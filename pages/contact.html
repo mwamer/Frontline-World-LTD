@@ -30,50 +30,148 @@
     <section class="page-hero">
         <div class="container">
             <h1>Get in Touch</h1>
+            <p class="hero-tagline">We'd Love to Hear From You</p>
         </div>
     </section>
 
     <section class="page-content">
         <div class="container">
+            <!-- Introduction -->
+            <div class="contact-intro">
+                <p>Whether you have a specific challenge in mind, want to explore how FW can support your organisation, or simply want to discuss ideas, we're here to help. Get in touch using the form below or use one of our direct contact options.</p>
+            </div>
+
+            <!-- Contact Information Section -->
             <div class="contact-section">
                 <h2>Contact Information</h2>
                 <div class="contact-grid">
                     <div class="contact-info">
-                        <h3>Email</h3>
+                        <h3>📧 Email</h3>
                         <p><a href="mailto:info@frontlineworld.com">info@frontlineworld.com</a></p>
+                        <p class="contact-note">For general inquiries and project requests</p>
                     </div>
                     <div class="contact-info">
-                        <h3>Phone</h3>
-                        <p><a href="tel:+44123456789">+44 (0) 123 456 789</a></p>
+                        <h3>📞 Phone</h3>
+                        <p><a href="tel:+441234567890">+44 (0) 123 456 7890</a></p>
+                        <p class="contact-note">Monday to Friday, 9am-5pm GMT</p>
                     </div>
                     <div class="contact-info">
-                        <h3>Address</h3>
-                        <p>Frontline World Ltd<br>London, United Kingdom</p>
+                        <h3>📍 Address</h3>
+                        <p>Frontline World Ltd<br>London<br>United Kingdom</p>
+                        <p class="contact-note">Open to international partnerships</p>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Quick Contact Options -->
             <div class="contact-section">
+                <h2>Quick Contact Options</h2>
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <h4>Project Inquiry</h4>
+                        <p>Interested in working with us on a specific project or challenge?</p>
+                        <a href="#contact-form" class="option-link">Submit a Project Inquiry →</a>
+                    </div>
+                    <div class="contact-option">
+                        <h4>General Information</h4>
+                        <p>Want to learn more about FW and our services?</p>
+                        <a href="mailto:info@frontlineworld.com" class="option-link">Email Us →</a>
+                    </div>
+                    <div class="contact-option">
+                        <h4>Urgent Matter</h4>
+                        <p>Need to reach us quickly about a time-sensitive issue?</p>
+                        <a href="tel:+441234567890" class="option-link">Call Us →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Section -->
+            <div class="contact-section" id="contact-form">
                 <h2>Send us a Message</h2>
-                <form class="contact-form" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">Name *</label>
-                        <input type="text" id="name" name="name" required>
+                <p>Please fill out the form below and we'll get back to you as soon as possible, typically within 2-3 business days.</p>
+                
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="organization">Organization</label>
+                            <input type="text" id="organization" name="organization" placeholder="Organization name">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" placeholder="Country">
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="organization">Organization</label>
-                        <input type="text" id="organization" name="organization">
+                        <label for="phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+44 (0)...">
                     </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject of Inquiry *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Please Select --</option>
+                            <option value="Strategic Research">Strategic Research & Institutional Advisory</option>
+                            <option value="Risk & Foresight">Risk & Strategic Foresight</option>
+                            <option value="Communication">Strategic Communication & Media Advisory</option>
+                            <option value="Training">Professional & Executive Training</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Partnership">Partnership Opportunity</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
+                        <textarea id="message" name="message" rows="7" placeholder="Tell us about your challenge, project, or inquiry. The more detail you provide, the better we can assist." required></textarea>
                     </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">Yes, I'd like to receive updates about FW's research and insights</label>
+                    </div>
+
                     <button type="submit" class="submit-button">Send Message</button>
+                    <p class="form-note">We respect your privacy. We'll only use your information to respond to your inquiry.</p>
                 </form>
+            </div>
+
+            <!-- Response Time -->
+            <div class="response-section">
+                <h3>What to Expect</h3>
+                <p>We typically respond to all inquiries within <strong>2-3 business days</strong>. If you have an urgent matter, please call us directly at the phone number above.</p>
+            </div>
+
+            <!-- Service Areas -->
+            <div class="service-areas-contact">
+                <h3>Our Service Areas</h3>
+                <p>Not sure which service you need? Here's a quick guide:</p>
+                <div class="service-guide">
+                    <div class="guide-item">
+                        <strong>Strategic Research & Institutional Advisory</strong> — You need evidence-based insights to understand a complex issue or situation
+                    </div>
+                    <div class="guide-item">
+                        <strong>Risk & Strategic Foresight</strong> — You want to anticipate emerging risks, opportunities, or prepare for uncertainty
+                    </div>
+                    <div class="guide-item">
+                        <strong>Strategic Communication & Media Advisory</strong> — You need help communicating effectively in a complex or sensitive environment
+                    </div>
+                    <div class="guide-item">
+                        <strong>Professional & Executive Training</strong> — You want to build capability and develop skills in your team
+                    </div>
+                </div>
+                <p>Still not sure? <a href="mailto:info@frontlineworld.com">Email us</a> to discuss your needs.</p>
             </div>
         </div>
     </section>
