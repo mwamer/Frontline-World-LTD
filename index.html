@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontline World Ltd - Interdisciplinary Consultancy</title>
+    <title>Frontline World Ltd - Understanding Complex Worlds, Shaping Better Futures</title>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation with Contact Info -->
     <nav class="navbar">
-        <div class="container">
+        <div class="container navbar-container">
             <div class="logo">
                 <h1>Frontline World</h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="pages/about.html">About</a></li>
                 <li><a href="pages/approach.html">Our Approach</a></li>
                 <li><a href="pages/services.html">Services</a></li>
@@ -23,49 +23,229 @@
                 <li><a href="pages/people.html">People</a></li>
                 <li><a href="pages/contact.html">Contact</a></li>
             </ul>
+            <div class="contact-quick">
+                <a href="mailto:wesaam.amer@gmail.com" class="contact-email">📧 wesaam.amer@gmail.com</a>
+                <a href="tel:+441234567890" class="contact-phone">📞 +44 (0) 7310 498 510</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2>Frontline World Ltd</h2>
-            <p>Interdisciplinary Consultancy Connecting Knowledge and Practice</p>
-            <p class="tagline">Bridging research, policy, and practice across business, government, and academia</p>
-            <button class="cta-button"><a href="pages/contact.html">Get in Touch</a></button>
+            <span class="hero-subtitle">Welcome to Frontline World</span>
+            <h1>Understanding Complex Worlds. Shaping Better Futures</h1>
+            <p class="hero-description">Interdisciplinary consultancy connecting research, policy, and practice across business, government, and academia</p>
+            <div class="hero-ctas">
+                <a href="pages/contact.html" class="cta-button primary">Start a Conversation</a>
+                <a href="pages/about.html" class="cta-button secondary">Learn About Us</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Preview -->
-    <section class="about-preview">
+    <!-- Philosophy Section -->
+    <section class="philosophy-section">
         <div class="container">
-            <h3>Who We Are</h3>
-            <p>Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice across education, media, governance, technology, health, sustainability, cultural resilience, and post-conflict recovery.</p>
-            <p><a href="pages/about.html" class="learn-more">Learn More →</a></p>
+            <div class="philosophy-intro">
+                <h2>Our Philosophy</h2>
+                <p class="section-tagline">Insight → Foresight → Action</p>
+                <p>In a complex and rapidly changing world, organizations need more than solutions to problems after they emerge. They need the ability to understand their environment, anticipate risks and opportunities, and act with confidence.</p>
+            </div>
+
+            <div class="philosophy-steps">
+                <div class="step">
+                    <div class="step-icon">💡</div>
+                    <h3>Insight</h3>
+                    <p>Deep research and critical analysis to understand what matters and why</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-icon">🔮</div>
+                    <h3>Foresight</h3>
+                    <p>Strategic anticipation to prepare for emerging risks and opportunities</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-icon">🎯</div>
+                    <h3>Action</h3>
+                    <p>Practical strategies and capacity building for lasting impact</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Key Areas -->
-    <section class="key-areas">
+    <!-- Services Overview -->
+    <section class="services-overview">
         <div class="container">
-            <h3>Our Focus Areas</h3>
-            <div class="areas-grid">
-                <div class="area-card">
-                    <h4>Research & Analysis</h4>
-                    <p>Evidence-based insights for informed decision-making</p>
+            <h2>How We Help</h2>
+            <p class="section-description">Four integrated service lines addressing distinct client needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card featured">
+                    <div class="service-number">01</div>
+                    <h3>Strategic Research & Institutional Advisory</h3>
+                    <p>Understanding complex issues and translating evidence into clear strategic direction</p>
+                    <ul class="service-highlights">
+                        <li>Strategic Briefs & Research</li>
+                        <li>Context Assessments</li>
+                        <li>Transformation Roadmaps</li>
+                    </ul>
+                    <a href="pages/services.html" class="service-link">Learn More →</a>
                 </div>
-                <div class="area-card">
-                    <h4>Strategic Advisory</h4>
-                    <p>Practical guidance on complex organizational challenges</p>
+
+                <div class="service-card featured">
+                    <div class="service-number">02</div>
+                    <h3>Risk & Strategic Foresight</h3>
+                    <p>Identifying emerging risks and opportunities, anticipating change</p>
+                    <ul class="service-highlights">
+                        <li>Risk Assessments</li>
+                        <li>Scenario Planning</li>
+                        <li>Resilience Building</li>
+                    </ul>
+                    <a href="pages/services.html" class="service-link">Learn More →</a>
                 </div>
-                <div class="area-card">
-                    <h4>Professional Training</h4>
-                    <p>Building capability through tailored training programs</p>
+
+                <div class="service-card featured">
+                    <div class="service-number">03</div>
+                    <h3>Strategic Communication & Media Advisory</h3>
+                    <p>Helping organisations communicate effectively in complex environments</p>
+                    <ul class="service-highlights">
+                        <li>Communication Strategy</li>
+                        <li>Media Advisory</li>
+                        <li>Crisis Management</li>
+                    </ul>
+                    <a href="pages/services.html" class="service-link">Learn More →</a>
                 </div>
-                <div class="area-card">
-                    <h4>Capacity Building</h4>
-                    <p>Institutional development for lasting impact</p>
+
+                <div class="service-card featured">
+                    <div class="service-number">04</div>
+                    <h3>Professional & Executive Training</h3>
+                    <p>Building knowledge, skills, and strategic capabilities</p>
+                    <ul class="service-highlights">
+                        <li>Leadership Programs</li>
+                        <li>Foresight Training</li>
+                        <li>Digital Capability</li>
+                    </ul>
+                    <a href="pages/services.html" class="service-link">Learn More →</a>
                 </div>
+            </div>
+
+            <div class="services-cta">
+                <a href="pages/services.html" class="cta-link">Explore All Services →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise-overview">
+        <div class="container">
+            <h2>Our Expertise</h2>
+            <p class="section-description">Multidisciplinary knowledge applied to complex challenges</p>
+            
+            <div class="expertise-highlights">
+                <div class="expertise-box">
+                    <h4>Communication & Media</h4>
+                    <p>Strategic communications and media development</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Digital Transformation</h4>
+                    <p>Technology adoption and digital-enabled change</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Governance</h4>
+                    <p>Democratic governance and institutional reform</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Conflict & Peace</h4>
+                    <p>Conflict analysis and peacebuilding</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Organisational Resilience</h4>
+                    <p>Change management and resilience building</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Institutional Development</h4>
+                    <p>Systems development and capacity building</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Education</h4>
+                    <p>Education policy and learning systems</p>
+                </div>
+                <div class="expertise-box">
+                    <h4>Health & Sustainability</h4>
+                    <p>Health systems and sustainable development</p>
+                </div>
+            </div>
+
+            <div class="expertise-cta">
+                <p>We combine these areas of expertise to create integrated solutions for complex challenges</p>
+                <a href="pages/expertise.html" class="cta-link">Discover Our Expertise →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve -->
+    <section class="who-we-serve">
+        <div class="container">
+            <h2>Who We Work With</h2>
+            <p class="section-description">We partner with organisations across sectors and regions</p>
+            
+            <div class="serve-grid">
+                <div class="serve-card">
+                    <div class="serve-icon">🤝</div>
+                    <h4>NGOs & Development Organisations</h4>
+                    <p>Building capacity and strategic capability in international development</p>
+                </div>
+                <div class="serve-card">
+                    <div class="serve-icon">📺</div>
+                    <h4>Media & Communications</h4>
+                    <p>Supporting effective communication strategies and media development</p>
+                </div>
+                <div class="serve-card">
+                    <div class="serve-icon">🏛️</div>
+                    <h4>Government & Public Institutions</h4>
+                    <p>Advising on governance, policy, and institutional development</p>
+                </div>
+                <div class="serve-card">
+                    <div class="serve-icon">🌍</div>
+                    <h4>Complex & Fragile Environments</h4>
+                    <p>Deep expertise working in conflict-affected and rapidly changing contexts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tagline/Value Prop Section -->
+    <section class="value-proposition">
+        <div class="container">
+            <h2>Insight for Better Foresight</h2>
+            <p>We help individuals and institutions think critically about alternative futures and make informed choices in the present.</p>
+            <div class="value-points">
+                <div class="value-point">
+                    <strong>Understand</strong> complexity and changing environments
+                </div>
+                <div class="value-point">
+                    <strong>Anticipate</strong> risks, opportunities, and emerging developments
+                </div>
+                <div class="value-point">
+                    <strong>Communicate</strong> clearly and strategically
+                </div>
+                <div class="value-point">
+                    <strong>Strengthen</strong> people, capabilities, and institutions
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Work Together?</h2>
+            <p>Let's explore how FW can support your organisation's challenges and opportunities</p>
+            <div class="cta-buttons">
+                <a href="pages/contact.html" class="cta-button primary">Get in Touch</a>
+                <a href="pages/about.html" class="cta-button secondary">Learn More</a>
             </div>
         </div>
     </section>
@@ -73,12 +253,37 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Frontline World Ltd. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Accessibility</a></li>
-            </ul>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Frontline World</h4>
+                    <p>Understanding Complex Worlds. Shaping Better Futures.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="pages/about.html">About</a></li>
+                        <li><a href="pages/services.html">Services</a></li>
+                        <li><a href="pages/expertise.html">Expertise</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>
+                        <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a><br>
+                        <a href="tel:+441234567890">+44 (0) 7310 498 510</a><br>
+                        London, United Kingdom
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Frontline World Ltd. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
 </body>
