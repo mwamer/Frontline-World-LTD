@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frontline World Ltd - Interdisciplinary consultancy connecting knowledge and practice across business, government, and academia.">
+    <title>Frontline World Ltd | Strategic Consulting & Advisory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Frontline World</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Understanding Complex Worlds</h1>
+            <p>Shaping Better Futures</p>
+            <a href="about.html" class="cta-button">Learn More</a>
+        </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="about-preview">
+        <div class="container">
+            <h2>Who We Are</h2>
+            <p>Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice to help you understand complex challenges and build lasting capability.</p>
+            <a href="about.html" class="link-button">Read Full About Page →</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Expertise</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Research & Analysis</h3>
+                    <p>Deep-dive research and evidence-based analysis to understand complex challenges</p>
+                </div>
+                <div class="service-card">
+                    <h3>Strategic Advisory</h3>
+                    <p>Expert guidance for informed decision-making across government, business, and academia</p>
+                </div>
+                <div class="service-card">
+                    <h3>Professional Training</h3>
+                    <p>Capacity-building and institutional development programs tailored to your needs</p>
+                </div>
+                <div class="service-card">
+                    <h3>Governance & Policy</h3>
+                    <p>Specialization in governance structures, policy development, and institutional resilience</p>
+                </div>
+                <div class="service-card">
+                    <h3>Digital Transformation</h3>
+                    <p>Strategic guidance on digital change and technological innovation</p>
+                </div>
+                <div class="service-card">
+                    <h3>Conflict & Peace</h3>
+                    <p>Expertise in post-conflict recovery and peace-building initiatives</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Knowledge into Action?</h2>
+            <p>Let us help you understand complexity and build lasting capability</p>
+            <a href="#contact" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form" onsubmit="handleContactForm(event)">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+            <p>Connecting knowledge, expertise, and practice</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
