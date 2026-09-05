@@ -309,7 +309,7 @@ html {
 }
 
 /* Mission & Vision */
-.mission-vision {
+.mission-vision-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -319,8 +319,9 @@ html {
 .mission-box,
 .vision-box {
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f8f9fa;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .mission-box {
@@ -344,30 +345,182 @@ html {
     line-height: 1.8;
 }
 
-/* Expertise Grid */
-.expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+.framework-subtitle,
+.section-lead {
+    color: #667eea;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-.expertise-item {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.framework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.framework-item,
+.value-card,
+.person-card {
+    background: #fff;
+    border: 1px solid #e8ecf4;
+    border-radius: 12px;
     padding: 1.5rem;
-    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.framework-item h4 {
+    color: #1e3c72;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+}
+
+.framework-item p {
+    color: #555;
+    margin-bottom: 0.75rem;
+}
+
+.framework-item span {
+    display: inline-block;
+    color: #764ba2;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.framework-item-wide {
+    grid-column: 1 / -1;
+}
+
+.framework-summary {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #eef3ff 100%);
+    border-left: 4px solid #1e3c72;
+    border-radius: 10px;
+}
+
+.framework-summary h3 {
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.4rem;
+    color: #1e3c72;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.value-card {
     text-align: center;
 }
 
-.expertise-item h4 {
-    color: #1e3c72;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+.value-letter {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
-.expertise-item p {
+.value-card h4 {
+    color: #1e3c72;
+    margin-bottom: 0.75rem;
+}
+
+.benefits-list {
+    margin-left: 1.25rem;
     color: #555;
-    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.benefits-list li {
+    margin-bottom: 0.5rem;
+}
+
+.people-section {
+    background: #f8f9fa;
+}
+
+.person-card h3 {
+    color: #1e3c72;
+    margin-bottom: 0.4rem;
+}
+
+.person-role {
+    color: #764ba2;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+}
+
+.expertise-tags span {
+    background: #f0f4ff;
+    color: #1e3c72;
+    border: 1px solid #dce4ff;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+}
+
+.person-card blockquote {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid #667eea;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #444;
+    border-radius: 0 10px 10px 0;
+}
+
+.network-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+}
+
+.network-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.network-table th,
+.network-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #edf1f7;
+}
+
+.network-table th {
+    background: #1e3c72;
+    color: white;
+}
+
+.join-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #eef3ff 100%);
+    padding: 2rem;
+    border-radius: 14px;
 }
 
 /* Footer */
@@ -422,11 +575,12 @@ html {
     .about-preview h2,
     .cta-section h2,
     .contact h2,
-    .page-header h1 {
+    .page-header h1,
+    .section-block h2 {
         font-size: 1.8rem;
     }
 
-    .mission-vision {
+    .mission-vision-grid {
         grid-template-columns: 1fr;
     }
 
@@ -434,8 +588,13 @@ html {
         grid-template-columns: 1fr;
     }
 
-    .expertise-grid {
+    .framework-grid,
+    .values-grid {
         grid-template-columns: 1fr;
+    }
+
+    .framework-item-wide {
+        grid-column: auto;
     }
 
     .hero {
