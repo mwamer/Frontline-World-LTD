@@ -159,11 +159,55 @@ html {
     background: white;
 }
 
-.services h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
+.service-layout {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.service-intro {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.service-intro h2,
+.service-challenges h3 {
     color: #1e3c72;
+    line-height: 1.2;
+}
+
+.service-intro h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: left;
+}
+
+.service-intro p,
+.service-challenges p,
+.challenge-list {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.service-challenges {
+    background: #f8f9fa;
+    border-radius: 18px;
+    padding: 2rem;
+    border-left: 4px solid #667eea;
+}
+
+.service-challenges h3 {
+    font-size: clamp(1.6rem, 2vw, 2.1rem);
+    margin-bottom: 1rem;
+}
+
+.challenge-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0 1.25rem;
+}
+
+.challenge-list li + li {
+    margin-top: 0.4rem;
 }
 
 .services-grid {
