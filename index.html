@@ -11,15 +11,63 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Frontline World</div>
+            <a href="index.html" class="logo">Frontline World</a>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#sectors">Sectors</a></li>
-                <li><a href="#insights">Insights</a></li>
-                <li><a href="#partnerships">Partnerships</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="about.html" class="dropdown-toggle">About <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#who-we-are">Who We Are</a></li>
+                        <li><a href="about.html#mission">Mission</a></li>
+                        <li><a href="about.html#vision">Vision</a></li>
+                        <li><a href="about.html#our-approach">Our Approach</a></li>
+                        <li><a href="about.html#our-framework">Our Framework</a></li>
+                        <li><a href="about.html#tagline">Tagline</a></li>
+                        <li><a href="about.html#our-values">Our Values</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="about.html#our-people" class="dropdown-toggle">Our People <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#leadership">Leadership</a></li>
+                        <li><a href="about.html#associates">Associates</a></li>
+                        <li><a href="about.html#subject-matter-experts">Subject-Matter Experts</a></li>
+                        <li><a href="about.html#advisory-network">Advisory Network</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#services" class="dropdown-toggle">Services <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#service-research">Strategic Research &amp; Institutional Advisory</a></li>
+                        <li><a href="index.html#service-risk">Risk &amp; Strategic Foresight</a></li>
+                        <li><a href="index.html#service-communication">Strategic Communication &amp; Media Advisory</a></li>
+                        <li><a href="index.html#service-training">Professional &amp; Executive Training</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#sectors" class="dropdown-toggle">Sectors <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#sector-education">Education</a></li>
+                        <li><a href="index.html#sector-media">Media &amp; Communication</a></li>
+                        <li><a href="index.html#sector-government">Government &amp; Governance</a></li>
+                        <li><a href="index.html#sector-technology">Technology</a></li>
+                        <li><a href="index.html#sector-health">Health</a></li>
+                        <li><a href="index.html#sector-sustainability">Sustainability</a></li>
+                        <li><a href="index.html#sector-cultural">Cultural Resilience</a></li>
+                        <li><a href="index.html#sector-conflict">Conflict &amp; Recovery</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#insights" class="dropdown-toggle">Insights <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#insight-reports">Research &amp; Reports</a></li>
+                        <li><a href="index.html#insight-articles">Articles &amp; Commentary</a></li>
+                        <li><a href="index.html#insight-news">News</a></li>
+                        <li><a href="index.html#insight-events">Events</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#partnerships">Partnerships</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
@@ -50,56 +98,119 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2>Our Expertise</h2>
+            <h2>Services</h2>
+            <p class="section-lead-center">Tailored advisory, research, communication, and executive training solutions.</p>
             <div class="services-grid">
-                <div class="service-card">
-                    <h3>Strategic Research & Institutional Advisory</h3>
-                    <p>Evidence-based research, institutional analysis, and actionable advisory support.</p>
+                <div id="service-research" class="service-card">
+                    <h3>Strategic Research &amp; Institutional Advisory</h3>
+                    <p>Evidence-based research, institutional analysis, and actionable advisory support helping clients make sense of complex environments and institutional challenges.</p>
+                    <a href="about.html#our-framework" class="link-button">Framework: 01. Understand →</a>
                 </div>
-                <div class="service-card">
-                    <h3>Risk & Strategic Foresight</h3>
-                    <p>Scenario thinking, horizon scanning, and preparedness for uncertainty and change.</p>
+                <div id="service-risk" class="service-card">
+                    <h3>Risk &amp; Strategic Foresight</h3>
+                    <p>Scenario thinking, horizon scanning, and preparedness strategies to identify emerging risks, explore possible futures, and adapt to uncertainty and change.</p>
+                    <a href="about.html#our-framework" class="link-button">Framework: 02. Anticipate →</a>
                 </div>
-                <div class="service-card">
-                    <h3>Strategic Communication & Media Advisory</h3>
-                    <p>Narrative strategy, public engagement, and communication support in complex environments.</p>
+                <div id="service-communication" class="service-card">
+                    <h3>Strategic Communication &amp; Media Advisory</h3>
+                    <p>Narrative strategy, public engagement, and communication support to turn complexity into clarity and operate effectively in sensitive environments.</p>
+                    <a href="about.html#our-framework" class="link-button">Framework: 03. Communicate →</a>
                 </div>
-                <div class="service-card">
-                    <h3>Professional & Executive Training</h3>
-                    <p>Tailored training and capacity-building for leaders, teams, and institutions.</p>
+                <div id="service-training" class="service-card">
+                    <h3>Professional &amp; Executive Training</h3>
+                    <p>Tailored capacity-building, executive education, and leadership training to develop the skills and capabilities organisations need to navigate complexity.</p>
+                    <a href="about.html#our-framework" class="link-button">Framework: 04. Strengthen →</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sectors Section -->
-    <section id="sectors" class="about-preview">
+    <section id="sectors" class="sectors-section">
         <div class="container">
-            <h2>Sectors We Work In</h2>
-            <p>Education, media & communication, government & governance, technology, health, sustainability, cultural resilience, and conflict & recovery.</p>
-            <a href="about.html" class="link-button">Explore Our Sector Focus →</a>
+            <h2>Sectors</h2>
+            <p class="section-lead-center">Connecting multidisciplinary expertise across the sectors most exposed to disruption.</p>
+            <div class="sectors-grid">
+                <div id="sector-education" class="sector-card">
+                    <div class="sector-icon">🎓</div>
+                    <h3>Education</h3>
+                    <p>Higher education strategy, institutional development, capacity-building, and academic leadership.</p>
+                </div>
+                <div id="sector-media" class="sector-card">
+                    <div class="sector-icon">📰</div>
+                    <h3>Media &amp; Communication</h3>
+                    <p>Journalism, public discourse, media ecosystems, digital transformation, and strategic narratives.</p>
+                </div>
+                <div id="sector-government" class="sector-card">
+                    <div class="sector-icon">🏛️</div>
+                    <h3>Government &amp; Governance</h3>
+                    <p>Public policy analysis, institutional resilience, governance reform, and stakeholder engagement.</p>
+                </div>
+                <div id="sector-technology" class="sector-card">
+                    <div class="sector-icon">💻</div>
+                    <h3>Technology</h3>
+                    <p>Digital transformation, artificial intelligence, platform governance, and tech policy.</p>
+                </div>
+                <div id="sector-health" class="sector-card">
+                    <div class="sector-icon">⚕️</div>
+                    <h3>Health</h3>
+                    <p>Health systems resilience, public health communication, policy analysis, and institutional readiness.</p>
+                </div>
+                <div id="sector-sustainability" class="sector-card">
+                    <div class="sector-icon">🌱</div>
+                    <h3>Sustainability</h3>
+                    <p>Environmental resilience, sustainable development, and social transformation strategies.</p>
+                </div>
+                <div id="sector-cultural" class="sector-card">
+                    <div class="sector-icon">🌍</div>
+                    <h3>Cultural Resilience</h3>
+                    <p>Intercultural engagement, social cohesion, heritage protection, and community resilience.</p>
+                </div>
+                <div id="sector-conflict" class="sector-card">
+                    <div class="sector-icon">🕊️</div>
+                    <h3>Conflict &amp; Recovery</h3>
+                    <p>Peacebuilding, post-conflict recovery, fragile state advisory, and humanitarian response support.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Insights Section -->
-    <section id="insights" class="services">
+    <section id="insights" class="insights-section">
         <div class="container">
             <h2>Insights</h2>
-            <div class="services-grid">
-                <div class="service-card"><h3>Research & Reports</h3></div>
-                <div class="service-card"><h3>Articles & Commentary</h3></div>
-                <div class="service-card"><h3>News</h3></div>
-                <div class="service-card"><h3>Events</h3></div>
+            <p class="section-lead-center">Rigorous research, critical analysis, and strategic commentary on emerging global trends.</p>
+            <div class="insights-grid">
+                <div id="insight-reports" class="insight-card">
+                    <div class="badge">Research</div>
+                    <h3>Research &amp; Reports</h3>
+                    <p>In-depth analytical reports, working papers, and evidence briefs on global governance, communication, and risk.</p>
+                </div>
+                <div id="insight-articles" class="insight-card">
+                    <div class="badge">Commentary</div>
+                    <h3>Articles &amp; Commentary</h3>
+                    <p>Thought leadership, expert opinion pieces, and practical perspectives on navigating complex environments.</p>
+                </div>
+                <div id="insight-news" class="insight-card">
+                    <div class="badge">News</div>
+                    <h3>News</h3>
+                    <p>Latest updates on Frontline World research findings, institutional partnerships, and international engagements.</p>
+                </div>
+                <div id="insight-events" class="insight-card">
+                    <div class="badge">Events</div>
+                    <h3>Events</h3>
+                    <p>Upcoming executive seminars, policy roundtables, webinars, and expert workshops.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Partnerships Section -->
-    <section id="partnerships" class="cta-section">
+    <section id="partnerships" class="partnerships-section">
         <div class="container">
             <h2>Partnerships</h2>
-            <p>We collaborate with organisations and experts who share our commitment to practical, evidence-based impact.</p>
-            <a href="#contact" class="cta-button">Start a Conversation</a>
+            <p>We collaborate with business, government, academic, and civil society partners globally who share our commitment to practical, evidence-based impact and institutional resilience.</p>
+            <a href="about.html#join" class="cta-button">Join Frontline World Network</a>
         </div>
     </section>
 

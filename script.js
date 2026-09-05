@@ -4,10 +4,31 @@ function toggleMenu() {
     navLinks.classList.toggle('active');
 }
 
-// Close menu when a link is clicked
-document.querySelectorAll('.nav-links a').forEach(link => {
+// Dropdown menu toggle for mobile
+document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            const parent = this.parentElement;
+            if (parent) {
+                const isOpen = parent.classList.contains('open');
+                document.querySelectorAll('.nav-links .dropdown').forEach(d => d.classList.remove('open'));
+                if (!isOpen) {
+                    parent.classList.add('open');
+                }
+            }
+        }
+    });
+});
+
+// Close menu when a link inside dropdown-menu or non-dropdown nav link is clicked
+document.querySelectorAll('.dropdown-menu a, .nav-links > li > a:not(.dropdown-toggle)').forEach(link => {
     link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('active');
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) {
+            navLinks.classList.remove('active');
+        }
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
     });
 });
 
@@ -35,28 +56,57 @@ function handleContactForm(event) {
         return;
     }
     
-    // Show success message (in a real application, this would send to a server)
+    // Show success message
     alert('Thank you for your message! We will get back to you soon.');
     form.reset();
 }
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scroll for anchor links on current page
+document.querySelectorAll('a[href*="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+        const href = this.getAttribute('href');
+        if (!href) return;
+        
+        const parts = href.split('#');
+        const pagePath = parts[0];
+        const targetId = parts[1];
+        
+        if (!targetId) return;
+        
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const isCurrentPage = !pagePath || pagePath === currentPage || pagePath === '' || (currentPage === '' && pagePath === 'index.html');
+        
+        if (isCurrentPage) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                if (history.pushState) {
+                    history.pushState(null, null, '#' + targetId);
+                }
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks) navLinks.classList.remove('active');
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+            }
         }
     });
 });
 
-// Add active class to current page in navigation
+// Highlight active link in navigation based on current page and hash
 window.addEventListener('load', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const currentHash = window.location.hash;
+    
     document.querySelectorAll('.nav-links a').forEach(link => {
-        const href = link.getAttribute('href').split('/').pop() || 'index.html';
-        if (href === currentPage) {
+        const rawHref = link.getAttribute('href') || '';
+        link.classList.remove('active');
+        
+        const hrefPage = rawHref.split('#')[0] || 'index.html';
+        const hrefHash = rawHref.includes('#') ? '#' + rawHref.split('#')[1] : '';
+        
+        if (!currentHash && hrefPage === currentPage && !hrefHash) {
+            link.classList.add('active');
+        } else if (currentHash && hrefHash && hrefHash === currentHash && (hrefPage === currentPage || !hrefPage)) {
             link.classList.add('active');
         }
     });

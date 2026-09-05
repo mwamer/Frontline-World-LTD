@@ -11,11 +11,62 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Frontline World</div>
+            <a href="index.html" class="logo">Frontline World</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="index.html#services">Services</a></li>
+                <li class="dropdown">
+                    <a href="about.html" class="dropdown-toggle active">About <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#who-we-are">Who We Are</a></li>
+                        <li><a href="about.html#mission">Mission</a></li>
+                        <li><a href="about.html#vision">Vision</a></li>
+                        <li><a href="about.html#our-approach">Our Approach</a></li>
+                        <li><a href="about.html#our-framework">Our Framework</a></li>
+                        <li><a href="about.html#tagline">Tagline</a></li>
+                        <li><a href="about.html#our-values">Our Values</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="about.html#our-people" class="dropdown-toggle">Our People <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#leadership">Leadership</a></li>
+                        <li><a href="about.html#associates">Associates</a></li>
+                        <li><a href="about.html#subject-matter-experts">Subject-Matter Experts</a></li>
+                        <li><a href="about.html#advisory-network">Advisory Network</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#services" class="dropdown-toggle">Services <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#service-research">Strategic Research &amp; Institutional Advisory</a></li>
+                        <li><a href="index.html#service-risk">Risk &amp; Strategic Foresight</a></li>
+                        <li><a href="index.html#service-communication">Strategic Communication &amp; Media Advisory</a></li>
+                        <li><a href="index.html#service-training">Professional &amp; Executive Training</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#sectors" class="dropdown-toggle">Sectors <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#sector-education">Education</a></li>
+                        <li><a href="index.html#sector-media">Media &amp; Communication</a></li>
+                        <li><a href="index.html#sector-government">Government &amp; Governance</a></li>
+                        <li><a href="index.html#sector-technology">Technology</a></li>
+                        <li><a href="index.html#sector-health">Health</a></li>
+                        <li><a href="index.html#sector-sustainability">Sustainability</a></li>
+                        <li><a href="index.html#sector-cultural">Cultural Resilience</a></li>
+                        <li><a href="index.html#sector-conflict">Conflict &amp; Recovery</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="index.html#insights" class="dropdown-toggle">Insights <span class="caret">▾</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html#insight-reports">Research &amp; Reports</a></li>
+                        <li><a href="index.html#insight-articles">Articles &amp; Commentary</a></li>
+                        <li><a href="index.html#insight-news">News</a></li>
+                        <li><a href="index.html#insight-events">Events</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#partnerships">Partnerships</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
@@ -37,7 +88,7 @@
     <!-- Main Content -->
     <section class="about-content">
         <div class="container">
-            <div class="section-block">
+            <div class="section-block" id="who-we-are">
                 <h2>Who We Are</h2>
                 <p>Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. FW connects knowledge and practice across education, media, governance, technology, health, sustainability, cultural resilience, and post-conflict recovery — helping clients understand complex challenges, make informed decisions, and build lasting capability.</p>
                 <p>FW combines research and analysis, strategic advisory, professional training, and institutional capacity-building to deliver practical, evidence-based solutions for individuals, organisations, and governments.</p>
@@ -45,25 +96,26 @@
                 <p class="highlight-text">FW turns knowledge into insight, insight into strategy, and strategy into action.</p>
             </div>
 
-            <div class="mission-vision-grid">
-                <div class="mission-box">
+            <div class="mission-vision-grid" id="mission-vision">
+                <div class="mission-box" id="mission">
                     <h3>Mission</h3>
                     <p>To connect knowledge, expertise, and practice to help individuals, organisations, and governments understand complexity, make informed decisions, build capacity, and adapt to change.</p>
                 </div>
-                <div class="vision-box">
+                <div class="vision-box" id="vision">
                     <h3>Vision</h3>
                     <p>A world where knowledge and expertise are transformed into practical action, enabling capable people, resilient institutions, and more sustainable and peaceful futures.</p>
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="our-approach">
                 <h2>Our Approach</h2>
+                <p class="section-lead">From Knowledge to Action</p>
                 <p>FW is built on a simple proposition: insight enables foresight, foresight enables preparedness for change and uncertainty, and preparedness builds resilience.</p>
                 <p>In a complex and rapidly changing world, organisations need more than solutions to problems after they emerge. They need the ability to understand their environment, identify emerging risks and opportunities, anticipate change, and act with confidence.</p>
                 <p>FW brings together multidisciplinary expertise in research, strategic analysis, foresight, communication, and professional development to help clients move from understanding to action. Our approach is practical, not theoretical—designed to deliver usable tools, clear recommendations, and measurable results within defined timeframes.</p>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="our-framework">
                 <h2>Our Framework</h2>
                 <p class="framework-subtitle">UNDERSTAND → ANTICIPATE → COMMUNICATE → STRENGTHEN → TRANSFORM</p>
                 <div class="framework-grid">
@@ -92,20 +144,58 @@
                         <p>Turn strategy into lasting change. FW supports organisations in translating insight, strategy, and capability into institutional improvement, organisational resilience, and sustainable transformation.</p>
                     </div>
                 </div>
+
                 <div class="framework-summary">
-                    <h3>FW Approach / Methodology</h3>
-                    <p>A practical framework for helping organisations navigate complexity, prepare for change, build capability, and create lasting impact.</p>
+                    <h3>The FW Approach / Methodology</h3>
+                    <div class="methodology-diagram">
+                        <div class="methodology-stages">
+                            <div class="stage-col">
+                                <div class="stage-pill">UNDERSTAND</div>
+                                <div class="stage-arrow">↓</div>
+                                <div class="stage-box">Research &amp; Advisory</div>
+                            </div>
+                            <div class="stage-sep">→</div>
+                            <div class="stage-col">
+                                <div class="stage-pill">ANTICIPATE</div>
+                                <div class="stage-arrow">↓</div>
+                                <div class="stage-box">Risk &amp; Foresight</div>
+                            </div>
+                            <div class="stage-sep">→</div>
+                            <div class="stage-col">
+                                <div class="stage-pill">COMMUNICATE</div>
+                                <div class="stage-arrow">↓</div>
+                                <div class="stage-box">Strategic Communication</div>
+                            </div>
+                            <div class="stage-sep">→</div>
+                            <div class="stage-col">
+                                <div class="stage-pill">STRENGTHEN</div>
+                                <div class="stage-arrow">↓</div>
+                                <div class="stage-box">Professional Development &amp; Training</div>
+                            </div>
+                        </div>
+                        <div class="methodology-down">↓</div>
+                        <div class="transformation-box">
+                            <h4>TRANSFORMATION</h4>
+                            <p>Better Decisions • Stronger Capability • Resilient Institutions</p>
+                        </div>
+                    </div>
+                    <p class="framework-caption">A practical framework for helping organisations navigate complexity, prepare for change, build capability, and create lasting impact.</p>
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="tagline">
                 <h2>Tagline</h2>
                 <p class="tagline">Insight for Better Foresight</p>
-                <p>The tagline expresses FW's central philosophy: insight reflects rigorous research, interdisciplinary knowledge, critical analysis, and contextual understanding. Foresight reflects anticipation, preparedness, strategic thinking, and the development of better possible futures.</p>
-                <p>Better foresight reflects an ambition beyond prediction: FW helps individuals and institutions think critically about alternative futures and make informed choices in the present. Insight informs foresight. Foresight informs action. Action shapes better futures.</p>
+                <p>The tagline expresses FW's central philosophy:</p>
+                <ul class="benefits-list">
+                    <li><strong>Insight</strong> — FW's commitment to rigorous research, interdisciplinary knowledge, critical analysis, and contextual understanding.</li>
+                    <li><strong>Foresight</strong> — FW's commitment to anticipation, preparedness, strategic thinking, and the development of better possible futures.</li>
+                </ul>
+                <p style="margin-top: 1rem;">"Better foresight" reflects an ambition beyond prediction: FW helps individuals and institutions think critically about alternative futures and make informed choices in the present.</p>
+                <p class="highlight-text">Insight informs foresight. Foresight informs action. Action shapes better futures.</p>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="our-values">
                 <h2>Our Values</h2>
                 <div class="values-grid">
                     <div class="value-card">
@@ -131,8 +221,9 @@
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="client-benefits">
                 <h2>What This Means for Our Clients</h2>
+                <p>FW helps organisations navigate to:</p>
                 <ul class="benefits-list">
                     <li>Understand complexity and changing environments</li>
                     <li>Anticipate risks, opportunities, and emerging developments</li>
@@ -145,7 +236,7 @@
     </section>
 
     <!-- Our People -->
-    <section class="about-content people-section">
+    <section class="about-content people-section" id="our-people">
         <div class="container">
             <div class="section-block">
                 <h2>Our People</h2>
@@ -156,7 +247,7 @@
                 <p>This approach allows us to remain agile, responsive, and outcome-focused, providing clients with access to specialist knowledge, strategic insight, and practical experience across research, advisory, communication, training, and institutional development.</p>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="leadership">
                 <h2>Leadership</h2>
                 <div class="person-card">
                     <h3>Dr Wesam Amer</h3>
@@ -181,7 +272,7 @@
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="associates">
                 <h2>Associates</h2>
                 <p class="section-lead">Expertise On Demand</p>
                 <p>Frontline World Associates are independent professionals who collaborate with FW on specific projects, programmes, and client assignments.</p>
@@ -209,7 +300,7 @@
                 <p>Associates may contribute to consultancy, research, training, advisory work, and project delivery.</p>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="subject-matter-experts">
                 <h2>Subject-Matter Experts</h2>
                 <p class="section-lead">Specialist Knowledge. Practical Application.</p>
                 <p>Frontline World works with subject-matter experts who bring deep knowledge and practical experience to specific client challenges.</p>
@@ -228,7 +319,7 @@
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block" id="advisory-network">
                 <h2>Advisory Board</h2>
                 <p class="section-lead">Independent Advice. Strategic Perspective.</p>
                 <p>Frontline World's Advisory Board provides independent guidance, strategic insight, and external perspectives to support the company's long-term development.</p>
@@ -252,7 +343,7 @@
                 </div>
             </div>
 
-            <div class="section-block join-section">
+            <div class="section-block join-section" id="join">
                 <h2>Join Frontline World</h2>
                 <p class="section-lead">Bring Your Expertise to the Frontline</p>
                 <p>Frontline World is building an international network of researchers, practitioners, professionals, and experts who want to apply their knowledge to real-world challenges.</p>
