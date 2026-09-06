@@ -15,16 +15,22 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 function handleContactForm(event) {
     event.preventDefault();
     
-    // Get form values
     const form = event.target;
-    const name = form.elements[0].value;
-    const email = form.elements[1].value;
-    const subject = form.elements[2].value;
-    const message = form.elements[3].value;
+    
+    // Get values by element id/name if available, falling back to form elements
+    const fullNameInput = form.querySelector('#fullName') || form.elements['fullName'] || form.elements[0];
+    const organisationInput = form.querySelector('#organisation') || form.elements['organisation'];
+    const emailInput = form.querySelector('#email') || form.elements['email'] || form.elements[1];
+    const messageInput = form.querySelector('#message') || form.elements['message'] || form.elements[3];
+
+    const fullName = fullNameInput ? fullNameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+    const organisation = organisationInput ? organisationInput.value.trim() : '';
     
     // Simple validation
-    if (!name || !email || !subject || !message) {
-        alert('Please fill in all fields');
+    if (!fullName || !email || !message || (organisationInput && !organisation)) {
+        alert('Please fill in all required fields marked with *');
         return;
     }
     
@@ -35,9 +41,43 @@ function handleContactForm(event) {
         return;
     }
     
-    // Show success message (in a real application, this would send to a server)
-    alert('Thank you for your message! We will get back to you soon.');
+    // Show success message
+    alert('Thank you for your enquiry! Frontline World will review your details and get back to you shortly.');
     form.reset();
+}
+
+// Helper function to select an Area of Interest checkbox and scroll to form
+function selectAreaOfInterest(value) {
+    const checkboxes = document.querySelectorAll('input[name="interest"]');
+    checkboxes.forEach(cb => {
+        if (cb.value === value) {
+            cb.checked = true;
+        }
+    });
+    focusContactForm();
+}
+
+// Helper function to select Preferred Next Step checkbox and scroll to form
+function selectPreferredNextStep(value) {
+    const checkboxes = document.querySelectorAll('input[name="nextStep"]');
+    checkboxes.forEach(cb => {
+        if (cb.value === value) {
+            cb.checked = true;
+        }
+    });
+    focusContactForm();
+}
+
+// Helper function to scroll to and focus form
+function focusContactForm() {
+    const section = document.getElementById('contact-form-section');
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+    const firstInput = document.getElementById('fullName');
+    if (firstInput) {
+        setTimeout(() => firstInput.focus(), 400);
+    }
 }
 
 // Smooth scroll for anchor links
