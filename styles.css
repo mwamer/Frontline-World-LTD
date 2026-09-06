@@ -386,6 +386,241 @@ html {
     box-shadow: 0 0 5px rgba(102, 126, 234, 0.1);
 }
 
+.contact-page {
+    padding: 80px 20px;
+    background: #f5f7fb;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.contact-main,
+.contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.intro-block,
+.support-section,
+.form-panel,
+.sidebar-box {
+    background: white;
+    border: 1px solid #e8eef8;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+}
+
+.lead-in,
+.challenge-line {
+    color: #1e3c72;
+    font-weight: 700;
+}
+
+.intro-block p,
+.support-section p,
+.sidebar-box p,
+.form-panel p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef3ff;
+    color: #1e3c72;
+    border: 1px solid #dfe9ff;
+    border-radius: 999px;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+    background: #dfe9ff;
+}
+
+.support-section h2,
+.section-heading h2,
+.sidebar-box h3,
+.form-panel h3 {
+    color: #1e3c72;
+    margin-bottom: 0.75rem;
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.support-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+    border: 1px solid #edf2ff;
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.support-card h3 {
+    font-size: 1.1rem;
+    color: #1e3c72;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.support-card p {
+    font-size: 0.98rem;
+    margin-bottom: 0.75rem;
+    color: #555;
+}
+
+.support-card a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.support-card a:hover {
+    text-decoration: underline;
+}
+
+.enquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-heading {
+    margin-bottom: 1.5rem;
+}
+
+.section-heading p {
+    font-size: 1.1rem;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.enquiry-form label {
+    display: block;
+    color: #1e3c72;
+    font-weight: 600;
+}
+
+.enquiry-form label span {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.enquiry-form input,
+.enquiry-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dfe6f1;
+    border-radius: 10px;
+    font: inherit;
+    color: #333;
+    background: #fff;
+}
+
+.enquiry-form textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.checkbox-grid,
+.radio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.check-item input {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+}
+
+.submit-button {
+    align-self: flex-start;
+    min-width: 180px;
+}
+
+.contact-sidebar {
+    gap: 1.5rem;
+}
+
+.sidebar-box h3 {
+    margin-bottom: 1rem;
+}
+
+.contact-detail {
+    margin-bottom: 1rem;
+}
+
+.contact-detail h4 {
+    color: #1e3c72;
+    margin-bottom: 0.35rem;
+}
+
+.contact-detail a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, #f5f7fb 0%, #eef3ff 100%);
+}
+
+.sidebar-callout {
+    font-weight: 700;
+    color: #1e3c72;
+}
+
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.contact-hero {
+    min-height: auto;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
 /* Page Header */
 .page-header {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);

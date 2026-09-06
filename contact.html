@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Frontline World Ltd to discuss strategic research, advisory, communication, training, and transformation support.">
+    <title>Contact | Frontline World Ltd</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Frontline World</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="approach.html">Approach</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header contact-hero">
+        <div class="container">
+            <h1>Contact</h1>
+            <p>Let's Start a Conversation</p>
+        </div>
+    </section>
+
+    <main class="contact-page">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-main">
+                    <div class="intro-block">
+                        <p class="lead-in">Every organisation faces unique challenges.</p>
+                        <p>Whether you need strategic research, risk and foresight support, communication expertise, executive training, or organisational transformation services, Frontline World is ready to explore how we can help.</p>
+                        <p>We welcome enquiries from organisations, institutions, networks, businesses, and professionals seeking evidence-based insight, practical solutions, and trusted expertise.</p>
+                        <p class="challenge-line">Tell us about your challenge.</p>
+                        <div class="cta-row">
+                            <a href="#contact-form" class="cta-button">Book a Consultation</a>
+                            <a href="#contact-form" class="secondary-button">Submit an Enquiry</a>
+                        </div>
+                    </div>
+
+                    <div class="support-section">
+                        <h2>How Can We Help?</h2>
+                        <p>Choose the option that best matches your needs.</p>
+                        <div class="support-grid">
+                            <article class="support-card">
+                                <h3>Strategic Research &amp; Institutional Advisory</h3>
+                                <p>Research, analysis, stakeholder assessments, institutional reviews, and strategic planning support.</p>
+                                <a href="#contact-form">Request Research Support <span aria-hidden="true">→</span></a>
+                            </article>
+                            <article class="support-card">
+                                <h3>Risk &amp; Strategic Foresight</h3>
+                                <p>Risk assessments, future scenario planning, resilience reviews, and preparedness analysis.</p>
+                                <a href="#contact-form">Request Foresight Support <span aria-hidden="true">→</span></a>
+                            </article>
+                            <article class="support-card">
+                                <h3>Strategic Communication &amp; Media Advisory</h3>
+                                <p>Communication strategy, stakeholder engagement, narrative analysis, and communication risk advisory.</p>
+                                <a href="#contact-form">Request Communication Support <span aria-hidden="true">→</span></a>
+                            </article>
+                            <article class="support-card">
+                                <h3>Professional &amp; Executive Training</h3>
+                                <p>Leadership development, executive education, workshops, and bespoke learning programmes.</p>
+                                <a href="#contact-form">Request Training Information <span aria-hidden="true">→</span></a>
+                            </article>
+                            <article class="support-card">
+                                <h3>Institutional Strategy &amp; Transformation</h3>
+                                <p>Organisational development, strategic reviews, capability strengthening, and transformation support.</p>
+                                <a href="#contact-form">Request Transformation Support <span aria-hidden="true">→</span></a>
+                            </article>
+                        </div>
+                    </div>
+
+                    <section id="contact-form" class="enquiry-section">
+                        <div class="section-heading">
+                            <h2>Contact Form</h2>
+                            <p>Tell Us About Your Project</p>
+                        </div>
+
+                        <form class="enquiry-form" onsubmit="handleContactForm(event)">
+                            <div class="form-panel">
+                                <h3>Contact Information</h3>
+                                <div class="form-grid">
+                                    <label>
+                                        <span>Full Name*</span>
+                                        <input type="text" name="fullName" required>
+                                    </label>
+                                    <label>
+                                        <span>Organisation*</span>
+                                        <input type="text" name="organisation" required>
+                                    </label>
+                                    <label>
+                                        <span>Position / Role</span>
+                                        <input type="text" name="position">
+                                    </label>
+                                    <label>
+                                        <span>Email Address*</span>
+                                        <input type="email" name="email" required>
+                                    </label>
+                                    <label>
+                                        <span>Phone Number</span>
+                                        <input type="tel" name="phone">
+                                    </label>
+                                    <label>
+                                        <span>Country / Region</span>
+                                        <input type="text" name="country">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-panel">
+                                <h3>Area of Interest</h3>
+                                <p>Select one or more:</p>
+                                <div class="checkbox-grid">
+                                    <label class="check-item"><input type="checkbox"> <span>Strategic Research &amp; Institutional Advisory</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Risk &amp; Strategic Foresight</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Strategic Communication &amp; Media Advisory</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Professional &amp; Executive Training</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Institutional Strategy &amp; Transformation</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Partnership Opportunities</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Speaking Engagements</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>Media Enquiries</span></label>
+                                    <label class="check-item"><input type="checkbox"> <span>General Enquiry</span></label>
+                                </div>
+                            </div>
+
+                            <div class="form-panel">
+                                <h3>Your Enquiry</h3>
+                                <label>
+                                    <span>Please briefly describe your challenge, project, or area of interest.</span>
+                                    <textarea name="message" rows="7" placeholder="Please briefly describe your challenge, project, or area of interest."></textarea>
+                                </label>
+                            </div>
+
+                            <div class="form-panel">
+                                <h3>Preferred Next Step</h3>
+                                <div class="radio-grid">
+                                    <label class="check-item"><input type="radio" name="nextStep"> <span>Consultation Call</span></label>
+                                    <label class="check-item"><input type="radio" name="nextStep"> <span>Project Discussion</span></label>
+                                    <label class="check-item"><input type="radio" name="nextStep"> <span>Training Discussion</span></label>
+                                    <label class="check-item"><input type="radio" name="nextStep"> <span>Partnership Conversation</span></label>
+                                    <label class="check-item"><input type="radio" name="nextStep"> <span>General Information</span></label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="cta-button submit-button">Submit</button>
+                        </form>
+                    </section>
+                </div>
+
+                <aside class="contact-sidebar">
+                    <div class="sidebar-box">
+                        <h3>Other Ways to Connect</h3>
+                        <div class="contact-detail">
+                            <h4>Email</h4>
+                            <p><a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a></p>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Mobile</h4>
+                            <p>+44(0)7310498510</p>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-box">
+                        <h3>Partnerships</h3>
+                        <p>Interested in collaboration, research partnerships, or joint initiatives?</p>
+                    </div>
+
+                    <div class="sidebar-box highlight-box">
+                        <h3>Not Sure Where to Start?</h3>
+                        <p>Approach Frontline World with a challenge rather than a predefined solution.</p>
+                        <p>If you are unsure which service is right for you, we would be pleased to discuss your situation and explore potential options together.</p>
+                        <p class="sidebar-callout">Let's discuss your challenge.</p>
+                        <div class="sidebar-actions">
+                            <a href="#contact-form" class="secondary-button">Book a Consultation</a>
+                            <a href="#contact-form" class="secondary-button">Submit an Enquiry</a>
+                            <a href="#contact-form" class="secondary-button">Request a Callback</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+            <p>Connecting knowledge, expertise, and practice</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
