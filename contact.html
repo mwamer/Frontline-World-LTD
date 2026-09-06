@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Frontline World Ltd - Start a conversation, request research or advisory support, book a consultation, or submit an enquiry.">
+    <title>Contact Us | Frontline World Ltd</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Frontline World</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="approach.html">Approach</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact</h1>
+            <p>Let's Start a Conversation</p>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="contact-intro">
+        <div class="container">
+            <div class="intro-content">
+                <p class="lead-text">Every organisation faces unique challenges.</p>
+                <p>Whether you need strategic research, risk and foresight support, communication expertise, executive training, or organisational transformation services, Frontline World is ready to explore how we can help.</p>
+                <p>We welcome enquiries from organisations, institutions, networks, businesses, and professionals seeking evidence-based insight, practical solutions, and trusted expertise.</p>
+                <p class="callout-text">Tell us about your challenge.</p>
+                <div class="action-buttons">
+                    <a href="#contact-form-section" class="cta-button" onclick="selectPreferredNextStep('Consultation Call')">Book a Consultation</a>
+                    <a href="#contact-form-section" class="cta-button secondary" onclick="focusContactForm()">Submit an Enquiry</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Can We Help Section -->
+    <section class="how-we-help">
+        <div class="container">
+            <h2>How Can We Help?</h2>
+            <p class="section-subtitle">Choose the option that best matches your needs.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Strategic Research & Institutional Advisory</h3>
+                    <p>Research, analysis, stakeholder assessments, institutional reviews, and strategic planning support.</p>
+                    <a href="#contact-form-section" class="card-link" onclick="selectAreaOfInterest('Strategic Research & Institutional Advisory')">Request Research Support &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h3>Risk & Strategic Foresight</h3>
+                    <p>Risk assessments, future scenario planning, resilience reviews, and preparedness analysis.</p>
+                    <a href="#contact-form-section" class="card-link" onclick="selectAreaOfInterest('Risk & Strategic Foresight')">Request Foresight Support &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h3>Strategic Communication & Media Advisory</h3>
+                    <p>Communication strategy, stakeholder engagement, narrative analysis, and communication risk advisory.</p>
+                    <a href="#contact-form-section" class="card-link" onclick="selectAreaOfInterest('Strategic Communication & Media Advisory')">Request Communication Support &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h3>Professional & Executive Training</h3>
+                    <p>Leadership development, executive education, workshops, and bespoke learning programmes.</p>
+                    <a href="#contact-form-section" class="card-link" onclick="selectAreaOfInterest('Professional & Executive Training')">Request Training Information &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h3>Institutional Strategy & Transformation</h3>
+                    <p>Organisational development, strategic reviews, capability strengthening, and transformation support.</p>
+                    <a href="#contact-form-section" class="card-link" onclick="selectAreaOfInterest('Institutional Strategy & Transformation')">Request Transformation Support &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form-section" class="contact-form-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Main Form Column -->
+                <div class="form-wrapper">
+                    <h2>Tell Us About Your Project</h2>
+                    <form class="contact-form extended-form" onsubmit="handleContactForm(event)">
+                        <div class="form-section">
+                            <h3>Contact Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organisation">Organisation <span class="required">*</span></label>
+                                    <input type="text" id="organisation" name="organisation" placeholder="Organisation" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="position">Position / Role</label>
+                                    <input type="text" id="position" name="position" placeholder="Position / Role">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Phone Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country / Region</label>
+                                    <input type="text" id="country" name="country" placeholder="Country / Region">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Area of Interest</h3>
+                            <p class="field-instruction">Select one or more:</p>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Strategic Research & Institutional Advisory">
+                                    <span>Strategic Research & Institutional Advisory</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Risk & Strategic Foresight">
+                                    <span>Risk & Strategic Foresight</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Strategic Communication & Media Advisory">
+                                    <span>Strategic Communication & Media Advisory</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Professional & Executive Training">
+                                    <span>Professional & Executive Training</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Institutional Strategy & Transformation">
+                                    <span>Institutional Strategy & Transformation</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Partnership Opportunities">
+                                    <span>Partnership Opportunities</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Speaking Engagements">
+                                    <span>Speaking Engagements</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="Media Enquiries">
+                                    <span>Media Enquiries</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="interest" value="General Enquiry">
+                                    <span>General Enquiry</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Your Enquiry</h3>
+                            <div class="form-group">
+                                <label for="message">Please briefly describe your challenge, project, or area of interest.</label>
+                                <textarea id="message" name="message" rows="6" placeholder="Please briefly describe your challenge, project, or area of interest..." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Preferred Next Step</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="nextStep" value="Consultation Call">
+                                    <span>Consultation Call</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="nextStep" value="Project Discussion">
+                                    <span>Project Discussion</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="nextStep" value="Training Discussion">
+                                    <span>Training Discussion</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="nextStep" value="Partnership Conversation">
+                                    <span>Partnership Conversation</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="nextStep" value="General Information">
+                                    <span>General Information</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="cta-button">Send Enquiry</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Sidebar Info Column -->
+                <div class="contact-sidebar">
+                    <div class="sidebar-box connect-box">
+                        <h3>Other Ways to Connect</h3>
+                        <div class="contact-item">
+                            <span class="icon">✉</span>
+                            <div>
+                                <strong>Email</strong>
+                                <p><a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="icon">📞</span>
+                            <div>
+                                <strong>Mobile</strong>
+                                <p><a href="tel:+447310498510">+44(0)7310498510</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="icon">🤝</span>
+                            <div>
+                                <strong>Partnerships</strong>
+                                <p>Interested in collaboration, research partnerships, or joint initiatives?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-box start-box">
+                        <h3>Not Sure Where to Start?</h3>
+                        <p>Approach Frontline World with a challenge rather than a predefined solution.</p>
+                        <p>If you are unsure which service is right for you, we would be pleased to discuss your situation and explore potential options together.</p>
+                        <p class="highlight-callout">Let's discuss your challenge.</p>
+                        <div class="sidebar-buttons">
+                            <a href="#contact-form-section" class="cta-button small" onclick="selectPreferredNextStep('Consultation Call')">Book a Consultation</a>
+                            <a href="#contact-form-section" class="cta-button secondary small" onclick="focusContactForm()">Submit an Enquiry</a>
+                            <a href="#contact-form-section" class="cta-button outline small" onclick="selectPreferredNextStep('Consultation Call')">Request a Callback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+            <p>Connecting knowledge, expertise, and practice</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
