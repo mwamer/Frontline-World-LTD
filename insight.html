@@ -1,333 +1,298 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Insight | Frontline World</title>
+    <title>Insight | Frontline World</title>
 
-<link
-    rel="stylesheet"
-    href="styles.css"
->
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
 
-
-<style>
-
-    /* =====================================================
-       INDIVIDUAL INSIGHT PAGE
-       ===================================================== */
-
-    .single-insight-page {
-        padding: 140px 0 80px;
-    }
-
-
-    .single-insight-container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-
-    .single-insight-back {
-        display: inline-block;
-        margin-bottom: 40px;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-
-    .single-insight-category {
-        display: inline-block;
-        margin-bottom: 15px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-    }
-
-
-    .single-insight-title {
-        font-size: clamp(
-            2.2rem,
-            5vw,
-            4.5rem
-        );
-
-        line-height: 1.1;
-
-        margin: 0 0 25px;
-    }
-
-
-    .single-insight-meta {
-        margin-bottom: 40px;
-        font-size: 0.95rem;
-        opacity: 0.75;
-    }
-
-
-    .single-insight-featured-image {
-        width: 100%;
-        margin-bottom: 45px;
-        overflow: hidden;
-    }
-
-
-    .single-insight-featured-image img {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-    }
-
-
-    .single-insight-excerpt {
-        font-size: 1.3rem;
-        line-height: 1.7;
-        margin-bottom: 40px;
-        font-weight: 500;
-    }
-
-
-    .single-insight-body {
-        font-size: 1.08rem;
-        line-height: 1.8;
-    }
-
-
-    .single-insight-body p {
-        margin-bottom: 25px;
-    }
-
-
-    .single-insight-body h2 {
-        margin-top: 50px;
-        margin-bottom: 20px;
-    }
-
-
-    .single-insight-body h3 {
-        margin-top: 35px;
-        margin-bottom: 15px;
-    }
-
-
-    .single-insight-body ul,
-    .single-insight-body ol {
-        margin-bottom: 25px;
-        padding-left: 30px;
-    }
-
-
-    .single-insight-body li {
-        margin-bottom: 10px;
-    }
-
-
-    .single-insight-body blockquote {
-        margin: 35px 0;
-        padding: 20px 30px;
-        border-left: 4px solid currentColor;
-        font-size: 1.2rem;
-        font-style: italic;
-    }
-
-
-    .single-insight-body a {
-        text-decoration: underline;
-    }
-
-
-    .single-insight-gallery {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 50px;
-    }
-
-
-    .single-insight-gallery img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        display: block;
-    }
-
-
-    .insight-loading,
-    .insight-message {
-        padding: 80px 0;
-        text-align: center;
-        font-size: 1.1rem;
-    }
-
-
-    @media (max-width: 700px) {
+    <style>
 
         .single-insight-page {
-            padding-top: 110px;
+            padding: 140px 0 80px;
+        }
+
+
+        .single-insight-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+
+        .insight-back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+
+        .single-insight-category {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+
+        .single-insight-title {
+            font-size: clamp(
+                2rem,
+                5vw,
+                4rem
+            );
+
+            line-height: 1.15;
+
+            margin-bottom: 20px;
+        }
+
+
+        .single-insight-meta {
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+
+
+        .single-insight-featured-image {
+            margin-bottom: 40px;
+        }
+
+
+        .single-insight-featured-image img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+
+        .single-insight-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+
+        .single-insight-body h2,
+        .single-insight-body h3 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+
+        .single-insight-body p {
+            margin-bottom: 20px;
+        }
+
+
+        .single-insight-body ul,
+        .single-insight-body ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+
+        .single-insight-body blockquote {
+            margin: 30px 0;
+            padding: 20px 25px;
+            border-left: 4px solid #b08d57;
+            font-style: italic;
         }
 
 
         .single-insight-gallery {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: repeat(
+                2,
+                1fr
+            );
+
+            gap: 20px;
+
+            margin-top: 40px;
         }
 
 
         .single-insight-gallery img {
-            height: auto;
+            width: 100%;
+            display: block;
         }
 
-    }
 
-</style>
-```
+        .insight-loading,
+        .insight-message {
+            padding: 40px 0;
+        }
+
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .single-insight-gallery {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-```
-<!-- =====================================================
-     HEADER
-     ===================================================== -->
 
-<header class="site-header">
+    <!-- HEADER -->
 
-    <div class="container">
+    <header class="site-header">
 
-        <nav class="main-nav">
+        <div class="container">
+
+            <nav class="main-nav">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+                    Frontline World
+                </a>
+
+
+                <div class="nav-links">
+
+                    <a href="index.html#about">
+                        About
+                    </a>
+
+                    <a href="index.html#approach">
+                        Approach
+                    </a>
+
+                    <a href="index.html#pillars">
+                        Services
+                    </a>
+
+                    <a href="index.html#projects">
+                        Projects
+                    </a>
+
+                    <a href="index.html#mission">
+                        Mission
+                    </a>
+
+                    <a href="index.html#contact">
+                        Contact
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- INSIGHT -->
+
+    <main class="single-insight-page">
+
+        <div
+            class="container single-insight-container"
+        >
+
 
             <a
-                href="index.html"
-                class="logo"
+                href="insights.html"
+                class="insight-back-link"
             >
-                Frontline World
+                ← Back to News &amp; Insights
             </a>
 
 
-            <div class="nav-links">
+            <div
+                id="single-insight-content"
+            >
 
-                <a href="index.html#about">
-                    About
-                </a>
-
-                <a href="index.html#approach">
-                    Approach
-                </a>
-
-                <a href="index.html#pillars">
-                    Services
-                </a>
-
-                <a href="index.html#projects">
-                    Projects
-                </a>
-
-                <a href="index.html#mission">
-                    Mission
-                </a>
-
-                <a href="index.html#contact">
-                    Contact
-                </a>
+                <p class="insight-loading">
+                    Loading insight...
+                </p>
 
             </div>
 
-        </nav>
 
-    </div>
+        </div>
 
-</header>
-
-
-
-<!-- =====================================================
-     INSIGHT ARTICLE
-     ===================================================== -->
-
-<main class="single-insight-page">
-
-    <div
-        class="container single-insight-container"
-        id="single-insight-container"
-    >
-
-        <p class="insight-loading">
-            Loading insight...
-        </p>
-
-    </div>
-
-</main>
+    </main>
 
 
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
+    <!-- FOOTER -->
 
-<footer class="site-footer">
+    <footer class="site-footer">
 
-    <div class="container">
+        <div class="container">
 
-        <p>
-            © 2026 Frontline World.
-            All rights reserved.
-        </p>
+            <p>
+                © 2026 Frontline World.
+                All rights reserved.
+            </p>
 
-    </div>
+        </div>
 
-</footer>
+    </footer>
 
 
 
-<!-- =====================================================
-     SUPABASE
-     ===================================================== -->
+    <!-- SUPABASE -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
-
-<script>
-
-    /* =====================================================
-       SUPABASE CONFIGURATION
-       ===================================================== */
-
-    const SUPABASE_URL =
-        'https://hyeubekegkvnolzbvxnh.supabase.co';
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js">
+    </script>
 
 
-    const SUPABASE_ANON_KEY =
-        'sb_publishable_M4vOrMcF_PQAcnhSatSteg_t25kBpCr';
+    <script>
+
+        window.SUPABASE_URL =
+            'https://hyeubekegkvnolzbvxnh.supabase.co';
 
 
-    const client =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
+        window.SUPABASE_ANON_KEY =
+            'sb_publishable_M4vOrMcF_PQAcnhSatSteg_t25kBpCr';
+
+
+        window.supabaseClient =
+            window.supabase.createClient(
+                window.SUPABASE_URL,
+                window.SUPABASE_ANON_KEY
+            );
+
+    </script>
 
 
 
-    /* =====================================================
-       HELPERS
-       ===================================================== */
+    <!-- LOAD INSIGHT -->
 
-    function escapeHtml(value) {
+    <script>
 
-        return String(value || '')
-            .replace(
+        function escapeHtml(value) {
+
+            return String(
+                value || ''
+            ).replace(
                 /[&<>"']/g,
                 function (character) {
 
@@ -349,423 +314,295 @@
                 }
             );
 
-    }
-
-
-
-    function formatDate(dateValue) {
-
-        if (!dateValue) {
-            return '';
         }
 
 
-        return new Date(
-            dateValue
-        ).toLocaleDateString(
-            undefined,
-            {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
+
+        function formatDate(dateValue) {
+
+            if (!dateValue) {
+                return '';
             }
-        );
-
-    }
 
 
-
-    /* =====================================================
-       GET URL SLUG
-       ===================================================== */
-
-    function getSlug() {
-
-        const parameters =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        return parameters.get(
-            'slug'
-        );
-
-    }
-
-
-
-    /* =====================================================
-       RENDER INSIGHT
-       ===================================================== */
-
-    function renderInsight(post) {
-
-        const container =
-            document.getElementById(
-                'single-insight-container'
-            );
-
-
-        const imageUrls =
-            Array.isArray(post.image_urls)
-                ? post.image_urls
-                : [];
-
-
-        const featuredImage =
-            post.featured_image_url ||
-            (
-                imageUrls.length
-                    ? imageUrls[0]
-                    : null
-            );
-
-
-        const galleryImages =
-            imageUrls.filter(
-                function (imageUrl) {
-
-                    return imageUrl !==
-                        featuredImage;
-
+            return new Date(
+                dateValue
+            ).toLocaleDateString(
+                undefined,
+                {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 }
             );
 
-
-        const publicationDate =
-            post.publication_date ||
-            post.published_at ||
-            post.created_at;
-
-
-        let html = '';
-
-
-        /* Back link */
-
-        html +=
-            '<a ' +
-
-            'href="insights.html" ' +
-
-            'class="single-insight-back">' +
-
-            '&larr; Back to News &amp; Insights' +
-
-            '</a>';
-
-
-
-        /* Category */
-
-        if (post.category) {
-
-            html +=
-                '<div ' +
-
-                'class="single-insight-category">' +
-
-                escapeHtml(
-                    post.category
-                ) +
-
-                '</div>';
-
         }
 
 
 
-        /* Title */
+        async function loadInsight() {
 
-        html +=
-            '<h1 ' +
-
-            'class="single-insight-title">' +
-
-            escapeHtml(
-                post.title
-            ) +
-
-            '</h1>';
+            const container =
+                document.getElementById(
+                    'single-insight-content'
+                );
 
 
-
-        /* Meta */
-
-        html +=
-            '<div ' +
-
-            'class="single-insight-meta">' +
-
-            formatDate(
-                publicationDate
-            ) +
-
-            '</div>';
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
 
 
-
-        /* Featured image */
-
-        if (featuredImage) {
-
-            html +=
-                '<div ' +
-
-                'class="single-insight-featured-image">' +
-
-                '<img ' +
-
-                'src="' +
-
-                escapeHtml(
-                    featuredImage
-                ) +
-
-                '" ' +
-
-                'alt="' +
-
-                escapeHtml(
-                    post.title
-                ) +
-
-                '">' +
-
-                '</div>';
-
-        }
+            const slug =
+                params.get('slug');
 
 
+            if (!slug) {
 
-        /* Excerpt */
+                container.innerHTML =
+                    '<p class="insight-message">' +
+                    'Insight not found.' +
+                    '</p>';
 
-        if (post.excerpt) {
+                return;
 
-            html +=
-                '<div ' +
-
-                'class="single-insight-excerpt">' +
-
-                escapeHtml(
-                    post.excerpt
-                ) +
-
-                '</div>';
-
-        }
+            }
 
 
+            try {
 
-        /* Body */
-
-        if (post.body) {
-
-            html +=
-                '<article ' +
-
-                'class="single-insight-body">' +
-
-                post.body +
-
-                '</article>';
-
-        }
-
-
-
-        /* Gallery */
-
-        if (galleryImages.length) {
-
-            html +=
-                '<div ' +
-
-                'class="single-insight-gallery">';
+                const result =
+                    await window.supabaseClient
+                        .from(
+                            'insights_posts'
+                        )
+                        .select(
+                            '*'
+                        )
+                        .eq(
+                            'slug',
+                            slug
+                        )
+                        .eq(
+                            'status',
+                            'published'
+                        )
+                        .single();
 
 
-            galleryImages.forEach(
-                function (imageUrl, index) {
+                if (result.error) {
+                    throw result.error;
+                }
 
-                    html +=
-                        '<img ' +
 
-                        'src="' +
+                const post =
+                    result.data;
+
+
+                if (!post) {
+
+                    container.innerHTML =
+                        '<p class="insight-message">' +
+                        'Insight not found.' +
+                        '</p>';
+
+                    return;
+
+                }
+
+
+                document.title =
+                    post.title +
+                    ' | Frontline World';
+
+
+                let featuredImage = '';
+
+
+                if (
+                    post.featured_image_url
+                ) {
+
+                    featuredImage =
+                        '<div class="single-insight-featured-image">' +
+
+                        '<img src="' +
 
                         escapeHtml(
-                            imageUrl
+                            post.featured_image_url
                         ) +
 
-                        '" ' +
-
-                        'alt="' +
+                        '" alt="' +
 
                         escapeHtml(
                             post.title
                         ) +
 
-                        ' image ' +
+                        '">' +
 
-                        (index + 2) +
-
-                        '">';
+                        '</div>';
 
                 }
-            );
 
 
-            html +=
-                '</div>';
-
-        }
+                let gallery = '';
 
 
-        container.innerHTML = html;
+                if (
+                    Array.isArray(
+                        post.image_urls
+                    ) &&
+                    post.image_urls.length > 1
+                ) {
 
-    }
+                    const galleryImages =
+                        post.image_urls
+                            .slice(1)
+                            .map(
+                                function (url) {
 
+                                    return (
 
+                                        '<img src="' +
 
-    /* =====================================================
-       LOAD INSIGHT
-       ===================================================== */
+                                        escapeHtml(
+                                            url
+                                        ) +
 
-    async function loadInsight() {
+                                        '" alt="' +
 
-        const container =
-            document.getElementById(
-                'single-insight-container'
-            );
+                                        escapeHtml(
+                                            post.title
+                                        ) +
 
+                                        '">'
 
-        const slug =
-            getSlug();
+                                    );
 
-
-        if (!slug) {
-
-            container.innerHTML =
-                '<div class="insight-message">' +
-
-                '<h2>Insight not found</h2>' +
-
-                '<p>' +
-
-                'No insight was selected.' +
-
-                '</p>' +
-
-                '<p>' +
-
-                '<a href="insights.html">' +
-
-                'Return to News &amp; Insights' +
-
-                '</a>' +
-
-                '</p>' +
-
-                '</div>';
+                                }
+                            )
+                            .join('');
 
 
-            return;
+                    if (galleryImages) {
 
-        }
+                        gallery =
+                            '<div class="single-insight-gallery">' +
+
+                            galleryImages +
+
+                            '</div>';
+
+                    }
+
+                }
 
 
-        try {
+                container.innerHTML =
 
-            const result =
-                await client
-                    .from(
-                        'insights_posts'
+                    (
+
+                        post.category
+
+                            ?
+
+                            '<div class="single-insight-category">' +
+
+                            escapeHtml(
+                                post.category
+                            ) +
+
+                            '</div>'
+
+                            :
+
+                            ''
+
                     )
-                    .select(
-                        'id, title, slug, excerpt, body, category, status, publication_date, featured_image_url, image_urls, created_at, published_at'
+
+                    +
+
+                    '<h1 class="single-insight-title">' +
+
+                    escapeHtml(
+                        post.title
+                    ) +
+
+                    '</h1>'
+
+
+                    +
+
+                    '<div class="single-insight-meta">' +
+
+                    formatDate(
+                        post.publication_date ||
+                        post.published_at ||
+                        post.created_at
                     )
-                    .eq(
-                        'slug',
-                        slug
+
+                    +
+
+                    '</div>'
+
+
+                    +
+
+                    featuredImage
+
+
+                    +
+
+                    '<article class="single-insight-body">' +
+
+                    (
+                        post.body ||
+
+                        '<p>' +
+
+                        escapeHtml(
+                            post.excerpt || ''
+                        ) +
+
+                        '</p>'
                     )
-                    .eq(
-                        'status',
-                        'published'
-                    )
-                    .single();
+
+                    +
+
+                    '</article>'
 
 
-            if (result.error) {
+                    +
 
-                throw result.error;
-
-            }
+                    gallery;
 
 
-            if (!result.data) {
+            } catch (error) {
 
-                throw new Error(
-                    'Insight not found.'
+                console.error(
+                    'Error loading insight:',
+                    error
                 );
 
+
+                container.innerHTML =
+                    '<p class="insight-message">' +
+
+                    'Unable to load this insight.' +
+
+                    '</p>';
+
             }
-
-
-            document.title =
-                result.data.title +
-                ' | Frontline World';
-
-
-            renderInsight(
-                result.data
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                'Error loading insight:',
-                error
-            );
-
-
-            container.innerHTML =
-                '<div class="insight-message">' +
-
-                '<h2>Insight not found</h2>' +
-
-                '<p>' +
-
-                'The requested insight could not be found.' +
-
-                '</p>' +
-
-                '<p>' +
-
-                '<a href="insights.html">' +
-
-                'Return to News &amp; Insights' +
-
-                '</a>' +
-
-                '</p>' +
-
-                '</div>';
 
         }
 
-    }
 
 
+        loadInsight();
 
-    /* =====================================================
-       START
-       ===================================================== */
+    </script>
 
-    loadInsight();
-
-</script>
-```
 
 </body>
 
