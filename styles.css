@@ -196,6 +196,46 @@ html {
     line-height: 1.6;
 }
 
+/* Challenges Section */
+.challenges {
+    padding: 80px 20px;
+    background: #f8f9fa;
+}
+
+.challenges h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1e3c72;
+}
+
+.challenges p {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.8;
+}
+
+.challenges-intro {
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.challenges-list {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    padding-left: 1.5rem;
+    line-height: 1.8;
+}
+
+.challenges-list li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.challenges-conclusion {
+    font-weight: 600;
+}
+
 /* CTA Section */
 .cta-section {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
