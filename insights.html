@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>News & Insights | Frontline World</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .public-insights-page {
+            padding: 120px 0 80px;
+        }
+
+        .public-insights-header {
+            margin-bottom: 50px;
+        }
+
+        .public-insights-header h1 {
+            margin-bottom: 15px;
+        }
+
+        .public-insights-header p {
+            max-width: 750px;
+        }
+
+        .public-insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .public-insight-card {
+            overflow: hidden;
+        }
+
+        .public-insight-card-image {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .public-insight-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .public-insight-card-content {
+            padding-bottom: 20px;
+        }
+
+        .public-insight-category {
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .public-insight-card h2 {
+            margin: 0 0 10px;
+        }
+
+        .public-insight-date {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .public-insight-excerpt {
+            margin-bottom: 20px;
+        }
+
+        .public-insight-read-more {
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .insights-loading,
+        .insights-message {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 900px) {
+            .public-insights-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .public-insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="main-nav">
+                <a href="index.html" class="logo">Frontline World</a>
+
+                <div class="nav-links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#approach">Approach</a>
+                    <a href="index.html#pillars">Services</a>
+                    <a href="index.html#projects">Projects</a>
+                    <a href="index.html#mission">Mission</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- News & Insights -->
+    <main class="public-insights-page">
+
+        <div class="container">
+
+            <header class="public-insights-header">
+                <h1>News & Insights</h1>
+
+                <p>
+                    Research, analysis, commentary, events and perspectives
+                    from Frontline World.
+                </p>
+            </header>
+
+
+            <section
+                class="public-insights-grid"
+                id="public-insights-grid"
+                aria-live="polite"
+            >
+
+                <p class="insights-loading">
+                    Loading latest insights...
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                © 2026 Frontline World. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+    <script>
+        window.SUPABASE_URL =
+            'https://hyeubekegkvnolzbvxnh.supabase.co';
+
+        window.SUPABASE_ANON_KEY =
+            'sb_publishable_M4vOrMcF_PQAcnhSatSteg_t25kBpCr';
+
+        window.supabaseClient = window.supabase.createClient(
+            window.SUPABASE_URL,
+            window.SUPABASE_ANON_KEY
+        );
+    </script>
+
+
+    <!-- Public site JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
