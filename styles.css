@@ -166,10 +166,129 @@ html {
     color: #1e3c72;
 }
 
-.services-grid {
+.services-framework {
+    margin-bottom: 3rem;
+}
+
+.framework-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.framework-intro h3,
+.expertise-section h3,
+.integrated-approach h3 {
+    font-size: 2.1rem;
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.framework-tagline {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.framework-intro p,
+.integrated-approach p,
+.expertise-card p,
+.expertise-card li {
+    color: #555;
+    line-height: 1.7;
+}
+
+.framework-flow {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.framework-step {
+    background: #f8f9fa;
+    border: 1px solid #e8ecf4;
+    border-left: 5px solid #667eea;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.framework-step h4,
+.expertise-card h4 {
+    color: #1e3c72;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.framework-type,
+.expertise-type {
+    color: #667eea;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.framework-arrow {
+    text-align: center;
+    font-size: 2rem;
+    color: #667eea;
+    line-height: 1;
+}
+
+.integrated-approach {
+    background: linear-gradient(135deg, #f5f7fa 0%, #eef3ff 100%);
+    border-left: 4px solid #1e3c72;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.integrated-approach p {
+    margin-bottom: 0.75rem;
+}
+
+.expertise-section {
+    margin-top: 4rem;
+}
+
+.expertise-list {
+    display: grid;
     gap: 2rem;
+}
+
+.expertise-card {
+    background: #fff;
+    border: 1px solid #ebf0f8;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.expertise-index {
+    color: #667eea;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.expertise-summary {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.key-services {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0 1.25rem;
+    color: #555;
+}
+
+.outcome {
+    color: #1e3c72;
+    font-weight: 600;
+    margin-bottom: 1rem;
 }
 
 .service-card {
@@ -194,6 +313,19 @@ html {
 .service-card p {
     color: #666;
     line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .framework-flow {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: stretch;
+    }
+
+    .framework-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* CTA Section */
