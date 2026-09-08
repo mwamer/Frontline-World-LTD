@@ -1,0 +1,9 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{- if .Description }}
+<meta name="description" content="{{ .Description }}">
+{{- else if .Site.Params.description }}
+<meta name="description" content="{{ .Site.Params.description }}">
+{{- end }}
+<title>{{ if .IsHome }}{{ .Site.Title }} | Strategic Consulting & Advisory{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<link rel="stylesheet" href="{{ "styles.css" | relURL }}">

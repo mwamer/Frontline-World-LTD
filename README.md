@@ -1,50 +1,70 @@
 # Frontline World Ltd
 
-Public website and admin dashboard for Frontline World Ltd, an interdisciplinary consultancy.
+Public website for Frontline World Ltd, an interdisciplinary consultancy. Built with [Hugo](https://gohugo.io) and deployed to GitHub Pages.
 
 ## Project Structure
 
 ```
-├── index.html              # Homepage (hero, expertise, sectors, projects, contact)
-├── about.html              # Company overview, framework, team
-├── approach.html           # Methodology and framework
-├── contact.html            # Contact form
-├── insights.html           # Public news/insights listing (Supabase-powered)
-├── insight.html            # Single insight view (loaded by slug)
-├── dashboard.html          # Admin CMS dashboard (requires authentication)
-├── styles.css              # Shared stylesheet
-├── script.js               # Shared JS (mobile nav, contact form, smooth scroll)
-├── dashboard.js            # Dashboard logic (CRUD for insights, enquiries, team, content)
-├── auth.js                 # Supabase auth helpers (session, sign-in, sign-out, role check)
-├── config.js               # Supabase project credentials (URL + anon key)
-└── .github/workflows/      # GitHub Pages deployment via Jekyll
+├── content/                     # Markdown content (edit these)
+│   ├── _index.md                # Homepage content
+│   ├── about.md                 # About page
+│   ├── approach.md              # Approach page
+│   ├── contact.md               # Contact page (mailto links)
+│   └── news/                    # News articles
+│       ├── _index.md            # News listing page
+│       └── *.md                 # Individual articles
+├── layouts/                     # HTML templates
+│   ├── _default/
+│   │   ├── baseof.html          # Shared layout (head, nav, footer)
+│   │   └── single.html          # Standard page layout
+│   ├── index.html               # Homepage layout
+│   ├── news/
+│   │   ├── list.html            # News listing
+│   │   └── single.html          # Single article
+│   └── partials/
+│       ├── head.html            # <head> tag
+│       ├── nav.html             # Navigation
+│       └── footer.html          # Footer
+├── static/                      # Copied as-is to the built site
+│   ├── styles.css
+│   ├── script.js
+│   └── images/                  # Images (news featured images, etc.)
+├── hugo.toml                    # Hugo configuration
+└── .github/workflows/hugo.yml   # GitHub Pages deploy workflow
 ```
 
-## Getting Started
+## Editing Content
 
-### Prerequisites
+All site content lives in `content/` as Markdown files. Add a frontmatter block at the top of each file:
 
-- A modern web browser
-- A local HTTP server (e.g., `python3 -m http.server`, `npx serve`, or VS Code Live Server)
-- For the admin dashboard: a [Supabase](https://supabase.com) project with the required tables and storage bucket
+```markdown
+---
+title: "My Article Title"
+date: 2026-09-06
+description: "A short summary shown in listings."
+news_type: "Commentary"         # Category shown on cards
+image: "images/article.png"     # Optional featured image
+draft: false
+---
 
-### Running Locally
+Content here in Markdown...
+```
 
-1. Clone the repository
-2. Start a local server from the project root:
-   ```
-   python3 -m http.server 8000
-   ```
-3. Open `http://localhost:8000` in your browser
+To publish a new news article: create a file in `content/news/`, push to `main`, and the site redeploys automatically. The homepage shows the latest 6 articles.
 
-### Dashboard Setup
+## Local Development
 
-1. Create a Supabase project
-2. Update `config.js` with your Supabase URL and anon key
-3. Run the required SQL schema in the Supabase SQL editor (tables: `insights_posts`, `enquiries`, `team_members`, `content_blocks`, `profiles`)
-4. Create a `media` storage bucket in Supabase for image uploads
-5. Ensure the authenticated user has a profile row with role `admin` or `editor`
+```bash
+brew install hugo
+hugo server    # live reload at http://localhost:1313/
+```
 
-### Deployment
+Build the static site to `public/`:
 
-The site deploys automatically to GitHub Pages on push to `main` via the GitHub Actions workflow.
+```bash
+hugo
+```
+
+## Deployment
+
+Push to `main`. The GitHub Actions workflow (`.github/workflows/hugo.yml`) builds the site and deploys it to GitHub Pages automatically.

@@ -1,0 +1,39 @@
+baseURL = "https://mwamer.github.io/Frontline-World-LTD/"
+locale = "en"
+defaultContentLanguage = "en"
+title = "Frontline World Ltd"
+
+[params]
+  description = "Interdisciplinary consultancy connecting knowledge and practice across business, government, and academia."
+  email = "wesaam.amer@gmail.com"
+  phone = "+44 (0)7310 498510"
+
+[taxonomies]
+  # Intentionally empty: disables the default categories and tags taxonomies
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menus.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+  [[menus.main]]
+    name = "Approach"
+    url = "/approach/"
+    weight = 3
+  [[menus.main]]
+    name = "News"
+    url = "/news/"
+    weight = 4
+  [[menus.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 5
