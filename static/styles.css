@@ -515,10 +515,10 @@ em {
 }
 
 .hero-title {
-    font-size: clamp(3rem, 8.4vw, 6.8rem);
-    line-height: 1.02;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    line-height: 1.05;
     letter-spacing: -0.02em;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
 }
 
 .hero-title em {
@@ -526,12 +526,13 @@ em {
     font-weight: 300;
 }
 
-.hero-sub {
+.hero-tagline {
     font-family: var(--font-serif);
-    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-size: clamp(1.05rem, 1.7vw, 1.35rem);
     font-style: italic;
-    color: var(--charcoal);
-    margin-bottom: 2.6rem;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    margin-bottom: 2.8rem;
 }
 
 .hero-actions {
@@ -1789,32 +1790,6 @@ em {
     color: var(--terracotta);
 }
 
-.framework-item-wide {
-    grid-column: 1 / -1;
-}
-
-.framework-summary {
-    margin-top: 2rem;
-    padding: 2rem 2.4rem;
-    background: var(--forest);
-    color: var(--offwhite);
-}
-
-.framework-summary strong {
-    display: block;
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 1.4rem;
-    color: var(--offwhite);
-    margin-bottom: 0.6rem;
-}
-
-.framework-summary p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.97rem;
-    line-height: 1.8;
-}
-
 /* Tagline */
 .tagline {
     font-family: var(--font-serif);
@@ -2882,12 +2857,16 @@ em {
     }
 
     .framework-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (min-width: 1200px) {
     .why-band-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .framework-grid {
         grid-template-columns: repeat(5, 1fr);
     }
 }

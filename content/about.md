@@ -30,14 +30,6 @@ A world where knowledge and expertise are transformed into practical action, ena
 </div>
 </div>
 
-## Our Approach
-
-FW is built on a simple proposition: insight enables foresight, foresight enables preparedness for change and uncertainty, and preparedness builds resilience.
-
-In a complex and rapidly changing world, organisations need more than solutions to problems after they emerge. They need the ability to understand their environment, identify emerging risks and opportunities, anticipate change, and act with confidence.
-
-FW brings together multidisciplinary expertise in research, strategic analysis, foresight, communication, and professional development to help clients move from understanding to action. Our approach is practical, not theoretical — designed to deliver usable tools, clear recommendations, and measurable results within defined timeframes.
-
 ## Our Framework
 
 <p class="framework-subtitle">UNDERSTAND → ANTICIPATE → COMMUNICATE → STRENGTHEN → TRANSFORM</p>
@@ -84,21 +76,13 @@ Build people and organisational capability. FW develops the knowledge, skills, l
 
 </div>
 
-<div class="framework-item framework-item-wide" markdown="1">
+<div class="framework-item" markdown="1">
 
 #### 05. Transform
 
 Turn strategy into lasting change. FW supports organisations in translating insight, strategy, and capability into institutional improvement, organisational resilience, and sustainable transformation.
 
 </div>
-
-</div>
-
-<div class="framework-summary" markdown="1">
-
-**FW Approach / Methodology**
-
-A practical framework for helping organisations navigate complexity, prepare for change, build capability, and create lasting impact.
 
 </div>
 
@@ -311,28 +295,6 @@ Experts may be engaged for individual assignments, research projects, advisory s
 </div>
 
 </div>
-
-### Advisory Board
-
-**Independent Advice. Strategic Perspective.**
-
-Frontline World's Advisory Board provides independent guidance, strategic insight, and external perspectives to support the company's long-term development.
-
-The Board will bring together up to five experienced professionals from complementary sectors and disciplines.
-
-<div class="network-table-wrap" markdown="1">
-
-| Position | Profile |
-|----------|---------|
-| Advisory Member 01 | Business Strategy & Corporate Development |
-| Advisory Member 02 | Government, Policy & International Affairs |
-| Advisory Member 03 | Media, Journalism & Strategic Communication |
-| Advisory Member 04 | Technology, AI & Digital Transformation |
-| Advisory Member 05 | Higher Education, Research & Institutional Development |
-
-</div>
-
----
 
 <div class="join-section" markdown="1">
 
