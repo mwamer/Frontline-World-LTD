@@ -414,4 +414,192 @@
         </ul>
     </div>
 </section>
+
+<!-- Current & Future Partners -->
+<section class="partners" id="partners" aria-labelledby="partners-heading">
+    <div class="container">
+        <header class="partners-header reveal">
+            <p class="section-kicker">Current &amp; Future Partners</p>
+            <h2 id="partners-heading" class="partners-title">Growing a Global Network</h2>
+            <p class="partners-lead">Frontline World is building relationships with organisations, institutions, networks and professionals committed to evidence-based practice, innovation and meaningful impact.</p>
+        </header>
+
+        <ul class="partner-wall reveal" aria-label="Partner logo wall">
+            {{ range .Params.partners }}
+            <li class="partner-card">
+                {{ if .logo }}
+                <a class="partner-logo" href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}">
+                    <img src="{{ .logo }}" alt="{{ .name }} logo" loading="lazy">
+                </a>
+                {{ else }}
+                <span class="partner-slot" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="19" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M6.5 17.5L10.5 6.5M17.5 17.5L13.5 6.5"/></svg>
+                </span>
+                {{ end }}
+                <span class="partner-label">{{ .name }}</span>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</section>
+
+<!-- Become a Partner -->
+<section class="become-partner" id="become-a-partner" aria-labelledby="become-partner-heading">
+    <div class="container">
+        <header class="become-partner-header reveal">
+            <p class="section-kicker">Become a Partner</p>
+            <h2 id="become-partner-heading" class="become-partner-title">Let&rsquo;s Explore Opportunities to Work Together</h2>
+            <p class="become-partner-lead">We welcome conversations about research partnerships, knowledge exchange, advisory support, training, events and institutional development.</p>
+            <p class="become-partner-lead">We work with universities, NGOs, government institutions, foundations, media organisations, businesses and professional networks.</p>
+        </header>
+
+        <div class="areas-of-interest reveal">
+            <p class="areas-of-interest-label">Areas of Interest</p>
+            <ul class="areas-grid" aria-label="Areas of interest">
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Research &amp; Knowledge Exchange</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Strategic Advisory</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Training &amp; Executive Education</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Joint Events</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Publications</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Capacity Building</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Institutional Development</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Grant-Funded Projects</li>
+            </ul>
+        </div>
+
+        <div class="partnership-form reveal" id="partnership-enquiry">
+            <div class="partnership-form-copy">
+                <p class="section-kicker">Partnership Enquiry</p>
+                <p class="partnership-form-intro">Tell us briefly about your organisation and the partnership opportunity you would like to explore.</p>
+            </div>
+            <form class="partnership-form-fields" action="mailto:wesaam.amer@gmail.com?subject=Partnership%20Enquiry" method="post" enctype="text/plain">
+                <div class="pf-field">
+                    <label for="pf-organisation">Organisation Name</label>
+                    <input id="pf-organisation" type="text" name="organisation" autocomplete="organization" required>
+                </div>
+                <div class="pf-field">
+                    <label for="pf-website">Website</label>
+                    <input id="pf-website" type="url" name="website" autocomplete="url" placeholder="https://">
+                </div>
+                <div class="pf-field">
+                    <label for="pf-country">Country / Region</label>
+                    <input id="pf-country" type="text" name="country" autocomplete="country-name">
+                </div>
+                <div class="pf-field">
+                    <label for="pf-contact">Contact Person</label>
+                    <input id="pf-contact" type="text" name="contact" autocomplete="name">
+                </div>
+                <div class="pf-field">
+                    <label for="pf-position">Position</label>
+                    <input id="pf-position" type="text" name="position">
+                </div>
+                <div class="pf-field">
+                    <label for="pf-email">Email Address</label>
+                    <input id="pf-email" type="email" name="email" autocomplete="email" required>
+                </div>
+                <fieldset class="pf-field pf-field-wide pf-interest">
+                    <legend>Partnership Interest</legend>
+                    <div class="pf-check-grid">
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Research Collaboration">Research Collaboration</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Advisory Partnership">Advisory Partnership</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Training & Executive Education">Training &amp; Executive Education</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Events & Conferences">Events &amp; Conferences</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Knowledge Exchange">Knowledge Exchange</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Institutional Development">Institutional Development</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Funding & Grant Opportunities">Funding &amp; Grant Opportunities</label>
+                        <label class="pf-check"><input type="checkbox" name="interest" value="Other">Other</label>
+                    </div>
+                </fieldset>
+                <div class="pf-field pf-field-wide">
+                    <label for="pf-message">Message</label>
+                    <textarea id="pf-message" name="message" rows="5" placeholder="Tell us briefly about your organisation and the partnership opportunity you would like to explore."></textarea>
+                </div>
+                <button type="submit" class="cta-button pf-submit">Submit Partnership Enquiry</button>
+                <p class="team-join-note">Opens in your email app, pre-addressed to Frontline World.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Why Partner with Frontline World -->
+<section class="why-partner" id="why-partner" aria-labelledby="why-partner-heading">
+    <div class="container">
+        <header class="why-partner-header reveal">
+            <p class="section-kicker">Why Partner with Frontline World</p>
+            <h2 id="why-partner-heading" class="why-partner-title">A Partnership Built on Substance</h2>
+            <p class="why-partner-lead">Four reasons organisations choose to work with us.</p>
+        </header>
+
+        <ul class="reason-grid reveal" aria-label="Why partner with Frontline World">
+            <li class="reason-card">
+                <span class="reason-node" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <div class="reason-body">
+                    <h3 class="reason-name">Interdisciplinary Expertise</h3>
+                    <p class="reason-desc">Access expertise across research, strategy, communication, foresight and organisational development.</p>
+                </div>
+            </li>
+            <li class="reason-card">
+                <span class="reason-node" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                </span>
+                <div class="reason-body">
+                    <h3 class="reason-name">Flexible Collaboration</h3>
+                    <p class="reason-desc">Partnership models tailored to organisational needs and opportunities.</p>
+                </div>
+            </li>
+            <li class="reason-card">
+                <span class="reason-node" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </span>
+                <div class="reason-body">
+                    <h3 class="reason-name">Global Networks</h3>
+                    <p class="reason-desc">Connections across academia, policy, professional practice, media and development.</p>
+                </div>
+            </li>
+            <li class="reason-card">
+                <span class="reason-node" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><polyline points="9 12 11 14 15 10"/></svg>
+                </span>
+                <div class="reason-body">
+                    <h3 class="reason-name">Evidence-Based Practice</h3>
+                    <p class="reason-desc">Rigorous research, practical solutions and a focus on meaningful outcomes.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Interested in Working Together -->
+<section class="work-together" id="interested-working-together" aria-labelledby="work-together-heading">
+    <div class="container">
+        <div class="work-together-inner reveal">
+            <p class="section-kicker">Start the Conversation</p>
+            <h2 id="work-together-heading" class="work-together-title">Interested in Working Together?</h2>
+            <p class="work-together-text">Whether you are seeking research, advisory support, training, thought leadership or institutional development, we would be delighted to start a conversation.</p>
+            <p class="work-together-text">Let&rsquo;s build meaningful partnerships that create lasting impact.</p>
+            <div class="work-together-ctas">
+                <a class="cta-button" href="#partnership-enquiry">Become a Partner</a>
+                <a class="cta-button secondary" href="mailto:wesaam.amer@gmail.com?subject=Collaboration%20with%20Frontline%20World">Discuss a Collaboration</a>
+                <a class="cta-button secondary" href="{{ "contact" | relURL }}">Contact Frontline World</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Need the Right Expertise -->
+<section class="right-expertise" id="need-the-right-expertise" aria-labelledby="right-expertise-heading">
+    <div class="container">
+        <div class="right-expertise-inner reveal">
+            <p class="section-kicker">Frontline World</p>
+            <h2 id="right-expertise-heading" class="right-expertise-title">Need the Right Expertise?</h2>
+            <p class="right-expertise-text">Whether you are facing a strategic challenge, developing a new programme, navigating technological change or seeking specialist research and advice, we can help identify the expertise you need.</p>
+            <div class="right-expertise-ctas">
+                <a class="cta-button" href="{{ "contact" | relURL }}">Tell Us About Your Challenge</a>
+                <a class="cta-button secondary" href="{{ "services" | relURL }}">Explore Our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
 {{ end }}
