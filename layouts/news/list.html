@@ -14,11 +14,11 @@
             {{- if $pages }}
             {{- range $pages }}
             <article class="public-insight-card">
+                {{- $frame := dict "ratio" "portrait" "tone" "sand" }}
                 {{- if .Params.image }}
-                <div class="public-insight-card-image">
-                    <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
-                </div>
+                {{- $frame = merge $frame (dict "src" .Params.image "alt" .Title) }}
                 {{- end }}
+                {{ partial "image-frame.html" $frame }}
                 <div class="public-insight-card-content">
                     {{- if .Params.news_type }}
                     <span class="public-insight-category">{{ .Params.news_type }}</span>

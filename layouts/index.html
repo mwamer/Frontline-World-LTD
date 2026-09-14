@@ -2,19 +2,24 @@
 <!-- Hero Section -->
 <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-inner">
-        <div class="hero-content">
-            <p class="hero-kicker">Strategic Research &middot; Foresight &middot; Communication &middot; Advisory</p>
-            <h1 id="hero-heading" class="hero-title reveal">Understanding <em>Complex</em> Worlds</h1>
-            <p class="hero-sub">Shaping Better Futures</p>
-            <div class="hero-actions">
-                <a href="{{ "about" | relURL }}" class="cta-button">Learn More</a>
-                <a href="{{ "contact" | relURL }}" class="cta-button secondary">Get in Touch</a>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <p class="hero-kicker">Strategic Research &middot; Foresight &middot; Communication &middot; Advisory</p>
+                <h1 id="hero-heading" class="hero-title reveal">Understanding <em>Complex</em> Worlds</h1>
+                <p class="hero-sub">Shaping Better Futures</p>
+                <div class="hero-actions">
+                    <a href="{{ "about" | relURL }}" class="cta-button">Learn More</a>
+                    <a href="{{ "contact" | relURL }}" class="cta-button secondary">Get in Touch</a>
+                </div>
             </div>
-            <div class="hero-meta">
-                <p><strong>Who we are</strong> Interdisciplinary consultancy</p>
-                <p><strong>Where we work</strong> Business &middot; Government &middot; Academia</p>
-                <p><strong>What we do</strong> Knowledge into action</p>
+            <div class="hero-visual reveal">
+                {{ partial "image-frame.html" (dict "ratio" "portrait" "tone" "forest" "caption" "Portrait placeholder — real photography coming soon") }}
             </div>
+        </div>
+        <div class="hero-meta">
+            <p><strong>Who we are</strong> Interdisciplinary consultancy</p>
+            <p><strong>Where we work</strong> Business &middot; Government &middot; Academia</p>
+            <p><strong>What we do</strong> Knowledge into action</p>
         </div>
     </div>
 </section>
@@ -22,12 +27,17 @@
 <!-- Mission Section -->
 <section id="mission" class="mission" aria-labelledby="mission-heading">
     <div class="container">
-        <div class="section-head reveal">
-            <p class="section-kicker">Who We Are</p>
-            <h2 id="mission-heading">Our Mission</h2>
+        <div class="mission-grid">
+            <div class="mission-copy">
+                <p class="section-kicker">Who We Are</p>
+                <h2 id="mission-heading">Our Mission</h2>
+                <p class="lead-text">Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice to help organisations understand complexity, anticipate change, communicate clearly, and build lasting capability.</p>
+                <a href="{{ "about" | relURL }}" class="link-button">Read Full About Page &rarr;</a>
+            </div>
+            <div class="mission-visual">
+                {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "sand" "caption" "Landscape placeholder — real photography coming soon") }}
+            </div>
         </div>
-        <p class="lead-text reveal">Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice to help organisations understand complexity, anticipate change, communicate clearly, and build lasting capability.</p>
-        <a href="{{ "about" | relURL }}" class="link-button">Read Full About Page &rarr;</a>
     </div>
 </section>
 
@@ -41,7 +51,7 @@
         </div>
 
         <div class="expertise-list">
-            <details class="expertise-item" id="expertise-understand" style="--accent: var(--navy);" open>
+            <details class="expertise-item" id="expertise-understand" open>
                 <summary class="expertise-summary">
                     <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
@@ -81,7 +91,7 @@
                 </div>
             </details>
 
-            <details class="expertise-item" id="expertise-anticipate" style="--accent: var(--slate);" open>
+            <details class="expertise-item" id="expertise-anticipate" open>
                 <summary class="expertise-summary">
                     <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
@@ -122,7 +132,7 @@
                 </div>
             </details>
 
-            <details class="expertise-item" id="expertise-communicate" style="--accent: var(--gold);" open>
+            <details class="expertise-item" id="expertise-communicate" open>
                 <summary class="expertise-summary">
                     <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
@@ -162,7 +172,7 @@
                 </div>
             </details>
 
-            <details class="expertise-item" id="expertise-strengthen" style="--accent: var(--navy);" open>
+            <details class="expertise-item" id="expertise-strengthen" open>
                 <summary class="expertise-summary">
                     <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
@@ -202,7 +212,7 @@
                 </div>
             </details>
 
-            <details class="expertise-item" id="expertise-transform" style="--accent: var(--slate);" open>
+            <details class="expertise-item" id="expertise-transform" open>
                 <summary class="expertise-summary">
                     <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
@@ -379,16 +389,19 @@
         </div>
         <div class="projects-grid reveal">
             <article class="project-card">
+                {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "terracotta") }}
                 <p class="project-tag">Institutional Advisory</p>
                 <h3>Institutional Resilience Review</h3>
                 <p>A comprehensive review helping a public-sector institution strengthen governance and adapt to a changing operating environment.</p>
             </article>
             <article class="project-card">
+                {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "forest") }}
                 <p class="project-tag">Strategic Foresight</p>
                 <h3>Strategic Foresight Programme</h3>
                 <p>A scenario-planning programme supporting leadership teams to anticipate risk and prepare for multiple futures.</p>
             </article>
             <article class="project-card">
+                {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "sand") }}
                 <p class="project-tag">Communication Advisory</p>
                 <h3>Communication Risk Advisory</h3>
                 <p>Narrative and stakeholder engagement strategy delivered for an organisation navigating a period of public scrutiny.</p>
@@ -410,6 +423,11 @@
             {{- if $news }}
             {{- range $news }}
             <article class="insight-card">
+                {{- $frame := dict "ratio" "square" "tone" "sand" }}
+                {{- if .Params.image }}
+                {{- $frame = merge $frame (dict "src" .Params.image "alt" .Title) }}
+                {{- end }}
+                {{ partial "image-frame.html" $frame }}
                 <p class="insight-date">{{ .Date.Format "January 2, 2006" }}</p>
                 <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                 {{- if .Description }}
@@ -419,14 +437,17 @@
             {{- end }}
             {{- else }}
             <div class="insight-card">
+                {{ partial "image-frame.html" (dict "ratio" "square" "tone" "terracotta") }}
                 <p class="insight-date">News</p>
                 <h3>Research & Reports</h3>
             </div>
             <div class="insight-card">
+                {{ partial "image-frame.html" (dict "ratio" "square" "tone" "forest") }}
                 <p class="insight-date">Commentary</p>
                 <h3>Articles & Commentary</h3>
             </div>
             <div class="insight-card">
+                {{ partial "image-frame.html" (dict "ratio" "square" "tone" "sand") }}
                 <p class="insight-date">Updates</p>
                 <h3>Latest Updates</h3>
             </div>
@@ -443,7 +464,7 @@
 <!-- Partnerships Section -->
 <section id="partnerships" class="cta-section" aria-labelledby="partnerships-heading">
     <div class="container reveal">
-        <p class="section-kicker" style="color:var(--gold);">Collaboration</p>
+        <p class="section-kicker">Collaboration</p>
         <h2 id="partnerships-heading">Partnerships</h2>
         <p>We collaborate with organisations and experts who share our commitment to practical, evidence-based impact.</p>
         <a href="{{ "contact" | relURL }}" class="cta-button">Start a Conversation</a>

@@ -19,7 +19,7 @@
 
         {{- if .Params.image }}
         <div class="single-insight-featured-image">
-            <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+            {{ partial "image-frame.html" (dict "ratio" "wide" "tone" "sand" "src" .Params.image "alt" .Title) }}
         </div>
         {{- end }}
 

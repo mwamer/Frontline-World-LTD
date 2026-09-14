@@ -10,6 +10,12 @@
     </div>
 </section>
 
+{{- if .Params.image }}
+<div class="container page-feature">
+    {{ partial "image-frame.html" (dict "ratio" "wide" "tone" "sand" "src" .Params.image "alt" .Title) }}
+</div>
+{{- end }}
+
 <!-- Page Content -->
 <section class="about-content">
     <div class="container">
