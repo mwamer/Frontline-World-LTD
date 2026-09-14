@@ -11,3 +11,6 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Browser panel artifacts
+.openchamber/

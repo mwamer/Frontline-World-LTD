@@ -1,12 +1,20 @@
 {{ define "main" }}
 <!-- Hero Section -->
 <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-content">
-        <h1 id="hero-heading">Understanding Complex Worlds</h1>
-        <p>Shaping Better Futures</p>
-        <div class="hero-actions">
-            <a href="{{ "about" | relURL }}" class="cta-button">Learn More</a>
-            <a href="{{ "contact" | relURL }}" class="cta-button secondary">Get in Touch</a>
+    <div class="hero-inner">
+        <div class="hero-content">
+            <p class="hero-kicker">Strategic Research &middot; Foresight &middot; Communication &middot; Advisory</p>
+            <h1 id="hero-heading" class="hero-title reveal">Understanding <em>Complex</em> Worlds</h1>
+            <p class="hero-sub">Shaping Better Futures</p>
+            <div class="hero-actions">
+                <a href="{{ "about" | relURL }}" class="cta-button">Learn More</a>
+                <a href="{{ "contact" | relURL }}" class="cta-button secondary">Get in Touch</a>
+            </div>
+            <div class="hero-meta">
+                <p><strong>Who we are</strong> Interdisciplinary consultancy</p>
+                <p><strong>Where we work</strong> Business &middot; Government &middot; Academia</p>
+                <p><strong>What we do</strong> Knowledge into action</p>
+            </div>
         </div>
     </div>
 </section>
@@ -14,8 +22,11 @@
 <!-- Mission Section -->
 <section id="mission" class="mission" aria-labelledby="mission-heading">
     <div class="container">
-        <h2 id="mission-heading">Our Mission</h2>
-        <p class="lead-text">Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice to help organisations understand complexity, anticipate change, communicate clearly, and build lasting capability.</p>
+        <div class="section-head reveal">
+            <p class="section-kicker">Who We Are</p>
+            <h2 id="mission-heading">Our Mission</h2>
+        </div>
+        <p class="lead-text reveal">Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. We connect knowledge and practice to help organisations understand complexity, anticipate change, communicate clearly, and build lasting capability.</p>
         <a href="{{ "about" | relURL }}" class="link-button">Read Full About Page &rarr;</a>
     </div>
 </section>
@@ -23,12 +34,16 @@
 <!-- Core Expertise Section -->
 <section id="pillars" class="expertise" aria-labelledby="pillars-heading">
     <div class="container">
-        <h2 id="pillars-heading">Our Core Expertise</h2>
-        <p class="section-subtitle">Five interconnected disciplines that anchor our work.</p>
+        <div class="section-head reveal">
+            <p class="section-kicker">Core Expertise</p>
+            <h2 id="pillars-heading">Our Core Expertise</h2>
+            <p>Five interconnected disciplines that anchor our work.</p>
+        </div>
 
         <div class="expertise-list">
             <details class="expertise-item" id="expertise-understand" style="--accent: var(--navy);" open>
                 <summary class="expertise-summary">
+                    <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
                     </span>
@@ -68,6 +83,7 @@
 
             <details class="expertise-item" id="expertise-anticipate" style="--accent: var(--slate);" open>
                 <summary class="expertise-summary">
+                    <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15 9 13 13 9 15 11 11 15 9"/></svg>
                     </span>
@@ -108,6 +124,7 @@
 
             <details class="expertise-item" id="expertise-communicate" style="--accent: var(--gold);" open>
                 <summary class="expertise-summary">
+                    <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="12.5" x2="14" y2="12.5"/></svg>
                     </span>
@@ -147,6 +164,7 @@
 
             <details class="expertise-item" id="expertise-strengthen" style="--accent: var(--navy);" open>
                 <summary class="expertise-summary">
+                    <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M6 12v5c0 1.2 2.7 3 6 3s6-1.8 6-3v-5"/></svg>
                     </span>
@@ -186,6 +204,7 @@
 
             <details class="expertise-item" id="expertise-transform" style="--accent: var(--slate);" open>
                 <summary class="expertise-summary">
+                    <span class="expertise-index" aria-hidden="true"></span>
                     <span class="expertise-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
                     </span>
@@ -229,11 +248,13 @@
 <!-- Sectors Section -->
 <section id="sectors" class="sectors" aria-labelledby="sectors-heading">
     <div class="container">
-        <p class="section-eyebrow">Areas of Focus / Sectors</p>
-        <h2 id="sectors-heading">Expertise Applied Across Diverse Sectors and Contexts</h2>
-        <p class="section-subtitle">Our expertise travels across sectors, but our solutions are always grounded in the realities of the environments in which our clients operate.</p>
+        <div class="section-head reveal">
+            <p class="section-kicker">Areas of Focus / Sectors</p>
+            <h2 id="sectors-heading">Expertise Applied Across Diverse Sectors and Contexts</h2>
+            <p>Our expertise travels across sectors, but our solutions are always grounded in the realities of the environments in which our clients operate.</p>
+        </div>
 
-        <div class="sectors-grid">
+        <div class="sectors-grid reveal">
             <article class="sector-card">
                 <span class="sector-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5-10-5z"/><path d="M6 10.5V16c0 1.5 2.7 3.5 6 3.5s6-2 6-3.5v-5.5"/><line x1="22" y1="8" x2="22" y2="14"/></svg>
@@ -351,9 +372,12 @@
 <!-- Featured Projects Section -->
 <section id="projects" class="projects" aria-labelledby="projects-heading">
     <div class="container">
-        <h2 id="projects-heading">Featured Projects</h2>
-        <p class="section-subtitle">A snapshot of the work we're proud of.</p>
-        <div class="projects-grid">
+        <div class="section-head reveal">
+            <p class="section-kicker">Selected Work</p>
+            <h2 id="projects-heading">Featured Projects</h2>
+            <p>A snapshot of the work we're proud of.</p>
+        </div>
+        <div class="projects-grid reveal">
             <article class="project-card">
                 <p class="project-tag">Institutional Advisory</p>
                 <h3>Institutional Resilience Review</h3>
@@ -376,30 +400,41 @@
 <!-- Latest News Section -->
 <section id="news" class="insights" aria-labelledby="news-heading">
     <div class="container">
-        <h2 id="news-heading">Latest News</h2>
-        <div class="insights-grid">
+        <div class="section-head reveal">
+            <p class="section-kicker">Latest News</p>
+            <h2 id="news-heading">Latest News</h2>
+        </div>
+        <div class="insights-grid reveal">
             {{- $news := where .Site.RegularPages "Section" "news" }}
             {{- $news = $news | first 6 }}
             {{- if $news }}
             {{- range $news }}
             <article class="insight-card">
+                <p class="insight-date">{{ .Date.Format "January 2, 2006" }}</p>
                 <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                <p>{{ .Date.Format "January 2, 2006" }}</p>
                 {{- if .Description }}
                 <p>{{ .Description }}</p>
                 {{- end }}
             </article>
             {{- end }}
             {{- else }}
-            <div class="insight-card"><h3>Research & Reports</h3></div>
-            <div class="insight-card"><h3>Articles & Commentary</h3></div>
-            <div class="insight-card"><h3>News</h3></div>
-            <div class="insight-card"><h3>Events</h3></div>
+            <div class="insight-card">
+                <p class="insight-date">News</p>
+                <h3>Research & Reports</h3>
+            </div>
+            <div class="insight-card">
+                <p class="insight-date">Commentary</p>
+                <h3>Articles & Commentary</h3>
+            </div>
+            <div class="insight-card">
+                <p class="insight-date">Updates</p>
+                <h3>Latest Updates</h3>
+            </div>
             {{- end }}
         </div>
         {{- if $news }}
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="{{ "news" | relURL }}" class="cta-button">View All News</a>
+        <div class="section-actions">
+            <a href="{{ "news" | relURL }}" class="link-button">View All News &rarr;</a>
         </div>
         {{- end }}
     </div>
@@ -407,7 +442,8 @@
 
 <!-- Partnerships Section -->
 <section id="partnerships" class="cta-section" aria-labelledby="partnerships-heading">
-    <div class="container">
+    <div class="container reveal">
+        <p class="section-kicker" style="color:var(--gold);">Collaboration</p>
         <h2 id="partnerships-heading">Partnerships</h2>
         <p>We collaborate with organisations and experts who share our commitment to practical, evidence-based impact.</p>
         <a href="{{ "contact" | relURL }}" class="cta-button">Start a Conversation</a>
@@ -416,12 +452,15 @@
 
 <!-- Contact Section -->
 <section id="contact" class="contact-preview" aria-labelledby="contact-heading">
-    <div class="container">
-        <h2 id="contact-heading">Let's Start a Conversation</h2>
+    <div class="container reveal">
+        <div class="section-head">
+            <p class="section-kicker">Get in Touch</p>
+            <h2 id="contact-heading">Let's Start a Conversation</h2>
+        </div>
         <p>Whether you need strategic research, risk and foresight support, communication expertise, executive training, or organisational transformation services, Frontline World is ready to explore how we can help.</p>
         <ul class="contact-quick-list">
-            <li>Email: <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></li>
-            <li>Mobile: <a href="tel:+447310498510">{{ .Site.Params.phone }}</a></li>
+            <li><strong>Email</strong> <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></li>
+            <li><strong>Mobile</strong> <a href="tel:+447310498510">{{ .Site.Params.phone }}</a></li>
         </ul>
         <a href="{{ "contact" | relURL }}" class="cta-button">Visit Contact Page &rarr;</a>
     </div>

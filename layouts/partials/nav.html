@@ -1,20 +1,29 @@
-<header class="site-header">
-    <nav class="navbar" aria-label="Primary">
-        <div class="container navbar-inner">
-            <a href="{{ "" | relURL }}" class="logo">Frontline World</a>
-            <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" onclick="toggleMenu(event)">
-                <span class="visually-hidden">Menu</span>
-                <span class="nav-toggle-icon" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </button>
+<header class="site-header" data-header>
+    <div class="container header-inner">
+        <a href="{{ "" | relURL }}" class="logo">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                    <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                </svg>
+            </span>
+            <span class="logo-text">Frontline World</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-toggle-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        <nav class="nav-links-wrap" aria-label="Primary">
             <ul id="primary-navigation" class="nav-links">
                 {{- range .Site.Menus.main }}
-                <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+                <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}><span class="nav-link-label">{{ .Name }}</span></a></li>
                 {{- end }}
+                <li class="nav-cta"><a href="{{ "contact" | relURL }}" class="btn btn-primary btn-sm">Contact Us</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </div>
 </header>

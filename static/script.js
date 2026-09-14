@@ -1,12 +1,15 @@
-// Toggle mobile menu
+// ---- Mobile menu ----
 function toggleMenu(event) {
     const navLinks = document.querySelector('.nav-links');
+    if (!navLinks) return;
     const isOpen = navLinks.classList.toggle('active');
     const toggleButton = event ? event.currentTarget : document.querySelector('.nav-toggle');
     if (toggleButton && toggleButton.hasAttribute('aria-expanded')) {
         toggleButton.setAttribute('aria-expanded', String(isOpen));
     }
 }
+
+document.querySelector('.nav-toggle').addEventListener('click', toggleMenu);
 
 function closeMenu() {
     const navLinks = document.querySelector('.nav-links');
@@ -36,7 +39,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// On mobile, start the expertise accordion collapsed (except the first item)
+// ---- On mobile, start the expertise accordion collapsed (except the first item) ----
 function initExpertiseAccordion() {
     const items = document.querySelectorAll('.expertise-item');
     if (!items.length || window.innerWidth >= 768) return;
@@ -47,17 +50,52 @@ function initExpertiseAccordion() {
 
 initExpertiseAccordion();
 
-// Solidify the transparent navbar once the page scrolls past the top
-function updateNavbarOnScroll() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-    navbar.classList.toggle('scrolled', window.scrollY > 10);
+// ---- Solidify the transparent header once the page scrolls ----
+function updateHeaderOnScroll() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+    header.classList.toggle('scrolled', window.scrollY > 10);
 }
 
-updateNavbarOnScroll();
-window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+updateHeaderOnScroll();
+window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
 
-// Respect the user's reduced-motion preference for JS-driven scrolling
+// ---- Scroll reveal ----
+function initReveal() {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+
+    // Stagger siblings that share the same parent grid
+    items.forEach(item => {
+        const siblings = item.parentElement
+            ? item.parentElement.querySelectorAll('.reveal')
+            : null;
+        if (siblings && siblings.length > 1) {
+            const index = Array.prototype.indexOf.call(siblings, item);
+            item.style.transitionDelay = `${(index % 6) * 90}ms`;
+        }
+    });
+
+    if (!('IntersectionObserver' in window)) {
+        items.forEach(item => item.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(item => observer.observe(item));
+}
+
+initReveal();
+
+// ---- Respect reduced-motion preference for JS-driven scrolling ----
 function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }

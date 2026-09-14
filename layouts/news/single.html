@@ -4,13 +4,17 @@
         <a href="{{ "news" | relURL }}" class="insight-back-link">&larr; Back to News</a>
 
         {{- if .Params.news_type }}
-        <div class="single-insight-category">{{ .Params.news_type }}</div>
+        <span class="single-insight-category">{{ .Params.news_type }}</span>
         {{- end }}
 
         <h1 class="single-insight-title">{{ .Title }}</h1>
 
         <div class="single-insight-meta">
-            {{ .Date.Format "January 2, 2006" }}
+            <span>{{ .Date.Format "January 2, 2006" }}</span>
+            {{- if .Description }}
+            <span aria-hidden="true">&middot;</span>
+            <span>{{ .Description }}</span>
+            {{- end }}
         </div>
 
         {{- if .Params.image }}

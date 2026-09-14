@@ -33,7 +33,3 @@ title = "Frontline World Ltd"
     name = "News"
     url = "/news/"
     weight = 4
-  [[menus.main]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 5
