@@ -803,6 +803,224 @@ em {
     max-width: 24rem;
 }
 
+/* ---------- Sectors band ---------- */
+.sectors-band {
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.sectors-band-head {
+    max-width: 44rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.sectors-band-head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+    margin-bottom: 1.2rem;
+}
+
+.sectors-band-intro {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    max-width: 52ch;
+}
+
+.sectors-band-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.sectors-band-item {
+    background: var(--offwhite);
+    padding: clamp(1.5rem, 2.5vw, 2.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: background 0.3s var(--ease-out);
+}
+
+.sectors-band-item:hover {
+    background: var(--sand);
+}
+
+.sectors-band-num {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    transition: color 0.3s var(--ease-out);
+}
+
+.sectors-band-item:hover .sectors-band-num {
+    color: var(--terracotta);
+}
+
+.sectors-band-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height: 1.3;
+    color: var(--forest);
+}
+
+.sectors-band-cta {
+    margin-top: 2.4rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--charcoal);
+}
+
+.sectors-band-cta a {
+    color: var(--terracotta);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: color 0.3s var(--ease-out);
+}
+
+.sectors-band-cta a:hover {
+    color: var(--forest);
+}
+
+/* ---------- Engagement models ---------- */
+.engagement {
+    background: var(--offwhite);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.engagement-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+}
+
+.engagement-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 1.75rem;
+    align-items: baseline;
+    padding: clamp(1.4rem, 2.6vw, 2.2rem) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.engagement-num {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    padding-top: 0.4rem;
+}
+
+.engagement-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+    color: var(--forest);
+    margin-bottom: 0.35rem;
+    transition: color 0.3s var(--ease-out);
+}
+
+.engagement-item:hover .engagement-title {
+    color: var(--terracotta);
+}
+
+.engagement-desc {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 56ch;
+}
+
+.engagement-note {
+    margin-top: 1.6rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+/* ---------- Why Frontline World ---------- */
+.why-band {
+    background:
+        radial-gradient(ellipse 60% 70% at 0% 0%, rgba(184, 92, 69, 0.12), transparent 55%),
+        var(--forest);
+    color: var(--offwhite);
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    border-bottom: 1px solid rgba(233, 225, 210, 0.08);
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.why-band-head {
+    text-align: center;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.why-band-head h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height: 1.1;
+    color: var(--sand);
+}
+
+.why-band-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+}
+
+.why-band-item {
+    padding: 1.8rem 1.6rem;
+    background: rgba(233, 225, 210, 0.06);
+    border: 1px solid rgba(233, 225, 210, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.why-band-item:hover {
+    background: rgba(233, 225, 210, 0.1);
+    border-color: rgba(184, 92, 69, 0.5);
+    transform: translateY(-4px);
+}
+
+.why-band-num {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--terracotta-bright);
+    margin-bottom: 0.4rem;
+}
+
+.why-band-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    color: var(--sand);
+}
+
+.why-band-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(233, 225, 210, 0.72);
+}
+
 /* ---------- Section base ---------- */
 .section-head {
     max-width: 46rem;
@@ -2432,6 +2650,14 @@ em {
     .service-list {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .sectors-band-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .why-band-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (min-width: 768px) {
@@ -2514,6 +2740,14 @@ em {
 
     .service-visual {
         max-width: 28rem;
+    }
+
+    .sectors-band-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .why-band-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .nav-toggle {
@@ -2612,6 +2846,12 @@ em {
 
     .framework-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .why-band-grid {
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
