@@ -39,17 +39,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ---- On mobile, start the expertise accordion collapsed (except the first item) ----
-function initExpertiseAccordion() {
-    const items = document.querySelectorAll('.expertise-item');
-    if (!items.length || window.innerWidth >= 768) return;
-    items.forEach((item, index) => {
-        item.open = index === 0;
-    });
-}
-
-initExpertiseAccordion();
-
 // ---- Solidify the transparent header once the page scrolls ----
 function updateHeaderOnScroll() {
     const header = document.querySelector('.site-header');
@@ -111,9 +100,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(targetId);
         if (target) {
             e.preventDefault();
-            if (target.classList.contains('expertise-item')) {
-                target.open = true;
-            }
             scrollToElement(target);
         }
     });

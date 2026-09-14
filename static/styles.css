@@ -1117,64 +1117,36 @@ em {
     line-height: 1.8;
 }
 
-/* ---------- Expertise (5 pillars accordion) ---------- */
+/* ---------- Expertise (5 pillars overview) ---------- */
 .expertise {
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
 }
 
-.expertise-list {
-    counter-reset: exp;
-    display: flex;
-    flex-direction: column;
+.pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr;
     border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
 }
 
-.expertise-item {
-    counter-increment: exp;
-    background: transparent;
-    border-bottom: 1px solid var(--line);
-    transition: background-color 0.4s var(--ease-out);
-}
-
-.expertise-item:hover {
-    background: rgba(255, 255, 255, 0.55);
-}
-
-.expertise-item summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-.expertise-item summary::-webkit-details-marker {
-    display: none;
-}
-
-.expertise-summary {
+.pillar-card {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-    padding: clamp(1.6rem, 3.5vw, 2.4rem) 0;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 1.75rem 1.5rem 1.9rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
 }
 
-.expertise-index {
+.pillar-index {
     font-family: var(--font-serif);
     font-size: 0.95rem;
     color: var(--terracotta);
-    display: inline-block;
 }
 
-.expertise-index::before {
-    content: "0" counter(exp);
-}
-
-.expertise-summary-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    flex: 1;
-}
-
-.expertise-eyebrow {
+.pillar-eyebrow {
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.22em;
@@ -1182,95 +1154,37 @@ em {
     color: var(--text-muted);
 }
 
-.expertise-title {
+.pillar-card h3 {
     font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
-    line-height: 1.15;
+    font-size: 1.3rem;
+    line-height: 1.25;
     color: var(--forest);
-    transition: color 0.3s var(--ease-out);
+    margin: 0.2rem 0 0.1rem;
 }
 
-.expertise-item:hover .expertise-title,
-.expertise-item[open] .expertise-title {
-    color: var(--terracotta);
-}
-
-.expertise-tagline {
+.pillar-desc {
     color: var(--text-muted);
-    font-size: 0.98rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
 }
 
-.expertise-chevron {
-    align-self: flex-start;
-    color: var(--forest);
-    transition: transform 0.4s var(--ease-out), color 0.3s var(--ease-out);
-}
-
-.expertise-chevron svg {
-    width: 26px;
-    height: 26px;
-    stroke-width: 1.4;
-}
-
-.expertise-item[open] .expertise-chevron {
-    transform: rotate(180deg);
-    color: var(--terracotta);
-}
-
-.expertise-panel {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0.5rem 0 clamp(2rem, 4vw, 3rem);
-}
-
-.expertise-col-main p {
-    color: var(--text);
-    line-height: 1.85;
-    margin-bottom: 1.1rem;
-}
-
-.expertise-col-main .cta-button {
-    margin-top: 0.75rem;
-}
-
-.expertise-subheading {
+.pillar-link {
+    margin-top: auto;
     font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--terracotta);
-    margin-bottom: 1.1rem;
 }
 
-.key-services-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-    margin-bottom: 1.75rem;
-}
-
-.key-services-list li {
-    padding: 0.42rem 0.95rem;
-    border: 1px solid var(--line);
-    background: var(--offwhite);
-    font-size: 0.83rem;
-    color: var(--charcoal);
-    letter-spacing: 0.02em;
-}
-
-.outcome-box {
-    border-left: 2px solid var(--terracotta);
-    padding: 1.1rem 1.4rem;
-    background: rgba(184, 92, 69, 0.08);
-}
-
-.outcome-box p {
-    font-family: var(--font-serif);
-    font-size: 1.08rem;
-    font-style: italic;
+.pillar-link:hover {
     color: var(--forest);
+}
+
+.expertise .section-actions {
+    text-align: center;
+    margin-top: 3rem;
 }
 
 /* ---------- Sectors ---------- */
@@ -1505,16 +1419,6 @@ em {
 .insights .section-actions {
     text-align: center;
     margin-top: 3rem;
-}
-
-/* ---------- Home services overview ---------- */
-.home-services {
-    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
-}
-
-.home-services-actions {
-    text-align: center;
-    margin-top: 2.5rem;
 }
 
 /* ---------- Dark CTA band (Partnerships) ---------- */
@@ -2711,19 +2615,8 @@ em {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .expertise-summary {
-        flex-direction: row;
-        align-items: baseline;
-        gap: 1.75rem;
-    }
-
-    .expertise-index {
-        min-width: 3.4rem;
-    }
-
-    .expertise-panel {
-        grid-template-columns: 1.2fr 1fr;
-        gap: 3rem;
+    .pillar-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-top {
@@ -2854,6 +2747,10 @@ em {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .pillar-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .why-matters-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -2877,6 +2774,10 @@ em {
     }
 
     .framework-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .pillar-grid {
         grid-template-columns: repeat(5, 1fr);
     }
 }
