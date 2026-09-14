@@ -1507,6 +1507,16 @@ em {
     margin-top: 3rem;
 }
 
+/* ---------- Home services overview ---------- */
+.home-services {
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+}
+
+.home-services-actions {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
 /* ---------- Dark CTA band (Partnerships) ---------- */
 .cta-section {
     position: relative;
