@@ -563,6 +563,133 @@ em {
     margin-right: 0.4rem;
 }
 
+/* ---------- Services hero ---------- */
+.services-hero {
+    position: relative;
+    background:
+        radial-gradient(ellipse 55% 70% at 82% 18%, rgba(184, 92, 69, 0.14), transparent 60%),
+        radial-gradient(ellipse 45% 60% at 8% 85%, rgba(23, 58, 53, 0.06), transparent 65%),
+        var(--sand);
+    padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
+    overflow: hidden;
+}
+
+.services-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--line);
+}
+
+.services-hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.services-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: center;
+}
+
+.services-hero-content {
+    max-width: 62rem;
+}
+
+.services-hero-title {
+    font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.8rem;
+}
+
+.services-hero-title em {
+    color: var(--terracotta);
+    font-weight: 300;
+}
+
+.services-hero-sub {
+    max-width: 46ch;
+    color: var(--text-muted);
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.8;
+}
+
+.services-hero-visual {
+    max-width: 24rem;
+}
+
+/* Five core services — anchor list */
+.services-index {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+}
+
+.services-index-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(1.2rem, 3vw, 2.5rem);
+    padding: clamp(1.4rem, 2.6vw, 2rem) 0;
+    border-bottom: 1px solid var(--line);
+    transition: background-color 0.4s var(--ease-out), padding-left 0.4s var(--ease-out), padding-right 0.4s var(--ease-out);
+}
+
+.services-index-item:hover,
+.services-index-item:focus-visible {
+    background: rgba(255, 255, 255, 0.55);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.services-index-number {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--terracotta);
+}
+
+.services-index-title {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    line-height: 1.15;
+    color: var(--forest);
+    transition: color 0.3s var(--ease-out);
+}
+
+.services-index-item:hover .services-index-title,
+.services-index-item:focus-visible .services-index-title {
+    color: var(--terracotta);
+}
+
+.services-index-desc {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.services-index-arrow {
+    font-family: var(--font-serif);
+    font-size: 1.7rem;
+    color: var(--terracotta);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.services-index-item:hover .services-index-arrow,
+.services-index-item:focus-visible .services-index-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* ---------- Section base ---------- */
 .section-head {
     max-width: 46rem;
@@ -2250,6 +2377,14 @@ em {
 
     .mission-grid {
         grid-template-columns: 1.1fr 1fr;
+    }
+
+    .services-hero-grid {
+        grid-template-columns: 1.35fr 1fr;
+    }
+
+    .services-hero-visual {
+        margin-left: auto;
     }
 
     .nav-toggle {

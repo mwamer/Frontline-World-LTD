@@ -1,0 +1,60 @@
+{{ define "main" }}
+<!-- Services Hero -->
+<section class="services-hero" aria-labelledby="services-heading">
+    <div class="services-hero-inner">
+        <div class="services-hero-grid">
+            <div class="services-hero-content">
+                <p class="section-kicker">What We Do</p>
+                <h1 id="services-heading" class="services-hero-title reveal">Turning <em>Complexity</em> into Strategic Advantage</h1>
+                <p class="services-hero-sub">Frontline World helps organisations understand complex environments, anticipate change, strengthen capability, and act with confidence.</p>
+            </div>
+            <div class="services-hero-visual">
+                {{ partial "image-frame.html" (dict "ratio" "tall" "tone" "forest" "caption" "Portrait placeholder — real photography coming soon") }}
+            </div>
+        </div>
+
+        <div class="services-index" aria-label="Our five core services">
+            <a class="services-index-item" href="#strategic-research">
+                <span class="services-index-number" aria-hidden="true">01</span>
+                <span class="services-index-text">
+                    <span class="services-index-title">Strategic Research &amp; Institutional Advisory</span>
+                    <span class="services-index-desc">Understand complexity and make better-informed decisions.</span>
+                </span>
+                <span class="services-index-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="services-index-item" href="#risk-foresight">
+                <span class="services-index-number" aria-hidden="true">02</span>
+                <span class="services-index-text">
+                    <span class="services-index-title">Risk &amp; Strategic Foresight</span>
+                    <span class="services-index-desc">Anticipate emerging risks, opportunities, and future scenarios.</span>
+                </span>
+                <span class="services-index-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="services-index-item" href="#communication-media">
+                <span class="services-index-number" aria-hidden="true">03</span>
+                <span class="services-index-text">
+                    <span class="services-index-title">Strategic Communication &amp; Media Advisory</span>
+                    <span class="services-index-desc">Navigate complex information environments and communicate with impact.</span>
+                </span>
+                <span class="services-index-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="services-index-item" href="#training-capability">
+                <span class="services-index-number" aria-hidden="true">04</span>
+                <span class="services-index-text">
+                    <span class="services-index-title">Professional &amp; Executive Training</span>
+                    <span class="services-index-desc">Build leadership, strategic, digital, and organisational capability.</span>
+                </span>
+                <span class="services-index-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="services-index-item" href="#institutional-transformation">
+                <span class="services-index-number" aria-hidden="true">05</span>
+                <span class="services-index-text">
+                    <span class="services-index-title">Institutional Strategy &amp; Transformation</span>
+                    <span class="services-index-desc">Turn strategy into organisational improvement and sustainable change.</span>
+                </span>
+                <span class="services-index-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+{{ end }}
