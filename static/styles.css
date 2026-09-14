@@ -564,6 +564,28 @@ em {
     margin-right: 0.4rem;
 }
 
+/* ---------- Our People hero ---------- */
+.our-hero-support {
+    max-width: 36rem;
+    display: grid;
+    gap: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.our-hero-support p {
+    color: var(--text-muted);
+    font-size: 1.06rem;
+    line-height: 1.7;
+}
+
+.network-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
 /* ---------- Services hero ---------- */
 .services-hero {
     position: relative;
