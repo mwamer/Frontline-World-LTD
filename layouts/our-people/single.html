@@ -207,4 +207,79 @@
         <p class="associates-closing reveal">Associates contribute to research, consultancy, advisory, training and strategic projects.</p>
     </div>
 </section>
+
+<!-- How We Build the Right Team -->
+<section class="team-process" id="team-process" aria-labelledby="team-process-heading">
+    <div class="container">
+        <header class="team-process-header reveal">
+            <p class="section-kicker">How We Build the Right Team</p>
+            <h2 id="team-process-heading" class="team-process-title">From Challenge to Capability</h2>
+            <p class="team-process-lead">Every assignment begins with the client&rsquo;s challenge.</p>
+        </header>
+
+        <ol class="team-process-steps reveal" aria-label="How we build the right team">
+            <li class="team-process-step">
+                <span class="team-process-number" aria-hidden="true">01</span>
+                <h3 class="team-process-step-title">Understand</h3>
+                <p class="team-process-step-desc">We identify the problem, objectives and operating context.</p>
+            </li>
+            <li class="team-process-step">
+                <span class="team-process-number" aria-hidden="true">02</span>
+                <h3 class="team-process-step-title">Map</h3>
+                <p class="team-process-step-desc">We identify the knowledge, skills and perspectives required.</p>
+            </li>
+            <li class="team-process-step">
+                <span class="team-process-number" aria-hidden="true">03</span>
+                <h3 class="team-process-step-title">Assemble</h3>
+                <p class="team-process-step-desc">We bring together the most relevant researchers, advisors and specialists.</p>
+            </li>
+            <li class="team-process-step">
+                <span class="team-process-number" aria-hidden="true">04</span>
+                <h3 class="team-process-step-title">Integrate</h3>
+                <p class="team-process-step-desc">We combine different perspectives into a coherent approach.</p>
+            </li>
+            <li class="team-process-step">
+                <span class="team-process-number" aria-hidden="true">05</span>
+                <h3 class="team-process-step-title">Deliver</h3>
+                <p class="team-process-step-desc">We work collaboratively to produce practical, evidence-based outcomes.</p>
+            </li>
+        </ol>
+
+        <p class="team-process-link-wrap reveal">
+            <a class="link-button" href="{{ "services" | relURL }}">Explore how this connects to our Services &rarr;</a>
+        </p>
+
+        <div class="team-join reveal" id="join-the-network">
+            <div class="team-join-copy">
+                <h3 class="team-join-title">Join the Associate Network</h3>
+                <p class="team-join-text">Are you an independent researcher, consultant, practitioner or specialist? If you are interested in joining Frontline World as an associate, complete the form and we will be in touch.</p>
+            </div>
+            <form class="team-join-form" action="mailto:wesaam.amer@gmail.com" method="post" enctype="text/plain">
+                <div class="team-join-field">
+                    <label for="join-name">Name</label>
+                    <input id="join-name" type="text" name="name" autocomplete="name" required>
+                </div>
+                <div class="team-join-field">
+                    <label for="join-email">Email</label>
+                    <input id="join-email" type="email" name="email" autocomplete="email" required>
+                </div>
+                <div class="team-join-field">
+                    <label for="join-expertise">Area of expertise</label>
+                    <select id="join-expertise" name="expertise">
+                        <option value="Research & Policy">Research &amp; Policy</option>
+                        <option value="Media & Communication">Media &amp; Communication</option>
+                        <option value="Risk & Foresight">Risk &amp; Foresight</option>
+                        <option value="Technology & AI">Technology &amp; AI</option>
+                        <option value="Education & Capacity">Education &amp; Capacity</option>
+                        <option value="Conflict & Recovery">Conflict &amp; Recovery</option>
+                        <option value="Society & Sustainability">Society &amp; Sustainability</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button team-join-submit">Send Application</button>
+                <p class="team-join-note">Opens in your email app, pre-addressed to Frontline World.</p>
+            </form>
+        </div>
+    </div>
+</section>
 {{ end }}
