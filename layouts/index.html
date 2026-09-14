@@ -33,10 +33,22 @@
         <div class="news-ticker-viewport">
             <div class="news-ticker-track">
                 {{- range $tickerNews }}
-                <a class="news-ticker-item" href="{{ .RelPermalink }}">{{ .Title }} <span class="news-ticker-dot" aria-hidden="true"></span></a>
+                <a class="news-ticker-item" href="{{ .RelPermalink }}">
+                    {{- if .Params.image }}
+                    <img class="news-ticker-thumb" src="{{ .Params.image | relURL }}" alt="" aria-hidden="true">
+                    {{- end }}
+                    <span>{{ .Title }}</span>
+                    <span class="news-ticker-dot" aria-hidden="true"></span>
+                </a>
                 {{- end }}
                 {{- range $tickerNews }}
-                <a class="news-ticker-item" href="{{ .RelPermalink }}">{{ .Title }} <span class="news-ticker-dot" aria-hidden="true"></span></a>
+                <a class="news-ticker-item" href="{{ .RelPermalink }}">
+                    {{- if .Params.image }}
+                    <img class="news-ticker-thumb" src="{{ .Params.image | relURL }}" alt="" aria-hidden="true">
+                    {{- end }}
+                    <span>{{ .Title }}</span>
+                    <span class="news-ticker-dot" aria-hidden="true"></span>
+                </a>
                 {{- end }}
             </div>
         </div>
