@@ -528,9 +528,9 @@ em {
 
 .hero-tagline {
     font-family: var(--font-serif);
-    font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+    font-size: clamp(1.5rem, 2.6vw, 2.05rem);
     font-style: italic;
-    color: var(--text-muted);
+    color: var(--terracotta);
     letter-spacing: 0.01em;
     margin-bottom: 2.8rem;
 }
@@ -1421,6 +1421,112 @@ em {
     margin-top: 3rem;
 }
 
+/* ---------- Latest news ticker ---------- */
+.news-ticker {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--offwhite);
+    padding: 0.85rem 0;
+}
+
+.news-ticker-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    min-width: 0;
+}
+
+.news-ticker-label {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    white-space: nowrap;
+}
+
+.news-ticker-viewport {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+
+.news-ticker-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: ticker-scroll 30s linear infinite;
+}
+
+.news-ticker:hover .news-ticker-track,
+.news-ticker:focus-within .news-ticker-track {
+    animation-play-state: paused;
+}
+
+.news-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.3rem;
+    padding-right: 1.3rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--forest);
+}
+
+.news-ticker-item:hover {
+    color: var(--terracotta);
+}
+
+.news-ticker-dot {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--terracotta);
+}
+
+@keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.news-ticker .link-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .news-ticker-track {
+        animation: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-ticker-inner {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    .news-ticker-label {
+        order: 1;
+    }
+
+    .news-ticker .link-button {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .news-ticker-viewport {
+        order: 3;
+        flex-basis: 100%;
+    }
+}
+
 /* ---------- Dark CTA band (Partnerships) ---------- */
 .cta-section {
     position: relative;
@@ -1567,6 +1673,11 @@ em {
 .about-content h3 {
     font-size: clamp(1.3rem, 2.2vw, 1.7rem);
     margin: 2.4rem 0 1rem;
+}
+
+.about-content h2[id],
+.about-content h3[id] {
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
 }
 
 .about-content h4 {

@@ -9,7 +9,7 @@
                 <p class="hero-tagline">Insight for a better Foresight</p>
                 <div class="hero-actions">
                     <a href="{{ "services" | relURL }}" class="cta-button">Services</a>
-                    <a href="{{ "associates" | relURL }}" class="cta-button secondary">Associates</a>
+                    <a href="{{ "about/" | relURL }}#associates" class="cta-button secondary">Associates</a>
                 </div>
             </div>
             <div class="hero-visual reveal">
@@ -23,6 +23,27 @@
         </div>
     </div>
 </section>
+
+<!-- Latest News Ticker -->
+{{- $tickerNews := where .Site.RegularPages "Section" "news" }}
+{{- if $tickerNews }}
+<section class="news-ticker" aria-label="Latest news, stories and insights">
+    <div class="container news-ticker-inner">
+        <p class="news-ticker-label">Latest News, Stories &amp; Insights</p>
+        <div class="news-ticker-viewport">
+            <div class="news-ticker-track">
+                {{- range $tickerNews }}
+                <a class="news-ticker-item" href="{{ .RelPermalink }}">{{ .Title }} <span class="news-ticker-dot" aria-hidden="true"></span></a>
+                {{- end }}
+                {{- range $tickerNews }}
+                <a class="news-ticker-item" href="{{ .RelPermalink }}">{{ .Title }} <span class="news-ticker-dot" aria-hidden="true"></span></a>
+                {{- end }}
+            </div>
+        </div>
+        <a href="{{ "news" | relURL }}" class="link-button">View All News &rarr;</a>
+    </div>
+</section>
+{{- end }}
 
 <!-- Mission Section -->
 <section id="mission" class="mission" aria-labelledby="mission-heading">
