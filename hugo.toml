@@ -8,6 +8,19 @@ title = "Frontline World Ltd"
   email = "wesaam.amer@gmail.com"
   phone = "+44 (0)7310 498510"
 
+# Social media profiles, rendered site-wide by layouts/partials/social.html.
+# Set `url` to the official Frontline World profile when it is available.
+# Platforms with an empty url stay visible but are not clickable, and no
+# placeholder or invented URLs are used.
+[[params.social]]
+  name = "LinkedIn"
+  label = "Frontline World on LinkedIn"
+  url = ""
+[[params.social]]
+  name = "X (Twitter)"
+  label = "Frontline World on X"
+  url = ""
+
 [taxonomies]
   # Intentionally empty: disables the default categories and tags taxonomies
 
