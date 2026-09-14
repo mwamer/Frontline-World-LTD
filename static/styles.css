@@ -1021,6 +1021,43 @@ em {
     color: rgba(233, 225, 210, 0.72);
 }
 
+/* ---------- Final CTA ---------- */
+.final-cta {
+    background: var(--offwhite);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(5rem, 10vw, 8rem) 0;
+    text-align: center;
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.final-cta .container {
+    max-width: 48rem;
+}
+
+.final-cta h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+    margin-bottom: 1.3rem;
+}
+
+.final-cta p {
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    line-height: 1.85;
+    margin: 0 auto 2.6rem auto;
+    max-width: 42ch;
+}
+
+.final-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
 /* ---------- Section base ---------- */
 .section-head {
     max-width: 46rem;
@@ -2862,6 +2899,15 @@ em {
     }
 
     .hero-actions .cta-button {
+        width: 100%;
+    }
+
+    .final-cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .final-cta-actions .cta-button {
         width: 100%;
     }
 
