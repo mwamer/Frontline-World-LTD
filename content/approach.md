@@ -20,7 +20,7 @@ FW brings together multidisciplinary expertise in research, strategic analysis, 
         <div class="framework-stage">
             <div class="stage-number">1</div>
             <h3>Knowledge</h3>
-            <p>We bring together evidence, research, data, and multidisciplinary expertise to understand the issue.</p>
+            <p>We assemble the evidence, data, and specialist expertise needed to understand the client's challenge and operating environment.</p>
         </div>
         <div class="arrow-icon">→</div>
         <div class="framework-stage">
@@ -49,7 +49,7 @@ FW brings together multidisciplinary expertise in research, strategic analysis, 
 
 ##### Knowledge
 
-We bring together evidence, research, data, and multidisciplinary expertise to understand the issue.
+We assemble the evidence, data, and specialist expertise needed to understand the client's challenge and operating environment.
 
 </div>
 

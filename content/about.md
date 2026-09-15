@@ -5,7 +5,7 @@ description: "Our mission, vision, approach, values, and people."
 
 ## Who We Are
 
-Frontline World (FW) Ltd is an interdisciplinary consultancy working across business, government, and academia. FW connects knowledge and practice across education, media, governance, technology, health, sustainability, cultural resilience, and post-conflict recovery — helping clients understand complex challenges, make informed decisions, and build lasting capability.
+Frontline World (FW) Ltd is an interdisciplinary consultancy working with organisations across business, government, academia, and civil society. FW connects knowledge and practice across education, media, governance, technology, health, sustainability, cultural resilience, and post-conflict recovery — helping clients understand complex challenges, make better-informed decisions, and build lasting capability.
 
 FW combines research and analysis, strategic advisory, professional training, and institutional capacity-building to deliver practical, evidence-based solutions for individuals, organisations, and governments.
 
@@ -32,7 +32,7 @@ A world where knowledge and expertise are transformed into practical action, ena
 
 ## Our Framework
 
-<p class="framework-subtitle">UNDERSTAND → ANTICIPATE → COMMUNICATE → STRENGTHEN → TRANSFORM</p>
+<p class="framework-subtitle">UNDERSTAND → ANTICIPATE → COMMUNICATE → STRENGTHEN</p>
 
 <div class="framework-grid" markdown="1">
 
@@ -82,7 +82,7 @@ Build people and organisational capability. FW develops the knowledge, skills, l
 
 <p class="tagline">Insight for Better Foresight</p>
 
-The tagline expresses FW's central philosophy: insight reflects rigorous research, interdisciplinary knowledge, critical analysis, and contextual understanding. Foresight reflects anticipation, preparedness, strategic thinking, and the development of better possible futures.
+The tagline expresses FW's central philosophy: insight reflects rigorous evidence, critical analysis, and grounding in real-world context. Foresight reflects anticipation, preparedness, strategic thinking, and the development of better possible futures.
 
 Better foresight reflects an ambition beyond prediction: FW helps individuals and institutions think critically about alternative futures and make informed choices in the present. Insight informs foresight. Foresight informs action. Action shapes better futures.
 
@@ -164,7 +164,7 @@ This approach allows us to remain agile, responsive, and outcome-focused, provid
 
 Dr Wesam Amer is the Founder and Director of Frontline World, providing strategic leadership across the organisation's research, advisory, training, and partnership activities.
 
-A researcher, academic leader, and communication specialist, Wesam brings international experience across higher education, research, media, governance, and institutional development. His work focuses on the intersection of communication, technology, conflict, public discourse, and organisational resilience, helping institutions navigate complexity and respond to change with confidence.
+An experienced advisor, communication specialist, and former academic leader, Wesam brings international experience across governance, media, technology, and institutional development. He helps clients understand complex and contested environments, communicate with confidence, and strengthen organisational resilience — combining analytical rigour with practical, decision-focused advice.
 
 He has held academic and research appointments in Palestine, the United Kingdom, Germany, and the United States, including positions at the University of Cambridge, Newcastle University, Harvard University, and the University of Hamburg.
 
