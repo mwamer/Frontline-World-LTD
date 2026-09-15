@@ -76,14 +76,6 @@ Build people and organisational capability. FW develops the knowledge, skills, l
 
 </div>
 
-<div class="framework-item" markdown="1">
-
-#### 05. Transform
-
-Turn strategy into lasting change. FW supports organisations in translating insight, strategy, and capability into institutional improvement, organisational resilience, and sustainable transformation.
-
-</div>
-
 </div>
 
 ## Tagline

@@ -5,7 +5,7 @@ description: "Get in touch with Frontline World."
 
 ## Let's Start a Conversation
 
-Whether you need strategic research, risk and foresight support, communication expertise, executive training, or organisational transformation services, Frontline World is ready to explore how we can help.
+Whether you need strategic research, risk and foresight support, communication expertise, executive training, or support with institutional transformation, Frontline World is ready to explore how we can help.
 
 We welcome enquiries from organisations, institutions, networks, businesses, and professionals seeking evidence-based insight, practical solutions, and trusted expertise.
 
@@ -59,16 +59,6 @@ Communication strategy, stakeholder engagement, narrative analysis, and communic
 Leadership development, executive education, workshops, and bespoke learning programmes.
 
 [Request Training Information →](mailto:wesaam.amer@gmail.com?subject=Training%20Information%20Request)
-
-</div>
-
-<div class="service-card" markdown="1">
-
-### Institutional Strategy & Transformation
-
-Organisational development, strategic reviews, capability strengthening, and transformation support.
-
-[Request Transformation Support →](mailto:wesaam.amer@gmail.com?subject=Transformation%20Support%20Request)
 
 </div>
 
