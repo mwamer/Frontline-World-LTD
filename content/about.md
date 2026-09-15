@@ -9,7 +9,7 @@ Frontline World (FW) Ltd is an interdisciplinary consultancy working with organi
 
 FW combines research and analysis, strategic advisory, professional training, and institutional capacity-building to deliver practical, evidence-based solutions for individuals, organisations, and governments.
 
-Multidisciplinary teams of researchers, practitioners, and subject-matter experts bridge research, policy, and practice — drawing on specialist expertise in communication and media, digital transformation, governance, conflict and peace, organisational resilience, and institutional development, including in fragile and high-risk environments. This depth allows FW to assemble the right expertise around each client's specific challenge.
+Every client challenge is served by a multidisciplinary team assembled for the task. FW brings together researchers, advisors, and subject-matter experts with specialist expertise in communication and media, digital transformation, governance, conflict and peace, organisational resilience, and institutional development — including in fragile and high-risk environments. This depth allows FW to match the right expertise to each client's specific challenge.
 
 <p class="highlight-text">FW turns knowledge into insight, insight into strategy, and strategy into action.</p>
 

@@ -81,7 +81,7 @@ We translate insight and foresight into strategies, decisions, communication, sk
 
 ## What This Means for Our Clients
 
-FW helps organisations navigate to:
+Through our work, FW helps organisations:
 
 <div class="benefits-list" markdown="1">
 
