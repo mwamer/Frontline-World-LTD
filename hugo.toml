@@ -43,14 +43,18 @@ title = "Frontline World Ltd"
     url = "/our-people/"
     weight = 3
   [[menus.main]]
-    name = "Approach"
-    url = "/approach/"
+    name = "Core Expertise & Services"
+    url = "/services/"
     weight = 4
   [[menus.main]]
-    name = "Services"
-    url = "/services/"
+    name = "Sectors"
+    url = "/sectors/"
     weight = 5
   [[menus.main]]
-    name = "News"
-    url = "/news/"
+    name = "Insights"
+    url = "/insights/"
     weight = 6
+  [[menus.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 7

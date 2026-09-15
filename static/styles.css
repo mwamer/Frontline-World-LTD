@@ -1471,6 +1471,7 @@ em {
 .pf-field input[type="text"],
 .pf-field input[type="url"],
 .pf-field input[type="email"],
+.pf-field select,
 .pf-field textarea {
     width: 100%;
     background: var(--offwhite);
@@ -1484,6 +1485,7 @@ em {
 }
 
 .pf-field input:focus,
+.pf-field select:focus,
 .pf-field textarea:focus {
     outline: none;
     border-color: var(--terracotta);
@@ -2710,13 +2712,19 @@ em {
     color: var(--offwhite);
     font-size: clamp(2.2rem, 4.4vw, 3.6rem);
     margin-bottom: 1.2rem;
+    margin-top: 0;
 }
 
 .cta-section p {
     color: rgba(255, 255, 255, 0.75);
     font-size: 1.08rem;
     line-height: 1.8;
-    margin-bottom: 2.4rem;
+}
+
+.cta-section .section-kicker,
+.cta-section .section-kicker::before {
+    color: rgba(244, 235, 222, 0.85);
+    background: rgba(244, 235, 222, 0.85);
 }
 
 /* ---------- Contact preview ---------- */

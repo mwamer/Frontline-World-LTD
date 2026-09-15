@@ -5,6 +5,7 @@ description: "Understanding Complexity. Building Capability. Creating Change."
 news_type: "News"
 image: "images/welcome-frontline-world.png"
 draft: false
+aliases: [/news/welcome/]
 ---
 
 Welcome to Frontline World.

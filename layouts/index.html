@@ -13,8 +13,8 @@
                 <h1 id="hero-heading" class="hero-title reveal">Understanding <em>Complex</em> Worlds. Shaping Better Futures.</h1>
                 <p class="hero-tagline">Insight for a better Foresight</p>
                 <div class="hero-actions">
-                    <a href="{{ "services" | relURL }}" class="cta-button">Services</a>
-                    <a href="{{ "about/" | relURL }}#associates" class="cta-button secondary">Associates</a>
+                    <a href="{{ "services" | relURL }}" class="cta-button">Explore Our Services</a>
+                    <a href="{{ "our-people" | relURL }}" class="cta-button secondary">Meet Our Experts</a>
                 </div>
             </div>
             <div class="hero-visual reveal">
@@ -30,7 +30,7 @@
 </section>
 
 <!-- Latest News Ticker -->
-{{- $tickerNews := where .Site.RegularPages "Section" "news" }}
+{{- $tickerNews := where .Site.RegularPages "Section" "insights" }}
 {{- if $tickerNews }}
 <section class="news-ticker" aria-label="Latest news, stories and insights">
     <div class="container news-ticker-inner">
@@ -57,20 +57,52 @@
                 {{- end }}
             </div>
         </div>
-        <a href="{{ "news" | relURL }}" class="link-button">View All News &rarr;</a>
+        <a href="{{ "insights" | relURL }}" class="link-button">View All Insights &rarr;</a>
     </div>
 </section>
 {{- end }}
 
-<!-- Mission Section -->
-<section id="mission" class="mission" aria-labelledby="mission-heading">
+<!-- What We Do -->
+<section id="what-we-do" class="mission" aria-labelledby="what-we-do-heading">
     <div class="container">
         <div class="mission-grid">
             <div class="mission-copy">
-                <p class="section-kicker">Who We Are</p>
-                <h2 id="mission-heading">Our Mission</h2>
-                <p class="lead-text">Frontline World (FW) Ltd is an interdisciplinary consultancy working with organisations across business, government, academia, and civil society. We connect knowledge and practice to help clients understand complexity, anticipate change, communicate clearly, and build lasting capability.</p>
-                <a href="{{ "about" | relURL }}" class="link-button">Read Full About Page &rarr;</a>
+                <p class="section-kicker">What We Do</p>
+                <h2 id="what-we-do-heading">Practical Support for Complex Challenges</h2>
+                <p class="lead-text">Frontline World helps organisations make sense of complexity, anticipate change, communicate with confidence, and build the capability to act. Working across business, government, academia, and civil society, we turn evidence and insight into practical strategic decisions.</p>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                        <div class="benefit-content">
+                            <p>Understand complexity and changing environments</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                        <div class="benefit-content">
+                            <p>Anticipate emerging risks and opportunities</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                        <div class="benefit-content">
+                            <p>Communicate clearly and strategically</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                        <div class="benefit-content">
+                            <p>Build professional and organisational capability</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                        <div class="benefit-content">
+                            <p>Translate knowledge into practical action</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ "services" | relURL }}" class="link-button">Explore Our Services &rarr;</a>
             </div>
             <div class="mission-visual">
                 {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "sand" "caption" "Landscape placeholder — real photography coming soon") }}
@@ -79,13 +111,13 @@
     </div>
 </section>
 
-<!-- Services and Expertise Section -->
-<section id="pillars" class="expertise" aria-labelledby="pillars-heading">
+<!-- Core Expertise -->
+<section id="core-expertise" class="expertise" aria-labelledby="pillars-heading">
     <div class="container">
         <div class="section-head reveal">
-            <p class="section-kicker">Services and Expertise</p>
-            <h2 id="pillars-heading">Services and Expertise</h2>
-            <p>We bring together strategic insight, foresight, communication, and capability building to help organisations understand complexity, anticipate change, make confident decisions, and turn strategy into meaningful, lasting impact.</p>
+            <p class="section-kicker">Core Expertise</p>
+            <h2 id="pillars-heading">How We Create Value</h2>
+            <p>Our expertise spans research and analysis, foresight, strategic communication, and capability building. Clients engage us through four services that draw on this expertise for practical results.</p>
         </div>
 
         <div class="pillar-grid reveal">
@@ -120,136 +152,90 @@
         </div>
 
         <div class="section-actions reveal">
-            <a href="{{ "services" | relURL }}" class="link-button">Explore All Services &rarr;</a>
+            <a href="{{ "services" | relURL }}" class="link-button">Core Expertise &amp; Services &rarr;</a>
         </div>
     </div>
 </section>
 
-<!-- Sectors Section -->
-<section id="sectors" class="sectors" aria-labelledby="sectors-heading">
+<!-- Who We Serve -->
+<section id="who-we-serve" class="sectors" aria-labelledby="who-we-serve-heading">
     <div class="container">
         <div class="section-head reveal">
-            <p class="section-kicker">Areas of Focus / Sectors</p>
-            <h2 id="sectors-heading">Expertise Applied Across Diverse Sectors and Contexts</h2>
-            <p>Many of our clients work in complex, fragile, politically sensitive, or rapidly changing environments. Our solutions are grounded in the realities of those environments, not generic templates.</p>
+            <p class="section-kicker">Who We Serve</p>
+            <h2 id="who-we-serve-heading">Organisations Facing Complex, High-Stakes Challenges</h2>
+            <p>Frontline World works with organisations across sectors and regions, wherever decisions carry real weight and environments change quickly.</p>
         </div>
 
-        <div class="sectors-grid reveal">
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5-10-5z"/><path d="M6 10.5V16c0 1.5 2.7 3.5 6 3.5s6-2 6-3.5v-5.5"/><line x1="22" y1="8" x2="22" y2="14"/></svg>
-                </span>
-                <h3>Education</h3>
-                <p>Institutional development, leadership, learning innovation, and capacity building.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-strengthen" class="expertise-badge badge-strengthen">Strengthen</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="8" x2="22" y2="8"/><line x1="6" y1="12" x2="14" y2="12"/><line x1="6" y1="15" x2="11" y2="15"/></svg>
-                </span>
-                <h3>Media & Communication</h3>
-                <p>Communication strategy, audience engagement, narrative analysis, and information environments.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-communicate" class="expertise-badge badge-communicate">Communicate</a>
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l8-6 8 6"/><path d="M5 10v9M19 10v9M9 19v-6M15 19v-6"/><line x1="3" y1="19" x2="21" y2="19"/></svg>
-                </span>
-                <h3>Government & Governance</h3>
-                <p>Policy development, public sector effectiveness, strategic planning, and institutional improvement.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-anticipate" class="expertise-badge badge-anticipate">Anticipate</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="8" height="8" rx="1"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
-                </span>
-                <h3>Technology & Digital Transformation</h3>
-                <p>Digital strategy, AI readiness, innovation, and organisational adaptation.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-anticipate" class="expertise-badge badge-anticipate">Anticipate</a>
-                    <a href="#expertise-strengthen" class="expertise-badge badge-strengthen">Strengthen</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 3.5.7 6 3 2.5-2.3 4-3.3 6-3 3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
-                </span>
-                <h3>Health & Wellbeing</h3>
-                <p>Organisational development, communication, resilience, and service improvement.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-communicate" class="expertise-badge badge-communicate">Communicate</a>
-                    <a href="#expertise-strengthen" class="expertise-badge badge-strengthen">Strengthen</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 5 6.5 5 10a5 5 0 0 1-10 0c0-3.5 2-7 5-10z"/></svg>
-                </span>
-                <h3>Sustainability & Development</h3>
-                <p>Social impact, resilience, development strategy, and organisational effectiveness.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-anticipate" class="expertise-badge badge-anticipate">Anticipate</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V10l8-6 8 6v11"/><line x1="2" y1="21" x2="22" y2="21"/><line x1="9" y1="21" x2="9" y2="14"/><line x1="15" y1="21" x2="15" y2="14"/></svg>
-                </span>
-                <h3>Cultural Resilience</h3>
-                <p>Knowledge systems, heritage preservation, institutional sustainability, and social cohesion.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-strengthen" class="expertise-badge badge-strengthen">Strengthen</a>
-                    
-                </div>
-            </article>
-
-            <article class="sector-card">
-                <span class="sector-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.3 1 6.2L12 16.5 6.5 19.5l1-6.2L3 8l6-1 3-6z"/></svg>
-                </span>
-                <h3>Conflict & Post-Conflict Recovery</h3>
-                <p>Institutional rebuilding, resilience, recovery planning, and capacity development.</p>
-                <div class="sector-tags" aria-label="Related expertise areas">
-                    <a href="#expertise-understand" class="expertise-badge badge-understand">Understand</a>
-                    <a href="#expertise-anticipate" class="expertise-badge badge-anticipate">Anticipate</a>
-                    <a href="#expertise-strengthen" class="expertise-badge badge-strengthen">Strengthen</a>
-                    
-                </div>
-            </article>
+        <div class="areas-of-interest reveal">
+            <ul class="areas-grid" aria-label="Who we serve">
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>NGOs &amp; International Development Organisations</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Media &amp; Communication Organisations</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Government, Policy &amp; Public Institutions</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Universities &amp; Research Organisations</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Businesses &amp; Corporate Organisations</li>
+                <li class="area-item"><span class="area-dot" aria-hidden="true"></span>Civil Society &amp; Mission-Driven Organisations</li>
+            </ul>
         </div>
 
-        <div class="sector-callout">
-            <h3>Don't See Your Sector?</h3>
-            <p>Many of the challenges organisations face today cut across traditional sector boundaries.</p>
-            <p>If your organisation is navigating complexity, change, uncertainty, or transformation, we would welcome the opportunity to explore how Frontline World can help.</p>
-            <a href="{{ "contact" | relURL }}" class="cta-button">Start a Conversation</a>
+        <p class="who-we-serve-note">Frontline World is particularly relevant where organisations face complex, fragile, politically sensitive, high-risk, or rapidly changing environments.</p>
+
+        <div class="section-actions reveal">
+            <a href="{{ "about" | relURL }}" class="link-button">More About Frontline World &rarr;</a>
         </div>
     </div>
 </section>
 
-<!-- Featured Projects Section -->
+<!-- Sectors -->
+<section id="sectors" class="sectors-band" aria-labelledby="sectors-heading">
+    <div class="container">
+        <div class="sectors-band-head">
+            <p class="section-kicker">Sectors</p>
+            <h2 id="sectors-heading">Where We Apply Our Expertise</h2>
+            <p class="sectors-band-intro">Sectors of application, not separate service lines. Frontline World applies the same core expertise wherever clients face complexity, uncertainty, and change.</p>
+        </div>
+
+        <ul class="sectors-band-grid">
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">01</span>
+                <span class="sectors-band-name">Education</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">02</span>
+                <span class="sectors-band-name">Media &amp; Communication</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">03</span>
+                <span class="sectors-band-name">Government &amp; Governance</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">04</span>
+                <span class="sectors-band-name">Technology &amp; Digital Transformation</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">05</span>
+                <span class="sectors-band-name">Health &amp; Wellbeing</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">06</span>
+                <span class="sectors-band-name">Sustainability &amp; Development</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">07</span>
+                <span class="sectors-band-name">Cultural Resilience</span>
+            </li>
+            <li class="sectors-band-item">
+                <span class="sectors-band-num" aria-hidden="true">08</span>
+                <span class="sectors-band-name">Conflict &amp; Post-Conflict Recovery</span>
+            </li>
+        </ul>
+
+        <div class="section-actions reveal">
+            <a href="{{ "sectors" | relURL }}" class="link-button">Explore Our Sectors &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<!-- Selected Work -->
 <section id="projects" class="projects" aria-labelledby="projects-heading">
     <div class="container">
         <div class="section-head reveal">
@@ -280,16 +266,17 @@
     </div>
 </section>
 
-<!-- Latest News Section -->
-<section id="news" class="insights" aria-labelledby="news-heading">
+<!-- Insights -->
+<section id="insights" class="insights" aria-labelledby="insights-home-heading">
     <div class="container">
         <div class="section-head reveal">
-            <p class="section-kicker">Latest News</p>
-            <h2 id="news-heading">Latest News</h2>
+            <p class="section-kicker">Insights</p>
+            <h2 id="insights-home-heading">Latest Insights</h2>
+            <p>News, analysis, publications, and events from Frontline World.</p>
         </div>
         <div class="insights-grid reveal">
-            {{- $news := where .Site.RegularPages "Section" "news" }}
-            {{- $news = $news | first 6 }}
+            {{- $news := where .Site.RegularPages "Section" "insights" }}
+            {{- $news = $news | first 3 }}
             {{- if $news }}
             {{- range $news }}
             <article class="insight-card">
@@ -309,12 +296,12 @@
             <div class="insight-card">
                 {{ partial "image-frame.html" (dict "ratio" "square" "tone" "terracotta") }}
                 <p class="insight-date">News</p>
-                <h3>Research & Reports</h3>
+                <h3>Research &amp; Reports</h3>
             </div>
             <div class="insight-card">
                 {{ partial "image-frame.html" (dict "ratio" "square" "tone" "forest") }}
                 <p class="insight-date">Commentary</p>
-                <h3>Articles & Commentary</h3>
+                <h3>Articles &amp; Commentary</h3>
             </div>
             <div class="insight-card">
                 {{ partial "image-frame.html" (dict "ratio" "square" "tone" "sand") }}
@@ -325,35 +312,43 @@
         </div>
         {{- if $news }}
         <div class="section-actions">
-            <a href="{{ "news" | relURL }}" class="link-button">View All News &rarr;</a>
+            <a href="{{ "insights" | relURL }}" class="link-button">View Insights &rarr;</a>
         </div>
         {{- end }}
     </div>
 </section>
 
-<!-- Partnerships Section -->
-<section id="partnerships" class="cta-section" aria-labelledby="partnerships-heading">
-    <div class="container reveal">
-        <p class="section-kicker">Collaboration</p>
-        <h2 id="partnerships-heading">Partnerships</h2>
-        <p>We collaborate with organisations and experts who share our commitment to practical, evidence-based impact.</p>
-        <a href="{{ "contact" | relURL }}" class="cta-button">Start a Conversation</a>
+<!-- Our People -->
+<section id="our-people" class="cta-section" aria-labelledby="our-people-heading">
+    <div class="container">
+        <div class="section-head reveal">
+            <p class="section-kicker">Our People</p>
+            <h2 id="our-people-heading">The Right Expertise for Every Challenge</h2>
+            <p>Frontline World is not defined by the number of people on its payroll, but by its ability to bring together the right expertise for the challenge at hand. Our network of associates, subject-matter experts, and advisors is assembled around each client's needs.</p>
+        </div>
+        <div class="final-cta-actions reveal">
+            <a href="{{ "our-people" | relURL }}" class="cta-button">Meet Our Experts</a>
+            <a href="{{ "our-people" | relURL }}#join-the-network" class="cta-button secondary">Join Frontline World</a>
+        </div>
     </div>
 </section>
 
-<!-- Contact Section -->
+<!-- Final CTA -->
 <section id="contact" class="contact-preview" aria-labelledby="contact-heading">
     <div class="container reveal">
         <div class="section-head">
             <p class="section-kicker">Get in Touch</p>
-            <h2 id="contact-heading">Let's Start a Conversation</h2>
+            <h2 id="contact-heading">Let's Discuss Your Challenge</h2>
         </div>
-        <p>Whether you need strategic research, risk and foresight support, communication expertise, executive training, or support with institutional transformation, Frontline World is ready to explore how we can help.</p>
+        <p>Whether you need strategic research, risk and foresight support, communication expertise, or executive training, Frontline World is ready to explore how we can help.</p>
         <ul class="contact-quick-list">
             <li><strong>Email</strong> <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></li>
             <li><strong>Mobile</strong> <a href="tel:+447310498510">{{ .Site.Params.phone }}</a></li>
         </ul>
-        <a href="{{ "contact" | relURL }}" class="cta-button">Visit Contact Page &rarr;</a>
+        <div class="section-actions">
+            <a href="{{ "contact" | relURL }}" class="cta-button">Discuss Your Challenge</a>
+            <a href="{{ "services" | relURL }}" class="cta-button secondary">Explore Our Services</a>
+        </div>
     </div>
 </section>
 {{ end }}

@@ -1,7 +1,7 @@
 {{ define "main" }}
 <main class="single-insight-page">
     <div class="container single-insight-container">
-        <a href="{{ "news" | relURL }}" class="insight-back-link">&larr; Back to News</a>
+        <a href="{{ "insights" | relURL }}" class="insight-back-link">&larr; Back to Insights</a>
 
         {{- if .Params.news_type }}
         <span class="single-insight-category">{{ .Params.news_type }}</span>

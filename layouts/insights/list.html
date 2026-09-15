@@ -2,7 +2,7 @@
 <section class="public-insights-page">
     <div class="container">
         <header class="public-insights-header">
-            <p class="page-kicker">News &amp; Views</p>
+            <p class="page-kicker">Frontline World Insights</p>
             <h1>{{ .Title }}</h1>
             {{- if .Description }}
             <p>{{ .Description }}</p>
@@ -10,7 +10,7 @@
         </header>
 
         <section class="public-insights-grid" aria-live="polite">
-            {{- $pages := where .Site.RegularPages "Section" "news" }}
+            {{- $pages := where .Site.RegularPages "Section" "insights" }}
             {{- if $pages }}
             {{- range $pages }}
             <article class="public-insight-card">
