@@ -46,6 +46,12 @@ title = "Frontline World Ltd"
     name = "Core Expertise & Services"
     url = "/services/"
     weight = 4
+    identifier = "services"
+  [[menus.main]]
+    name = "Professional & Executive Training"
+    url = "/professional-executive-training/"
+    parent = "services"
+    weight = 1
   [[menus.main]]
     name = "Sectors"
     url = "/sectors/"
