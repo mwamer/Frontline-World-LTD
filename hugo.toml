@@ -30,37 +30,37 @@ title = "Frontline World Ltd"
       unsafe = true
 
 [menus]
-  [[menus.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
+  # Primary navigation. "Courses" renders a mega menu in layouts/partials/nav.html;
+  # its category groups are built from programme content (not hardcoded menu entries).
   [[menus.main]]
     name = "About"
     url = "/about/"
-    weight = 2
+    weight = 1
   [[menus.main]]
     name = "Our People"
     url = "/our-people/"
-    weight = 3
+    weight = 2
   [[menus.main]]
-    name = "Core Expertise & Services"
-    url = "/services/"
-    weight = 4
-    identifier = "services"
-  [[menus.main]]
-    name = "Training Academy"
+    name = "Courses"
     url = "/training-academy/"
-    parent = "services"
-    weight = 1
+    weight = 3
+    identifier = "courses"
   [[menus.main]]
-    name = "Sectors"
-    url = "/sectors/"
-    weight = 5
-  [[menus.main]]
+    name = "Corporate / Organisational Training"
+    url = "/training-academy/#for-organisations"
+    weight = 4
+    identifier = "corporate-training"
+
+  # Secondary "resources" group, rendered beside the primary navigation.
+  [[menus.resources]]
     name = "Insights"
     url = "/insights/"
-    weight = 6
-  [[menus.main]]
+    weight = 1
+  [[menus.resources]]
+    name = "Sectors"
+    url = "/sectors/"
+    weight = 2
+  [[menus.resources]]
     name = "Contact"
     url = "/contact/"
-    weight = 7
+    weight = 3
