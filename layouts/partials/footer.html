@@ -15,9 +15,7 @@
         <nav class="footer-nav" aria-label="Footer">
             <p class="footer-heading">Explore</p>
             {{- range .Site.Menus.main }}
-            {{- if not .Parent }}
             <a href="{{ .URL }}">{{ .Name }}</a>
-            {{- end }}
             {{- end }}
         </nav>
         <div class="footer-contact">
