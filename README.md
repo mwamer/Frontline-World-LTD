@@ -152,6 +152,15 @@ Page layout lives in the page files. To change a section's structure, edit the m
 
 Change the file name or the `url` field, then add the old path to `aliases` in frontmatter so Hugo emits a redirect.
 
+### Images live in the project
+
+Every image on the site lives in `static/images/`. Never reference an image from outside the project. Save it into the project first, then link the local copy from the page that uses it:
+
+- **From a link**: download the image into `static/images/`.
+- **From a local file**: copy the file into `static/images/`.
+
+Use a descriptive file name, then link it from the page with a relative path (see the depth table above) and an `alt` description.
+
 ### Replace a placeholder image
 
 Pages use a branded placeholder until real photography exists. To add a real image:
@@ -186,6 +195,7 @@ When you add or remove an article or course, update the matching list by hand.
 ## Conventions
 
 - Keep each page self-contained. Do not move page copy into `layouts/`; those files are passthrough plumbing.
+- Never reference external images. Download or copy every image into `static/images/` before linking it.
 - Do not invent URLs, contact details, social profiles, or photo credits. Use the placeholder in the page until real assets exist.
 - Reuse the design tokens in `static/styles.css` rather than introducing new colors, fonts, or spacing values.
 - Keep relative links depth-correct, per the table above.
