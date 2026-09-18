@@ -4477,26 +4477,26 @@ em {
     background: rgba(244, 235, 222, 0.85);
 }
 
-.programmes {
+.courses {
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
 }
 
-.programmes-note {
+.courses-note {
     margin-top: 0.4rem;
     color: var(--text-muted);
 }
 
-.programme-list {
+.course-list {
     list-style: none;
     margin: 2.75rem 0 0;
     padding: 0;
 }
 
-.programme-item:last-child {
+.course-item:last-child {
     border-bottom: 1px solid var(--line-strong);
 }
 
-.programme-link {
+.course-link {
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     gap: 0 2.5rem;
@@ -4506,27 +4506,27 @@ em {
     color: var(--forest);
 }
 
-.programme-index {
+.course-index {
     font-family: var(--font-serif);
     color: var(--terracotta);
     font-size: 1rem;
 }
 
-.programme-title {
+.course-title {
     display: block;
     font-family: var(--font-serif);
     font-size: clamp(1.35rem, 2.4vw, 1.85rem);
     transition: color 0.3s var(--ease-out);
 }
 
-.programme-desc {
+.course-desc {
     display: block;
     margin-top: 0.35rem;
     color: var(--text-muted);
     max-width: 38rem;
 }
 
-.programme-meta {
+.course-meta {
     color: var(--text-muted);
     font-size: 0.72rem;
     font-weight: 600;
@@ -4536,26 +4536,26 @@ em {
     line-height: 1.7;
 }
 
-.programme-arrow {
+.course-arrow {
     color: var(--terracotta);
     font-size: 1.25rem;
     transition: transform 0.3s var(--ease-out);
 }
 
-.programme-item:hover .programme-title {
+.course-item:hover .course-title {
     color: var(--terracotta);
 }
 
-.programme-item a:hover .programme-arrow {
+.course-item a:hover .course-arrow {
     transform: translateX(6px);
 }
 
-.custom-programmes {
+.custom-courses {
     background: var(--sand);
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
 }
 
-.custom-programmes .lead-text {
+.custom-courses .lead-text {
     max-width: 46rem;
 }
 
@@ -4596,21 +4596,21 @@ em {
     max-width: 48rem;
 }
 
-/* Programme pages */
-.programme-facts {
+/* Course pages */
+.course-facts {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem 3rem;
     margin-top: 2rem;
 }
 
-.programme-facts p {
+.course-facts p {
     margin: 0;
     color: var(--text-muted);
     font-size: 0.95rem;
 }
 
-.programme-facts strong {
+.course-facts strong {
     display: block;
     color: var(--forest);
     font-size: 0.72rem;
@@ -4620,15 +4620,15 @@ em {
     margin-bottom: 0.25rem;
 }
 
-.programme-body {
+.course-body {
     padding: clamp(3rem, 6vw, 5rem) 0;
 }
 
-.programme-body-inner {
+.course-body-inner {
     max-width: 46rem;
 }
 
-.programme-body p {
+.course-body p {
     font-size: 1.06rem;
     line-height: 1.85;
     color: var(--text);
@@ -4646,12 +4646,12 @@ em {
         grid-template-columns: 1fr;
     }
 
-    .programme-link {
+    .course-link {
         grid-template-columns: auto 1fr auto;
         gap: 0 1.5rem;
     }
 
-    .programme-meta {
+    .course-meta {
         grid-column: 2 / 3;
     }
 
@@ -4671,15 +4671,15 @@ em {
         grid-template-columns: 1fr;
     }
 
-    .programme-link {
+    .course-link {
         grid-template-columns: auto 1fr;
     }
 
-    .programme-meta {
+    .course-meta {
         grid-column: 1 / -1;
     }
 
-    .programme-arrow {
+    .course-arrow {
         display: none;
     }
 }

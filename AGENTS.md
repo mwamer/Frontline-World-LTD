@@ -19,7 +19,7 @@ Read `README.md` first. It is the source of truth for this project's structure a
 
 - **Relative links.** Match the depth table in `README.md`. Never write `/Frontline-World-LTD/...`; it breaks a custom domain.
 - **Repeated chrome.** Head, navigation, and footer are copied into every page. If they change, update every file under `content/`.
-- **Manual lists.** The home insights cards, the news ticker, the insights grid, and the programme list are hand-written. Update the matching list when you add or remove an article or programme.
+- **Manual lists.** The home insights cards, the news ticker, the insights grid, and the course list are hand-written. Update the matching list when you add or remove an article or course.
 - **`security.allowContent`.** Keep `allowContent = ['^text/html$']` in `hugo.toml`, or the build fails.
 
 ## Do not
