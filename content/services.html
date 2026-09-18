@@ -1,5 +1,57 @@
-{{ define "main" }}
-<!-- Services Hero -->
+---
+title: "Services"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Turning complexity into strategic advantage: strategic research, risk and foresight, strategic communication, and professional training.">
+<title>Services | Frontline World Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header" data-header>
+    <div class="container header-inner">
+        <a href="../" class="logo">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                    <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                </svg>
+            </span>
+            <span class="logo-text">Frontline World</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-toggle-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        <nav class="nav-links-wrap" aria-label="Primary">
+            <ul id="primary-navigation" class="nav-links">
+                <li><a href="../"><span class="nav-link-label">Home</span></a></li>
+                <li><a href="../about/"><span class="nav-link-label">About</span></a></li>
+                <li><a href="../our-people/"><span class="nav-link-label">Our People</span></a></li>
+                <li class="nav-item-has-children">
+                    <a href="./"><span class="nav-link-label">Core Expertise &amp; Services</span></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="../training-academy/">Training Academy</a></li>
+                    </ul>
+                </li>
+                <li><a href="../sectors/"><span class="nav-link-label">Sectors</span></a></li>
+                <li><a href="../insights/"><span class="nav-link-label">Insights</span></a></li>
+                <li><a href="../contact/"><span class="nav-link-label">Contact</span></a></li>
+                <li class="nav-cta"><a href="../contact/" class="btn btn-primary btn-sm">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+</header><main id="main-content">
+
 <section class="services-hero" aria-labelledby="services-heading">
     <div class="services-hero-inner">
         <div class="services-hero-grid">
@@ -9,7 +61,25 @@
                 <p class="services-hero-sub">Core expertise is how FW creates value — research and analysis, foresight, strategic communication, and capability building. Services are what clients engage FW to deliver, drawing on that expertise for practical results. Each service below sets out the challenges it addresses, what we provide, and the value clients gain.</p>
             </div>
             <div class="services-hero-visual">
-                {{ partial "image-frame.html" (dict "ratio" "tall" "tone" "forest" "caption" "Portrait placeholder — real photography coming soon") }}
+                
+
+
+
+
+<figure class="image-frame image-frame--tall image-frame--forest">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <span class="image-frame__monogram" aria-hidden="true">FW</span>
+            <span class="image-frame__grid" aria-hidden="true"></span>
+            <span class="image-frame__ratio-tag">03:04</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+    <figcaption class="image-frame__caption">Portrait placeholder — real photography coming soon</figcaption>
+</figure>
             </div>
         </div>
 
@@ -50,7 +120,7 @@
     </div>
 </section>
 
-<!-- Service 01 — Strategic Research & Institutional Advisory -->
+
 <section id="strategic-research" class="service-section" aria-labelledby="service-01-heading">
     <div class="container service-section-grid">
         <div class="service-copy">
@@ -73,12 +143,30 @@
             </div>
         </div>
         <div class="service-visual">
-            {{ partial "image-frame.html" (dict "ratio" "portrait" "tone" "sand" "caption" "Photograph placeholder — coming soon") }}
+            
+
+
+
+
+<figure class="image-frame image-frame--portrait image-frame--sand">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <span class="image-frame__monogram" aria-hidden="true">FW</span>
+            <span class="image-frame__grid" aria-hidden="true"></span>
+            <span class="image-frame__ratio-tag">04:05</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+    <figcaption class="image-frame__caption">Photograph placeholder — coming soon</figcaption>
+</figure>
         </div>
     </div>
 </section>
 
-<!-- Service 02 — Risk & Strategic Foresight -->
+
 <section id="risk-foresight" class="service-section service-section--alt service-section--swap" aria-labelledby="service-02-heading">
     <div class="container service-section-grid">
         <div class="service-copy">
@@ -103,12 +191,30 @@
             </div>
         </div>
         <div class="service-visual">
-            {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "forest" "caption" "Photograph placeholder — coming soon") }}
+            
+
+
+
+
+<figure class="image-frame image-frame--landscape image-frame--forest">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <span class="image-frame__monogram" aria-hidden="true">FW</span>
+            <span class="image-frame__grid" aria-hidden="true"></span>
+            <span class="image-frame__ratio-tag">03:02</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+    <figcaption class="image-frame__caption">Photograph placeholder — coming soon</figcaption>
+</figure>
         </div>
     </div>
 </section>
 
-<!-- Service 03 — Strategic Communication & Media Advisory -->
+
 <section id="communication-media" class="service-section" aria-labelledby="service-03-heading">
     <div class="container service-section-grid">
         <div class="service-copy">
@@ -132,12 +238,30 @@
             </div>
         </div>
         <div class="service-visual">
-            {{ partial "image-frame.html" (dict "ratio" "portrait" "tone" "terracotta" "caption" "Photograph placeholder — coming soon") }}
+            
+
+
+
+
+<figure class="image-frame image-frame--portrait image-frame--terracotta">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <span class="image-frame__monogram" aria-hidden="true">FW</span>
+            <span class="image-frame__grid" aria-hidden="true"></span>
+            <span class="image-frame__ratio-tag">04:05</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+    <figcaption class="image-frame__caption">Photograph placeholder — coming soon</figcaption>
+</figure>
         </div>
     </div>
 </section>
 
-<!-- Service 04 — Professional & Executive Training -->
+
 <section id="training-capability" class="service-section service-section--alt service-section--swap" aria-labelledby="service-04-heading">
     <div class="container service-section-grid">
         <div class="service-copy">
@@ -159,15 +283,33 @@
                 <p class="service-value-label">Client Value</p>
                 <p class="service-value-text">Stronger capability, improved performance, and future-ready leadership.</p>
             </div>
-            <p class="service-page-link"><a href="{{ "training-academy" | relURL }}">Visit the Training Academy &rarr;</a></p>
+            <p class="service-page-link"><a href="../training-academy/">Visit the Training Academy &rarr;</a></p>
         </div>
         <div class="service-visual">
-            {{ partial "image-frame.html" (dict "ratio" "landscape" "tone" "sand" "caption" "Photograph placeholder — coming soon") }}
+            
+
+
+
+
+<figure class="image-frame image-frame--landscape image-frame--sand">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <span class="image-frame__monogram" aria-hidden="true">FW</span>
+            <span class="image-frame__grid" aria-hidden="true"></span>
+            <span class="image-frame__ratio-tag">03:02</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+    <figcaption class="image-frame__caption">Photograph placeholder — coming soon</figcaption>
+</figure>
         </div>
     </div>
 </section>
 
-<!-- How Clients Engage With Us -->
+
 <section id="how-we-engage" class="engagement" aria-labelledby="engagement-heading">
     <div class="container">
         <div class="sectors-band-head">
@@ -218,7 +360,7 @@
     </div>
 </section>
 
-<!-- Why Frontline World -->
+
 <section id="why-frontline-world" class="why-band" aria-labelledby="why-band-heading">
     <div class="container">
         <div class="why-band-head">
@@ -255,15 +397,65 @@
     </div>
 </section>
 
-<!-- Final CTA -->
+
 <section id="final-cta" class="final-cta" aria-labelledby="final-cta-heading">
     <div class="container">
         <h2 id="final-cta-heading">Have a challenge to solve?</h2>
         <p>Let's explore how Frontline World can help you understand the challenge, anticipate what comes next, and identify a practical path forward.</p>
         <div class="final-cta-actions">
-            <a href="{{ "contact" | relURL }}" class="cta-button">Discuss Your Challenge &rarr;</a>
-            <a href="{{ "about" | relURL }}" class="cta-button secondary">Explore Our Expertise &rarr;</a>
+            <a href="../contact/" class="cta-button">Discuss Your Challenge &rarr;</a>
+            <a href="../about/" class="cta-button secondary">Explore Our Expertise &rarr;</a>
         </div>
     </div>
 </section>
-{{ end }}
+
+    </main><footer class="footer" data-footer>
+    <div class="container footer-top">
+        <div class="footer-brand">
+            <a href="../" class="footer-logo">
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                        <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                    </svg>
+                </span>
+                <span>Frontline World</span>
+            </a>
+            <p class="footer-tagline">Global strategic research, foresight, communication, and advisory. Connecting knowledge, expertise, and practice.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+            <p class="footer-heading">Explore</p>
+            <a href="../">Home</a>
+            <a href="../about/">About</a>
+            <a href="../our-people/">Our People</a>
+            <a href="./">Core Expertise &amp; Services</a>
+            <a href="../sectors/">Sectors</a>
+            <a href="../insights/">Insights</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+        <div class="footer-contact">
+            <p class="footer-heading">Contact</p>
+            <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a>
+            <a href="tel:+447310498510">&#43;44 (0)7310 498510</a>
+        </div>
+        <div class="footer-social">
+            <p class="footer-heading">Follow</p><ul class="social-links" aria-label="Social media links">
+    <li>
+        <a aria-label="Frontline World on LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8.5h4.5V23h-4.5V8.5zM8.5 8.5h4.31v1.98h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V23h-4.5v-6.98c0-1.67-.03-3.81-2.32-3.81-2.33 0-2.69 1.82-2.69 3.7V23H8.5V8.5z"/></svg>
+        </a>
+    </li>
+    <li>
+        <a aria-label="Frontline World on X">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.5 22H1.4l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg>
+        </a>
+    </li>
+</ul></div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+        <p class="footer-note">Insight for better foresight.</p>
+    </div>
+</footer><script src="../script.js"></script>
+</body>
+</html>

@@ -29,6 +29,11 @@ title = "Frontline World Ltd"
     [markup.goldmark.renderer]
       unsafe = true
 
+[security]
+  # Pages live as complete .html files in content/ (they already contain
+  # their own markup), so allow HTML as a content format.
+  allowContent = ['^text/html$']
+
 [menus]
   [[menus.main]]
     name = "Home"
