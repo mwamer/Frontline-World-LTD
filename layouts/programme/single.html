@@ -5,12 +5,12 @@
         <h1 id="programme-heading">{{ .Title }}</h1>
         <p class="page-lead">{{ .Description }}</p>
         <div class="programme-facts">
-            <p><strong>Audience</strong> {{ .Params.target_audience }}</p>
-            <p><strong>Format</strong> {{ delimit .Params.delivery_formats " · " }}</p>
+            <p><strong>Audience</strong> {{ .Params.audience }}</p>
+            <p><strong>Format</strong> {{ .Params.format }}</p>
             <p><strong>Next cohort</strong> Dates to be announced</p>
         </div>
         <div class="hero-actions">
-            <a class="cta-button" href="{{ "contact" | relURL }}?course={{ .Title | urlquery }}">Apply for This Programme</a>
+            <a class="cta-button" href="mailto:{{ site.Params.email }}?subject={{ "Course Enquiry" | urlquery }}%3A%20{{ .Title | urlquery }}">Enquire About This Programme</a>
             <a class="cta-button secondary" href="{{ "training-academy" | relURL }}#programmes">Back to Programmes</a>
         </div>
     </div>

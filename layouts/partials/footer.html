@@ -12,23 +12,13 @@
             </a>
             <p class="footer-tagline">Global strategic research, foresight, communication, and advisory. Connecting knowledge, expertise, and practice.</p>
         </div>
-        <nav class="footer-nav" aria-label="Academy">
-            <p class="footer-heading">Academy</p>
-            <a href="{{ "training-academy" | relURL }}" target="_blank" rel="noopener">Courses</a>
-            <a href="{{ "training-academy" | relURL }}#upcoming" target="_blank" rel="noopener">Upcoming Cohorts</a>
-            <a href="{{ "training-academy" | relURL }}#for-organisations" target="_blank" rel="noopener">Corporate / Organisational Training</a>
-        </nav>
-        <nav class="footer-nav" aria-label="Explore">
+        <nav class="footer-nav" aria-label="Footer">
             <p class="footer-heading">Explore</p>
-            <a href="{{ "about" | relURL }}">About</a>
-            <a href="{{ "our-people" | relURL }}">Our People</a>
-            <a href="{{ "services" | relURL }}">Core Expertise &amp; Services</a>
-            <a href="{{ "sectors" | relURL }}">Sectors</a>
-        </nav>
-        <nav class="footer-nav" aria-label="Resources">
-            <p class="footer-heading">Resources</p>
-            <a href="{{ "insights" | relURL }}">Insights</a>
-            <a href="{{ "contact" | relURL }}">Contact</a>
+            {{- range .Site.Menus.main }}
+            {{- if not .Parent }}
+            <a href="{{ .URL }}">{{ .Name }}</a>
+            {{- end }}
+            {{- end }}
         </nav>
         <div class="footer-contact">
             <p class="footer-heading">Contact</p>

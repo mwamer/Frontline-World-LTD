@@ -104,21 +104,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-
-// ---- Course application prefill (contact page) ----
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const course = params.get('course');
-    if (!course) return;
-
-    const category = document.getElementById('cf-category');
-    if (category) {
-        const option = Array.from(category.options).find(o => o.value === 'Course Application');
-        if (option) option.selected = true;
-    }
-
-    const message = document.getElementById('cf-message');
-    if (message && !message.value) {
-        message.value = `I'm applying for: ${course}\n\n`;
-    }
-});

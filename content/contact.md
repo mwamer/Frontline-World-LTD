@@ -54,7 +54,6 @@ We welcome enquiries from organisations, institutions, networks, businesses, and
 <option value="Consultancy / Advisory">Consultancy / Advisory</option>
 <option value="Research">Research</option>
 <option value="Training">Training</option>
-<option value="Course Application">Course Application</option>
 <option value="Strategic Partnership">Strategic Partnership</option>
 <option value="Associate / Expert Network">Associate / Expert Network</option>
 <option value="General Enquiry">General Enquiry</option>

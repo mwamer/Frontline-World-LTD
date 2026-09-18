@@ -1,13 +1,3 @@
-<div class="utility-bar">
-    <div class="container utility-bar-inner">
-        <p class="utility-contact">
-            <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
-            <span class="utility-sep" aria-hidden="true">/</span>
-            <a href="tel:{{ .Site.Params.phone | plainify }}">{{ .Site.Params.phone }}</a>
-        </p>
-        <a href="{{ "contact" | relURL }}" class="utility-cta">Discuss a Programme &rarr;</a>
-    </div>
-</div>
 <header class="site-header" data-header>
     <div class="container header-inner">
         <a href="{{ "" | relURL }}" class="logo">
@@ -30,50 +20,20 @@
         <nav class="nav-links-wrap" aria-label="Primary">
             <ul id="primary-navigation" class="nav-links">
                 {{- range .Site.Menus.main }}
-                {{- if eq .Identifier "courses" }}
-                {{- $academyPage := $.GetPage "training-academy" }}
-                <li class="nav-item-has-children nav-mega-item">
-                    <a href="{{ .URL }}"{{ if hasPrefix $.Page.RelPermalink "/training-academy/" }} class="active" aria-current="page"{{ end }} target="_blank" rel="noopener"><span class="nav-link-label">{{ .Name }}</span></a>
-                    <div class="nav-mega"{{ with $academyPage }} aria-label="Courses by subject area from {{ .Title }}"{{ end }}>
-                        <div class="nav-mega-inner">
-                            {{- $programmes := where site.RegularPages "Type" "programme" }}
-                            {{- $cats := slice }}
-                            {{- range $p := $programmes }}
-                                {{- $cats = $cats | append (default "General" (index $p.Params.course_categories 0)) }}
-                            {{- end }}
-                            {{- range $cat := uniq $cats }}
-                            <div class="nav-mega-col">
-                                <p class="nav-mega-title">{{ $cat }}</p>
-                                <ul class="nav-mega-links">
-                                    {{- range $p := $programmes }}
-                                    {{- if eq (default "General" (index $p.Params.course_categories 0)) $cat }}
-                                    <li><a href="{{ $p.RelPermalink }}" target="_blank" rel="noopener">{{ $p.Title }}</a></li>
-                                    {{- end }}
-                                    {{- end }}
-                                </ul>
-                            </div>
-                            {{- end }}
-                            <div class="nav-mega-foot">
-                                <a href="{{ "training-academy" | relURL }}#programmes" target="_blank" rel="noopener">View All Courses &rarr;</a>
-                                <a href="{{ "training-academy" | relURL }}#upcoming" target="_blank" rel="noopener">Timetable / Upcoming Cohorts &rarr;</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {{- else }}
-                <li{{ if eq .Identifier "corporate-training" }} class="nav-corporate"{{ end }}>
-                    <a href="{{ .URL }}"{{ if eq .Identifier "corporate-training" }} target="_blank" rel="noopener"{{ end }}{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}><span class="nav-link-label">{{ .Name }}</span></a>
-                </li>
-                {{- end }}
-                {{- end }}
-                <li class="nav-resources-group">
-                    <p class="resources-label" aria-hidden="true">Resources</p>
-                    <ul class="nav-resources" aria-label="Resources">
-                        {{- range .Site.Menus.resources }}
-                        <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "resources" . }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
+                {{- if .HasChildren }}
+                <li class="nav-item-has-children">
+                    <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}><span class="nav-link-label">{{ .Name }}</span></a>
+                    <ul class="nav-dropdown">
+                        {{- range .Children }}
+                        <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a></li>
                         {{- end }}
                     </ul>
                 </li>
+                {{- else }}
+                <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active" aria-current="page"{{ end }}><span class="nav-link-label">{{ .Name }}</span></a></li>
+                {{- end }}
+                {{- end }}
+                <li class="nav-cta"><a href="{{ "contact" | relURL }}" class="btn btn-primary btn-sm">Contact Us</a></li>
             </ul>
         </nav>
     </div>

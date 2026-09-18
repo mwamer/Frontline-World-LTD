@@ -1,14 +1,5 @@
 {{ define "main" }}
-{{- /* Catalogue order: course_id 001-005. Add new programmes here to set their display order. */}}
-{{- $programmes := slice
-    (site.GetPage "programmes/strategic-foresight-for-leaders")
-    (site.GetPage "programmes/ai-digital-transformation-for-organisations")
-    (site.GetPage "programmes/strategic-communication-in-complex-information-environments")
-    (site.GetPage "programmes/leadership-in-times-of-uncertainty")
-    (site.GetPage "programmes/understanding-ai-from-generative-ai-to-ai-agents")
-}}
-
-<!-- 1. Hero -->
+<!-- Academy Hero -->
 <section class="hero academy-hero" aria-labelledby="academy-hero-heading">
     <div class="hero-inner">
         <div class="hero-grid">
@@ -18,10 +9,13 @@
                 <h1 id="academy-hero-heading" class="hero-title reveal">Learning for <em>leaders</em> operating in a world that won't stand still.</h1>
                 <p class="hero-tagline">Executive education. Professional development. Institutional capability.</p>
                 <div class="hero-actions">
-                    <a href="#programmes" class="cta-button">Browse Courses</a>
+                    <a href="#programmes" class="cta-button">Explore Courses</a>
                     <a href="{{ "contact" | relURL }}" class="cta-button secondary">Discuss a Custom Programme</a>
                 </div>
                 <p class="academy-print">Programmes informed by the research, foresight, and communication practice we run every day.</p>
+            </div>
+            <div class="hero-visual reveal">
+                {{ partial "image-frame.html" (dict "ratio" "portrait" "tone" "forest" "caption" "Seminar photography — real photography coming soon") }}
             </div>
         </div>
         <div class="hero-meta">
@@ -32,302 +26,178 @@
     </div>
 </section>
 
-<!-- 2. Audience split -->
-<section class="audience-split" aria-labelledby="audience-heading">
+<!-- Positioning statement -->
+<section class="academy-position" aria-labelledby="academy-position-heading">
     <div class="container">
-        <p class="section-kicker">Who It's For</p>
-        <h2 id="audience-heading">One Academy, two ways in.</h2>
-        <div class="audience-panels">
-            <div id="for-individuals" class="audience-panel audience-panel--individual">
-                <p class="section-kicker">For Individuals</p>
-                <h3>Develop yourself.</h3>
-                <p>Leaders, executives, managers, researchers, government and NGO professionals, and emerging leaders who want to build their judgement, their skills, and their career.</p>
-                <ul class="audience-points">
-                    <li>Leaders &amp; executives</li>
-                    <li>Managers &amp; rising professionals</li>
-                    <li>Researchers &amp; analysts</li>
-                    <li>Government &amp; NGO professionals</li>
-                    <li>Communication professionals</li>
-                    <li>Emerging leaders</li>
-                </ul>
-                <a href="#programmes" class="cta-button">Browse Courses</a>
-            </div>
-            <div id="for-organisations" class="audience-panel audience-panel--organisation">
-                <p class="section-kicker">For Organisations</p>
-                <h3>Build your institution's capability.</h3>
-                <p>Universities, governments, international and non-governmental organisations, professional associations, and corporate teams that need tailored development &mdash; not off-the-shelf training.</p>
-                <ul class="audience-points">
-                    <li>Universities &amp; research institutions</li>
-                    <li>Government &amp; public agencies</li>
-                    <li>International &amp; non-governmental organisations</li>
-                    <li>Professional associations</li>
-                    <li>Corporate teams</li>
-                </ul>
-                <ol class="audience-process">
-                    <li><strong>Diagnose</strong> &mdash; understand your context, challenges, and people.</li>
-                    <li><strong>Design</strong> &mdash; shape a programme around your institution.</li>
-                    <li><strong>Deliver</strong> &mdash; run it with practitioners who do this work daily.</li>
-                    <li><strong>Embed</strong> &mdash; leave durable capability behind.</li>
-                </ol>
-                <a href="{{ "contact" | relURL }}" class="cta-button">Discuss a Custom Programme</a>
-            </div>
-        </div>
+        <p class="section-kicker">Why the Academy Exists</p>
+        <p id="academy-position-heading" class="academy-quote reveal">The Academy doesn't package knowledge into courses. It turns the firm's daily work &mdash; <em>strategic research, foresight, communication, and digital practice</em> &mdash; into programmes that build real institutional capability.</p>
+        <p class="academy-tags">Research-informed &middot; Foresight-led &middot; Communication &amp; digital practice &middot; Built from real client work</p>
     </div>
 </section>
 
-<!-- 3. Featured courses -->
-<section id="programmes" class="featured-courses" aria-labelledby="featured-heading">
+<!-- The Frontline World model -->
+<section class="academy-model" aria-labelledby="academy-model-heading">
     <div class="container">
-        <p class="section-kicker">Featured Courses</p>
-        <h2 id="featured-heading">Programmes for professionals.</h2>
-        <p class="featured-note">Programmes run in small cohorts, online and in person. Pricing, dates, and duration are confirmed on request &mdash; enrol your interest through the application form.</p>
-        <div class="course-card-grid">
-            {{- range $programmes }}
-            {{- partial "course-card.html" (dict "p" .) }}
-            {{- end }}
-        </div>
+        <p class="section-kicker">The Frontline World Model</p>
+        <h2 id="academy-model-heading">One organisation, five capabilities. The Academy is the fourth.</h2>
+        <ol class="model-band">
+            <li class="model-step">
+                <a href="{{ "services" | relURL }}#strategic-research">
+                    <span class="model-name">Understand</span>
+                    <span class="model-note">Make sense of complex environments</span>
+                </a>
+            </li>
+            <li class="model-step">
+                <a href="{{ "services" | relURL }}#risk-foresight">
+                    <span class="model-name">Anticipate</span>
+                    <span class="model-note">Prepare for what comes next</span>
+                </a>
+            </li>
+            <li class="model-step">
+                <a href="{{ "services" | relURL }}#communication-media">
+                    <span class="model-name">Communicate</span>
+                    <span class="model-note">Turn complexity into clarity</span>
+                </a>
+            </li>
+            <li class="model-step model-step--current">
+                <span class="model-name">Strengthen</span>
+                <span class="model-note">Build future-ready capability &mdash; <em>The Academy</em></span>
+            </li>
+            <li class="model-step">
+                <span class="model-name">Transform</span>
+                <span class="model-note">Change institutions and systems</span>
+            </li>
+        </ol>
+        <p class="model-footnote"><a href="{{ "about" | relURL }}" class="link-button">See the wider model on our approach &rarr;</a></p>
     </div>
 </section>
 
-<!-- 4. Upcoming cohorts -->
-<section id="upcoming" class="upcoming" aria-labelledby="upcoming-heading">
-    <div class="container">
-        <p class="section-kicker">Upcoming Cohorts</p>
-        <h2 id="upcoming-heading">Timetable &mdash; when programmes run.</h2>
-        <p class="upcoming-note">Cohort dates are being confirmed for launch. Enrol your interest and we'll notify you the moment enrolment opens.</p>
-        <div class="course-card-grid upcoming-grid">
-            {{- range $programmes }}
-            {{- $scheduled := false }}
-            {{- $line := "" }}
-            {{- range $c := .Params.future_cohorts }}
-                {{- $when := "" }}
-                {{- with $c.date }}{{ $when = printf "%s" ((time .) | time.Format "January 2, 2006") }}{{ end }}
-                {{- with $c.time }}{{ $when = printf "%s · %s" $when . }}{{ end }}
-                {{- with $c.location }}{{ $when = printf "%s · %s" $when . }}{{ end }}
-                {{- if $when }}{{ $scheduled = true }}{{ $line = $when }}{{ end }}
-            {{- end }}
-            {{- if not $scheduled }}{{ $line = .Params.next_cohort | default "Dates to be announced" }}{{ end }}
-            {{- partial "course-card.html" (dict "p" . "cohort_line" $line "cta" (cond $scheduled "Enrol Now" "Enrol Interest") "cta_href" (printf "%s?course=%s" ("contact" | relURL) (.Title | urlquery))) }}
-            {{- end }}
-        </div>
+<!-- Two pathways -->
+<section class="academy-paths" aria-labelledby="academy-paths-heading">
+    <div class="academy-path academy-path--individual">
+        <p class="section-kicker">For Individuals</p>
+        <h3 id="academy-paths-heading">Develop yourself.</h3>
+        <p>Leaders, executives, managers, researchers, government and NGO professionals, and emerging leaders who want to build their judgement, their skills, and their career.</p>
+        <p class="academy-path-tags">Leaders &middot; Executives &middot; Managers &middot; Researchers &middot; Government &middot; NGOs &middot; Communication Professionals &middot; Emerging Leaders</p>
+        <a href="#programmes" class="cta-button">Explore Courses</a>
+    </div>
+    <div class="academy-path academy-path--organisation">
+        <p class="section-kicker">For Organisations</p>
+        <h3 id="academy-org-heading">Build your institution's capability.</h3>
+        <p>Universities, governments, international and non-governmental organisations, professional associations, and corporate teams that need tailored development &mdash; not off-the-shelf training.</p>
+        <p class="academy-path-tags">Universities &middot; Government &middot; NGOs &middot; International Organisations &middot; Associations &middot; Corporate</p>
+        <a href="{{ "contact" | relURL }}" class="cta-button">Discuss a Custom Programme</a>
     </div>
 </section>
 
-<!-- 5. Courses by category -->
-<section id="categories" class="academy-categories" aria-labelledby="categories-heading">
+<!-- Programmes -->
+<section id="programmes" class="programmes" aria-labelledby="programmes-heading">
     <div class="container">
-        <p class="section-kicker">Courses by Category</p>
-        <h2 id="categories-heading">Browse by subject area.</h2>
-        {{- $cats := slice }}
-        {{- range $p := $programmes }}
-            {{- $cats = $cats | append (default "General" (index $p.Params.course_categories 0)) }}
-        {{- end }}
-        <div class="category-tiles">
-            {{- range $cat := uniq $cats }}
-            {{- $count := 0 }}
-            {{- range $p := $programmes }}
-                {{- if eq (default "General" (index $p.Params.course_categories 0)) $cat }}{{ $count = add $count 1 }}{{ end }}
+        <p class="section-kicker">Open Enrolment</p>
+        <h2 id="programmes-heading">Programmes for professionals.</h2>
+        <p class="programmes-note">Programmes run in small cohorts, online and in person. Next cohort dates to be announced.</p>
+        <ol class="programme-list">
+            {{- $programmes := slice
+                (site.GetPage "programmes/strategic-foresight-for-leaders")
+                (site.GetPage "programmes/ai-digital-transformation-for-organisations")
+                (site.GetPage "programmes/strategic-communication-in-complex-information-environments")
+                (site.GetPage "programmes/leadership-in-times-of-uncertainty")
+                (site.GetPage "programmes/understanding-ai-from-generative-ai-to-ai-agents")
+            }}
+            {{- range $i, $p := $programmes }}
+            <li class="programme-item">
+                <a class="programme-link" href="{{ $p.RelPermalink }}">
+                    <span class="programme-index" aria-hidden="true">{{ printf "%02d" (add $i 1) }}</span>
+                    <span class="programme-main">
+                        <span class="programme-title">{{ $p.Title }}</span>
+                        <span class="programme-desc">{{ $p.Description }}</span>
+                    </span>
+                    <span class="programme-meta">{{ $p.Params.audience }} &middot; {{ $p.Params.format }}</span>
+                    <span class="programme-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
             {{- end }}
-            <details class="category-tile" open>
-                <summary>
-                    <span class="category-tile-name">{{ $cat }}</span>
-                    <span class="category-tile-count">{{ $count }} course{{ if ne $count 1 }}s{{ end }}</span>
-                </summary>
-                <ul class="category-tile-links">
-                    {{- range $p := $programmes }}
-                    {{- if eq (default "General" (index $p.Params.course_categories 0)) $cat }}
-                    <li><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></li>
-                    {{- end }}
-                    {{- end }}
-                </ul>
-            </details>
-            {{- end }}
-        </div>
+        </ol>
     </div>
 </section>
 
-<!-- 6. Why choose us -->
-<section class="why-us" aria-labelledby="why-us-heading">
+<!-- Custom Programmes -->
+<section id="custom-programmes" class="custom-programmes" aria-labelledby="custom-heading">
     <div class="container">
-        <p class="section-kicker">Why Choose Us</p>
-        <p id="why-us-heading" class="why-us-quote">The Academy doesn't package knowledge into courses. It turns the firm's daily work &mdash; <em>strategic research, foresight, communication, and digital practice</em> &mdash; into programmes that build real institutional capability.</p>
-        <div class="why-us-grid">
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 12 L17.5 15.5"/></svg>
-                <h4>Sharper strategic judgement</h4>
-                <p>Make sense of complex environments and act with confidence.</p>
-            </div>
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L12 7 M12 17 L12 22 M2 12 L7 12 M17 12 L22 12"/><circle cx="12" cy="12" r="3.5"/></svg>
-                <h4>Working fluency with AI</h4>
-                <p>Understand emerging technology without becoming a technologist.</p>
-            </div>
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M9 5 L9 3 M15 5 L15 3 M4 12 L20 12"/></svg>
-                <h4>Communication that holds</h4>
-                <p>Credibility and clarity when the stakes are high.</p>
-            </div>
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21 C7 17 3 13.5 3 9.5 C3 6.5 5.5 4.5 8 4.5 C10 4.5 11.5 5.5 12 7 C12.5 5.5 14 4.5 16 4.5 C18.5 4.5 21 6.5 21 9.5 C21 13.5 17 17 12 21 Z"/></svg>
-                <h4>Foresight in action</h4>
-                <p>Structured methods applied to the decisions you actually face.</p>
-            </div>
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 L7 12 L10 5 L14 19 L17 12 L21 12"/></svg>
-                <h4>Leadership equal to uncertainty</h4>
-                <p>Decisive and humane in conditions of ambiguity.</p>
-            </div>
-            <div class="why-us-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L21 8 L12 13 L3 8 Z"/><path d="M3 13 L12 18 L21 13"/></svg>
-                <h4>Capability that stays</h4>
-                <p>Durable skills that transfer to your institution.</p>
-            </div>
-        </div>
+        <p class="section-kicker">For Organisations</p>
+        <h2 id="custom-heading">Capability development built around your institution.</h2>
+        <p class="lead-text">We design programmes around your context, your people, and your strategic challenges &mdash; for universities, governments, international organisations, associations, and corporate teams, delivered in-house or internationally.</p>
+        <ol class="process-line">
+            <li><strong>Diagnose</strong><span>Understand your context, challenges, and people.</span></li>
+            <li><strong>Design</strong><span>Shape a programme around your institution.</span></li>
+            <li><strong>Deliver</strong><span>Run it with practitioners who do this work daily.</span></li>
+            <li><strong>Embed</strong><span>Leave durable capability behind.</span></li>
+        </ol>
+        <a href="{{ "contact" | relURL }}" class="cta-button">Discuss a Custom Programme</a>
     </div>
 </section>
 
-<!-- 7. Case studies / testimonials -->
-{{- $stories := where site.RegularPages "Params.kind" "case-study" }}
-<section id="stories" class="academy-stories" aria-labelledby="stories-heading">
-    <div class="container">
-        <p class="section-kicker">Case Studies &amp; Testimonials</p>
-        <h2 id="stories-heading">What the Academy delivers in practice.</h2>
-        {{- if $stories }}
-        <div class="story-grid">
-            {{- range $stories }}
-            <article class="story-card">
-                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                {{- with .Description }}
-                <p>{{ . }}</p>
-                {{- end }}
-            </article>
-            {{- end }}
-        </div>
-        {{- else }}
-        <p class="stories-note">Client stories and programme outcomes will be published here as they complete. Until then, the best picture of the Academy is the work behind it &mdash; <a href="{{ "insights" | relURL }}">explore our insights</a>.</p>
-        {{- end }}
-    </div>
-</section>
-
-<!-- 8. Insights / blog -->
-{{- $posts := (where site.RegularPages "Section" "insights") | first 3 }}
-{{- if $posts }}
-<section id="insights" class="academy-insights" aria-labelledby="insights-heading">
-    <div class="container">
-        <p class="section-kicker">From the Practice</p>
-        <h2 id="insights-heading">Insights &amp; analysis.</h2>
-        <div class="public-insights-grid">
-            {{- range $posts }}
-            <article class="public-insight-card">
-                {{- $frame := dict "ratio" "landscape" "tone" "sand" }}
-                {{- if .Params.image }}
-                {{- $frame = merge $frame (dict "src" .Params.image "alt" .Title) }}
-                {{- end }}
-                {{ partial "image-frame.html" $frame }}
-                <div class="public-insight-card-content">
-                    {{- if .Params.news_type }}
-                    <span class="public-insight-category">{{ .Params.news_type }}</span>
-                    {{- end }}
-                    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-                    <p class="public-insight-date">{{ .Date.Format "January 2, 2006" }}</p>
-                    {{- if .Description }}
-                    <p class="public-insight-excerpt">{{ .Description }}</p>
-                    {{- end }}
-                    <a href="{{ .RelPermalink }}" class="public-insight-read-more">Read more &rarr;</a>
+<!-- Outcomes -->
+<section class="academy-outcomes" aria-labelledby="academy-outcomes-heading">
+    <div class="container academy-outcomes-inner">
+        <p class="section-kicker">Outcomes</p>
+        <h2 id="academy-outcomes-heading">What participants leave with.</h2>
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Sharper strategic judgement</h4>
+                    <p>Make sense of complex environments and act with confidence.</p>
                 </div>
-            </article>
-            {{- end }}
-        </div>
-    </div>
-</section>
-{{- end }}
-
-<!-- 9. FAQ -->
-<section id="faq" class="academy-faq" aria-labelledby="faq-heading">
-    <div class="container">
-        <p class="section-kicker">FAQ</p>
-        <h2 id="faq-heading">Questions, answered honestly.</h2>
-        <div class="faq-list">
-            <details class="faq-item">
-                <summary>What is the Frontline World Training Academy?</summary>
-                <p>The learning arm of Frontline World. It turns the firm's daily research, foresight, communication, and digital practice into open-enrolment courses and bespoke programmes that build institutional capability.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Who are the programmes for?</summary>
-                <p>Individuals &mdash; leaders, executives, managers, researchers, government and NGO staff, and communication professionals. And organisations &mdash; universities, governments, international and non-governmental organisations, associations, and corporate teams.</p>
-            </details>
-            <details class="faq-item">
-                <summary>How do I apply?</summary>
-                <p>Use the application form on the <a href="{{ "contact" | relURL }}">contact page</a>, select <strong>Course Application</strong>, and name the programme you're applying for. We'll confirm next steps and details by email.</p>
-            </details>
-            <details class="faq-item">
-                <summary>How much do programmes cost?</summary>
-                <p>Pricing is being confirmed for the launch catalogue and will be published per course. For now, prices are shared on request &mdash; enrol your interest and we'll respond with full details.</p>
-            </details>
-            <details class="faq-item">
-                <summary>What formats do programmes run in?</summary>
-                <p>Online, in person, hybrid, and in-house. Each course page lists its formats under <strong>Format</strong>.</p>
-            </details>
-            <details class="faq-item">
-                <summary>When do the first cohorts run?</summary>
-                <p>Dates are being confirmed. Enrol your interest through the application form and we'll notify you when enrolment opens.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Do I need prior experience to join?</summary>
-                <p>Each course page states who it is designed for. Courses are open by default; where prerequisites apply they will be listed on the course page.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Can you build a programme for our organisation?</summary>
-                <p>Yes. Corporate and organisational programmes are designed around your context, your people, and your strategic challenges &mdash; diagnosed, designed, and delivered in-house or internationally.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Are programmes certified?</summary>
-                <p>Certificate details are being confirmed and will be published per programme when finalised.</p>
-            </details>
-        </div>
-    </div>
-</section>
-
-<!-- 10. Secondary link blocks -->
-<section class="link-blocks" aria-labelledby="link-blocks-heading">
-    <div class="container">
-        <div class="link-block">
-            <p class="section-kicker">Popular Courses</p>
-            <h2 id="link-blocks-heading">Starting points.</h2>
-            <div class="course-card-grid">
-                {{- range first 3 $programmes }}
-                {{- partial "course-card.html" (dict "p" .) }}
-                {{- end }}
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Working fluency with AI</h4>
+                    <p>Understand emerging technology without becoming a technologist.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Communication that holds</h4>
+                    <p>Credibility and clarity when the stakes are high.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Foresight in action</h4>
+                    <p>Structured methods applied to the decisions you actually face.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Leadership equal to uncertainty</h4>
+                    <p>Decisive and humane in conditions of ambiguity.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon" aria-hidden="true">&#10003;</div>
+                <div class="benefit-content">
+                    <h4>Capability that stays</h4>
+                    <p>Durable skills that transfer to your institution.</p>
+                </div>
             </div>
         </div>
-        <div class="link-block">
-            <p class="section-kicker">Useful Links</p>
-            <h2>Explore Frontline World.</h2>
-            <ul class="useful-links">
-                <li><a href="{{ "" | relURL }}">Home</a></li>
-                <li><a href="{{ "about" | relURL }}">About</a></li>
-                <li><a href="{{ "our-people" | relURL }}">Our People</a></li>
-                <li><a href="{{ "services" | relURL }}">Core Expertise &amp; Services</a></li>
-                <li><a href="{{ "sectors" | relURL }}">Sectors</a></li>
-                <li><a href="{{ "insights" | relURL }}">Insights</a></li>
-                <li><a href="{{ "contact" | relURL }}">Contact</a></li>
-            </ul>
-        </div>
     </div>
 </section>
 
-<!-- 11. Contact block -->
-<section class="academy-contact" aria-labelledby="academy-contact-heading">
-    <div class="container academy-contact-inner">
-        <div>
-            <p class="section-kicker">Start a Conversation</p>
-            <h2 id="academy-contact-heading">Whether you're building your own capability or your institution's, we'd welcome the conversation.</h2>
-            <p>Enquire, apply for a course, or discuss a custom programme with our team.</p>
-        </div>
-        <div class="academy-contact-channels">
-            <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
-            <a href="tel:{{ site.Params.phone | plainify }}">{{ site.Params.phone }}</a>
-            <a href="{{ "contact" | relURL }}" class="cta-button">Discuss a Programme</a>
+<!-- Final CTA -->
+<section class="cta-section" aria-labelledby="academy-final-heading">
+    <div class="container">
+        <p class="section-kicker">Start a Conversation</p>
+        <h2 id="academy-final-heading">Whether you're building your own capability or your institution's, we'd welcome the conversation.</h2>
+        <p>Explore our open-enrolment programmes, or discuss a custom programme with our team.</p>
+        <div class="hero-actions final-cta-actions">
+            <a href="#programmes" class="cta-button">Explore Courses</a>
+            <a href="{{ "contact" | relURL }}" class="cta-button secondary">Discuss a Custom Programme</a>
         </div>
     </div>
 </section>
