@@ -4556,6 +4556,28 @@ em {
     gap: 0.9rem;
 }
 
+/* Coming-soon placeholder card */
+.course-card--coming {
+    border: 1px dashed var(--line-strong);
+    background: transparent;
+    cursor: default;
+}
+
+.course-card--coming:hover {
+    background: transparent;
+}
+
+.course-card--coming .course-card-desc {
+    margin-bottom: 1.4rem;
+}
+
+.course-card--coming .course-card-cta {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+}
+
 .custom-courses {
     background: var(--sand);
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
@@ -4710,4 +4732,411 @@ em {
 .service-page-link a:hover {
     color: var(--terracotta);
     border-color: transparent;
+}
+
+/* ==========================================================================
+   Course detail page (strategic-foresight-for-leaders)
+   ========================================================================== */
+
+/* Kill the inherited article padding; sections are full-bleed bands */
+.course-detail {
+    padding: 0;
+}
+
+/* Full-bleed section bands */
+.course-section {
+    padding: 5.5rem 0 6rem;
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.course-section--alt {
+    background: var(--offwhite);
+}
+
+/* Section typography on course pages (overrides .course-body h2) */
+.course-section h2 {
+    font-size: clamp(2rem, 3.6vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    margin: 0 0 1.4rem;
+}
+
+.course-section h3 {
+    color: var(--forest);
+    margin: 0 0 0.6rem;
+}
+
+.course-section--alt h2,
+.course-section--alt h3 {
+    color: var(--forest);
+}
+
+.section-lead {
+    color: var(--text-muted);
+    max-width: 56rem;
+    margin: 0 0 2.6rem;
+}
+
+/* Breadcrumb */
+.course-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 2.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+}
+
+.course-breadcrumb a {
+    color: var(--forest);
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.course-breadcrumb a:hover {
+    color: var(--terracotta);
+    border-color: var(--terracotta);
+}
+
+.course-breadcrumb .crumb-sep {
+    color: rgba(36, 38, 34, 0.45);
+}
+
+.course-breadcrumb .crumb-current {
+    color: var(--text-muted);
+}
+
+/* Course overview: two-column copy + info panel */
+.course-overview-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+
+.course-overview-copy p {
+    margin-bottom: 1rem;
+    max-width: 40rem;
+}
+
+.course-overview-copy p:last-child {
+    margin-bottom: 0;
+}
+
+/* Info panel */
+.course-info-panel {
+    border: 1px solid var(--line-strong);
+    background: var(--offwhite);
+    padding: 1.8rem 1.9rem 1.4rem;
+    border-radius: 2px;
+}
+
+.course-info-list {
+    margin: 0;
+}
+
+.course-info-row {
+    padding: 1.05rem 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1rem;
+}
+
+.course-info-row:first-child {
+    padding-top: 0.2rem;
+}
+
+.course-info-row:last-child {
+    padding-bottom: 0.35rem;
+    border-bottom: none;
+}
+
+.course-info-row dt {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    padding-top: 0.2rem;
+}
+
+.course-info-row dd {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+/* Reasons (Why this course) */
+.reason-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.reason-block {
+    border-top: 2px solid var(--terracotta);
+    padding: 2rem 0.5rem 0.5rem 0;
+}
+
+.reason-num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+}
+
+.reason-block h3 {
+    font-size: 1.18rem;
+}
+
+.reason-block p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+/* Audience (Who it is for) */
+.audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.audience-card {
+    border: 1px solid var(--line);
+    background: var(--offwhite);
+    border-radius: 2px;
+    padding: 1.6rem 1.5rem;
+    transition: border-color 0.3s var(--ease-out);
+}
+
+.audience-card:hover {
+    border-color: var(--terracotta);
+}
+
+.audience-num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--terracotta);
+    margin-bottom: 0.8rem;
+}
+
+.audience-card h3 {
+    font-size: 1.02rem;
+}
+
+.audience-card p {
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Learning objectives */
+.objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem 1.5rem;
+}
+
+.objective-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.objective-num {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--terracotta);
+    padding-top: 0.15rem;
+    white-space: nowrap;
+}
+
+.objective-copy h3 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.objective-copy p {
+    color: var(--text-muted);
+    font-size: 0.93rem;
+    line-height: 1.62;
+    margin: 0;
+}
+
+/* Three themes (forest band) */
+.course-themes {
+    background: var(--forest);
+}
+
+.course-themes h2 {
+    color: var(--offwhite);
+}
+
+.course-themes .section-kicker {
+    color: var(--sand);
+    border-color: var(--terracotta);
+    background: none;
+    padding-left: 0;
+}
+
+.course-themes .section-lead {
+    color: rgba(248, 246, 241, 0.78);
+}
+
+.themes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.theme-block {
+    border-top: 1px solid rgba(248, 246, 241, 0.22);
+    padding-top: 1.6rem;
+}
+
+.theme-num {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.7rem;
+}
+
+.theme-block h3 {
+    color: var(--offwhite);
+    font-size: 1.3rem;
+}
+
+.theme-block p {
+    color: rgba(248, 246, 241, 0.78);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Course structure placeholder */
+.structure-panel {
+    border: 1px dashed var(--line-strong);
+    background: var(--offwhite);
+    border-radius: 2px;
+    padding: 2.2rem 2rem;
+    max-width: 44rem;
+}
+
+.structure-status {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--forest);
+    margin-bottom: 0.7rem;
+}
+
+.structure-panel p:last-child {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Delivery panels */
+.delivery-panels {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    max-width: 56rem;
+}
+
+.delivery-panel {
+    border-top: 2px solid var(--terracotta);
+    padding-top: 1.5rem;
+}
+
+.delivery-panel h3 {
+    font-size: 1.18rem;
+}
+
+.delivery-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-panel li {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-muted);
+    font-size: 0.97rem;
+    line-height: 1.65;
+}
+
+.delivery-panel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--terracotta);
+}
+
+/* Application + final CTA actions */
+.course-apply .hero-actions,
+.cta-section .final-cta-actions {
+    margin-top: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .course-section {
+        padding: 4rem 0 4.5rem;
+    }
+
+    .course-overview-grid {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+    }
+
+    .reason-grid,
+    .audience-grid,
+    .objectives-grid,
+    .themes-grid,
+    .delivery-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .objective-item {
+        padding: 1.1rem 0 0.4rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .course-section {
+        padding: 3.4rem 0 3.8rem;
+    }
+
+    .course-info-row {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }
+
+    .reason-block,
+    .theme-block {
+        padding-right: 0;
+    }
+
+    .course-breadcrumb {
+        margin-bottom: 1.8rem;
+    }
 }
