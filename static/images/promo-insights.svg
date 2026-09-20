@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" fill="none" role="img" aria-label="Page of insights with a bookmark">
+  <path d="M25 8h26v30l-7 7H25V8z" stroke="#173A35" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M44 9h-8v9l4-3 4 3V9z" fill="#B85C45"/>
+  <path d="M31 22h14" stroke="#B85C45" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M31 27h14" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M31 32h9" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" fill="none" role="img" aria-label="Branching futures paths">
+  <path d="M36 42V28" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M36 30C27 27 21 20 18 9" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M36 30c-4.5-1.5-8.5-6.5-9.5-15" stroke="#B85C45" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M36 30c8-4 13-10 17-20" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="18" cy="9" r="2.1" fill="#173A35"/>
+  <circle cx="26.5" cy="15" r="2.1" fill="#B85C45"/>
+  <circle cx="53" cy="10" r="2.1" fill="#173A35"/>
+</svg>

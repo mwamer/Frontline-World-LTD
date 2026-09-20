@@ -5192,3 +5192,92 @@ em {
         transform: translateX(320%) skewX(-18deg);
     }
 }
+
+/* ==========================================================================
+   Promotional margin rails
+   Editorial side features fixed to the outer margins on wide screens.
+   Hidden below 1440px so the content gutter stays clean.
+   ========================================================================== */
+
+.promo-rail {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 60;
+    display: none;
+    flex-direction: column;
+    gap: 1.15rem;
+    width: 96px;
+}
+
+@media (min-width: 1440px) {
+    .promo-rail {
+        display: flex;
+    }
+}
+
+.promo-rail--left {
+    left: 12px;
+}
+
+.promo-rail--right {
+    right: 12px;
+}
+
+.promo-card {
+    display: block;
+    background: var(--offwhite);
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--terracotta);
+    padding: 0.85rem 0.8rem 0.75rem;
+    text-align: left;
+    transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out),
+        transform 0.3s var(--ease-out);
+}
+
+.promo-card:hover,
+.promo-card:focus-visible {
+    border-color: var(--terracotta);
+    background: var(--sand);
+    transform: translateY(-2px);
+}
+
+.promo-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.65rem;
+}
+
+.promo-kicker {
+    display: block;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.3rem;
+}
+
+.promo-name {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    line-height: 1.32;
+    color: var(--forest);
+}
+
+.promo-go {
+    display: inline-block;
+    margin-top: 0.55rem;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    transition: letter-spacing 0.3s var(--ease-out);
+}
+
+.promo-card:hover .promo-go {
+    letter-spacing: 0.19em;
+}

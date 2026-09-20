@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" fill="none" role="img" aria-label="Signal wave crossing a threshold line">
+  <path d="M10 44c7-2 9-26 18-26s10 30 20 26 9-12 14-12" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M8 30h56" stroke="#B85C45" stroke-width="1.6" stroke-dasharray="3 3.5" stroke-linecap="round"/>
+  <circle cx="38" cy="30" r="2.8" fill="#B85C45"/>
+</svg>

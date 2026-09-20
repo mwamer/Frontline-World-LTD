@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 48" fill="none" role="img" aria-label="Open book with a rising arc">
+  <path d="M22 22c5-5 10-5 15 0s10 5 15 0" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="36" cy="12" r="2.2" fill="#B85C45"/>
+  <path d="M22 38c4-2.6 9-2.6 14 0" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M36 38V24" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M36 38c5-2.6 10-2.6 14 0" stroke="#173A35" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M18 42h36" stroke="#B85C45" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
