@@ -5144,3 +5144,51 @@ em {
         margin-bottom: 1.8rem;
     }
 }
+
+/* ==========================================================================
+   Enrolment CTA: premium shimmer sweep
+   Applies to Enrol Now and Register for a Course buttons. A soft band of
+   offwhite light sweeps diagonally across the brand-coloured button at a
+   slow tempo, then rests. The global prefers-reduced-motion guard stops it.
+   ========================================================================== */
+
+.cta-button--shimmer {
+    position: relative;
+    overflow: hidden;
+    /* Quiet top-edge highlight for a lifted, premium face */
+    box-shadow: inset 0 1px 0 rgba(248, 246, 241, 0.14);
+}
+
+.cta-button--shimmer:hover {
+    transform: translateY(-1px);
+}
+
+.cta-button--shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    z-index: 1;
+    pointer-events: none;
+    transform: translateX(-140%) skewX(-18deg);
+    background: linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(248, 246, 241, 0.3) 50%,
+        transparent 100%
+    );
+    animation: enrol-shimmer 4.6s var(--ease-out) infinite;
+}
+
+@keyframes enrol-shimmer {
+    0%,
+    62% {
+        transform: translateX(-140%) skewX(-18deg);
+    }
+    94%,
+    100% {
+        transform: translateX(320%) skewX(-18deg);
+    }
+}
