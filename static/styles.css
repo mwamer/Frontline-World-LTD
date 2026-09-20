@@ -4486,6 +4486,10 @@ em {
     color: var(--text-muted);
 }
 
+.courses-register {
+    margin-top: 2.6rem;
+}
+
 .course-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
