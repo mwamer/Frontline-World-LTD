@@ -5244,10 +5244,10 @@ em {
 
 .promo-art {
     display: block;
-    width: 200%;
-    max-width: 200%;
+    width: 270%;
+    max-width: 270%;
     height: auto;
-    margin-left: -50%;
+    margin-left: -85%;
     margin-bottom: 0.65rem;
 }
 
