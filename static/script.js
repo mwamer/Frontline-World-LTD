@@ -104,3 +104,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// ---- Homepage video frame ----
+function initIntroVideo() {
+    const media = document.querySelector('.intro-video__media');
+    if (!media) return;
+    const video = media.querySelector('video');
+    const playButton = media.querySelector('.intro-video__play');
+    if (!video || !playButton) return;
+
+    playButton.addEventListener('click', () => {
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+    });
+
+    // Hand the frame over to the native controls once the film is running
+    video.addEventListener('play', () => {
+        media.classList.add('is-playing');
+        playButton.setAttribute('aria-hidden', 'true');
+        playButton.tabIndex = -1;
+    });
+    video.addEventListener('ended', () => media.classList.remove('is-playing'));
+}
+
+initIntroVideo();
