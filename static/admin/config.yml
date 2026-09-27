@@ -33,6 +33,18 @@ collections:
     folder: content/insights
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    # Decap lists Hugo's _index.md as an entry called "Insight _index", so an
+    # editor can publish an article onto the section page instead of into a new
+    # file. Only entries with cms_visible: true are listed.
+    #
+    # The filter compares the raw frontmatter value, and a missing field is
+    # undefined, which is not true. So every article needs cms_visible: true
+    # written in it. The hidden default below covers entries Decap itself
+    # creates, but any file authored outside the CMS must set it by hand.
+    # Keep cms_visible: false in content/insights/_index.md.
+    filter:
+      field: cms_visible
+      value: true
     editor:
       # No preview template: the page is rendered by Hugo, not by the CMS.
       preview: false
@@ -92,3 +104,11 @@ collections:
         name: body
         widget: markdown
         required: false
+
+      # Decap has no built-in way to exclude a single file, so the collection
+      # filter above keeps the section page out of the entry list. Never show
+      # this to editors; every new article gets it automatically.
+      - label: Show in CMS
+        name: cms_visible
+        widget: hidden
+        default: true
