@@ -1,13 +1,14 @@
 # Decap CMS configuration for the Insights section.
 #
-# base_url and auth_endpoint point at the OAuth proxy. Replace
-# OAUTH_PROXY_HOST with the deployed Cloudflare Worker hostname before login
-# will work; everything else here is final.
+# base_url and auth_endpoint point at the OAuth proxy deployed from
+# oauth-proxy/. The GitHub OAuth App callback URL must match this hostname plus
+# /callback, and the Worker needs GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET
+# before login works.
 backend:
   name: github
   repo: mwamer/Frontline-World-LTD
   branch: main
-  base_url: https://OAUTH_PROXY_HOST
+  base_url: https://frontline-cms-oauth.wesaam-amer.workers.dev
   auth_endpoint: auth
 
 # Every edit becomes a draft pull request, so nothing reaches the live site
