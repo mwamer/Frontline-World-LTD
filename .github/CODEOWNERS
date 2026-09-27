@@ -1,0 +1,24 @@
+# Review responsibility for CMS-created pull requests.
+#
+# Decap CMS has no per-collection permissions: anyone who can sign in can open
+# any collection and draft changes to it. This file is what actually gates
+# publishing. With editorial_workflow on, every CMS edit opens a pull request,
+# GitHub requests the owner of each changed path as reviewer, and branch
+# protection on main requires that review before the pull request can merge.
+#
+# This is review responsibility, not access control. It stops a section going
+# live unreviewed; it does not stop someone drafting a change to it.
+
+# Insights articles and the insights listing. Add each editor as an owner of
+# the section they are responsible for, so their colleagues' pull requests
+# need their approval:
+#   content/insights/**  @mwamer @editor-username
+content/insights/**  @mwamer
+
+# The CMS panel itself. A change to the admin configuration or the OAuth proxy
+# should never land on an editor's commit without a deliberate review.
+static/admin/**  @mwamer
+oauth-proxy/**  @mwamer
+hugo.toml  @mwamer
+layouts/insights/**  @mwamer
+layouts/partials/**  @mwamer

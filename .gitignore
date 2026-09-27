@@ -14,3 +14,8 @@ Thumbs.db
 
 # Browser panel artifacts
 .openchamber/
+
+# OAuth proxy: wrangler state and local secrets must never be committed
+oauth-proxy/node_modules/
+oauth-proxy/.dev.vars
+oauth-proxy/.wrangler/

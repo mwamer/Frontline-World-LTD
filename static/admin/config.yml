@@ -1,0 +1,82 @@
+# Decap CMS configuration for the Insights section.
+#
+# base_url and auth_endpoint point at the OAuth proxy. Replace
+# OAUTH_PROXY_HOST with the deployed Cloudflare Worker hostname before login
+# will work; everything else here is final.
+backend:
+  name: github
+  repo: mwamer/Frontline-World-LTD
+  branch: main
+  base_url: https://OAUTH_PROXY_HOST
+  auth_endpoint: auth
+
+# Every edit becomes a draft pull request, so nothing reaches the live site
+# without a review and merge.
+publish_mode: editorial_workflow
+
+# Matches the site's existing image convention. The insight layouts strip any
+# directory prefix from the stored value, so an editor can pick a file from the
+# whole library and the published path stays correct.
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: insights
+    label: Insights
+    label_singular: Insight
+    folder: content/insights
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      # No preview template: the page is rendered by Hugo, not by the CMS.
+      preview: false
+    fields:
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+        picker_utc: false
+
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - News
+          - Commentary
+          - Research
+          - Events
+
+      - label: Summary
+        name: summary
+        widget: text
+        hint: One or two sentences. This becomes the page description, the listing card excerpt, and the standfirst on the article, so it appears in all three places.
+
+      - label: Featured image
+        name: image
+        widget: image
+        choose_url: false
+
+      - label: Image alt text
+        name: image_alt
+        widget: string
+        required: false
+        hint: Leave blank to use the article title as the alt text.
+
+      - label: Listing order
+        name: weight
+        widget: number
+        value_type: int
+        default: 10
+        min: 1
+        hint: "Lower numbers appear first on the Insights listing, so 1 pins an article to the top. Give every article its own number: 0 counts as unset and sinks to the bottom, and articles sharing a number fall back to alphabetical order by filename, which is not something an editor can predict."
+
+      - label: Body
+        name: body
+        widget: markdown
+        required: false
