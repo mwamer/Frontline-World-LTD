@@ -1,0 +1,7 @@
+name = "frontline-cms-oauth"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Decap reaches the proxy at https://<name>.<subdomain>.workers.dev, and that
+# hostname has to match the GitHub OAuth App's callback URL exactly.
+workers_dev = true
