@@ -4,7 +4,7 @@ date: 2026-09-27
 category: News
 summary: Artificial intelligence is reshaping how we work, learn, and connect,
   and with that speed come real questions about jobs, privacy, and trust.
-image: /images/686f6d22915f90001d54f803.jpg
+image: /images/images.jpeg
 weight: 1
 teaser: AI isn't just a tool anymore — it's becoming the backdrop of daily life.
 cms_visible: true
