@@ -1,8 +1,12 @@
 {{- /*
-  Decorative image frame. Call with:
-    {{ partial "image-frame.html" (dict "image" .Params.image "alt" .Title "ratio" "21:09" "variant" "wide") }}
+  Decorative image frame. Call from page scope, where the dot is the page:
+    {{ partial "image-frame.html" (dict "image" .Params.image "alt" (.Params.image_alt | default .Title) "ratio" "21:09" "variant" "wide") }}
+  Inside a with block the dot is the loop value, not the page, so bind the page
+  to a variable first and take the alt from that.
   path.Base normalises whatever the CMS writes — "/images/foo.png" or a bare
   filename — so the published path is always depth-correct.
+  Pass the page's own image_alt. The title is only the fallback, because on a
+  card it already sits in the adjacent link, so a title alt adds nothing.
 */ -}}
 <figure class="image-frame image-frame--{{ .variant }} image-frame--sand">
     <div class="image-frame__mat">

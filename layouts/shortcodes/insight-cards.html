@@ -8,7 +8,7 @@
 {{- range (partial "insights-latest.html" (dict "site" .Site "limit" 4)) }}
 {{- $article := .page }}
 <article class="insight-card">
-    {{ with $article.Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" $article.Title "ratio" "01:01" "variant" "square") }}{{ end }}
+    {{ with $article.Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" ($article.Params.image_alt | default $article.Title) "ratio" "01:01" "variant" "square") }}{{ end }}
     <p class="insight-date">{{ $article.Date.Format "January 2, 2006" }}</p>
     <h3><a href="{{ $article.RelPermalink }}">{{ $article.Title }}</a></h3>
     <p>{{ $article.Params.teaser | default $article.Params.summary }}</p>
