@@ -74,7 +74,13 @@ collections:
         value_type: int
         default: 10
         min: 1
-        hint: "Lower numbers appear first on the Insights listing, so 1 pins an article to the top. Give every article its own number: 0 counts as unset and sinks to the bottom, and articles sharing a number fall back to alphabetical order by filename, which is not something an editor can predict."
+        hint: "Lower numbers appear first on the Insights listing, so 1 pins an article to the top. This does not control the home page: the ticker and the Latest Insights cards there are ordered by date, with this number only breaking ties between articles published the same day."
+
+      - label: Home page teaser
+        name: teaser
+        widget: text
+        required: false
+        hint: Optional. A short line for the home page ticker and cards, for example "How AI is reshaping trust." Leave blank to reuse the summary.
 
       - label: Body
         name: body

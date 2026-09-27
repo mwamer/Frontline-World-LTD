@@ -3,6 +3,7 @@ title: "AI and the Future of Strategic Communication"
 date: 2026-09-06
 category: "Commentary"
 summary: "Artificial intelligence is transforming how information is produced, circulated, and contested, creating new challenges and opportunities for strategic communication."
+teaser: "How AI is reshaping information, trust and strategic communication."
 image: "ai-strategic-communication.png"
 weight: 1
 aliases: []

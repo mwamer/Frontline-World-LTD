@@ -1,0 +1,21 @@
+{{- /*
+  Returns the Insights articles for the home page, newest first, with the
+  editorial `weight` breaking same-day ties. The home page ticker and cards both
+  call this so the two can never drift apart in ordering.
+
+  Date has to dominate weight or a high weight would outrank a newer article and
+  keep new posts off the home page. Seconds are scaled by 1000 and the weight is
+  taken mod 1000, so one day of difference always outweighs any weight.
+*/ -}}
+{{- $limit := .limit -}}
+{{- $dated := slice -}}
+{{- range where .site.RegularPages "Section" "insights" -}}
+    {{- $dated = $dated | append (dict
+        "page" .
+        "sort" (sub (mul .Date.Unix 1000) (mod (.Params.weight | default 0) 1000))) -}}
+{{- end -}}
+{{- $ordered := sort $dated "sort" "desc" -}}
+{{- if $limit -}}
+    {{- $ordered = first $limit $ordered -}}
+{{- end -}}
+{{- return $ordered -}}

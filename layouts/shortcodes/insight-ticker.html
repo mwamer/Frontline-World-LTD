@@ -1,0 +1,28 @@
+{{- /*
+  Homepage news ticker. The track scrolls to translateX(-50%), so the item set
+  has to appear twice for the loop to close without a visible seam. The second
+  copy is aria-hidden and untabbable, because it is only a visual repeat.
+*/ -}}
+{{- $articles := partial "insights-latest.html" (dict "site" .Site "limit" 6) }}
+<div class="news-ticker-track">
+    {{- range $articles }}
+    {{- $article := .page }}
+    <a class="news-ticker-item" href="{{ $article.RelPermalink }}">
+        {{- with $article.Params.image }}
+        <img class="news-ticker-thumb" src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="" aria-hidden="true">
+        {{- end }}
+        <span>{{ $article.Title }}</span>
+        <span class="news-ticker-dot" aria-hidden="true"></span>
+    </a>
+    {{- end }}
+    {{- range $articles }}
+    {{- $article := .page }}
+    <a class="news-ticker-item" href="{{ $article.RelPermalink }}" aria-hidden="true" tabindex="-1">
+        {{- with $article.Params.image }}
+        <img class="news-ticker-thumb" src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="" aria-hidden="true">
+        {{- end }}
+        <span>{{ $article.Title }}</span>
+        <span class="news-ticker-dot" aria-hidden="true"></span>
+    </a>
+    {{- end }}
+</div>

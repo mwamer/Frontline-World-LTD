@@ -104,28 +104,7 @@ title: "Frontline World Ltd"
     <div class="container news-ticker-inner">
         <p class="news-ticker-label">Latest News, Stories &amp; Insights</p>
         <div class="news-ticker-viewport">
-            <div class="news-ticker-track">
-                <a class="news-ticker-item" href="insights/ai-and-the-future-of-strategic-communication/">
-                    <img class="news-ticker-thumb" src="images/ai-strategic-communication.png" alt="" aria-hidden="true">
-                    <span>AI and the Future of Strategic Communication</span>
-                    <span class="news-ticker-dot" aria-hidden="true"></span>
-                </a>
-                <a class="news-ticker-item" href="insights/welcome/">
-                    <img class="news-ticker-thumb" src="images/welcome-frontline-world.png" alt="" aria-hidden="true">
-                    <span>Welcome to Frontline World</span>
-                    <span class="news-ticker-dot" aria-hidden="true"></span>
-                </a>
-                <a class="news-ticker-item" href="insights/ai-and-the-future-of-strategic-communication/">
-                    <img class="news-ticker-thumb" src="images/ai-strategic-communication.png" alt="" aria-hidden="true">
-                    <span>AI and the Future of Strategic Communication</span>
-                    <span class="news-ticker-dot" aria-hidden="true"></span>
-                </a>
-                <a class="news-ticker-item" href="insights/welcome/">
-                    <img class="news-ticker-thumb" src="images/welcome-frontline-world.png" alt="" aria-hidden="true">
-                    <span>Welcome to Frontline World</span>
-                    <span class="news-ticker-dot" aria-hidden="true"></span>
-                </a>
-            </div>
+            {{< insight-ticker >}}
         </div>
         <a href="insights/" class="link-button">View All Insights &rarr;</a>
     </div>
@@ -380,50 +359,7 @@ title: "Frontline World Ltd"
             <h2 id="insights-home-heading">Latest Insights</h2>
         </div>
         <div class="insights-grid reveal">
-            <article class="insight-card">
-                
-
-
-
-
-<figure class="image-frame image-frame--square image-frame--sand">
-    <div class="image-frame__mat">
-        <div class="image-frame__plate">
-            <img src="images/ai-strategic-communication.png" alt="AI and the Future of Strategic Communication" loading="lazy">
-            <span class="image-frame__ratio-tag">01:01</span>
-        </div>
-        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
-    </div>
-</figure>
-                <p class="insight-date">September 6, 2026</p>
-                <h3><a href="insights/ai-and-the-future-of-strategic-communication/">AI and the Future of Strategic Communication</a></h3>
-                <p>How AI is reshaping information, trust and strategic communication.</p>
-            </article>
-            <article class="insight-card">
-                
-
-
-
-
-<figure class="image-frame image-frame--square image-frame--sand">
-    <div class="image-frame__mat">
-        <div class="image-frame__plate">
-            <img src="images/welcome-frontline-world.png" alt="Welcome to Frontline World" loading="lazy">
-            <span class="image-frame__ratio-tag">01:01</span>
-        </div>
-        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
-        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
-    </div>
-</figure>
-                <p class="insight-date">September 6, 2026</p>
-                <h3><a href="insights/welcome/">Welcome to Frontline World</a></h3>
-                <p>Understanding Complexity. Building Capability. Creating Change.</p>
-            </article>
+            {{< insight-cards >}}
         </div>
         <div class="section-actions">
             <a href="insights/" class="link-button">View Insights &rarr;</a>

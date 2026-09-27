@@ -1,0 +1,16 @@
+{{- /*
+  Homepage "Latest Insights" cards. Sourced from the CMS content, so a newly
+  published article appears here without anyone editing the home page.
+
+  The cap is 4 because the grid is four columns from 1024px up; a fifth card
+  would wrap to a row of its own and unbalance the section.
+*/ -}}
+{{- range (partial "insights-latest.html" (dict "site" .Site "limit" 4)) }}
+{{- $article := .page }}
+<article class="insight-card">
+    {{ with $article.Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" $article.Title "ratio" "01:01" "variant" "square") }}{{ end }}
+    <p class="insight-date">{{ $article.Date.Format "January 2, 2006" }}</p>
+    <h3><a href="{{ $article.RelPermalink }}">{{ $article.Title }}</a></h3>
+    <p>{{ $article.Params.teaser | default $article.Params.summary }}</p>
+</article>
+{{ end }}
