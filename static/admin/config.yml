@@ -32,7 +32,11 @@ collections:
     label_singular: Insight
     folder: content/insights
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    # Filenames are the title, so an article's URL is /insights/title/. The
+    # date already lives in the date field and drives the ordering, so putting
+    # it in the filename as well only lengthened URLs. Matches the existing
+    # articles, which all predate this rule.
+    slug: "{{slug}}"
     # Decap lists Hugo's _index.md as an entry called "Insight _index", so an
     # editor can publish an article onto the section page instead of into a new
     # file. Only entries with cms_visible: true are listed.
