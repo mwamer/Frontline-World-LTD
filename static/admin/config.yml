@@ -10,6 +10,11 @@ backend:
   branch: main
   base_url: https://frontline-cms-oauth.wesaam-amer.workers.dev
   auth_endpoint: auth
+  # Decap asks for `repo` unless told otherwise, which would grant the token
+  # control of every private repository on the account. This repository is
+  # public, so the narrower scope the proxy requests is enough. Keep this in
+  # step with SCOPES in oauth-proxy/worker.js.
+  auth_scope: public_repo
 
 # Every edit becomes a draft pull request, so nothing reaches the live site
 # without a review and merge.

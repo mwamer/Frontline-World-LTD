@@ -5,3 +5,9 @@ compatibility_date = "2026-01-01"
 # Decap reaches the proxy at https://<name>.<subdomain>.workers.dev, and that
 # hostname has to match the GitHub OAuth App's callback URL exactly.
 workers_dev = true
+
+[vars]
+# The popup can only postMessage to one exact origin, so this has to be the
+# origin of the page that opens it: the CMS, not the Worker. Change it if the
+# site ever moves to a new domain.
+CMS_ORIGIN = "https://frontlineworld.org"
