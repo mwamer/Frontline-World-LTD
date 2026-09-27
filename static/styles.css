@@ -55,6 +55,7 @@ body {
 
 img {
     max-width: 100%;
+    height: auto;
     display: block;
 }
 
@@ -2405,6 +2406,11 @@ em {
 
 .mission-visual {
     max-width: 34rem;
+}
+
+/* Photos sit flush in the column; the browser's default figure margins would indent them. */
+.mission-figure {
+    margin: 0;
 }
 
 .mission .lead-text {
