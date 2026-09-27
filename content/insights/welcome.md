@@ -1,11 +1,13 @@
 ---
-title: "Welcome to Frontline World"
+title: Welcome to Frontline World
 date: 2026-09-06
-category: "News"
-summary: "Understanding Complexity. Building Capability. Creating Change."
-image: "welcome-frontline-world.png"
-weight: 2
-aliases: ["/news/welcome/"]
+category: News
+summary: Understanding Complexity. Building Capability. Creating Change.
+image: welcome-frontline-world.png
+image_alt: Welcome
+weight: 1
+aliases:
+  - /news/welcome/
 ---
 Welcome to Frontline World.
 
