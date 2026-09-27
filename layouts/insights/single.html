@@ -1,0 +1,35 @@
+{{- /* A single insight article. Editors set only the frontmatter fields and the body. */ -}}
+{{- $summary := .Params.summary -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" .Title "description" $summary) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}<main id="main-content">
+<main class="single-insight-page">
+    <div class="container single-insight-container">
+        <a href="{{ "insights/" | relURL }}" class="insight-back-link">&larr; Back to Insights</a>
+        <span class="single-insight-category">{{ .Params.category }}</span>
+
+        <h1 class="single-insight-title">{{ .Title }}</h1>
+
+        <div class="single-insight-meta">
+            <span>{{ .Date.Format "January 2, 2006" }}</span>
+            <span aria-hidden="true">&middot;</span>
+            <span>{{ $summary }}</span>
+        </div>
+        {{ with .Params.image }}
+        <div class="single-insight-featured-image">
+            {{ partial "image-frame.html" (dict "image" . "alt" ($.Params.image_alt | default $.Title) "ratio" "21:09" "variant" "wide") }}
+        </div>
+        {{ end }}
+
+        <article class="single-insight-body">
+            {{ .Content }}
+        </article>
+    </div>
+</main>
+
+    </main>{{ partial "site-footer.html" . }}
+
+</body>
+</html>

@@ -31,8 +31,10 @@ title = "Frontline World Ltd"
 
 [security]
   # Pages live as complete .html files in content/ (they already contain
-  # their own markup), so allow HTML as a content format.
-  allowContent = ['^text/html$']
+  # their own markup), so allow HTML as a content format. The insights
+  # section is the exception: it uses a shared layout, so its articles and
+  # listing are .md files with a markdown body.
+  allowContent = ['^text/html$', '^text/markdown$']
 
 [menus]
   [[menus.main]]

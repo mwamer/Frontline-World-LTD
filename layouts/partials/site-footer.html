@@ -1,0 +1,83 @@
+{{- /* Footer and the two promotional rails, shared by insight pages. */ -}}
+<footer class="footer" data-footer>
+    <div class="container footer-top">
+        <div class="footer-brand">
+            <a href="{{ "" | relURL }}" class="footer-logo">
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                        <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                    </svg>
+                </span>
+                <span>Frontline World</span>
+            </a>
+            <p class="footer-tagline">Global strategic research, foresight, communication, and advisory. Connecting knowledge, expertise, and practice.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+            <p class="footer-heading">Explore</p>
+            <a href="{{ "" | relURL }}">Home</a>
+            <a href="{{ "about/" | relURL }}">About</a>
+            <a href="{{ "our-people/" | relURL }}">Our People</a>
+            <a href="{{ "services/" | relURL }}">Core Expertise &amp; Services</a>
+            <a href="{{ "sectors/" | relURL }}">Sectors</a>
+            <a href="{{ "insights/" | relURL }}">Insights</a>
+            <a href="{{ "contact/" | relURL }}">Contact</a>
+        </nav>
+        <div class="footer-contact">
+            <p class="footer-heading">Contact</p>
+            <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a>
+            <a href="tel:+447310498510">&#43;44 (0)7310 498510</a>
+        </div>
+        <div class="footer-social">
+            <p class="footer-heading">Follow</p><ul class="social-links" aria-label="Social media links">
+    <li>
+        <a aria-label="Frontline World on LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8.5h4.5V23h-4.5V8.5zM8.5 8.5h4.31v1.98h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V23h-4.5v-6.98c0-1.67-.03-3.81-2.32-3.81-2.33 0-2.69 1.82-2.69 3.7V23H8.5V8.5z"/></svg>
+        </a>
+    </li>
+    <li>
+        <a aria-label="Frontline World on X">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.5 22H1.4l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg>
+        </a>
+    </li>
+</ul></div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+        <p class="footer-note">Insight for better foresight.</p>
+    </div>
+</footer><script src="{{ "script.js" | relURL }}"></script>
+<aside class="promo-rail promo-rail--left" aria-label="Frontline World: training, research and advisory">
+    <a class="promo-card" href="{{ "training-academy/" | relURL }}">
+        <img class="promo-art" src="{{ "images/promo-training.svg" | relURL }}" alt="" width="72" height="48">
+        <span class="promo-kicker">Executive Education</span>
+        <span class="promo-name">Professional &amp; Executive Training</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="{{ "training-academy/courses/strategic-foresight-for-leaders/" | relURL }}">
+        <img class="promo-art" src="{{ "images/promo-foresight.svg" | relURL }}" alt="" width="72" height="48">
+        <span class="promo-kicker">Futures Thinking</span>
+        <span class="promo-name">Strategic Foresight</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="{{ "services/#strategic-research" | relURL }}">
+        <img class="promo-art" src="{{ "images/promo-research.svg" | relURL }}" alt="" width="72" height="48">
+        <span class="promo-kicker">Advisory</span>
+        <span class="promo-name">Strategic Research &amp; Advisory</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+</aside>
+<aside class="promo-rail promo-rail--right" aria-label="Frontline World: risk foresight and insights">
+    <a class="promo-card" href="{{ "services/#risk-foresight" | relURL }}">
+        <img class="promo-art" src="{{ "images/promo-risk.svg" | relURL }}" alt="" width="72" height="48">
+        <span class="promo-kicker">Risk Intelligence</span>
+        <span class="promo-name">Risk &amp; Foresight</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="{{ "insights/" | relURL }}">
+        <img class="promo-art" src="{{ "images/promo-insights.svg" | relURL }}" alt="" width="72" height="48">
+        <span class="promo-kicker">Read</span>
+        <span class="promo-name">Latest Insights</span>
+        <span class="promo-go">Browse &rarr;</span>
+    </a>
+</aside>

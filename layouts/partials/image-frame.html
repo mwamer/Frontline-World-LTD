@@ -1,0 +1,18 @@
+{{- /*
+  Decorative image frame. Call with:
+    {{ partial "image-frame.html" (dict "image" .Params.image "alt" .Title "ratio" "21:09" "variant" "wide") }}
+  path.Base normalises whatever the CMS writes — "/images/foo.png" or a bare
+  filename — so the published path is always depth-correct.
+*/ -}}
+<figure class="image-frame image-frame--{{ .variant }} image-frame--sand">
+    <div class="image-frame__mat">
+        <div class="image-frame__plate">
+            <img src="{{ printf "images/%s" (path.Base .image) | relURL }}" alt="{{ .alt }}" loading="lazy">
+            <span class="image-frame__ratio-tag">{{ .ratio }}</span>
+        </div>
+        <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+        <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+    </div>
+</figure>

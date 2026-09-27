@@ -1,1 +1,39 @@
-{{ .Content }}
+{{- /*
+  The insights listing. Cards are generated from each article's frontmatter,
+  so publishing a new article adds it here automatically.
+*/ -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" .Title "description" .Params.summary) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}<main id="main-content">
+<section class="public-insights-page">
+    <div class="container">
+        <header class="public-insights-header">
+            <p class="page-kicker">Frontline World Insights</p>
+            <h1>Insights</h1>
+            {{ .Content }}
+        </header>
+
+        <section class="public-insights-grid" aria-live="polite">
+            {{ range .Pages.ByWeight }}
+            {{ $card := . }}
+            <article class="public-insight-card">
+                {{ with .Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" $card.Title "ratio" "04:05" "variant" "portrait") }}{{ end }}
+                <div class="public-insight-card-content">
+                    <span class="public-insight-category">{{ .Params.category }}</span>
+                    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                    <p class="public-insight-date">{{ .Date.Format "January 2, 2006" }}</p>
+                    <p class="public-insight-excerpt">{{ .Params.summary }}</p>
+                    <a href="{{ .RelPermalink }}" class="public-insight-read-more">Read more &rarr;</a>
+                </div>
+            </article>
+            {{ end }}
+        </section>
+    </div>
+</section>
+
+    </main>{{ partial "site-footer.html" . }}
+
+</body>
+</html>
