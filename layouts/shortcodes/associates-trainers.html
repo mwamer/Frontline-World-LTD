@@ -23,7 +23,7 @@
     <div class="trainer-grid" aria-label="Associate trainers">
     {{- range $trainer := $unique }}
         <article class="trainer-card">
-            <figure class="image-frame image-frame--portrait image-frame--sand">
+            <figure class="image-frame image-frame--square image-frame--sand">
                 <div class="image-frame__mat">
                     <div class="image-frame__plate">
                         {{- with $trainer.photo }}
@@ -32,7 +32,7 @@
                         <span class="image-frame__monogram" aria-hidden="true">FW</span>
                         <span class="image-frame__grid" aria-hidden="true"></span>
                         {{- end }}
-                        <span class="image-frame__ratio-tag">04:05</span>
+                        <span class="image-frame__ratio-tag">01:01</span>
                     </div>
                     <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
                     <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>

@@ -975,6 +975,31 @@ em {
     margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
+/* Compact headshot cards on the Our People page: four per row on desktop,
+   two on tablet, one on mobile. Scoped here; the course-page trainer cards
+   keep their own full-width portrait frames. */
+.associates-trainers .trainer-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+}
+
+.associates-trainers .trainer-card .image-frame {
+    width: clamp(6rem, 42%, 9.5rem);
+    margin: 0 auto 0.9rem;
+}
+
+@media (max-width: 1024px) {
+    .associates-trainers .trainer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .associates-trainers .trainer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .associates-closing {
     text-align: center;
     max-width: 36rem;
