@@ -1,10 +1,10 @@
 {{- /*
   Primary navigation, shared by insight articles and the insights listing.
-  Class names and the id/aria-controls pair drive the mobile toggle and the
-  services dropdown, so they must stay exactly as they are in the hand-written
-  pages. Paths go through relURL without a leading slash so Hugo prefixes the
-  baseURL path; a leading slash would be treated as already root-relative and
-  would break the github.io subpath.
+  Class names and the id/aria-controls pair drive the mobile toggle, so they
+  must stay exactly as they are in the hand-written pages. Paths go through
+  relURL without a leading slash so Hugo prefixes the baseURL path; a leading
+  slash would be treated as already root-relative and would break the
+  github.io subpath.
 */ -}}
 <header class="site-header" data-header>
     <div class="container header-inner">
@@ -30,11 +30,8 @@
                 <li><a href="{{ "" | relURL }}"><span class="nav-link-label">Home</span></a></li>
                 <li><a href="{{ "about/" | relURL }}"><span class="nav-link-label">About</span></a></li>
                 <li><a href="{{ "our-people/" | relURL }}"><span class="nav-link-label">Our People</span></a></li>
-                <li class="nav-item-has-children">
+                <li>
                     <a href="{{ "services/" | relURL }}"><span class="nav-link-label">Core Expertise &amp; Services</span></a>
-                    <ul class="nav-dropdown">
-                        <li><a href="{{ "training-academy/" | relURL }}">Training Academy</a></li>
-                    </ul>
                 </li>
                 <li><a href="{{ "sectors/" | relURL }}"><span class="nav-link-label">Sectors</span></a></li>
                 <li><a href="{{ "insights/" | relURL }}"><span class="nav-link-label">Insights</span></a></li>
