@@ -23,7 +23,8 @@
     --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    --max-width: 1240px;
+    --max-width: 1200px;
+    --container-pad: clamp(1.25rem, 4vw, 2rem);
     --nav-h: 84px;
 
     --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -79,10 +80,13 @@ button {
     outline-offset: 3px;
 }
 
+/* The one content container. Every full-width block wraps its content in this,
+   including the heroes, which used to carry their own copy of these three
+   declarations and drifted whenever the width changed. */
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    padding: 0 var(--container-pad);
 }
 
 .visually-hidden {
@@ -514,12 +518,6 @@ em {
     width: 1px;
     height: 100%;
     background: var(--line);
-}
-
-.hero-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .hero-grid {
@@ -1893,12 +1891,6 @@ em {
     background: var(--line);
 }
 
-.services-hero-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
-}
-
 .services-hero-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -2124,12 +2116,6 @@ em {
     color: var(--offwhite);
     padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3.5rem, 7vw, 6rem);
     overflow: hidden;
-}
-
-.service-hero-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
 .service-hero-grid {
@@ -2526,10 +2512,6 @@ em {
     scroll-margin-top: calc(var(--nav-h) + 1rem);
 }
 
-.final-cta .container {
-    max-width: 48rem;
-}
-
 .final-cta h2 {
     font-family: var(--font-serif);
     font-size: clamp(2.4rem, 5vw, 3.8rem);
@@ -2574,10 +2556,6 @@ em {
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-}
-
-.mission .container {
-    max-width: var(--max-width);
 }
 
 .mission-grid {
@@ -4636,16 +4614,15 @@ em {
     text-align: center;
 }
 
-.academy-position .container {
-    max-width: 66rem;
-}
-
 .academy-quote {
     font-family: var(--font-serif);
     font-size: clamp(1.7rem, 3.4vw, 2.7rem);
     line-height: 1.35;
     letter-spacing: -0.01em;
     color: var(--forest);
+    /* The measure lives here rather than on a narrowed container, so the
+       section can share the site container without stretching the lines.
+       The section is centred, so the measure stays centred too. */
     margin: 0 auto;
     max-width: 62rem;
 }
@@ -4736,8 +4713,8 @@ em {
     /* The panels stay full-bleed, but their text lines up with every other
        block on the page. A flat vw padding left it 46px outside .container on
        a 1440px screen, so mirror the container's own inset instead. */
-    padding: clamp(3rem, 6vw, 5.5rem) max(clamp(1.25rem, 4vw, 2.5rem),
-            calc((100cqw - var(--max-width)) / 2 + clamp(1.25rem, 4vw, 2.5rem)));
+    padding: clamp(3rem, 6vw, 5.5rem) max(var(--container-pad),
+            calc((100cqw - var(--max-width)) / 2 + var(--container-pad)));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
