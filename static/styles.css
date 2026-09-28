@@ -976,27 +976,47 @@ em {
 }
 
 /* Compact headshot cards on the Our People page: four per row on desktop,
-   two on tablet, one on mobile. Scoped here; the course-page trainer cards
-   keep their own full-width portrait frames. */
+   two on tablet, one on mobile. Headshots are fixed and square at 72, 80 and
+   88 px per breakpoint so name, role, organisation and bio lead the card.
+   Scoped here; the course-page trainer cards keep their full-width frames. */
 .associates-trainers .trainer-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.75rem;
 }
 
 .associates-trainers .trainer-card .image-frame {
-    width: clamp(6rem, 42%, 9.5rem);
+    width: 72px;
+    height: 72px;
     margin: 0 auto 0.9rem;
+}
+
+/* Slim the archival mat so the photo stays a visible headshot inside the
+   fixed-size frame. */
+.associates-trainers .image-frame__mat {
+    padding: 0.5rem;
+}
+
+.associates-trainers .image-frame__monogram {
+    font-size: 1.1rem;
 }
 
 @media (max-width: 1024px) {
     .associates-trainers .trainer-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .associates-trainers .trainer-card .image-frame {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 @media (max-width: 640px) {
     .associates-trainers .trainer-grid {
         grid-template-columns: 1fr;
+    }
+    .associates-trainers .trainer-card .image-frame {
+        width: 88px;
+        height: 88px;
     }
 }
 
