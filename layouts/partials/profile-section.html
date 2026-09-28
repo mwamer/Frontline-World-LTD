@@ -1,0 +1,20 @@
+{{- /*
+  One titled, tagged list on an associate profile. The section is skipped
+  entirely when the person has nothing recorded under that heading, so a
+  profile never promises information that is not there.
+
+  Call with:
+    {{ partial "profile-section.html" (dict "id" "profile-expertise" "title" "Expertise" "vocab" "expertise" "ids" $person.expertise) }}
+*/ -}}
+{{- $id := .id -}}
+{{- $title := .title -}}
+{{- with partial "vocab-labels.html" (dict "vocab" .vocab "ids" (.ids | default slice)) }}
+<section class="profile-section" aria-labelledby="{{ $id }}">
+    <h2 class="profile-section-title" id="{{ $id }}">{{ $title }}</h2>
+    <ul class="profile-tags">
+        {{- range . }}
+        <li class="profile-tag">{{ .label }}</li>
+        {{- end }}
+    </ul>
+</section>
+{{- end }}

@@ -1,0 +1,22 @@
+{{- /*
+  The first biography paragraph of an associate, as a single line of text.
+
+  A course trainer card has room for one paragraph, while a profile page shows
+  the whole biography, so this is what a course uses. The paragraph may come
+  from a record written by hand (a plain list of strings) or from the CMS (a
+  list of objects), and both are read here so no caller has to know which.
+
+  Call with a person:
+    {{ partial "associate-bio.html" $person }}
+*/ -}}
+{{- $text := "" -}}
+{{- range (.bio | default slice) -}}
+    {{- if not $text -}}
+        {{- if reflect.IsMap . -}}
+            {{- $text = index . "paragraph" -}}
+        {{- else -}}
+            {{- $text = . -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $text -}}

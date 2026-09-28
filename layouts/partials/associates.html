@@ -1,0 +1,27 @@
+{{- /*
+  The public Associate Directory: one record per person, in page order.
+
+  Each person is one file in data/associates/, and that file is the master
+  record — the directory grid, the Expertise On Demand filters and the
+  /people/<id>/ profile all read it, so one edit reaches all three. `id` is
+  the file name, added here so callers can link to the profile.
+
+  Only records marked public are returned, so a person can be prepared before
+  they are announced. Someone marked leadership: true heads the Our People
+  leadership block instead of the grid; pass exclude_leadership to leave them
+  out of a listing.
+
+  Call with:
+    {{ partial "associates.html" (dict "page" .) }}
+    {{ partial "associates.html" (dict "page" . "exclude_leadership" true) }}
+*/ -}}
+{{- $exclude_leadership := .exclude_leadership | default false -}}
+{{- $directory := slice -}}
+{{- range $id, $person := hugo.Data.associates -}}
+    {{- if eq ($person.status | default "public") "public" -}}
+        {{- if not (and $exclude_leadership $person.leadership) -}}
+            {{- $directory = $directory | append (merge $person (dict "id" $id)) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return (sort $directory "weight" "name") -}}

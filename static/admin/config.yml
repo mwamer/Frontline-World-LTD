@@ -147,27 +147,325 @@ collections:
         name: trainers
         widget: list
         collapsed: false
-        summary: "{{fields.name}} — {{fields.title}}"
-        hint: Add one entry per trainer on this course. Leave a field blank until the details are confirmed.
+        summary: "{{fields.associate}} — {{fields.role}}"
+        hint: >-
+          One entry per trainer on this course. The person's details are not
+          written here: point at their record in Associates, and the page reads
+          the name, title, organisation, photo and biography from it.
         fields:
-          - label: Name
-            name: name
+          - label: Associate
+            name: associate
             widget: string
+            hint: >-
+              The associate ID, which is their file name in the Associates
+              collection — for example saeed-abuzour. It must match exactly.
+              Leave a field blank until the details are confirmed.
 
-          - label: Title / Role
+          - label: Role on this course
+            name: role
+            widget: string
+            required: false
+            hint: >-
+              Optional. The part they play on this course, for example Lead
+              trainer. This is course-specific and stays in this file, unlike
+              their general roles, which live in their own record.
+
+          - label: Title on this course
             name: title
             widget: string
+            required: false
+            hint: >-
+              Optional. Replaces their own title on this course only. Leave
+              blank to use the title in their associate record.
 
-          - label: Organisation
-            name: organisation
-            widget: string
+  # The people behind Expertise On Demand. One file per person in
+  # data/associates/; the file name is the associate ID, which becomes the
+  # profile URL (/people/<id>/) and the reference a course uses. Editing a
+  # record here updates the Our People page, the directory card, the filters and
+  # the profile page at once, so a person is never written twice.
+  - name: associates
+    label: Associates
+    label_singular: Associate
+    description: >-
+      People in the directory on the Our People page. One file per person. The
+      file name is the associate ID: it becomes the profile URL and the
+      reference a course uses, so do not rename a file.
+    folder: data/associates
+    create: true
+    extension: yml
+    format: yaml
+    # The ID is the file name, and a new person gets one from their name.
+    slug: "{{slug}}"
+    editor:
+      # No preview template: the page is rendered by Hugo, not by the CMS.
+      preview: false
+    view_filters:
+      - label: Leadership
+        field: leadership
+        pattern: true
+    fields:
+      - label: Full name
+        name: name
+        widget: string
 
-          - label: Short bio
-            name: bio
+      - label: Professional title
+        name: title
+        widget: string
+
+      - label: Organisation
+        name: organisation
+        widget: string
+        required: false
+
+      - label: Professional photo
+        name: photo
+        widget: image
+        choose_url: false
+        hint: >-
+          A headshot, square or 4:5. It is cropped to a square on the Our
+          People page and to 4:5 on the profile page.
+
+      - label: Photo alt text
+        name: photo_alt
+        widget: string
+        required: false
+        hint: Leave blank to use the person's name as the alt text.
+
+      - label: Summary
+        name: summary
+        widget: text
+        required: false
+        hint: >-
+          One or two sentences. This is the directory card text and the page
+          description on the profile, so it appears in both places.
+
+      - label: Biography
+        name: bio
+        widget: list
+        required: false
+        summary: "{{{fields.paragraph}}}"
+        fields:
+          - label: Paragraph
+            name: paragraph
             widget: text
 
-          - label: Professional photo
-            name: photo
-            widget: image
-            required: false
-            choose_url: false
+      # The five lists below store the ID of each term, never its wording. The
+      # options mirror data/vocab/associates.yml, which is where the wording
+      # lives: when a term is added or relabelled there, add or relabel it here
+      # too. A term nobody holds never reaches the published page.
+      - label: Expertise
+        name: expertise
+        widget: select
+        multiple: true
+        required: false
+        hint: What this person knows. The first entry is the card's headline expertise.
+        options:
+        - { label: "Strategic Foresight", value: "strategic-foresight" }
+        - { label: "Strategic Research", value: "strategic-research" }
+        - { label: "Strategic Communication", value: "strategic-communication" }
+        - { label: "Political Communication", value: "political-communication" }
+        - { label: "Digital Media", value: "digital-media" }
+        - { label: "AI & Emerging Technologies", value: "ai-emerging-tech" }
+        - { label: "Media & Journalism", value: "media-journalism" }
+        - { label: "Conflict & Security", value: "conflict-security" }
+        - { label: "Peace & Resilience", value: "peace-resilience" }
+        - { label: "Education & Training", value: "education-training" }
+        - { label: "Leadership", value: "leadership" }
+        - { label: "Organisational Resilience", value: "organisational-resilience" }
+        - { label: "Institutional Development", value: "institutional-development" }
+        - { label: "Research Methods", value: "research-methods" }
+        - { label: "Policy & Governance", value: "policy-governance" }
+        - { label: "Technology & Society", value: "technology-society" }
+        - { label: "Other expertise", value: "other" }
+
+      - label: Roles
+        name: roles
+        widget: select
+        multiple: true
+        required: false
+        hint: What they contribute generally, across assignments.
+        options:
+        - { label: "Founder & Director", value: "founder-director" }
+        - { label: "Programme Director", value: "programme-director" }
+        - { label: "Programme Lead", value: "programme-lead" }
+        - { label: "Course Director", value: "course-director" }
+        - { label: "Trainer / Facilitator", value: "trainer-facilitator" }
+        - { label: "Subject-Matter Expert", value: "subject-matter-expert" }
+        - { label: "Researcher", value: "researcher" }
+        - { label: "Consultant", value: "consultant" }
+        - { label: "Advisor", value: "advisor" }
+        - { label: "Speaker", value: "speaker" }
+        - { label: "Mentor", value: "mentor" }
+
+      - label: Areas of contribution
+        name: contributions
+        widget: select
+        multiple: true
+        required: false
+        hint: The kinds of work they are engaged for.
+        options:
+        - { label: "Professional Training", value: "professional-training" }
+        - { label: "Executive Education", value: "executive-education" }
+        - { label: "Research", value: "research" }
+        - { label: "Consultancy", value: "consultancy" }
+        - { label: "Strategic Advisory", value: "strategic-advisory" }
+
+      - label: Sectors
+        name: sectors
+        widget: select
+        multiple: true
+        required: false
+        hint: The sectors on the Sectors page they have worked in.
+        options:
+        - { label: "Education", value: "education" }
+        - { label: "Media & Communication", value: "media-communication" }
+        - { label: "Government & Governance", value: "government-governance" }
+        - { label: "Technology & Digital Transformation", value: "technology-digital-transformation" }
+        - { label: "Health & Wellbeing", value: "health-wellbeing" }
+        - { label: "Sustainability & Development", value: "sustainability-development" }
+        - { label: "Cultural Resilience", value: "cultural-resilience" }
+        - { label: "Conflict & Post-Conflict Recovery", value: "conflict-post-conflict-recovery" }
+
+      - label: Regions
+        name: regions
+        widget: select
+        multiple: true
+        required: false
+        hint: Where they have worked.
+        options:
+        - { label: "Palestine", value: "palestine" }
+        - { label: "United Kingdom", value: "united-kingdom" }
+        - { label: "Germany", value: "germany" }
+        - { label: "United States", value: "united-states" }
+
+      - label: Professional links
+        name: links
+        widget: list
+        required: false
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: URL
+            name: url
+            widget: string
+
+      - label: Status
+        name: status
+        widget: select
+        default: private
+        options:
+          - private
+          - public
+        hint: >-
+          A private record is kept off the site entirely: no directory card, no
+          filter, no profile page. Set it to public when the person is
+          announced.
+
+      - label: Leadership
+        name: leadership
+        widget: boolean
+        default: false
+        required: false
+        hint: >-
+          Tick for the person who leads Frontline World. They appear in the
+          leadership block on the Our People page instead of the directory
+          grid, so their details are not repeated twice.
+
+      - label: Listing order
+        name: weight
+        widget: number
+        value_type: int
+        default: 10
+        min: 1
+        hint: Lower numbers come first in the directory.
+
+  # The wording behind the terms the associate records refer to by ID. This is
+  # the only place a term is labelled, and the five lists inside it drive the
+  # directory filters, the profile tags and the field options above. The file
+  # exists as it is; only the labels are edited here.
+  - name: vocabulary
+    label: Vocabulary
+    label_singular: Vocabulary file
+    description: >-
+      The wording of every expertise, role, contribution, sector and region an
+      associate can be tagged with. One file, listed here so the terms can be
+      relabelled without editing YAML by hand.
+    folder: data/vocab
+    create: false
+    extension: yml
+    format: yaml
+    editor:
+      preview: false
+    fields:
+      - label: Expertise terms
+        name: expertise
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."
+
+      - label: Role terms
+        name: roles
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."
+
+      - label: Contribution terms
+        name: contributions
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."
+
+      - label: Sector terms
+        name: sectors
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."
+
+      - label: Region terms
+        name: regions
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."

@@ -1,0 +1,98 @@
+# Master record for Dr Wesam Amer. One file per person in data/associates/,
+# editable through the CMS (Admin page, Associates collection).
+#
+# The file name is the associate ID. It becomes the profile URL
+# (/people/wesam-amer/) and the value a course uses to reference the person, so
+# renaming the file breaks both. Change the record, not the name.
+#
+# Fields
+#   name          Full name as published
+#   title         Professional title
+#   organisation  Organisation or affiliation
+#   photo         File in static/images; the folder prefix is ignored, so the
+#                 CMS can store either "/images/x.jpg" or "x.jpg"
+#   photo_alt     Alt text for the photo
+#   summary       One or two sentences: the directory card, and the page
+#                 description on the profile
+#   bio           Biography, one list item per paragraph: the profile page
+#   expertise     IDs from the expertise list in data/vocab/associates.yml.
+#                 The first is shown as the card's primary expertise
+#   roles         IDs from the roles list — what the person contributes
+#                 generally, not what they are doing on one assignment
+#   contributions IDs from the areas of contribution list
+#   sectors       IDs from the sectors list
+#   regions       IDs from the regions list
+#   links         Professional links, each with a label and a url
+#   status        public, or private while the person is being prepared
+#   leadership    true puts the person in the Our People leadership block
+#                 instead of the directory grid
+#   weight        Order in the directory; lower comes first
+#
+# Every field in this file is published. Keep administrative notes out of it:
+# a private status keeps the whole record off the site, and nothing else does.
+name: Dr Wesam Amer
+title: Founder & Director
+organisation: Frontline World
+photo: /images/wesam-amer-header-2.jpg
+photo_alt: Dr Wesam Amer, Founder and Director of Frontline World
+summary: >-
+  Advises organisations where media, communication, technology, AI and
+  conflict meet, helping leaders make sense of complex and politically
+  sensitive environments.
+bio:
+  - >-
+    Dr Wesam Amer is the Founder and Director of Frontline World, providing
+    strategic leadership across research, advisory, training and
+    international partnerships.
+  - >-
+    He advises organisations at the intersection of media and communication,
+    technology, AI, conflict, and public discourse — helping leaders make
+    sense of complex and politically sensitive environments.
+  - >-
+    His international academic and professional experience spans Palestine,
+    the UK, Germany and the United States, with experience associated with
+    institutions including Cambridge, Newcastle, Harvard and Hamburg.
+  - >-
+    He previously served as Dean of the Faculty of Mass Communication and
+    Languages at Gaza University, where he contributed to institutional
+    development, course innovation, quality assurance, research strategy and
+    academic capacity building.
+  - >-
+    At Frontline World, he leads the company's strategic development,
+    oversees research and advisory projects, develops partnerships and
+    coordinates multidisciplinary teams around complex challenges.
+expertise:
+  - strategic-research
+  - media-journalism
+  - strategic-communication
+  - ai-emerging-tech
+  - political-communication
+  - conflict-security
+  - peace-resilience
+  - education-training
+  - institutional-development
+  - leadership
+roles:
+  - founder-director
+  - programme-director
+  - researcher
+  - advisor
+contributions:
+  - professional-training
+  - research
+  - consultancy
+  - strategic-advisory
+sectors:
+  - education
+  - media-communication
+regions:
+  - palestine
+  - united-kingdom
+  - germany
+  - united-states
+links:
+  - label: Personal Website
+    url: https://wesamamer.com
+status: public
+leadership: true
+weight: 1

@@ -1,0 +1,47 @@
+{{- /*
+  The Leadership block on the Our People page. Leadership is not a second
+  record: it is the person in data/associates/ whose record is marked
+  leadership: true, read from the same file as the directory below.
+*/ -}}
+{{- $leadership := where (partial "associates.html" (dict "page" .)) "leadership" true -}}
+{{- if gt (len $leadership) 0 }}
+{{- $person := index $leadership 0 }}
+<section class="leadership" id="leadership" aria-labelledby="leadership-heading">
+    <div class="container">
+        <header class="leadership-header reveal">
+            <p class="section-kicker">Leadership</p>
+            <h2 id="leadership-heading" class="leadership-title">{{ $person.name }}</h2>
+            <p class="leadership-role">{{ $person.title }}</p>
+        </header>
+
+        <div class="leadership-grid">
+            <div class="leadership-portrait reveal">
+                {{ with $person.photo }}
+                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "01:01" "variant" "square" "loading" "eager") }}
+                {{ end }}
+            </div>
+            <div class="leadership-bio reveal">
+                {{ range $person.bio }}
+                <p>{{ . }}</p>
+                {{ end }}
+
+                {{ with $person.expertise }}
+                <h3 class="leadership-expertise-title">Areas of Expertise</h3>
+                <ul class="leadership-expertise-grid">
+                    {{ range partial "vocab-labels.html" (dict "vocab" "expertise" "ids" .) }}
+                    <li class="leadership-expertise-item">{{ .label }}</li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+
+                <p class="leadership-links">
+                    <a class="link-button leadership-link" href="{{ printf "people/%s/" $person.id | relURL }}">View Full Profile &rarr;</a>
+                    {{ range $person.links }}
+                    <a class="link-button leadership-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">View {{ $person.name }}&rsquo;s {{ .label }} &rarr;</a>
+                    {{ end }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{{- end }}

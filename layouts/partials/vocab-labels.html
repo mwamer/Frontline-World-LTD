@@ -1,0 +1,23 @@
+{{- /*
+  Turn a list of vocabulary ids into the list of labels to publish, so no
+  template has to know a term's wording. The ids come from an associate
+  record; the labels come from the matching list in
+  data/vocab/associates.yml.
+
+  Returns a slice of {id, label}, in the order the record lists them, with
+  unknown ids dropped. Dropping rather than printing the raw id keeps a
+  misspelt id from reaching the page; the tag then simply does not appear, and
+  the record is the thing to fix.
+
+  Call with:
+    {{ partial "vocab-labels.html" (dict "vocab" "expertise" "ids" $person.expertise) }}
+*/ -}}
+{{- $terms := index hugo.Data.vocab.associates .vocab | default slice -}}
+{{- $labels := slice -}}
+{{- range .ids -}}
+    {{- $match := where $terms "id" . -}}
+    {{- if gt (len $match) 0 -}}
+        {{- $labels = $labels | append (index $match 0) -}}
+    {{- end -}}
+{{- end -}}
+{{- return $labels -}}

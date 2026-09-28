@@ -1,0 +1,74 @@
+{{- /*
+  The Associate Directory: the people behind "Expertise On Demand" on the Our
+  People page. One card per public record in data/associates/, ordered by
+  weight. Nobody is written into this file, so adding a record adds a card, a
+  set of filter options and a profile page at the same time.
+
+  Each filter is a list of the vocabulary terms the published people actually
+  use, so a category nobody holds never appears. The controls ship hidden and
+  script.js reveals them, which keeps the plain grid working without
+  JavaScript, and the whole control set waits until there is more than one
+  person to narrow down.
+*/ -}}
+{{- $people := partial "associates.html" (dict "page" . "exclude_leadership" true) -}}
+{{- $filterable := gt (len $people) 1 -}}
+{{- $groups := slice
+    (dict "key" "expertise" "title" "Expertise")
+    (dict "key" "roles" "title" "Role")
+    (dict "key" "sectors" "title" "Sector")
+    (dict "key" "regions" "title" "Region") -}}
+{{- if $people }}
+<div class="associate-directory" id="associate-directory">
+    {{- if $filterable }}
+    <div class="associate-filters" id="associate-filters" hidden>
+        <div class="associate-search">
+            <label class="associate-search__label" for="associate-search">Search</label>
+            <input class="associate-search__input" id="associate-search" type="search" placeholder="Name, title or organisation" autocomplete="off">
+        </div>
+        {{- range $group := $groups }}
+        {{- $terms := slice }}
+        {{- $seen := dict }}
+        {{- range $person := $people }}
+        {{- range $term := partial "vocab-labels.html" (dict "vocab" $group.key "ids" (index $person $group.key | default slice)) }}
+        {{- $key := printf "%s:%s" $group.key $term.id }}
+        {{- if not (isset $seen $key) }}
+        {{- $seen = merge $seen (dict $key true) }}
+        {{- $terms = $terms | append $term }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- with sort $terms "label" }}
+        <div class="associate-filter">
+            <h3 class="associate-filter-title">{{ $group.title }}</h3>
+            <ul class="associate-filter-options">
+                {{- range . }}
+                <li><button type="button" class="associate-chip" data-filter-group="{{ $group.key }}" data-filter-value="{{ .id }}" aria-pressed="false">{{ .label }}</button></li>
+                {{- end }}
+            </ul>
+        </div>
+        {{- end }}
+        {{- end }}
+    </div>
+    {{- end }}
+
+    {{- /*
+      A directory of one or two people would leave three empty columns, so the
+      grid takes only as many columns as it has cards. Four is the ceiling and
+      the tablet and mobile rules narrow it further.
+    */}}
+    {{- $columns := len $people -}}
+    {{- if gt $columns 4 }}{{ $columns = 4 }}{{ end }}
+    <ul class="associate-grid associate-grid--{{ $columns }} reveal" id="associate-grid">
+        {{- range $people }}
+        {{ partial "associate-card.html" (dict "person" .) }}
+        {{- end }}
+    </ul>
+
+    {{- if $filterable }}
+    <p class="associate-status" id="associate-status" role="status" aria-live="polite" hidden></p>
+    <p class="associate-empty" id="associate-empty" hidden>No associates match that search yet.</p>
+    {{- end }}
+</div>
+{{- else }}
+<p class="associate-empty">New associates are added here as they are approved. Please check back soon.</p>
+{{- end }}

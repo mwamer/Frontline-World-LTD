@@ -1,0 +1,120 @@
+# Controlled vocabulary for the Associate Directory. An associate record
+# stores only the `id` of a term, never its wording, so relabelling a category
+# or adding a new one happens here and reaches the whole site at once.
+#
+# This file is the only place a term's label is written. Add an entry to the
+# right list, give it a new id, and it can be used by any associate.
+#
+# The ids must stay stable: a course and a published profile page both refer to
+# people by id, and a term is referred to by id inside a person record.
+
+# Expertise: what a person knows. `other` is the escape hatch for expertise
+# that does not fit the list; the label is what visitors see, so keep it in
+# the same register as the rest.
+expertise:
+  - id: strategic-foresight
+    label: Strategic Foresight
+  - id: strategic-research
+    label: Strategic Research
+  - id: strategic-communication
+    label: Strategic Communication
+  - id: political-communication
+    label: Political Communication
+  - id: digital-media
+    label: Digital Media
+  - id: ai-emerging-tech
+    label: AI & Emerging Technologies
+  - id: media-journalism
+    label: Media & Journalism
+  - id: conflict-security
+    label: Conflict & Security
+  - id: peace-resilience
+    label: Peace & Resilience
+  - id: education-training
+    label: Education & Training
+  - id: leadership
+    label: Leadership
+  - id: organisational-resilience
+    label: Organisational Resilience
+  - id: institutional-development
+    label: Institutional Development
+  - id: research-methods
+    label: Research Methods
+  - id: policy-governance
+    label: Policy & Governance
+  - id: technology-society
+    label: Technology & Society
+  - id: other
+    label: Other expertise
+
+# Roles: what a person contributes generally, across assignments. This is not
+# the role they hold on a particular course or project, which belongs in that
+# course's own data.
+roles:
+  - id: founder-director
+    label: Founder & Director
+  - id: programme-director
+    label: Programme Director
+  - id: programme-lead
+    label: Programme Lead
+  - id: course-director
+    label: Course Director
+  - id: trainer-facilitator
+    label: Trainer / Facilitator
+  - id: subject-matter-expert
+    label: Subject-Matter Expert
+  - id: researcher
+    label: Researcher
+  - id: consultant
+    label: Consultant
+  - id: advisor
+    label: Advisor
+  - id: speaker
+    label: Speaker
+  - id: mentor
+    label: Mentor
+
+# Areas of contribution: the kinds of work a person is engaged for.
+contributions:
+  - id: professional-training
+    label: Professional Training
+  - id: executive-education
+    label: Executive Education
+  - id: research
+    label: Research
+  - id: consultancy
+    label: Consultancy
+  - id: strategic-advisory
+    label: Strategic Advisory
+
+# Sectors: the fields a person has worked in. Seeded from the sector names on
+# the Sectors page, so the two stay recognisably the same list.
+sectors:
+  - id: education
+    label: Education
+  - id: media-communication
+    label: Media & Communication
+  - id: government-governance
+    label: Government & Governance
+  - id: technology-digital-transformation
+    label: Technology & Digital Transformation
+  - id: health-wellbeing
+    label: Health & Wellbeing
+  - id: sustainability-development
+    label: Sustainability & Development
+  - id: cultural-resilience
+    label: Cultural Resilience
+  - id: conflict-post-conflict-recovery
+    label: Conflict & Post-Conflict Recovery
+
+# Regions: where a person has worked. Add a region when a record needs one;
+# nothing is published until a person refers to it.
+regions:
+  - id: palestine
+    label: Palestine
+  - id: united-kingdom
+    label: United Kingdom
+  - id: germany
+    label: Germany
+  - id: united-states
+    label: United States

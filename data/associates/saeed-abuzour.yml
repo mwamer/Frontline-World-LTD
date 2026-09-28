@@ -1,0 +1,36 @@
+# Master record for Dr. Saeed Abu Zour. One file per person in
+# data/associates/, editable through the CMS. See data/associates/wesam-amer.yml
+# for what each field does; the file name is the associate ID.
+#
+# The biography is the one already published on the AI in Teaching course, and
+# the photo is the one uploaded for that course, so the person is not recorded
+# twice.
+name: Dr. Saeed Abu Zour
+title: Senior Lecturer in Mathematics
+organisation: Manchester Metropolitan University
+photo: /images/saeed-abuzour.jpg
+photo_alt: Dr. Saeed Abu Zour
+summary: >-
+  Senior Lecturer in Mathematics at Manchester Metropolitan University, within
+  the School of Computing and Mathematics, working across mathematics
+  education and computing.
+bio:
+  - >-
+    Dr Saeed Abu-Zour is a Senior Lecturer in Mathematics at Manchester
+    Metropolitan University, within the School of Computing and Mathematics.
+    His academic work and teaching contribute to mathematics education and
+    the broader field of computing and mathematical sciences.
+expertise:
+  - ai-emerging-tech
+  - education-training
+roles:
+  - subject-matter-expert
+  - trainer-facilitator
+contributions:
+  - professional-training
+sectors:
+  - education
+regions:
+  - united-kingdom
+status: public
+weight: 10

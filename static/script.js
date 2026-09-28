@@ -128,3 +128,67 @@ function initIntroVideo() {
 }
 
 initIntroVideo();
+
+// ---- Associate directory (Our People) ----
+// Progressive enhancement: the filter set is generated but ships hidden, so the
+// grid works without this script. A card carries the vocabulary ids of its
+// expertise, roles, sectors and regions as data attributes, and the search
+// haystack the directory built for it. Chips inside one group are alternatives;
+// the groups narrow between themselves.
+function initAssociateDirectory() {
+    const root = document.querySelector('.associate-directory');
+    if (!root) return;
+
+    const cards = Array.from(root.querySelectorAll('.associate-card'));
+    const filters = root.querySelector('.associate-filters');
+    if (!cards.length) return;
+    if (filters) filters.hidden = false;
+
+    const chips = Array.from(root.querySelectorAll('.associate-chip'));
+    const search = root.querySelector('.associate-search__input');
+    const status = root.querySelector('.associate-status');
+    const empty = root.querySelector('.associate-empty');
+    const active = new Map();
+
+    const hasId = (card, group, id) => (card.dataset[group] || '').split(' ').includes(id);
+
+    function apply() {
+        const term = (search ? search.value : '').trim().toLowerCase();
+        let shown = 0;
+
+        cards.forEach(card => {
+            const matchesGroups = Array.from(active).every(([group, ids]) =>
+                Array.from(ids).some(id => hasId(card, group, id)));
+            const matchesSearch = !term || (card.dataset.search || '').indexOf(term) !== -1;
+            card.hidden = !(matchesGroups && matchesSearch);
+            if (!card.hidden) shown += 1;
+        });
+
+        if (empty) empty.hidden = shown !== 0;
+        if (status) {
+            const filtering = active.size > 0 || term !== '';
+            status.hidden = !filtering;
+            status.textContent = 'Showing ' + shown + ' of ' + cards.length +
+                (cards.length === 1 ? ' associate' : ' associates');
+        }
+    }
+
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const group = chip.dataset.filterGroup;
+            const id = chip.dataset.filterValue;
+            const ids = active.get(group) || new Set();
+            const pressed = ids.has(id);
+
+            if (pressed) ids.delete(id); else ids.add(id);
+            if (ids.size) active.set(group, ids); else active.delete(group);
+            chip.setAttribute('aria-pressed', String(!pressed));
+            apply();
+        });
+    });
+
+    if (search) search.addEventListener('input', apply);
+    apply();
+}
+
+initAssociateDirectory();

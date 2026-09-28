@@ -1,0 +1,13 @@
+{{- /*
+  The vocabulary ids of one associate field, as a space-separated string, ready
+  to drop into a data- attribute. The filters on the Our People page match a
+  card on exactly these ids.
+
+  Call with:
+    {{ partial "vocab-ids.html" (dict "vocab" "roles" "ids" $person.roles) }}
+*/ -}}
+{{- $ids := slice -}}
+{{- range partial "vocab-labels.html" (dict "vocab" .vocab "ids" (.ids | default slice)) -}}
+    {{- $ids = $ids | append .id -}}
+{{- end -}}
+{{- return (delimit $ids " ") -}}

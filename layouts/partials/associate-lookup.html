@@ -1,0 +1,20 @@
+{{- /*
+  Look up one person by associate ID, for the places that are given an id
+  rather than the whole directory: a course's trainer list, for example.
+
+  Returns the record from data/associates/ when it exists and is public, and
+  an empty dict otherwise, so a caller can fall back without a nil check.
+
+  Call with:
+    {{ partial "associate-lookup.html" (dict "id" $entry.associate) }}
+*/ -}}
+{{- $person := dict -}}
+{{- with .id -}}
+    {{- $id := . -}}
+    {{- with index hugo.Data.associates $id -}}
+        {{- if eq (.status | default "public") "public" -}}
+            {{- $person = merge (dict "id" $id) . -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $person -}}

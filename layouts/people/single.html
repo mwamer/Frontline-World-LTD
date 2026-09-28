@@ -1,0 +1,73 @@
+{{- /*
+  One associate profile, at /people/<id>/.
+
+  The page is generated from the person's record in data/associates/ by
+  content/people/_content.gotmpl, and every field printed here is read from
+  that record. Nothing about a person is written a second time, and nothing
+  administrative reaches the page: a private record is never generated at all.
+
+  Only public records get here, and a section with no content is left out
+  rather than filled with an empty heading.
+*/ -}}
+{{- $person := .Params -}}
+{{- $description := $person.summary | default (printf "%s, %s at %s" $person.name $person.title $person.organisation) -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" .Title "description" $description) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}<main id="main-content">
+
+<article class="profile">
+    <div class="container profile-container">
+        <a class="profile-back-link" href="{{ "our-people/" | relURL }}">&larr; Back to Our People</a>
+
+        <header class="profile-header">
+            <div class="profile-intro">
+                <p class="section-kicker">Our People</p>
+                <h1 class="profile-name">{{ $person.name }}</h1>
+                <p class="profile-role">{{ $person.title }}</p>
+                {{ with $person.organisation }}
+                <p class="profile-organisation">{{ . }}</p>
+                {{ end }}
+            </div>
+            {{ with $person.photo }}
+            <div class="profile-portrait">
+                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "04:05" "variant" "portrait" "loading" "eager") }}
+            </div>
+            {{ end }}
+        </header>
+
+        <div class="profile-body">
+            {{ with $person.bio }}
+            <section class="profile-section" aria-labelledby="profile-about">
+                <h2 class="profile-section-title" id="profile-about">About</h2>
+                {{ range . }}
+                <p>{{ . }}</p>
+                {{ end }}
+            </section>
+            {{ end }}
+
+            {{ partial "profile-section.html" (dict "id" "profile-expertise" "title" "Expertise" "vocab" "expertise" "ids" $person.expertise) }}
+            {{ partial "profile-section.html" (dict "id" "profile-roles" "title" "Roles" "vocab" "roles" "ids" $person.roles) }}
+            {{ partial "profile-section.html" (dict "id" "profile-contributions" "title" "Areas of Contribution" "vocab" "contributions" "ids" $person.contributions) }}
+            {{ partial "profile-section.html" (dict "id" "profile-sectors" "title" "Sector Expertise" "vocab" "sectors" "ids" $person.sectors) }}
+            {{ partial "profile-section.html" (dict "id" "profile-regions" "title" "Regional Expertise" "vocab" "regions" "ids" $person.regions) }}
+
+            {{ with $person.links }}
+            <section class="profile-section" aria-labelledby="profile-links">
+                <h2 class="profile-section-title" id="profile-links">Professional Links</h2>
+                <p class="profile-links">
+                    {{- range . }}
+                    <a class="link-button" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }} &rarr;</a>
+                    {{- end }}
+                </p>
+            </section>
+            {{ end }}
+        </div>
+    </div>
+</article>
+
+    </main>{{ partial "site-footer.html" . }}
+
+</body>
+</html>

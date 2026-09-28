@@ -1,0 +1,32 @@
+{{- /*
+  Generates one profile page per public associate, at /people/<id>/, from the
+  records in data/associates/.
+
+  A person therefore becomes a profile as soon as their record is written:
+  there is no second file to add and no page to keep in step. The page itself
+  is rendered by layouts/people/single.html.
+
+  Private records are skipped, so someone can be prepared before they are
+  announced. Every other field in a record is published, which is why the
+  record holds no administrative notes.
+
+  The biography is normalised to a list of paragraphs here, so the page layout
+  does not have to care whether the record was written by hand (a plain list of
+  strings) or by the CMS (a list of objects, one per paragraph).
+*/ -}}
+{{- range $id, $person := hugo.Data.associates -}}
+    {{- if eq ($person.status | default "public") "public" -}}
+        {{- $bio := slice -}}
+        {{- range ($person.bio | default slice) -}}
+            {{- $paragraph := . -}}
+            {{- if reflect.IsMap . -}}{{- $paragraph = index . "paragraph" -}}{{- end -}}
+            {{- $bio = $bio | append $paragraph -}}
+        {{- end -}}
+        {{- $.AddPage (dict
+            "path" $id
+            "title" $person.name
+            "kind" "page"
+            "params" (merge $person (dict "id" $id "bio" $bio))
+            "content" (dict "mediaType" "text/markdown" "value" "")) -}}
+    {{- end -}}
+{{- end -}}

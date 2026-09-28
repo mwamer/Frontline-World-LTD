@@ -7,11 +7,13 @@
   filename — so the published path is always depth-correct.
   Pass the page's own image_alt. The title is only the fallback, because on a
   card it already sits in the adjacent link, so a title alt adds nothing.
+  Cards below the fold can leave loading alone. A portrait near the top of the
+  page, such as an associate profile or the founder, passes loading: "eager".
 */ -}}
 <figure class="image-frame image-frame--{{ .variant }} image-frame--sand">
     <div class="image-frame__mat">
         <div class="image-frame__plate">
-            <img src="{{ printf "images/%s" (path.Base .image) | relURL }}" alt="{{ .alt }}" loading="lazy">
+            <img src="{{ printf "images/%s" (path.Base .image) | relURL }}" alt="{{ .alt }}" loading="{{ .loading | default "lazy" }}">
             <span class="image-frame__ratio-tag">{{ .ratio }}</span>
         </div>
         <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>

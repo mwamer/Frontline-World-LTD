@@ -1,0 +1,34 @@
+{{- /*
+  One person in the Associate Directory, as a list item in the grid.
+
+  Everything shown here comes from the person's record in data/associates/:
+  nothing is repeated from another page. The data- attributes carry the
+  structured fields as vocabulary ids, which is what the filters match on, and
+  the lowercase haystack in data-search is what the search box matches on.
+
+  Call with:
+    {{ partial "associate-card.html" (dict "person" $person) }}
+*/ -}}
+{{- $person := .person -}}
+{{- $expertise := partial "vocab-labels.html" (dict "vocab" "expertise" "ids" ($person.expertise | default slice)) -}}
+{{- $profile := printf "people/%s/" $person.id | relURL -}}
+{{- $searchable := slice $person.name $person.title $person.organisation -}}
+{{- range $expertise }}{{ $searchable = $searchable | append .label }}{{ end }}
+<li class="associate-card"
+    data-expertise="{{ partial "vocab-ids.html" (dict "vocab" "expertise" "ids" $person.expertise) }}"
+    data-roles="{{ partial "vocab-ids.html" (dict "vocab" "roles" "ids" $person.roles) }}"
+    data-sectors="{{ partial "vocab-ids.html" (dict "vocab" "sectors" "ids" $person.sectors) }}"
+    data-regions="{{ partial "vocab-ids.html" (dict "vocab" "regions" "ids" $person.regions) }}"
+    data-search="{{ lower (delimit $searchable " ") }}">
+    {{ with $person.photo }}
+    {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "01:01" "variant" "square") }}
+    {{ end }}
+    <h3 class="associate-card__name"><a href="{{ $profile }}">{{ $person.name }}</a></h3>
+    <p class="associate-card__title">{{ $person.title }}</p>
+    <p class="associate-card__organisation">{{ $person.organisation }}</p>
+    {{ if gt (len $expertise) 0 }}
+    <p class="associate-card__expertise">{{ (index $expertise 0).label }}</p>
+    {{ end }}
+    <p class="associate-card__summary">{{ $person.summary }}</p>
+    <a class="link-button associate-card__link" href="{{ $profile }}">View Profile &rarr;</a>
+</li>
