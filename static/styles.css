@@ -5374,10 +5374,8 @@ em {
 
 .promo-art {
     display: block;
-    width: 270%;
-    max-width: 270%;
+    width: 100%;
     height: auto;
-    margin-left: -85%;
     margin-bottom: 0.65rem;
 }
 
