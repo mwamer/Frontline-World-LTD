@@ -3635,6 +3635,83 @@ em {
     color: var(--terracotta);
 }
 
+/* Trainer profile cards on course pages. The names, roles, bios and photos
+   come from data/trainers/*.yml, edited through the CMS; this only shapes the
+   cards around whatever the admin supplies. */
+.trainer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.75rem;
+    margin: 0 0 1.25rem;
+}
+
+.trainer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.1rem, 2vw, 1.5rem);
+    background: var(--offwhite);
+    border: 1px solid var(--line);
+}
+
+.trainer-card .image-frame {
+    width: 100%;
+    margin: 0 0 1.1rem;
+}
+
+.trainer-name {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--forest);
+    margin: 0 0 0.2rem;
+}
+
+.trainer-title,
+.trainer-organisation {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.trainer-title {
+    margin: 0 0 0.15rem;
+}
+
+.trainer-organisation {
+    margin: 0 0 0.9rem;
+}
+
+.trainer-bio {
+    color: var(--text);
+    font-size: 0.97rem;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.trainer-placeholder {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.course-trainers-meet {
+    margin: 1.5rem 0 0;
+    font-size: 0.98rem;
+}
+
+.course-trainers-meet a {
+    color: var(--forest);
+    border-bottom: 1px solid var(--terracotta);
+    padding-bottom: 2px;
+    transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.course-trainers-meet a:hover {
+    color: var(--terracotta);
+    border-color: transparent;
+}
+
 .why-matters {
     margin: 2.5rem 0 3.5rem;
 }

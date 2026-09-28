@@ -132,6 +132,18 @@ The listing, the home cards, and the ticker all read the article frontmatter, so
 3. Edit the copy, including the title, audience, and format facts.
 4. Add the course to the list in `content/training-academy.html`.
 
+### Add or edit course trainers
+
+Every course supports multiple trainers, displayed between "What the course covers" and the "Audience" section. Each trainer has a name, a title or role, an organisation, a short bio, and an optional photo.
+
+Trainer profiles live in one file per course at `data/trainers/<url-slug>.yml`. The file name must match the course's URL slug exactly. An empty file with `trainers: []` renders the "profiles will be announced soon" placeholder.
+
+Admin-editable through the CMS: the Admin page "Courses" collection edits these files. Each trainer is a list item with fields for name, title, organisation, bio, and photo. Photos upload to `static/images/`; the course pages themselves are not CMS-editable.
+
+The "Meet Our People" link below the trainers points at the existing Our People page.
+
+> **CMS testing status:** the CMS UI, its OAuth proxy, and the GitHub backend have not yet been fully tested locally. Verify trainer editing in the live/admin environment before relying on it.
+
 ### Add a page
 
 1. Create `content/<name>.html`. Copy a similar page as a starting point so the head, navigation, and footer stay consistent.

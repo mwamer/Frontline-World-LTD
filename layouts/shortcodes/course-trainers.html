@@ -1,0 +1,50 @@
+{{- /*
+    Trainer profiles for one course. Reads data/trainers/<course-slug>.yml,
+    which the admin edits through the CMS. Card styling lives in styles.css;
+    this only shapes the data into the profile cards.
+
+    The slug comes from the page URL, so the data file name must match the
+    course's URL slug exactly.
+
+    A trainer photo goes through the shared image-frame treatment; without a
+    photo the branded monogram placeholder stands in, as it does everywhere
+    else on the site. The "Meet Our People" link points at the existing page.
+*/ -}}
+{{- $slug := path.Base (strings.TrimSuffix "/" $.Page.RelPermalink) -}}
+{{- $trainers := slice -}}
+{{- with index hugo.Data.trainers $slug -}}
+    {{- $trainers = .trainers | default slice -}}
+{{- end -}}
+<h2 id="course-trainers-heading">Trainers</h2>
+{{- if gt (len $trainers) 0 }}
+<div class="trainer-grid">
+    {{- range $trainer := $trainers }}
+    <article class="trainer-card">
+        <figure class="image-frame image-frame--portrait image-frame--sand">
+            <div class="image-frame__mat">
+                <div class="image-frame__plate">
+                    {{- with $trainer.photo }}
+                    <img src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="{{ $trainer.name }}" loading="lazy">
+                    {{- else }}
+                    <span class="image-frame__monogram" aria-hidden="true">FW</span>
+                    <span class="image-frame__grid" aria-hidden="true"></span>
+                    {{- end }}
+                    <span class="image-frame__ratio-tag">04:05</span>
+                </div>
+                <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+            </div>
+        </figure>
+        <h3 class="trainer-name">{{ $trainer.name }}</h3>
+        <p class="trainer-title">{{ $trainer.title }}</p>
+        <p class="trainer-organisation">{{ $trainer.organisation }}</p>
+        <p class="trainer-bio">{{ $trainer.bio }}</p>
+    </article>
+    {{- end }}
+</div>
+{{- else }}
+<p class="trainer-placeholder">Trainer profiles for this course will be announced soon.</p>
+{{- end }}
+<p class="course-trainers-meet"><a href="{{ "our-people/" | relURL }}">Meet Our People &rarr;</a></p>

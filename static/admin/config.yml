@@ -116,3 +116,53 @@ collections:
         name: cms_visible
         widget: hidden
         default: true
+
+  # Course trainer profiles. Each file in data/trainers/ holds the trainers
+  # for one course, keyed by the course page's URL slug. The files are plain
+  # YAML frontmatter, so the admin edits only trainer data and never the
+  # course page HTML. The page itself calls the course-trainers shortcode,
+  # which reads the matching file by slug.
+  - name: courses
+    label: Courses
+    label_singular: Course
+    description: Trainer profiles for each course. A file holds the trainers for one course, keyed by the course slug.
+    folder: data/trainers
+    create: true
+    extension: yml
+    format: yaml
+    editor:
+      preview: false
+    fields:
+      - label: Course identifier
+        name: slug
+        widget: string
+        hint: Identifies which course this file belongs to. Must match the course page's URL slug — for example ai-in-teaching-practices-and-design — so the page finds the right file. The file name and this value should stay in step.
+
+      - label: Trainers
+        name: trainers
+        widget: list
+        collapsed: false
+        summary: "{{fields.name}} — {{fields.title}}"
+        hint: Add one entry per trainer on this course. Leave a field blank until the details are confirmed.
+        fields:
+          - label: Name
+            name: name
+            widget: string
+
+          - label: Title / Role
+            name: title
+            widget: string
+
+          - label: Organisation
+            name: organisation
+            widget: string
+
+          - label: Short bio
+            name: bio
+            widget: text
+
+          - label: Professional photo
+            name: photo
+            widget: image
+            required: false
+            choose_url: false
