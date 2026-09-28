@@ -971,6 +971,10 @@ em {
     margin: 0;
 }
 
+.associates-trainers {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
 .associates-closing {
     text-align: center;
     max-width: 36rem;
