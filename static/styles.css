@@ -5587,3 +5587,520 @@ em {
 .promo-card:hover .promo-go {
     letter-spacing: 0.19em;
 }
+
+/* ---------- Training Academy ---------- */
+
+/* The hero sits on the forest panel. The global p and .tag-line colours are
+   tuned for light backgrounds, so restate them in a light tint here. */
+.service-hero-lead {
+    max-width: 38rem;
+    color: rgba(248, 246, 241, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.service-hero .tag-line {
+    color: rgba(248, 246, 241, 0.68);
+}
+
+/* Compact image placeholder for cards: same archival language as .image-frame */
+.media {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--sand-shade);
+    overflow: hidden;
+}
+
+.media__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, rgba(36, 38, 34, 0.05) 0 1px, transparent 1px 17%),
+        repeating-linear-gradient(90deg, rgba(36, 38, 34, 0.05) 0 1px, transparent 1px 17%);
+    pointer-events: none;
+}
+
+.media__mono {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    opacity: 0.32;
+    user-select: none;
+}
+
+.media__ratio {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.55rem;
+    padding: 0.15rem 0.4rem;
+    background: rgba(248, 246, 241, 0.72);
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--forest);
+}
+
+/* Training areas */
+.area-grid {
+    list-style: none;
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+
+.area-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--offwhite);
+    box-shadow: 0 0 0 1px var(--line);
+    transition: box-shadow 0.35s var(--ease-out);
+}
+
+.area-card:hover {
+    box-shadow: 0 0 0 1px var(--terracotta);
+}
+
+.area-card .media {
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid var(--line);
+}
+
+.area-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: clamp(1.25rem, 2.2vw, 1.6rem);
+}
+
+.area-card-index {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--terracotta);
+}
+
+.area-card-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.12rem, 1.6vw, 1.3rem);
+    line-height: 1.3;
+    color: var(--forest);
+}
+
+.area-card-desc {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+/* Course catalogue */
+.course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: clamp(1.25rem, 2.2vw, 1.75rem);
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    background: none;
+    border: none;
+}
+
+.course-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: var(--sand);
+    box-shadow: 0 0 0 1px var(--line);
+    transition: box-shadow 0.35s var(--ease-out);
+}
+
+.course-card:hover,
+.course-card:focus-visible {
+    background: var(--sand);
+    box-shadow: 0 0 0 1px var(--terracotta);
+}
+
+.course-card .media {
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.course-card-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: clamp(1.5rem, 2.6vw, 2rem);
+}
+
+.course-card-index {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--terracotta);
+}
+
+.course-card-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height: 1.28;
+    color: var(--forest);
+}
+
+.course-card-desc {
+    font-size: 0.96rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+.course-card-meta {
+    margin-top: 0.2rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+}
+
+.course-card-cta {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--forest);
+}
+
+.course-card--coming {
+    background: var(--offwhite);
+}
+
+.course-card--coming .course-card-title,
+.course-card--coming .course-card-cta {
+    color: var(--text-muted);
+}
+
+.courses-register {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Our approach */
+.approach-steps {
+    list-style: none;
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.approach-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: clamp(1.5rem, 2.5vw, 2.1rem);
+    background: var(--offwhite);
+}
+
+.approach-step-index {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--terracotta);
+    opacity: 0.7;
+}
+
+.approach-step-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+    line-height: 1.3;
+    color: var(--forest);
+}
+
+.approach-step-desc {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+.approach-steps + .academy-tags {
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+
+/* Who we train */
+.audience-band {
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.audience-band .image-frame {
+    margin-top: clamp(2.5rem, 5vw, 3.25rem);
+}
+
+/* Other services strip */
+.others-band {
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+/* Training in practice */
+#delivery {
+    /* .engagement--sand sits above .engagement in the cascade, so the base
+       background wins. Scope the intent to this section instead. */
+    background: var(--sand);
+}
+
+.delivery-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
+}
+
+/* Delivery formats read as a light spec strip, well below Our Courses in weight.
+   No numerals or rules here, so the terracotta small-text contrast trap that
+   the other lists carry does not apply. */
+.delivery-formats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 2.8vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.delivery-format-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+    line-height: 1.3;
+    color: var(--forest);
+}
+
+.delivery-format-desc {
+    margin: 0.35rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+    .delivery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .delivery-formats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .approach-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 640px) {
+    .approach-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Training Academy: signature treatments ----------
+   The Academy shares the site's container, type scale, and palette with the
+   other service pages, but it carries a few devices of its own so it does not
+   read as a clone of service 01-03. */
+
+/* 1. Promise ribbon — four concepts that state what the training enables.
+      Training Areas carries the actual categories, so the two never repeat. */
+.service-hero--academy {
+    padding-bottom: 0;
+}
+
+.academy-ribbon {
+    margin-top: clamp(2.75rem, 5.5vw, 4.5rem);
+    border-top: 1px solid rgba(248, 246, 241, 0.22);
+    border-bottom: 1px solid rgba(248, 246, 241, 0.14);
+}
+
+.academy-ribbon-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.academy-ribbon-item a {
+    display: block;
+    padding: 0.95rem clamp(0.4rem, 1.2vw, 0.9rem);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    color: rgba(248, 246, 241, 0.72);
+    transition: color 0.3s var(--ease-out);
+}
+
+.academy-ribbon-item a:hover,
+.academy-ribbon-item a:focus-visible {
+    color: var(--offwhite);
+}
+
+/* 2. Approach staircase — numbering, a sand panel, and a small vertical
+      stagger. No rules, nodes, or arrows: the order is the message. */
+.approach-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    background: none;
+    border: 0;
+}
+
+.approach-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: clamp(1.4rem, 2.3vw, 1.9rem);
+    background: var(--sand);
+    border: 0;
+}
+
+.approach-step:nth-child(even) {
+    transform: translateY(clamp(1rem, 2vw, 1.75rem));
+}
+
+/* 1.55rem keeps the numeral at large-text size, so the terracotta tint
+   clears WCAG AA at 3:1 instead of needing 4.5:1. */
+.approach-step-index {
+    font-size: 1.55rem;
+    opacity: 0.8;
+}
+
+/* Room for the staggered panels, which sit below the grid's own bottom edge. */
+.approach-steps + .academy-tags {
+    margin-top: clamp(2.75rem, 5.5vw, 4rem);
+}
+
+
+/* 3. Who We Train — borderless list, so the page does not stack three
+      identical card grids (areas, courses, audiences). */
+.audience-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 clamp(2.5rem, 5vw, 4.5rem);
+    margin: clamp(2.5rem, 5vw, 3.25rem) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.audience-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 1.4rem;
+    align-items: baseline;
+    padding: clamp(1.5rem, 2.6vw, 2rem) 0;
+    border-top: 1px solid var(--line);
+}
+
+.audience-item-num {
+    grid-row: span 2;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1.05;
+    color: var(--terracotta);
+    opacity: 0.7;
+}
+
+.audience-item-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+    line-height: 1.3;
+    color: var(--forest);
+}
+
+.audience-item-desc {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+/* 4. Course cards — a rail that fills on hover, plus a nudged arrow. */
+.course-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    height: 3px;
+    background: var(--terracotta);
+    opacity: 0.32;
+    transform: scaleX(0.999);
+    transform-origin: left;
+    transition: opacity 0.4s var(--ease-out);
+}
+
+.course-card:hover::before,
+.course-card:focus-visible::before {
+    opacity: 1;
+}
+
+.course-card-cta {
+    transition: letter-spacing 0.4s var(--ease-out);
+}
+
+.course-card:hover .course-card-cta,
+.course-card:focus-visible .course-card-cta {
+    letter-spacing: 0.22em;
+}
+
+@media (max-width: 900px) {
+    .academy-ribbon-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .approach-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Two columns would stagger into a checkerboard, so the step goes flat. */
+    .approach-step:nth-child(even) {
+        transform: none;
+    }
+
+    .audience-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .approach-steps {
+        grid-template-columns: 1fr;
+    }
+}
