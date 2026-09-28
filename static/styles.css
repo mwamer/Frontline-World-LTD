@@ -3617,6 +3617,24 @@ em {
     line-height: 1.75;
 }
 
+/* Module and audience bullets. The site sets no generic list styling, so the
+   markers and rhythm come from the same tokens as the text beside them. */
+.course-body .course-list {
+    margin: 0.4rem 0 0;
+    padding-left: 1.15rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.course-body .course-list li {
+    margin-bottom: 0.15rem;
+}
+
+.course-body .course-list li::marker {
+    color: var(--terracotta);
+}
+
 .why-matters {
     margin: 2.5rem 0 3.5rem;
 }
@@ -3943,6 +3961,9 @@ em {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Stated rather than inherited, so a replacement photo crops the same way
+       every time. Change here when a frame needs a different anchor. */
+    object-position: center center;
 }
 
 /* Subtle archival grid texture on placeholder plates */
@@ -5674,6 +5695,17 @@ em {
 .area-card .media {
     aspect-ratio: 4 / 3;
     border-bottom: 1px solid var(--line);
+}
+
+/* Area-card photography. The source is wider than the 4/3 frame, so anchor the
+   crop to the right, where the subject sits, instead of centring on empty space. */
+.area-card .media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
 }
 
 .area-card-body {
