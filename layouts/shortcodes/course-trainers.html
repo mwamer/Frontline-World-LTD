@@ -24,7 +24,7 @@
             <div class="image-frame__mat">
                 <div class="image-frame__plate">
                     {{- with $trainer.photo }}
-                    <img src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="{{ $trainer.name }}" loading="lazy">
+                    <img src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="{{ $trainer.name }}">
                     {{- else }}
                     <span class="image-frame__monogram" aria-hidden="true">FW</span>
                     <span class="image-frame__grid" aria-hidden="true"></span>
