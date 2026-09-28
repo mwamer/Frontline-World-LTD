@@ -7,21 +7,35 @@
   the file name, added here so callers can link to the profile.
 
   Only records marked public are returned, so a person can be prepared before
-  they are announced. Someone marked leadership: true heads the Our People
-  leadership block instead of the grid; pass exclude_leadership to leave them
-  out of a listing.
+  they are announced.
+
+  Someone marked leadership: true heads the Our People leadership block, which
+  has room for one name. Pass exclude_leadership and that first leadership
+  record is left out of the listing, because the block has already printed it.
+  Any further leadership record stays in the listing: the block cannot show it,
+  so hiding it there too would drop the person off the site altogether.
 
   Call with:
     {{ partial "associates.html" (dict "page" .) }}
     {{ partial "associates.html" (dict "page" . "exclude_leadership" true) }}
 */ -}}
-{{- $exclude_leadership := .exclude_leadership | default false -}}
-{{- $directory := slice -}}
+{{- $all := slice -}}
 {{- range $id, $person := hugo.Data.associates -}}
     {{- if eq ($person.status | default "public") "public" -}}
-        {{- if not (and $exclude_leadership $person.leadership) -}}
-            {{- $directory = $directory | append (merge $person (dict "id" $id)) -}}
+        {{- $all = $all | append (merge $person (dict "id" $id)) -}}
+    {{- end -}}
+{{- end -}}
+{{- $all = sort $all "weight" "name" -}}
+{{- $directory := $all -}}
+{{- if .exclude_leadership -}}
+    {{- $directory = slice -}}
+    {{- $claimed := false -}}
+    {{- range $all -}}
+        {{- if and .leadership (not $claimed) -}}
+            {{- $claimed = true -}}
+        {{- else -}}
+            {{- $directory = $directory | append . -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
-{{- return (sort $directory "weight" "name") -}}
+{{- return $directory -}}
