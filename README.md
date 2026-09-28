@@ -140,6 +140,8 @@ Trainer profiles live in one file per course at `data/trainers/<url-slug>.yml`. 
 
 Admin-editable through the CMS: the Admin page "Courses" collection edits these files. Each trainer is a list item with fields for name, title, organisation, bio, and photo. Photos upload to `static/images/`; the course pages themselves are not CMS-editable.
 
+GitHub sign-in runs in a pop-up window: editors must allow pop-ups for `frontlineworld.org` and `frontline-cms-oauth.wesaam-amer.workers.dev`, or the login never completes.
+
 The "Meet Our People" link below the trainers points at the existing Our People page.
 
 > **CMS testing status:** the CMS UI, its OAuth proxy, and the GitHub backend have not yet been fully tested locally. Verify trainer editing in the live/admin environment before relying on it.

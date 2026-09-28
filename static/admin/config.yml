@@ -133,6 +133,11 @@ collections:
     editor:
       preview: false
     fields:
+      - label: Course name
+        name: title
+        widget: string
+        hint: Display name of the course, shown in the Courses list and in the editor. Keep it in step with the course page title.
+
       - label: Course identifier
         name: slug
         widget: string
