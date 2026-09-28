@@ -1,6 +1,11 @@
-# Trainer profiles for this course. Editable through the Admin page (Courses
-# collection). Leave empty until real trainer details and photos exist.
-# Each trainer: name (required), title, organisation, bio, photo (optional,
-# uploaded through the CMS; referenced as /images/...).
 title: "AI in Teaching: Practices & Design"
-trainers: []
+slug: "AI in Teaching: Practices & Design"
+trainers:
+  - name: Dr. Saeed Abu Zour
+    title: "AI expert and Professor of Mathematics "
+    bio: Dr Saeed Abu-Zour is a Senior Lecturer in Mathematics at Manchester
+      Metropolitan University, within the School of Computing and Mathematics.
+      His academic work and teaching contribute to mathematics education and the
+      broader field of computing and mathematical sciences.
+    organisation: Manchester Metropolitan University
+    photo: /images/saeed-abuzour.jpg
