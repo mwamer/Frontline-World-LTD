@@ -1031,9 +1031,54 @@ em {
 
 /* The closing line of the directory, and the way in when it is empty. */
 .associate-apply {
-    margin: 2.4rem 0 0;
-    padding-top: 1.6rem;
+    margin: clamp(3rem, 6vw, 4.25rem) 0 0;
+    padding-top: clamp(2rem, 4vw, 2.75rem);
     border-top: 1px solid var(--line);
+    text-align: center;
+}
+
+/* The way into the form from the foot of the directory. Filled in the brand
+   forest with offwhite text, larger and heavier than the standard button, with
+   the room above it that separates a closing call to action from the last row
+   of cards. */
+.associate-apply-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 58px;
+    padding: 1rem 2.2rem;
+    background: var(--forest);
+    color: var(--offwhite);
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid transparent;
+    box-shadow: 0 8px 24px rgba(15, 42, 38, 0.22);
+    transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out),
+        gap 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.associate-apply-cta:hover {
+    background: var(--forest-deep);
+    color: var(--offwhite);
+    gap: 0.85rem;
+    box-shadow: 0 12px 30px rgba(15, 42, 38, 0.3);
+}
+
+.associate-apply-cta:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+    .associate-apply-cta {
+        width: 100%;
+        padding: 0.95rem 1.3rem;
+    }
 }
 
 /* Four cards per row on desktop, two on tablet, one on mobile. The headshot is

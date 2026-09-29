@@ -69,8 +69,8 @@
     <p class="associate-empty" id="associate-empty" hidden>No associates match that search yet.</p>
     {{- end }}
 
-    {{- /* The last line of the directory, so the way in is here too and not only on the form page. */}}
-    <p class="associate-apply"><a class="link-button" href="{{ "become-an-associate/" | relURL }}">Apply to become an associate →</a></p>
+    {{- /* The last line of the directory, so the way in is here too and not only on the form page. A run of profile cards is exactly where a plain text link goes unnoticed, so it is given the weight of a button. */}}
+    <p class="associate-apply"><a class="associate-apply-cta" href="{{ "become-an-associate/" | relURL }}">Apply to become an associate →</a></p>
 </div>
 {{- else }}
 <p class="associate-empty">New associates are added here as they are approved. <a href="{{ "become-an-associate/" | relURL }}">You can apply to become an associate</a> in the meantime.</p>
