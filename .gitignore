@@ -15,15 +15,17 @@ Thumbs.db
 # Browser panel artifacts
 .openchamber/
 
-# OAuth proxy: wrangler state and local secrets must never be committed
+# Workers: wrangler state and local secrets must never be committed
+.wrangler/
 oauth-proxy/node_modules/
 oauth-proxy/.dev.vars
-oauth-proxy/.wrangler/
+applications-worker/node_modules/
+applications-worker/.dev.vars
 
-# Applicant data: never committed. This folder is a staging area while
-# applications arrive by email, not the system of record — the approved
-# production store will be R2. The .gitkeep files are the one exception, so a
-# fresh clone still has the folders the CMS expects.
+# Applicant data: never committed. Applications live in a private R2 bucket;
+# this folder is staging for the review process and is on its way out. The
+# .gitkeep files are the one exception, so a fresh clone still has the folders
+# the CMS expects.
 data/private/**
 !data/private/**/
 !data/private/**/.gitkeep

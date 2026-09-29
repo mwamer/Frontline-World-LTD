@@ -61,8 +61,18 @@ title: "Become an Associate"
     <div class="container">
         <p>Submission of this application does not guarantee acceptance as an associate. Only the information approved for public display is published, and administrative details remain separate. Files uploaded here are for review only, and are not published unless you consent.</p>
 
-        <form class="af-form" id="associate-application" method="post" enctype="text/plain" action="mailto:wesaam.amer@gmail.com">
-            <fieldset class="af-section" aria-labelledby="af-sec1">
+      <!-- The endpoint is the applications Worker. Without scripting the browser
+           posts the same multipart body straight to it, so the form still works
+           when JavaScript does not. -->
+      <form class="af-form" id="associate-application" method="post" enctype="multipart/form-data" action="https://frontline-applications.wesaam-amer.workers.dev/submit" data-endpoint="https://frontline-applications.wesaam-amer.workers.dev/submit" data-state="idle">
+          <!-- A field no one can see, so only an automated client fills it in. The
+               Worker refuses anything that arrives with it filled. Kept out of the
+               tab order and hidden from assistive technology, so it cannot be
+               reached by accident either. -->
+          <div class="af-trap" aria-hidden="true">
+              <label>Leave this field empty<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <fieldset class="af-section" aria-labelledby="af-sec1">
                 <legend class="af-section-title" id="af-sec1">Section 1 — Basic Information</legend>
                 <div class="af-fields">
                     <label class="af-field">Full name *<input type="text" name="name" required></label>
@@ -73,7 +83,7 @@ title: "Become an Associate"
                     <label class="af-field">Country / base *<input type="text" name="country" required></label>
                     <label class="af-field">Website<input type="url" name="website" placeholder="https://"></label>
                     <label class="af-field">LinkedIn<input type="url" name="linkedin" placeholder="https://"></label>
-                    <label class="af-field af-field-wide">Professional photograph *<input type="file" name="photo" accept="image/*" required></label>
+                    <label class="af-field af-field-wide">Professional photograph *<input type="file" name="photo" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" data-max-mb="8" required><span class="af-hint">JPG, PNG or WebP, up to 8 MB. This is the photograph that would appear on a profile, so please use a clear, recent headshot.</span></label>
                 </div>
             </fieldset>
 
@@ -146,7 +156,7 @@ title: "Become an Associate"
             <fieldset class="af-section" aria-labelledby="af-sec7">
                 <legend class="af-section-title" id="af-sec7">Section 7 — Supporting Information</legend>
                 <div class="af-fields">
-                    <label class="af-field af-field-wide">CV upload<input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+                    <label class="af-field af-field-wide">CV<input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-max-mb="5"><span class="af-hint">PDF, Word or Word Open XML, up to 5 MB. Optional, but a CV makes an application much easier to assess.</span></label>
                     <label class="af-field af-field-wide">Publications / portfolio / relevant links<textarea name="portfolio_links" rows="3" placeholder="One URL or entry per line"></textarea></label>
                     <label class="af-field af-field-wide">Additional information<textarea name="additional" rows="3"></textarea></label>
                 </div>
@@ -168,12 +178,12 @@ title: "Become an Associate"
                 </div>
             </fieldset>
 
-            <div class="af-actions">
-                <button type="submit" class="cta-button af-submit">Submit Application</button>
-                <p class="af-status" id="af-status" role="status" aria-live="polite"></p>
-                <p class="af-note">Submitting opens your email app with your answers in the message body. <b>Email cannot carry your photograph or CV automatically</b>, so attach both by hand before sending to <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a>.</p>
-                <noscript><p class="af-note">With scripting turned off, submitting sends the answers to <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a> as a plain email, and the photograph and CV still have to be attached by hand.</p></noscript>
-            </div>
+          <div class="af-actions">
+              <button type="submit" class="cta-button af-submit">Submit Application</button>
+              <p class="af-status" id="af-status" role="status" aria-live="polite"></p>
+              <p class="af-note">Your photograph and CV are uploaded with this form. You will see a confirmation once they have arrived, and there is nothing else to send.</p>
+              <noscript><p class="af-note">JavaScript is switched off, so the browser will send this form directly and you will see a short confirmation page afterwards. Your photograph and CV go with it.</p></noscript>
+          </div>
         </form>
     </div>
 </section>

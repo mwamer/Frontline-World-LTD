@@ -203,44 +203,74 @@ There is no `/people/` index page. The directory is the Our People page; each pr
 
 ## Applications and approval
 
-`/become-an-associate/` is a self-contained page in `content/`, and the applications it produces are reviewable in the CMS. Nothing about it is automatic: there is no server, so an application arrives as an email, and someone files it.
+`/become-an-associate/` is a self-contained page in `content/`. The form posts
+`multipart/form-data` to a dedicated Worker, which validates it and stores it in
+a private R2 bucket; a reviewer reads it from there. Nothing about the pipeline
+is automatic beyond the storage: there is no server-side approval step, so
+someone still files an application before it can become an associate record.
 
 ### What happens to an application
 
-1. An applicant fills in the eight sections and submits. The page opens their email app with the answers in the message body, addressed to the same address the rest of the site shows, which is written into the form's `action` because the pages do not read `hugo.toml`.
-2. Someone creates a record in the CMS "Applications" collection, in `data/private/applications/<id>.yml`, and sets `status: submitted` and `date_submitted`.
-3. The reviewer moves the status through `under-review`, and either `changes-requested`, `approved` or `rejected`. Each step adds a `review` list entry, so the history accumulates rather than being overwritten.
-4. On approval, the reviewer creates the person's record in `data/associates/<id>.yml` and copies across the public fields, then sets `visibility` to match `public_consent` on the application.
-5. A photograph or CV has to be copied out of `data/private/uploads/` into `static/images/` by hand before it can appear on the site.
+1. An applicant fills in the eight sections and submits. The browser sends a
+   `multipart/form-data` POST to the applications Worker's `/submit` endpoint
+   with `fetch()`. With scripting off, the form's own `action` posts the same
+   body straight to the same endpoint, so a submission never depends on the
+   applicant having JavaScript.
+2. The Worker checks, in this order: that the request came from the exact site
+   origin, that this connection is under the five-per-hour rate limit, that the
+   honeypot is empty, that every required field is present, that the answers are
+   acceptable, and the file types. Files are checked on the leading bytes, the
+   declared MIME type and the extension together, with size limits of 5 MB for a
+   CV and 8 MB for a photograph.
+3. The application is written to the private bucket `frontline-applications` as
+   `applications/<id>/application.json`, with the CV and photograph next to it
+   under generated names, never the applicant's own filenames:
 
-The application file names the same ID as the associate record, so the two files sit side by side and never hold the same field twice.
+   ```
+   applications/<id>/application.json
+   applications/<id>/cv/<uuid>.pdf
+   applications/<id>/photo/<uuid>.png
+   ```
 
-| In `data/private/applications/<id>.yml` | In `data/associates/<id>.yml` |
-| --------------------------------------- | ------------------------------ |
-| `email`, `linkedin`, `country`, `current_role` | — |
-| `photo`, `cv` in `data/private/uploads/` | `photo` in `static/images/` |
-| `availability`, `constraints` | — |
-| `bio_short`, `bio_long` | `summary`, `bio` |
-| `expertise`, `roles`, `contributions`, `sectors`, `regions`, `countries` | the same IDs, unchanged |
-| `qualifications`, `experience`, `teaching_subjects`, `languages` | the same, one list entry per line |
-| `status`, `date_submitted`, `date_decided`, `date_approved`, `review`, `admin_notes` | — |
-| `public_consent`, `consent_confirmed` | `visibility`, `profile_status` |
-
-The field names in the application collection, in the form, and in the email an applicant sends are the same, so transcribing an email into a record is a copy rather than a translation. The expertise, sector, region, role and contribution options in the form come from `data/vocab/associates.yml` through the `vocab-options` shortcode, and the CMS `options` lists mirror that file.
+   The record holds the consent answers verbatim. `publication_permitted` is
+   `true` only when the applicant answered yes to publishing a profile, and it
+   never flips on its own.
+4. A reviewer reads the application in R2 and decides. On approval they create
+   the person's record in `data/associates/<id>.yml`, copy across the public
+   fields, and set `visibility` by hand to match `public_consent` on the
+   application. Approving an application never sets visibility itself.
+5. A photograph or CV has to be exported out of R2 into `static/images/` by hand
+   before it can appear on the site.
 
 ### What the form can and cannot do
 
-The site is static, so the form has nothing to post to. With scripting on, `initAssociateApplication()` in `static/script.js` reads the form, lays it out under the same section headings, and hands it to the visitor's email app. With scripting off, the form falls back to its own `mailto` action, as the partnership form on `/our-people/` already does. Either way the applicant sends the email themselves.
-
-**An email carries text only.** The photograph and the CV are named in the message so the reviewer knows what to expect, but the applicant has to attach both by hand. The page says so, and the status line repeats it after submitting.
+The required photograph and the 5 MB / 8 MB file limits are named on the
+page and enforced again on the server.
 
 A photograph is required on the form, because an associate profile without one is not publishable, but nothing stops a reviewer approving a record that has no image.
+
 
 ### Privacy limits worth knowing
 
 `data/private/` sits outside `static/`, so Hugo never copies it into `public/` and no built page can link to it. `.gitignore` also excludes everything in it except the `.gitkeep` files, so an application saved through the CMS is never committed or pushed.
 
-**This is staging, not storage.** It is a local folder on whichever machine the CMS writes to, which is not a system of record, not backed up, and not access-controlled. It exists to hold an application between the moment it arrives by email and the moment it is transcribed. Keep anything genuinely sensitive out of it. The production store for applications and their uploads will be R2, behind the submission Worker; that is not built yet, so nothing here should be kept on the strength of it.
+**This is staging, not storage.** It is a local folder on whichever machine the CMS writes to, which is not a system of record, not backed up, and not access-controlled. It is kept for CMS compatibility and for applications that still arrive by email; the production store for applications and their uploads is R2 behind the submission Worker. Keep anything genuinely sensitive out of it, and treat it as temporary until the CMS can read from R2.
+
+  ### The applications Worker and its R2 bucket
+
+  Submission runs through `applications-worker/`, a Worker kept separate from the CMS OAuth proxy on purpose: the OAuth Worker holds credentials for writing the site, and the submission Worker accepts unauthenticated public writes, so the two are never allowed to share a boundary or an outing. Its `/submit` endpoint stores each application as three objects in the private bucket `frontline-applications`: the `application.json` record plus the CV and photo under generated names. That bucket was created without a public domain, so no object in it has a public URL, and the Worker never returns one.
+
+  The Worker's secrets live in `applications-worker/.dev.vars` (git-ignored) locally and in Cloudflare secrets in production; the bucket binding and the rate-limit KV namespace are configured in `applications-worker/wrangler.toml`. Before the first deploy, the bucket and KV namespace must exist:
+
+  ```sh
+  npx wrangler r2 bucket create frontline-applications
+  npx wrangler kv namespace create RATE_LIMIT   # then paste its id into wrangler.toml
+  npx wrangler secret put TURNSTILE_SECRET      # only if Turnstile is enabled
+  ```
+
+  Applications are read out of R2 with the Cloudflare API, `wrangler r2 object get`, or a temporary signed URL issued to the reviewer — never through a permanent public link. The CMS Applications collection in `data/private/applications/` continues to hold the working review record, and the reviewer copies the consent answers across by hand when creating an associate record, so the R2 consent never enters Git.
+
+  `static/admin/config.yml` is published at `/admin/config.yml`, so the collection names, the folder paths and every field label are visible. No applicant data is in that file.
 
 `static/admin/config.yml` is published at `/admin/config.yml`, so the collection names, the folder paths and every field label are visible. No applicant data is in that file.
 

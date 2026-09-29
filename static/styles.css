@@ -6827,6 +6827,52 @@ em {
     min-height: 1.2em;
 }
 
+.af-status--sending {
+    color: var(--text-muted);
+}
+
+.af-status--error {
+    color: var(--terracotta);
+}
+
+.af-status--success {
+    font-size: 1rem;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--forest);
+    background: var(--offwhite);
+}
+
+.af-field-error {
+    display: block;
+    color: var(--terracotta);
+    font-weight: 500;
+}
+
+.af-field .af-note {
+    display: block;
+    color: var(--terracotta);
+    font-weight: 500;
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--terracotta);
+}
+
+/* The honeypot. Taken out of the layout and out of reach of a keyboard or a
+   screen reader, so only an automated client can fill it in. */
+.af-trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
 @media (min-width: 720px) {
     .af-fields {
         grid-template-columns: 1fr 1fr;

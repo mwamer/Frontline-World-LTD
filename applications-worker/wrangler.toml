@@ -1,0 +1,34 @@
+# Associate application intake for Frontline World.
+#
+# A separate Worker from oauth-proxy. That one holds the GitHub OAuth secret
+# and runs an editor-only popup; this one is a public, unauthenticated write
+# endpoint. Coupling them would put a public POST path on the same Worker as a
+# credential, for no shared code.
+#
+# Deploy with:  npx wrangler deploy
+# Secrets:      npx wrangler secret put TURNSTILE_SECRET   (optional; see README)
+#
+# The R2 bucket has to exist before the first deploy:
+#   npx wrangler r2 bucket create frontline-applications
+
+name = "frontline-applications"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Only the exact site origin may submit. A local override goes in
+# .dev.vars, which is git-ignored, never here.
+[vars]
+ALLOWED_ORIGIN = "https://frontlineworld.org"
+
+# Private by construction: the bucket is created without a public domain and
+# this Worker never returns a URL for an object. The browser cannot address
+# these objects at all.
+[[r2_buckets]]
+binding = "APPLICATIONS"
+bucket_name = "frontline-applications"
+
+# Rate limiting. Created with:
+#   npx wrangler kv namespace create RATE_LIMIT
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "c0e54de735ba4634a9619d53534c65bc"
