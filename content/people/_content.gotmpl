@@ -6,16 +6,18 @@
   there is no second file to add and no page to keep in step. The page itself
   is rendered by layouts/people/single.html.
 
-  Private records are skipped, so someone can be prepared before they are
-  announced. Every other field in a record is published, which is why the
-  record holds no administrative notes.
+  Records that may not be published are skipped, so someone can be prepared,
+  or put on hold, before or after they are announced. Every other field in a
+  record is published, which is why the record holds no administrative notes:
+  contact details, availability, files and the review history live in the
+  private record in data/private/applications/ instead.
 
   The biography is normalised to a list of paragraphs here, so the page layout
   does not have to care whether the record was written by hand (a plain list of
   strings) or by the CMS (a list of objects, one per paragraph).
 */ -}}
 {{- range $id, $person := hugo.Data.associates -}}
-    {{- if eq ($person.status | default "public") "public" -}}
+    {{- if partial "associate-is-public.html" $person -}}
         {{- $bio := slice -}}
         {{- range ($person.bio | default slice) -}}
             {{- $paragraph := . -}}

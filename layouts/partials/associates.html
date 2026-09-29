@@ -6,8 +6,10 @@
   /people/<id>/ profile all read it, so one edit reaches all three. `id` is
   the file name, added here so callers can link to the profile.
 
-  Only records marked public are returned, so a person can be prepared before
-  they are announced.
+  Only records that may be published are returned, which is decided in one
+  place: a person has to be public and active. A person can therefore be
+  prepared, or put on hold, before or after they are announced, without
+  touching a page.
 
   Someone marked leadership: true heads the Our People leadership block, which
   has room for one name. Pass exclude_leadership and that first leadership
@@ -21,7 +23,7 @@
 */ -}}
 {{- $all := slice -}}
 {{- range $id, $person := hugo.Data.associates -}}
-    {{- if eq ($person.status | default "public") "public" -}}
+    {{- if partial "associate-is-public.html" $person -}}
         {{- $all = $all | append (merge $person (dict "id" $id)) -}}
     {{- end -}}
 {{- end -}}

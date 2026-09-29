@@ -19,3 +19,11 @@ Thumbs.db
 oauth-proxy/node_modules/
 oauth-proxy/.dev.vars
 oauth-proxy/.wrangler/
+
+# Applicant data: never committed. This folder is a staging area while
+# applications arrive by email, not the system of record — the approved
+# production store will be R2. The .gitkeep files are the one exception, so a
+# fresh clone still has the folders the CMS expects.
+data/private/**
+!data/private/**/
+!data/private/**/.gitkeep

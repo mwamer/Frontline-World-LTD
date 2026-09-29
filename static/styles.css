@@ -1029,6 +1029,13 @@ em {
     color: var(--text-muted);
 }
 
+/* The closing line of the directory, and the way in when it is empty. */
+.associate-apply {
+    margin: 2.4rem 0 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+}
+
 /* Four cards per row on desktop, two on tablet, one on mobile. The headshot is
    a fixed 72, 80 and 88 px square, so the name, title and organisation lead
    the card rather than the photograph. The Leadership portrait (Dr Wesam
@@ -1300,6 +1307,20 @@ em {
     font-size: 1.05rem;
     line-height: 1.7;
     margin: 0;
+}
+
+.team-join-link {
+    display: inline-block;
+    margin-top: 1.2rem;
+    color: var(--offwhite);
+    border-color: rgba(248, 246, 241, 0.4);
+}
+
+.team-join-link:hover,
+.team-join-link:focus-visible {
+    background: var(--offwhite);
+    color: var(--forest);
+    border-color: var(--offwhite);
 }
 
 .team-join-form {
@@ -3901,6 +3922,14 @@ em {
     margin: 0;
 }
 
+/* The optional line on what someone is doing on one assignment. */
+.trainer-focus {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 0.8rem;
+}
+
 .trainer-placeholder {
     color: var(--text-muted);
     font-size: 1rem;
@@ -4303,6 +4332,26 @@ em {
     color: var(--charcoal);
     background: var(--sand);
     border: 1px solid var(--line);
+}
+
+/* Free text an applicant wrote — qualifications, experience, subjects, languages
+   — rather than a term from the controlled vocabulary, so it is set as prose
+   instead of as a tag. */
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-list li {
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    padding-left: 1.1rem;
+    border-left: 1px solid var(--line-strong);
 }
 
 .profile-links {
@@ -6527,5 +6576,271 @@ em {
 @media (max-width: 640px) {
     .approach-steps {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Associate application form (/become-an-associate/) ----------
+   The form on the Become an Associate page. It reuses the .pf- field
+   treatment from the Partnership form above so both read as one system;
+   the .af- classes are this form's own wrapper, grid and checkbox-list
+   structures. The vocabulary checkbox groups are rendered by the
+   vocab-options shortcode, so the form's options come from
+   data/vocab/associates.yml and never drift from the record fields. */
+/* The form needs the extra width for its two-column grids, but the prose above
+   it still reads at the site's measure. */
+.af-page > .container {
+    max-width: 64rem;
+}
+
+.af-page > .container > p {
+    max-width: 54rem;
+}
+
+.af-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2.5rem 0 0;
+}
+
+.af-section {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: rgba(248, 246, 241, 0.6);
+    padding: 1.6rem 1.5rem 1.75rem;
+    margin: 0;
+    min-width: 0;
+}
+
+.af-section-title {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--forest);
+    padding: 0;
+    margin-bottom: 1.2rem;
+    float: left;
+    width: 100%;
+}
+
+.af-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin: 1.3rem 0 0.6rem;
+    padding: 0;
+}
+
+.af-section > .af-subtitle:first-of-type,
+.af-subfieldset > .af-subtitle {
+    margin-top: 0;
+}
+
+.af-text {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: -0.4rem 0 1.1rem;
+    clear: both;
+}
+
+.af-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    clear: both;
+}
+
+/* A field is the label element, so the control is its child and inherits the
+   label's typography. The treatment matches .pf-field on the Partnership form
+   so both read as one system. */
+.af-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0;
+    min-width: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--forest);
+}
+
+.af-field input[type="text"],
+.af-field input[type="url"],
+.af-field input[type="email"],
+.af-field textarea {
+    width: 100%;
+    background: var(--offwhite);
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    padding: 0.75rem 0.95rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--charcoal);
+    transition: border-color 0.3s var(--ease-out);
+}
+
+.af-field input:focus,
+.af-field textarea:focus {
+    outline: none;
+    border-color: var(--terracotta);
+}
+
+.af-field textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.af-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 400;
+    margin-top: -0.15rem;
+}
+
+.af-field input[type="file"] {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--text-muted);
+    padding: 0.6rem 0;
+}
+
+.af-field input[type="file"]::file-selector-button {
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--forest);
+    background: var(--sand);
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    padding: 0.4rem 0.8rem;
+    margin-right: 0.8rem;
+    cursor: pointer;
+}
+
+/* Checkbox groups generated by the vocab-options shortcode. */
+.af-check-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem 1.4rem;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    clear: both;
+}
+
+.af-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--charcoal);
+    cursor: pointer;
+}
+
+.af-check input[type="checkbox"],
+.af-check input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+    accent-color: var(--terracotta);
+    cursor: pointer;
+}
+
+.af-consent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    clear: both;
+}
+
+.af-consent .af-check-standalone {
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.af-consent .af-check-standalone:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.af-subfieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+.af-subfieldset > .af-subtitle {
+    margin-bottom: 0.5rem;
+}
+
+.af-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: flex-start;
+}
+
+.af-submit {
+    border: 0;
+}
+
+.af-note {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 46rem;
+}
+
+.af-note a {
+    color: var(--forest);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.af-status {
+    color: var(--forest);
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin: 0;
+    min-height: 1.2em;
+}
+
+@media (min-width: 720px) {
+    .af-fields {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .af-field-wide {
+        grid-column: 1 / -1;
+    }
+
+    .af-check-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .af-submit {
+        align-self: flex-start;
     }
 }

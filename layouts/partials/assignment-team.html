@@ -1,0 +1,107 @@
+{{- /*
+  The people on one activity — a course, a programme, a research project or a
+  consultancy — as a grid of cards.
+
+  The record is data/assignments/<activity-slug>.yml, which holds the people
+  working on that activity and nothing else about them. Every personal detail
+  printed here is read from the person's own record in data/associates/ by
+  associate-lookup.html, so a person is written once and one edit reaches their
+  profile, the directory, this grid and every other activity they are on.
+
+  What an entry may hold:
+    associate         the person's ID, the file name in data/associates/
+    assignment_role   what they do on this activity, kept apart from the
+                      general roles on their own record
+    title             a title for this activity only
+    focus             a line on what they are there to do
+    order             display order, lower first
+    visible           false holds an entry back without deleting it
+
+  An entry that names no known associate falls back to the name, title,
+  organisation, photograph and biography it carries itself, so a person can be
+  listed before their record exists. An entry that is hidden is skipped, so the
+  same file can hold a planned team that is not announced yet.
+
+  data/trainers/ is still read as a fallback, so a course whose file has not
+  moved yet still renders. Nothing writes there any more.
+
+  A photograph goes through the shared image-frame treatment; without one the
+  branded monogram placeholder stands in, as it does everywhere else on the
+  site. The assignment role is shown above the name, and the name links to the
+  person's profile when there is one to link to.
+
+  Call with:
+    {{ partial "assignment-team.html" (dict "id" $slug) }}
+    {{ partial "assignment-team.html" (dict "id" $slug "empty" "Trainers will be announced soon.") }}
+*/ -}}
+{{- $record := index hugo.Data.assignments .id | default (index hugo.Data.trainers .id) -}}
+{{- $entries := slice -}}
+{{- with $record -}}
+    {{- $entries = (.team | default .trainers) | default slice -}}
+{{- end -}}
+
+{{- /* Normalise first, so an entry that leaves out order or visible still sorts. */ -}}
+{{- $team := slice -}}
+{{- range $entries -}}
+    {{- $shown := true -}}
+    {{- if isset . "visible" -}}
+        {{- $shown = .visible -}}
+    {{- end -}}
+    {{- if $shown -}}
+        {{- $team = $team | append (merge . (dict
+            "assignment_role" (.assignment_role | default .role)
+            "order" (.order | default 100)
+            "sortname" (.name | default ""))) -}}
+    {{- end -}}
+{{- end -}}
+{{- $team = sort $team "order" "sortname" -}}
+
+{{- if gt (len $team) 0 }}
+<div class="trainer-grid">
+    {{- range $member := $team }}
+    {{- $person := partial "associate-lookup.html" (dict "id" $member.associate) }}
+    {{- $name := $member.name | default $person.name }}
+    {{- $title := $member.title | default $person.title }}
+    {{- $organisation := $member.organisation | default $person.organisation }}
+    {{- $photo := $member.photo | default $person.photo }}
+    {{- $bio := $member.bio | default (partial "associate-bio.html" $person) }}
+    <article class="trainer-card">
+        <figure class="image-frame image-frame--portrait image-frame--sand">
+            <div class="image-frame__mat">
+                <div class="image-frame__plate">
+                    {{- with $photo }}
+                    <img src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="{{ $name }}">
+                    {{- else }}
+                    <span class="image-frame__monogram" aria-hidden="true">FW</span>
+                    <span class="image-frame__grid" aria-hidden="true"></span>
+                    {{- end }}
+                    <span class="image-frame__ratio-tag">04:05</span>
+                </div>
+                <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
+                <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
+            </div>
+        </figure>
+        {{- with $member.assignment_role }}
+        <p class="trainer-role">{{ . }}</p>
+        {{- end }}
+        <h3 class="trainer-name">
+            {{- with $person.id }}
+            <a href="{{ printf "people/%s/" . | relURL }}">{{ $name }}</a>
+            {{- else }}
+            {{ $name }}
+            {{- end }}
+        </h3>
+        <p class="trainer-title">{{ $title }}</p>
+        <p class="trainer-organisation">{{ $organisation }}</p>
+        {{- with $member.focus }}
+        <p class="trainer-focus">{{ . }}</p>
+        {{- end }}
+        <p class="trainer-bio">{{ $bio }}</p>
+    </article>
+    {{- end }}
+</div>
+{{- else }}
+<p class="trainer-placeholder">{{ .empty | default "The people involved will be announced soon." }}</p>
+{{- end }}

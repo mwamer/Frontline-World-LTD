@@ -1,6 +1,0 @@
-# Trainer profiles for this course. Editable through the Admin page (Courses
-# collection). Leave empty until real trainer details and photos exist.
-# Each trainer: name (required), title, organisation, bio, photo (optional,
-# uploaded through the CMS; referenced as /images/...).
-title: "Strategic Communication in Complex Information Environments"
-trainers: []

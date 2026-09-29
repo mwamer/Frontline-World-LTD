@@ -192,3 +192,133 @@ function initAssociateDirectory() {
 }
 
 initAssociateDirectory();
+
+// ---- Associate application form ----
+// The site is static, so the form has nothing to post to. Submitting therefore
+// composes an email from the answers and hands it to the visitor's own email
+// app, which is where the review already happens. Without scripting the form
+// falls back to its own mailto action, so the journey still works.
+function initAssociateApplication() {
+    const form = document.querySelector('#associate-application');
+    if (!form) return;
+    const status = document.querySelector('#af-status');
+    const submit = form.querySelector('.af-submit');
+    // The form's own action is the single place the address is written.
+    const recipient = (form.getAttribute('action') || '').replace(/^mailto:/, '').split('?')[0];
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        const data = new FormData(form);
+        const subject = 'Associate application — ' + (data.get('name') || 'New applicant');
+        const body = buildApplicationEmail(data);
+        window.location.href = 'mailto:' + recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        if (status) {
+            status.textContent = hasFileToAttach(data)
+                ? 'Your email app is opening. Attach your photograph and CV by hand before sending.'
+                : 'Your email app is opening with the application ready to send.';
+        }
+        if (submit) submit.disabled = true;
+        setTimeout(() => { if (submit) submit.disabled = false; }, 4000);
+    });
+}
+
+// An email carries text only, so the photograph and CV have to be added by
+// hand. The applicant needs saying so before they send, not after.
+function hasFileToAttach(data) {
+    return ['photo', 'cv'].some((key) => {
+        const value = data.get(key);
+        return value instanceof File && value.name;
+    });
+}
+
+function buildApplicationEmail(data) {
+    const lines = [
+        'World Frontline World — associate application',
+        'Sent: ' + new Date().toISOString().slice(0, 10),
+        '',
+        'A photograph and a CV cannot travel with an email, so attach any file',
+        'named below by hand. Options given as codes are the vocabulary IDs used',
+        'in the CMS, so they can be pasted across as they are.',
+        ''
+    ];
+    for (const [heading, fields] of APPLICATION_SECTIONS) {
+        const rows = fields
+            .map(([key, label]) => [label, readFieldValue(data, key)])
+            .filter(([, value]) => value);
+        if (!rows.length) continue;
+        lines.push(heading.toUpperCase(), '');
+        for (const [label, value] of rows) lines.push(label + ': ' + value);
+        lines.push('');
+    }
+    return lines.join('\n');
+}
+
+function readFieldValue(data, key) {
+    return data.getAll(key)
+        // An unticked checkbox contributes nothing, so a value of "on" is a
+        // ticked one and reads better as Yes in an email.
+        .map((value) => (value instanceof File ? value.name : String(value).trim() === 'on' ? 'Yes' : String(value).trim()))
+        .filter(Boolean)
+        .join(', ');
+}
+
+// The fields of each section, in the order the form asks for them. The names
+// match the Applications collection in static/admin/config.yml, so an email
+// can be transcribed into a record without renaming anything.
+const APPLICATION_SECTIONS = [
+    ['Section 1 — Basic information', [
+        ['name', 'Full name'],
+        ['title', 'Professional title'],
+        ['organisation', 'Organisation / affiliation'],
+        ['current_role', 'Current position / role'],
+        ['email', 'Professional email'],
+        ['country', 'Country / base'],
+        ['website', 'Website'],
+        ['linkedin', 'LinkedIn'],
+        ['photo', 'Photograph']
+    ]],
+    ['Section 2 — Professional profile', [
+        ['bio_short', 'Short biography'],
+        ['bio_long', 'Extended biography'],
+        ['qualifications', 'Qualifications'],
+        ['experience', 'Selected experience']
+    ]],
+    ['Section 3 — Expertise', [
+        ['expertise', 'Expertise'],
+        ['sectors', 'Sector expertise'],
+        ['regions', 'Regional / geographic expertise'],
+        ['countries', 'Countries / regions of specific expertise'],
+        ['other_expertise', 'Other expertise']
+    ]],
+    ['Section 4 — Roles and contributions', [
+        ['roles', 'Roles'],
+        ['contributions', 'Areas of contribution']
+    ]],
+    ['Section 5 — Teaching and training', [
+        ['teaching_subjects', 'Subjects you could teach or deliver'],
+        ['delivery', 'Preferred delivery'],
+        ['preferred_audiences', 'Preferred audiences'],
+        ['languages', 'Languages and proficiency']
+    ]],
+    ['Section 6 — Availability', [
+        ['availability', 'Availability'],
+        ['constraints', 'Location or delivery constraints']
+    ]],
+    ['Section 7 — Supporting information', [
+        ['cv', 'CV'],
+        ['portfolio_links', 'Publications / portfolio / links'],
+        ['additional', 'Additional information']
+    ]],
+    ['Section 8 — Consent', [
+        ['consent_accuracy', 'Information accurate and up to date'],
+        ['consent_submission', 'Submission does not guarantee acceptance'],
+        ['consent_review', 'Consent to review for association and related work'],
+        ['public_consent', 'Consent to publish the profile if approved']
+    ]]
+];
+
+initAssociateApplication();

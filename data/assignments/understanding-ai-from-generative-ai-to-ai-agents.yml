@@ -1,0 +1,19 @@
+# Assignment record for "Understanding AI: From Generative AI to AI Agents": the people working on this course, and the
+# part each of them plays on it.
+#
+# Editable through the Admin page (Assignments collection). The file name must
+# match the activity's URL slug, which is how the page finds it.
+#
+# An entry names a person from the central Associate Directory by ID — the file
+# name of their record in data/associates/ — and the name, title, organisation,
+# photograph and biography all come from that record. Only what belongs to this
+# activity is written here. See
+# data/assignments/ai-in-teaching-practices-and-design.yml for the full list of
+# what an entry can hold.
+#
+# Leave the team empty until the people are confirmed: the page then shows its
+# own placeholder.
+type: course
+title: "Understanding AI: From Generative AI to AI Agents"
+slug: understanding-ai-from-generative-ai-to-ai-agents
+team: []

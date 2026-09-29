@@ -2,34 +2,48 @@
 # editable through the CMS (Admin page, Associates collection).
 #
 # The file name is the associate ID. It becomes the profile URL
-# (/people/wesam-amer/) and the value a course uses to reference the person, so
-# renaming the file breaks both. Change the record, not the name.
+# (/people/wesam-amer/) and the value a course, programme or project uses to
+# reference the person, so renaming the file breaks both. Change the record,
+# not the name.
 #
 # Fields
-#   name          Full name as published
-#   title         Professional title
-#   organisation  Organisation or affiliation
-#   photo         File in static/images; the folder prefix is ignored, so the
-#                 CMS can store either "/images/x.jpg" or "x.jpg"
-#   photo_alt     Alt text for the photo
-#   summary       One or two sentences: the directory card, and the page
-#                 description on the profile
-#   bio           Biography, one list item per paragraph: the profile page
-#   expertise     IDs from the expertise list in data/vocab/associates.yml.
-#                 The first is shown as the card's primary expertise
-#   roles         IDs from the roles list — what the person contributes
-#                 generally, not what they are doing on one assignment
-#   contributions IDs from the areas of contribution list
-#   sectors       IDs from the sectors list
-#   regions       IDs from the regions list
-#   links         Professional links, each with a label and a url
-#   status        public, or private while the person is being prepared
-#   leadership    true puts the person in the Our People leadership block
-#                 instead of the directory grid
-#   weight        Order in the directory; lower comes first
+#   name             Full name as published
+#   title            Professional title
+#   organisation     Organisation or affiliation
+#   photo            File in static/images; the folder prefix is ignored, so the
+#                    CMS can store either "/images/x.jpg" or "x.jpg"
+#   photo_alt        Alt text for the photo
+#   summary          One or two sentences: the directory card, and the page
+#                    description on the profile
+#   bio              Biography, one list item per paragraph: the profile page
+#   expertise        IDs from the expertise list in data/vocab/associates.yml.
+#                    The first is shown as the card's primary expertise
+#   roles            IDs from the roles list — what the person contributes
+#                    generally, not what they are doing on one assignment
+#   contributions    IDs from the areas of contribution list
+#   sectors          IDs from the sectors list
+#   regions          IDs from the regions list
+#   countries        Countries or regions of specific expertise, one per list
+#                    item. Free text, for places the regions list does not
+#                    cover; optional
+#   qualifications   Qualifications, one per list item. Optional
+#   experience       Selected experience, one entry per list item. Optional
+#   teaching_subjects Subjects the person can teach or deliver, one per list
+#                    item. Optional
+#   languages        Languages and proficiency, one per list item. Optional
+#   links            Professional links, each with a label and a url
+#   visibility       public, or private to keep the person off the site
+#   profile_status   active, or inactive or archived to keep the person off
+#                    the site without discarding the record
+#   leadership       true puts the person in the Our People leadership block
+#                    instead of the directory grid
+#   weight           Order in the directory; lower comes first
 #
 # Every field in this file is published. Keep administrative notes out of it:
-# a private status keeps the whole record off the site, and nothing else does.
+# a private or inactive record keeps the whole person off the site, and
+# nothing else does. Contact details, availability, files and the review
+# history live in the private record for the same person, in
+# data/private/applications/<id>.yml, which no template reads.
 name: Dr Wesam Amer
 title: Founder & Director
 organisation: Frontline World
@@ -93,6 +107,7 @@ regions:
 links:
   - label: Personal Website
     url: https://wesamamer.com
-status: public
+visibility: public
+profile_status: active
 leadership: true
 weight: 1

@@ -1,78 +1,13 @@
 {{- /*
-    Trainer profiles for one course. The people come from the central Associate
-    Directory: an entry in data/trainers/<course-slug>.yml names an associate ID
-    and the name, title, organisation, photograph and biography are read from
-    that person's record in data/associates/. Nothing about the person is
-    written twice, so a change to the record reaches this course too.
+    Trainers for one course. The heading and the closing link belong to the
+    course page, so they stay here; the grid itself is the shared
+    assignment-team partial, which a programme or project page calls the same
+    way.
 
-    An entry carries only what belongs to the assignment:
-      associate  the person's ID, which is the file name in data/associates/
-      role       what they do on this course, kept apart from the general roles
-                 on their record
-      title      a course-specific title, only when it should differ from the
-                 one on their record
-
-    The slug comes from the page URL, so the data file name must match the
-    course's URL slug exactly. An entry that names no known associate falls
-    back to whatever the entry itself carries, so a trainer can be listed
-    before their record exists.
-
-    A trainer photo goes through the shared image-frame treatment; without a
-    photo the branded monogram placeholder stands in, as it does everywhere
-    else on the site. The role on this course is shown above the name, and the
-    name links to the person's profile when there is one to link to. The "Meet
-    Our People" link points at the directory.
+    The activity's URL slug is taken from the page URL, so the record file in
+    data/assignments/ must be named after it exactly.
 */ -}}
 {{- $slug := path.Base (strings.TrimSuffix "/" $.Page.RelPermalink) -}}
-{{- $trainers := slice -}}
-{{- with index hugo.Data.trainers $slug -}}
-    {{- $trainers = .trainers | default slice -}}
-{{- end -}}
 <h2 id="course-trainers-heading">Trainers</h2>
-{{- if gt (len $trainers) 0 }}
-<div class="trainer-grid">
-    {{- range $trainer := $trainers }}
-    {{- $person := partial "associate-lookup.html" (dict "id" $trainer.associate) }}
-    {{- $name := $trainer.name | default $person.name }}
-    {{- $title := $trainer.title | default $person.title }}
-    {{- $organisation := $trainer.organisation | default $person.organisation }}
-    {{- $photo := $trainer.photo | default $person.photo }}
-    {{- $bio := $trainer.bio | default (partial "associate-bio.html" $person) }}
-    <article class="trainer-card">
-        <figure class="image-frame image-frame--portrait image-frame--sand">
-            <div class="image-frame__mat">
-                <div class="image-frame__plate">
-                    {{- with $photo }}
-                    <img src="{{ printf "images/%s" (path.Base .) | relURL }}" alt="{{ $name }}">
-                    {{- else }}
-                    <span class="image-frame__monogram" aria-hidden="true">FW</span>
-                    <span class="image-frame__grid" aria-hidden="true"></span>
-                    {{- end }}
-                    <span class="image-frame__ratio-tag">04:05</span>
-                </div>
-                <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
-                <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>
-                <span class="image-frame__corner image-frame__corner--bl" aria-hidden="true"></span>
-                <span class="image-frame__corner image-frame__corner--br" aria-hidden="true"></span>
-            </div>
-        </figure>
-        {{- with $trainer.role }}
-        <p class="trainer-role">{{ . }}</p>
-        {{- end }}
-        <h3 class="trainer-name">
-            {{- with $person.id }}
-            <a href="{{ printf "people/%s/" . | relURL }}">{{ $name }}</a>
-            {{- else }}
-            {{ $name }}
-            {{- end }}
-        </h3>
-        <p class="trainer-title">{{ $title }}</p>
-        <p class="trainer-organisation">{{ $organisation }}</p>
-        <p class="trainer-bio">{{ $bio }}</p>
-    </article>
-    {{- end }}
-</div>
-{{- else }}
-<p class="trainer-placeholder">Trainer profiles for this course will be announced soon.</p>
-{{- end }}
+{{- partial "assignment-team.html" (dict "id" $slug "empty" "Trainer profiles for this course will be announced soon.") -}}
 <p class="course-trainers-meet"><a href="{{ "our-people/" | relURL }}">Meet Our People &rarr;</a></p>

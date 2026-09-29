@@ -1,0 +1,24 @@
+{{- /*
+  One titled list of free text on an associate profile: qualifications, selected
+  experience, subjects taught, languages.
+
+  Used where a profile-section would be wrong, because these are sentences an
+  applicant wrote rather than terms from the controlled vocabulary. The section
+  is skipped entirely when there is nothing recorded, so a profile never
+  promises information that is not there.
+
+  Call with:
+    {{ partial "profile-list.html" (dict "id" "profile-qualifications" "title" "Qualifications" "items" $person.qualifications) }}
+*/ -}}
+{{- $id := .id -}}
+{{- $title := .title -}}
+{{- with .items }}
+<section class="profile-section" aria-labelledby="{{ $id }}">
+    <h2 class="profile-section-title" id="{{ $id }}">{{ $title }}</h2>
+    <ul class="profile-list">
+        {{- range . }}
+        <li>{{ . }}</li>
+        {{- end }}
+    </ul>
+</section>
+{{- end }}

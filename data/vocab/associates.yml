@@ -74,18 +74,30 @@ roles:
   - id: mentor
     label: Mentor
 
-# Areas of contribution: the kinds of work a person is engaged for.
+# Areas of contribution: the kinds of work a person is engaged for. These are
+# the options the application form offers, so the list also drives what an
+# applicant can tick.
 contributions:
-  - id: professional-training
-    label: Professional Training
+  - id: courses
+    label: Courses
   - id: executive-education
     label: Executive Education
+  - id: professional-training
+    label: Professional Training
   - id: research
     label: Research
   - id: consultancy
     label: Consultancy
   - id: strategic-advisory
     label: Strategic Advisory
+  - id: policy-work
+    label: Policy Work
+  - id: events-conferences
+    label: Events & Conferences
+  - id: speaking-engagements
+    label: Speaking Engagements
+  - id: programme-development
+    label: Programme Development
 
 # Sectors: the fields a person has worked in. Seeded from the sector names on
 # the Sectors page, so the two stay recognisably the same list.

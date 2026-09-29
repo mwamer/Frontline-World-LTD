@@ -32,5 +32,6 @@ sectors:
   - education
 regions:
   - united-kingdom
-status: public
+visibility: public
+profile_status: active
 weight: 10

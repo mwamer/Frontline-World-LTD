@@ -1,0 +1,25 @@
+{{- /*
+  Whether one person may be published, as a single boolean.
+
+  This is the only place the rule lives. A person appears in the Expertise On
+  Demand directory, in a course trainer grid and on a profile page only when
+  both conditions hold:
+
+    visibility      public, not private
+    profile_status  active, not inactive or archived
+
+  Both fields are optional, so a record written before they existed still
+  publishes: a missing visibility falls back to the older `status` key and then
+  to public, and a missing profile_status is active.
+
+  Everything else about a person — contact details, availability, files, the
+  review history — lives in the private record in
+  data/private/applications/, which no template reads, so the gate is the only
+  thing standing between a record and the published page.
+
+  Call with a person:
+    {{ partial "associate-is-public.html" $person }}
+*/ -}}
+{{- $visibility := .visibility | default .status | default "public" -}}
+{{- $profile := .profile_status | default "active" -}}
+{{- return (and (eq $visibility "public") (eq $profile "active")) -}}

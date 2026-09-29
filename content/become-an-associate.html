@@ -1,0 +1,265 @@
+---
+title: "Become an Associate"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Apply to become an associate of Frontline World: researchers, practitioners, consultants, trainers and subject-matter experts.">
+<title>Become an Associate | Frontline World Ltd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header" data-header>
+    <div class="container header-inner">
+        <a href="../" class="logo">
+            <span class="logo-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                    <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                </svg>
+            </span>
+            <span class="logo-text">Frontline World</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-toggle-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        <nav class="nav-links-wrap" aria-label="Primary">
+            <ul id="primary-navigation" class="nav-links">
+                <li><a href="../"><span class="nav-link-label">Home</span></a></li>
+                <li><a href="../about/"><span class="nav-link-label">About</span></a></li>
+                <li><a href="../our-people/"><span class="nav-link-label">Our People</span></a></li>
+                <li>
+                    <a href="../services/"><span class="nav-link-label">Core Expertise &amp; Services</span></a>
+                </li>
+                <li><a href="../sectors/"><span class="nav-link-label">Sectors</span></a></li>
+                <li><a href="../insights/"><span class="nav-link-label">Insights</span></a></li>
+                <li><a href="../contact/"><span class="nav-link-label">Contact</span></a></li>
+                <li class="nav-cta"><a href="../contact/" class="btn btn-primary btn-sm">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+</header><main id="main-content">
+
+<section class="page-header">
+    <div class="container">
+        <p class="page-kicker">Our People</p>
+        <h1>Become an Associate</h1>
+        <p class="page-lead">World Frontline World works with researchers, practitioners, consultants, trainers and subject-matter experts across disciplines and regions. If your expertise could contribute to our programmes, research, training or advisory work, we invite you to introduce yourself.</p>
+    </div>
+</section>
+
+<section class="about-content af-page">
+    <div class="container">
+        <p>Submission of this application does not guarantee acceptance as an associate. Only the information approved for public display is published, and administrative details remain separate. Files uploaded here are for review only, and are not published unless you consent.</p>
+
+        <form class="af-form" id="associate-application" method="post" enctype="text/plain" action="mailto:wesaam.amer@gmail.com">
+            <fieldset class="af-section" aria-labelledby="af-sec1">
+                <legend class="af-section-title" id="af-sec1">Section 1 — Basic Information</legend>
+                <div class="af-fields">
+                    <label class="af-field">Full name *<input type="text" name="name" required></label>
+                    <label class="af-field">Professional title *<input type="text" name="title" required></label>
+                    <label class="af-field">Organisation / affiliation *<input type="text" name="organisation" required></label>
+                    <label class="af-field">Current position / role *<input type="text" name="current_role" required></label>
+                    <label class="af-field">Professional email *<input type="email" name="email" autocomplete="email" required></label>
+                    <label class="af-field">Country / base *<input type="text" name="country" required></label>
+                    <label class="af-field">Website<input type="url" name="website" placeholder="https://"></label>
+                    <label class="af-field">LinkedIn<input type="url" name="linkedin" placeholder="https://"></label>
+                    <label class="af-field af-field-wide">Professional photograph *<input type="file" name="photo" accept="image/*" required></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec2">
+                <legend class="af-section-title" id="af-sec2">Section 2 — Professional Profile</legend>
+                <div class="af-fields">
+                    <label class="af-field af-field-wide">Short biography *<textarea name="bio_short" rows="4" required></textarea><span class="af-hint">Approximately 100–150 words.</span></label>
+                    <label class="af-field af-field-wide">Extended biography<textarea name="bio_long" rows="5"></textarea></label>
+                    <label class="af-field af-field-wide">Qualifications<textarea name="qualifications" rows="3" placeholder="One per line if preferred"></textarea></label>
+                    <label class="af-field af-field-wide">Selected experience<textarea name="experience" rows="4" placeholder="One per line if preferred"></textarea></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec3">
+                <legend class="af-section-title" id="af-sec3">Section 3 — Expertise</legend>
+                <p class="af-text">Select those that apply; include any details that do not fit the options.</p>
+                {{< vocab-options vocab="expertise" name="expertise" required="true" >}}
+                <h3 class="af-subtitle">Sector expertise</h3>
+                {{< vocab-options vocab="sectors" name="sectors" >}}
+                <h3 class="af-subtitle">Regional / geographic expertise</h3>
+                {{< vocab-options vocab="regions" name="regions" >}}
+                <div class="af-fields">
+                    <label class="af-field af-field-wide">Countries / regions of specific expertise<textarea name="countries" rows="2" placeholder="One per line if preferred"></textarea></label>
+                    <label class="af-field af-field-wide">Other expertise<textarea name="other_expertise" rows="2"></textarea></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec4">
+                <legend class="af-section-title" id="af-sec4">Section 4 — Roles &amp; Contributions</legend>
+                <p class="af-text">What roles could you take? What areas would you like to contribute to?</p>
+                <h3 class="af-subtitle">Roles (select all that apply)</h3>
+                {{< vocab-options vocab="roles" name="roles" >}}
+                <h3 class="af-subtitle">Areas you would like to contribute to (select all that apply)</h3>
+                {{< vocab-options vocab="contributions" name="contributions" >}}
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec5">
+                <legend class="af-section-title" id="af-sec5">Section 5 — Teaching &amp; Training</legend>
+                <div class="af-fields">
+                    <label class="af-field af-field-wide">Subjects / topics you could teach or deliver<textarea name="teaching_subjects" rows="3" placeholder="One per line if preferred"></textarea></label>
+                    <fieldset class="af-subfieldset">
+                        <legend class="af-subtitle">Preferred delivery</legend>
+                        <ul class="af-check-list">
+                            <li><label class="af-check"><input type="checkbox" name="delivery" value="in-person"> <span>In person</span></label></li>
+                            <li><label class="af-check"><input type="checkbox" name="delivery" value="online"> <span>Online</span></label></li>
+                            <li><label class="af-check"><input type="checkbox" name="delivery" value="hybrid"> <span>Hybrid</span></label></li>
+                        </ul>
+                    </fieldset>
+                    <label class="af-field af-field-wide">Preferred audiences<textarea name="preferred_audiences" rows="2"></textarea></label>
+                    <label class="af-field af-field-wide">Languages and proficiency<textarea name="languages" rows="2" placeholder="e.g. English – fluent, Arabic – native"></textarea></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec6">
+                <legend class="af-section-title" id="af-sec6">Section 6 — Availability</legend>
+                <p class="af-text">Select what applies.</p>
+                <ul class="af-check-list">
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="occasional"> <span>Available for occasional assignments</span></label></li>
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="short-term"> <span>Available for short-term projects</span></label></li>
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="ongoing"> <span>Available for ongoing programmes</span></label></li>
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="course-delivery"> <span>Available for course delivery</span></label></li>
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="consultancy"> <span>Available for consultancy</span></label></li>
+                    <li><label class="af-check"><input type="checkbox" name="availability" value="to-be-discussed"> <span>To be discussed</span></label></li>
+                </ul>
+                <div class="af-fields">
+                    <label class="af-field af-field-wide">Optional location/delivery constraints<textarea name="constraints" rows="2"></textarea></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec7">
+                <legend class="af-section-title" id="af-sec7">Section 7 — Supporting Information</legend>
+                <div class="af-fields">
+                    <label class="af-field af-field-wide">CV upload<input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+                    <label class="af-field af-field-wide">Publications / portfolio / relevant links<textarea name="portfolio_links" rows="3" placeholder="One URL or entry per line"></textarea></label>
+                    <label class="af-field af-field-wide">Additional information<textarea name="additional" rows="3"></textarea></label>
+                </div>
+            </fieldset>
+
+            <fieldset class="af-section" aria-labelledby="af-sec8">
+                <legend class="af-section-title" id="af-sec8">Section 8 — Consent</legend>
+                <div class="af-consent">
+                    <label class="af-check af-check-standalone"><input type="checkbox" name="consent_accuracy" required> <span>I confirm that the information I have provided is accurate and up to date.</span></label>
+                    <label class="af-check af-check-standalone"><input type="checkbox" name="consent_submission" required> <span>I understand that submission of this application does not guarantee acceptance as an associate.</span></label>
+                    <label class="af-check af-check-standalone"><input type="checkbox" name="consent_review" required> <span>I consent to World Frontline World reviewing this application for potential association, training, research, consultancy and related professional activities.</span></label>
+                    <fieldset class="af-subfieldset">
+                        <legend class="af-subtitle">If my application is approved, I consent to my professional profile, photograph and selected information being displayed on the World Frontline World website.</legend>
+                        <ul class="af-check-list">
+                            <li><label class="af-check"><input type="radio" name="public_consent" value="yes" required> <span>Yes</span></label></li>
+                            <li><label class="af-check"><input type="radio" name="public_consent" value="no"> <span>No</span></label></li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </fieldset>
+
+            <div class="af-actions">
+                <button type="submit" class="cta-button af-submit">Submit Application</button>
+                <p class="af-status" id="af-status" role="status" aria-live="polite"></p>
+                <p class="af-note">Submitting opens your email app with your answers in the message body. <b>Email cannot carry your photograph or CV automatically</b>, so attach both by hand before sending to <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a>.</p>
+                <noscript><p class="af-note">With scripting turned off, submitting sends the answers to <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a> as a plain email, and the photograph and CV still have to be attached by hand.</p></noscript>
+            </div>
+        </form>
+    </div>
+</section>
+
+    </main><footer class="footer" data-footer>
+    <div class="container footer-top">
+        <div class="footer-brand">
+            <a href="../" class="footer-logo">
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M16 4 L28 10 V22 L16 28 L4 22 V10 Z"/>
+                        <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22"/>
+                    </svg>
+                </span>
+                <span>Frontline World</span>
+            </a>
+            <p class="footer-tagline">Global strategic research, foresight, communication, and advisory. Connecting knowledge, expertise, and practice.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+            <p class="footer-heading">Explore</p>
+            <a href="../">Home</a>
+            <a href="../about/">About</a>
+            <a href="../our-people/">Our People</a>
+            <a href="../services/">Core Expertise &amp; Services</a>
+            <a href="../sectors/">Sectors</a>
+            <a href="../insights/">Insights</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+        <div class="footer-contact">
+            <p class="footer-heading">Contact</p>
+            <a href="mailto:wesaam.amer@gmail.com">wesaam.amer@gmail.com</a>
+            <a href="tel:+447310498510">&#43;44 (0)7310 498510</a>
+        </div>
+        <div class="footer-social">
+            <p class="footer-heading">Follow</p><ul class="social-links" aria-label="Social media links">
+    <li>
+        <a aria-label="Frontline World on LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8.5h4.5V23h-4.5V8.5zM8.5 8.5h4.31v1.98h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V23h-4.5v-6.98c0-1.67-.03-3.81-2.32-3.81-2.33 0-2.69 1.82-2.69 3.7V23H8.5V8.5z"/></svg>
+        </a>
+    </li>
+    <li>
+        <a aria-label="Frontline World on X">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.5 22H1.4l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg>
+        </a>
+    </li>
+</ul></div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Frontline World Ltd. All rights reserved.</p>
+        <p class="footer-note">Insight for better foresight.</p>
+    </div>
+</footer><script src="../script.js"></script>
+<aside class="promo-rail promo-rail--left" aria-label="Frontline World: training, research and advisory">
+    <a class="promo-card" href="../training-academy/">
+        <img class="promo-art" src="../images/promo-training.svg" alt="" width="72" height="48">
+        <span class="promo-kicker">Executive Education</span>
+        <span class="promo-name">Professional &amp; Executive Training</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="../training-academy/courses/strategic-foresight-for-leaders/">
+        <img class="promo-art" src="../images/promo-foresight.svg" alt="" width="72" height="48">
+        <span class="promo-kicker">Futures Thinking</span>
+        <span class="promo-name">Strategic Foresight</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="../services/#strategic-research">
+        <img class="promo-art" src="../images/promo-research.svg" alt="" width="72" height="48">
+        <span class="promo-kicker">Advisory</span>
+        <span class="promo-name">Strategic Research &amp; Advisory</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+</aside>
+<aside class="promo-rail promo-rail--right" aria-label="Frontline World: risk foresight and insights">
+    <a class="promo-card" href="../services/#risk-foresight">
+        <img class="promo-art" src="../images/promo-risk.svg" alt="" width="72" height="48">
+        <span class="promo-kicker">Risk Intelligence</span>
+        <span class="promo-name">Risk &amp; Foresight</span>
+        <span class="promo-go">Explore &rarr;</span>
+    </a>
+    <a class="promo-card" href="../insights/">
+        <img class="promo-art" src="../images/promo-insights.svg" alt="" width="72" height="48">
+        <span class="promo-kicker">Read</span>
+        <span class="promo-name">Latest Insights</span>
+        <span class="promo-go">Browse &rarr;</span>
+    </a>
+</aside>
+
+</body>
+</html>

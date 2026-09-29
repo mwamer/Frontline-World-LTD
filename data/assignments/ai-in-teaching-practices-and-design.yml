@@ -1,0 +1,40 @@
+# Assignment record for "AI in Teaching: Practices & Design": the people
+# working on one course, and the part each of them plays on it.
+#
+# Editable through the Admin page (Assignments collection). The file name must
+# match the activity's URL slug, which is how the page finds it.
+#
+# type            What the activity is: course, programme, research,
+#                 consultancy or project. Used to group the collection.
+# title           Display name of the activity.
+# slug            The activity's URL slug, for example
+#                 ai-in-teaching-practices-and-design. The file name and this
+#                 value should stay in step.
+# team            The people on this activity, in display order.
+#
+# An entry names a person from the central Associate Directory by ID — the file
+# name of their record in data/associates/ — and the name, title, organisation,
+# photograph and biography all come from that record. Only what belongs to this
+# activity is written here:
+#   associate         Required. The person's ID.
+#   assignment_role   What they do on this activity. This is the assignment
+#                     role, and it is deliberately not the same as the general
+#                     roles on their own record.
+#   title             Optional. Replaces their own title on this activity only.
+#   focus             Optional. A line on what they are there to do.
+#   order             Optional. Display order; lower comes first. Entries
+#                     without one keep the order they are written in.
+#   visible           Optional. Set to false to hold an entry back without
+#                     deleting it.
+#
+# An entry that names no known associate falls back to the name, title,
+# organisation, photograph and biography it carries itself, so a person can be
+# listed before their record exists. A file with `team: []` renders the
+# placeholder instead.
+type: course
+title: "AI in Teaching: Practices & Design"
+slug: ai-in-teaching-practices-and-design
+team:
+  - associate: saeed-abuzour
+    assignment_role: Trainer
+    title: "AI expert and Professor of Mathematics "

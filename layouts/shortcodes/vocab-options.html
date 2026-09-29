@@ -1,0 +1,33 @@
+{{- /*
+  The controlled options for one group of checkboxes on the application form.
+
+  The terms are read from data/vocab/associates.yml, which is the only place
+  they are labelled, so the form offers exactly what a record can hold and the
+  two cannot drift apart. Adding a term to the vocabulary adds it here.
+
+  The fieldset and its legend stay in the page, because they are the page's
+  copy; this only fills the field in.
+
+  Call with:
+    {{< vocab-options "expertise" "expertise" true >}}
+
+    vocab     the list in data/vocab/associates.yml to read
+    name      the form field name the values are submitted under
+    required  true marks the first option required. One required box in a
+              group of same-named checkboxes is enough to make the group
+              required, and it needs no script: the browser enforces it.
+*/ -}}
+{{- $vocab := .Get "vocab" -}}
+{{- $name := .Get "name" | default $vocab -}}
+{{- $required := .Get "required" | default false -}}
+{{- $terms := index hugo.Data.vocab.associates $vocab | default slice -}}
+<ul class="af-check-list">
+    {{- range $index, $term := $terms }}
+    <li>
+        <label class="af-check">
+            <input type="checkbox" name="{{ $name }}" value="{{ $term.id }}"{{ if and $required (eq $index 0) }} required{{ end }}>
+            <span>{{ $term.label }}</span>
+        </label>
+    </li>
+    {{- end }}
+</ul>
