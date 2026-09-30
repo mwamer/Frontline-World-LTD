@@ -14,6 +14,6 @@ publication_permitted: true
 consent_fingerprint: sha256:19f3bf60c28b35e677afdc9e7f5eb01ffe46632cb47bf19a6e967245f62af1f0
 approved_at: 2026-09-30T10:31:02.587Z
 approved_by: mwamer
-visibility: public
+visibility: private
 profile_status: active
 weight: 900
