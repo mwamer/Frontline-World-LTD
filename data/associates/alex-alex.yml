@@ -1,0 +1,19 @@
+application_id: app-20260929-5ca5b9a37709
+name: Alex Alex
+title: prof
+organisation: Excel
+summary: Palestinian academic
+expertise:
+  - strategic-foresight
+roles:
+  - consultant
+  - speaker
+sectors:
+  - education
+publication_permitted: true
+consent_fingerprint: sha256:19f3bf60c28b35e677afdc9e7f5eb01ffe46632cb47bf19a6e967245f62af1f0
+approved_at: 2026-09-30T10:31:02.587Z
+approved_by: mwamer
+visibility: private
+profile_status: inactive
+weight: 900
