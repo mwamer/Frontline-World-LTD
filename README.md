@@ -46,7 +46,9 @@ To change a page, edit its file in `content/`. There is no separate template to 
 │   ├── insights/list.html         # Insights listing
 │   ├── people/single.html         # Associate profile
 │   ├── partials/                  # Shared pieces, including the directory and profile helpers
-│   └── shortcodes/                # Assignment teams, leadership block, associate directory, form options
+│   ├── shortcodes/                # Assignment teams, leadership block, associate directory, form options
+├── applications-worker/            # Public form endpoint. Validates, then writes to a private R2 bucket
+├── review-worker/                  # The reviewer dashboard. Reads R2, writes records to GitHub
 ├── static/                        # Copied unchanged into the built site
 │   ├── styles.css                 # All site CSS, with design tokens at the top
 │   ├── script.js                  # Site JavaScript, including the directory filters
@@ -205,9 +207,8 @@ There is no `/people/` index page. The directory is the Our People page; each pr
 
 `/become-an-associate/` is a self-contained page in `content/`. The form posts
 `multipart/form-data` to a dedicated Worker, which validates it and stores it in
-a private R2 bucket; a reviewer reads it from there. Nothing about the pipeline
-is automatic beyond the storage: there is no server-side approval step, so
-someone still files an application before it can become an associate record.
+a private R2 bucket. A reviewer reads it from `review-worker/`, approves it there,
+and the approval writes the associate record to this repository.
 
 ### What happens to an application
 
@@ -235,19 +236,258 @@ someone still files an application before it can become an associate record.
    The record holds the consent answers verbatim. `publication_permitted` is
    `true` only when the applicant answered yes to publishing a profile, and it
    never flips on its own.
-4. A reviewer reads the application in R2 and decides. On approval they create
-   the person's record in `data/associates/<id>.yml`, copy across the public
-   fields, and set `visibility` by hand to match `public_consent` on the
-   application. Approving an application never sets visibility itself.
-5. A photograph or CV has to be exported out of R2 into `static/images/` by hand
-   before it can appear on the site.
+4. A reviewer opens the application in `review-worker/` and presses **Approve &
+   Create Associate**. The dashboard assembles `data/associates/<id>.yml` from
+   the application and the vocabulary in `data/vocab/associates.yml`, and writes
+   it through the GitHub Contents API. The record starts
+   `visibility: private` and `profile_status: inactive`, carries
+   `publication_permitted` copied from the application, and records who approved
+   it and when.
+5. **Publication is a separate decision.** Making the profile public is its own
+   button, and it is refused outright when the applicant did not consent.
+6. A photograph is a third decision, again its own button. Approval never
+   copies an image into `static/images/`, so accepting someone is never the same
+   decision as putting their face on a website.
+
+Every term on the record is validated against the vocabulary before it is
+written, and a term the vocabulary does not recognise is dropped rather than
+guessed at. The review state is kept separately in R2, so "approved" and "has a
+record" cannot drift apart: the record's `application_id` and the review's
+`associate_id` are set in the same operation.
+
+### Consent, and where it is read from
+
+The only authority for whether a person may be published is the
+`publication_permitted` answer in `applications/<id>/application.json` in R2.
+The dashboard re-reads that file on every publication and photograph request and
+checks it again, so a value typed into a form, or edited into the record by hand,
+is never enough. The site's own gate in `layouts/partials/associate-is-public.html`
+applies the same three conditions at build time, which means a record that is
+public in the repository still produces no page if its consent says no.
+
+Taking a profile down is never gated: `action=private` is accepted whatever the
+consent says, and the dashboard offers **Make Private** on an exposed record even
+when publication is not permitted. A rule that blocks a reviewer from undoing an
+exposure is not a safety control.
+
+The consent block is digested into a `consent_fingerprint` on both the record and
+the review state. If the application in R2 changes after approval, the digests
+disagree and the dashboard says so instead of publishing on a stale answer. No
+route can change a stored consent answer, which is what makes the mismatch a real
+event rather than a routine one.
+
+### The review dashboard
+
+`review-worker/` is a separate Worker from the submission endpoint, for the same
+reason: the submission Worker accepts unauthenticated public writes, and the
+review Worker holds a token that can write to this repository. They are never
+allowed to share a boundary.
+
+Authentication is GitHub OAuth against a reviewer allowlist in `REVIEWER_LOGINS`.
+The OAuth token identifies the reviewer and nothing else; all repository writes
+use `REPOSITORY_TOKEN`, which never leaves the server. Every state-changing form
+carries a CSRF token, including logout.
+
+The write surface is two folders, enforced in code rather than by convention:
+`data/associates/<id>.yml` and `static/images/<associate-id>.<jpg|jpeg|png|webp>`.
+No route takes a repository path from a request, so a reviewer cannot name a file.
+
+Two failure modes are treated as refusals rather than as success:
+
+- **The repository could not be checked.** A create with no SHA, so GitHub itself
+  refuses if the file appeared in the meantime. If the directory listing cannot
+  be read, nothing is written, because a list that failed to load is not a list
+  of zeroes.
+- **A write is refused.** Reported as a conflict and the application stays
+  unapproved, so a retry is safe.
+
+Reads the dashboard acts on — the vocabulary, the directory listing and the
+record it is about to change — are always fresh, never cached, so a reviewer
+never sees a state that has already moved.
+
+### Running the dashboard locally
+
+```sh
+# the submission endpoint
+(cd applications-worker && npx wrangler dev --port 8801)
+
+# the dashboard
+(cd review-worker && npx wrangler dev --port 8802)
+```
+
+The dashboard needs `REPOSITORY_TOKEN` and `GITHUB_REPO` in
+`review-worker/.dev.vars` (git-ignored). Start the two Workers sequentially
+against a shared `--persist-to` directory; starting them together can leave one
+holding the SQLite lock.
+
+`review-worker/test-github-stub.js` is an in-memory stand-in for the GitHub
+Contents API, so the whole approval and publication workflow can be exercised
+without a real token and without writing to this repository:
+
+```sh
+node test-github-stub.js 8803     # in one terminal
+./test.sh                         # in another
+```
+
+### Putting the dashboard in front of reviewers
+
+The dashboard is not live until three credentials exist, and two of them have to
+be created outside this repository.
+
+1. **A GitHub OAuth App of its own.** A GitHub OAuth App has exactly one callback
+   URL and no wildcard, so this Worker cannot share `oauth-proxy`'s App: two
+   Workers on two different hosts cannot both match. Create a second App with the
+   callback URL set to
+   `https://frontline-applications-review.<subdomain>.workers.dev/callback`.
+   The scope is `read:user`, and the callback reads only which account signed in.
+2. **A fine-grained personal access token** with "Contents: read and write" on
+   this repository and nothing else. This is the credential that writes records,
+   so it is the one worth scoping tightly. A GitHub App installation token works
+   the same way if you would rather not use a personal token.
+3. **A session secret**, which is any long random string:
+   `openssl rand -base64 48`.
+
+Then:
+
+```sh
+cd review-worker
+npx wrangler secret put GITHUB_CLIENT_ID
+npx wrangler secret put GITHUB_CLIENT_SECRET
+npx wrangler secret put REPOSITORY_TOKEN
+npx wrangler secret put SESSION_SECRET   # the value from step 3
+npx wrangler deploy
+```
+
+`ALLOWED_USERS`, `GITHUB_REPO` and `REPOSITORY_BRANCH` are already in
+`wrangler.toml`. Nothing else is needed: the R2 bucket binding is there, and the
+`.dev.vars` file that holds `GITHUB_API_BASE` and `ALLOW_TEST_RESET` for the test
+suite is never uploaded by `wrangler deploy`. A deployed Worker therefore has no
+test-login route and cannot be pointed at a stand-in.
+
+To check the deploy before anyone depends on it, load `/login` and confirm the
+page offers GitHub sign-in and nothing else. A Worker deployed without its
+secrets still answers, with a sign-in button that fails — which is why the
+first thing to test is a real sign-in, not a 200.
+
+### What is stored, and where
+
+An application lives in the private R2 bucket `frontline-applications`, which has no
+public domain and no public URL for any object. It is written by the applications
+Worker and read by the review dashboard. Three things are stored per application:
+
+| What | Where | Notes |
+| --- | --- | --- |
+| The application record | `applications/<id>/application.json` | Name, contact details, biography, qualifications, and the consent block as submitted. |
+| The CV | `applications/<id>/cv/<uuid>.<ext>` | Stored under a generated name, never the applicant's own filename. |
+| The photograph | `applications/<id>/photo/<uuid>.<ext>` | Same. Required by the form, but not published by approving. |
+| The review decision | `review/<id>/state.json` | Status, the notes, the history, and the timestamps the retention clock reads. |
+| The last sweep's report | `retention/last-run.json` | What was deleted, what was kept, and what failed. |
+
+There is no applicant account and no mail step, so there is no applicant-facing
+copy of any of this and no way for an applicant to ask for it through the site.
+A withdrawal is recorded by a reviewer, not requested by the applicant in
+self-service.
+
+### How long application data is kept
+
+These are the organisation's own operational periods. They are not a statement
+about what any law requires, and they are not legal advice — someone responsible
+for data protection should confirm them against the obligations that actually
+apply.
+
+| Outcome | Kept for | Counted from | What happens after |
+| --- | --- | --- | --- |
+| Rejected | 12 months (365 days) | The final rejection decision | The record, the CV and the photograph are deleted. |
+| Withdrawn | 30 days | The withdrawal | The record, the CV and the photograph are deleted. |
+| Approved | 24 months (730 days) | Approval | Raised for a person to decide. The application is **never** deleted automatically. Its CV is removed, and its photograph once it is published or was never publishable. |
+| Under review | No limit | — | Kept in full. |
+
+An approved application is deliberately never deleted automatically, for two
+reasons. The published Associate record carries `application_id` and a
+`consent_fingerprint`, and that link back to the answer the record was built from
+is the only way to show a published profile rests on a real consent. And the
+policy itself asks for a decision after 24 months rather than a deletion.
+
+### When deletion actually happens
+
+A scheduled Worker sweeps the bucket at **04:17 UTC every day**. The rules live in
+`review-worker/lib/retention.js` as pure functions; `review-worker/lib/cleanup.js`
+carries them out and writes the report.
+
+**This is a scheduled Worker rather than an R2 lifecycle rule, and the reason is
+structural.** A lifecycle rule matches on a prefix and an age in days. It cannot
+open an object and read a field. Retention here turns on `status`, which lives
+inside the object bodies, so a lifecycle rule could only delete every application
+on one fixed schedule — which would destroy applications still under review — or
+never fire at all.
+
+A reviewer can also run a sweep by hand from the Applications page. It is a
+delete, so it is a POST behind a session and a CSRF token like every other write.
+
+**The clock is stamped on the decision, not on the file.** `rejected_at`,
+`withdrawn_at` and `approved_at` are set by `saveReview` on the transition into
+that state, and re-stamped if an application is rejected again after being
+reopened, because the period counts from the final decision. They are not derived
+from `updated_at`, which a later note would move. Records written before the
+stamps existed are dated from the matching entry in their history.
+
+### Withdrawals and holds
+
+A withdrawal is the applicant ending the process, and it is a distinct status
+from a rejection because it carries a different period. Setting it requires a
+short reason: the policy deletes these in 30 days, and a deletion nobody wrote
+down is not defensible. The reason goes into the review history.
+
+Either outcome can be held past its period. A hold needs **both** a date and a
+reason; either alone is not a hold, so a half-filled form cannot quietly keep an
+application. Both are set on the status form, and clearing both releases the hold.
+
+### What the sweep will not do
+
+- It does not delete an application that is submitted, under review, awaiting
+  changes, or archived. A submission nobody has looked at is not finished with.
+- It does not delete an application merely because a fixed number of days has
+  passed. Age is only ever read together with a status and a decision date.
+- It does not delete a photograph that could still be needed. A photograph is
+  discarded only once it has been published, or once the applicant declined
+  publication and so it can never be published. An unpublished photograph of a
+  consenting applicant is the only copy, and is kept.
+- It does not touch anything outside `applications/<id>/` and `review/<id>/` for an
+  id that matches the generated format. Every key is built from a validated id,
+  so a malformed key is refused rather than followed.
+- It does not report a deletion it cannot confirm. Every deletion is followed by a
+  re-listing of the same prefix, and anything still there is recorded as a
+  failure. Uploads are deleted before the record, so a partial failure leaves a
+  whole application for the next sweep rather than an orphan.
+
+A failure on one application does not stop the sweep. Failures are listed at the
+top of the Applications page and in `retention/last-run.json`, because a deletion
+that silently did not happen is the failure mode worth being loud about.
+
+### Application data and the Associate record are different things
+
+The **application** is a private record of a process: what someone applied with,
+what they uploaded, and what was decided. It lives in R2 and is deleted on the
+schedule above.
+
+The **Associate record** is `data/associates/<id>.yml` in this repository. It is
+the public profile, it is built from the application at the moment of approval,
+and it stays while the Associate relationship and profile are active, subject to
+periodic review. It is not deleted by the retention sweep, and deleting the
+application does not delete it.
+
+What crosses from one to the other is deliberately narrow. The public record
+carries `application_id`, `publication_permitted`, a `consent_fingerprint`,
+`approved_at` and `approved_by`. It does not carry the applicant's email, their
+literal consent answer, their consent timestamp, their CV, reviewer notes, or any
+bucket key. The consent answer and timestamp stay in the private bucket.
 
 ### What the form can and cannot do
 
 The required photograph and the 5 MB / 8 MB file limits are named on the
 page and enforced again on the server.
 
-A photograph is required on the form, because an associate profile without one is not publishable, but nothing stops a reviewer approving a record that has no image.
+A photograph is required on the form, because an associate profile without one is not publishable. Approval still does not publish it: the image stays in the private bucket until a reviewer publishes it separately, and only where the applicant consented.
 
 
 ### Privacy limits worth knowing
@@ -268,7 +508,7 @@ A photograph is required on the form, because an associate profile without one i
   npx wrangler secret put TURNSTILE_SECRET      # only if Turnstile is enabled
   ```
 
-  Applications are read out of R2 with the Cloudflare API, `wrangler r2 object get`, or a temporary signed URL issued to the reviewer — never through a permanent public link. The CMS Applications collection in `data/private/applications/` continues to hold the working review record, and the reviewer copies the consent answers across by hand when creating an associate record, so the R2 consent never enters Git.
+  Applications are read out of R2 with the Cloudflare API, `wrangler r2 object get`, or a temporary signed URL issued to the reviewer — never through a permanent public link. The dashboard in `review-worker/` reads them through its R2 binding and serves them only to a signed-in reviewer. The CMS Applications collection in `data/private/applications/` remains the working review record for applications that arrive by email. A record created by the dashboard carries `publication_permitted` and a `consent_fingerprint`, which is a digest of the answer rather than the answer itself, so the consent text stays in the private bucket.
 
   `static/admin/config.yml` is published at `/admin/config.yml`, so the collection names, the folder paths and every field label are visible. No applicant data is in that file.
 

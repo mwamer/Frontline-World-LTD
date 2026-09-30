@@ -17,10 +17,16 @@ Thumbs.db
 
 # Workers: wrangler state and local secrets must never be committed
 .wrangler/
+
+# A locally-persisted R2 bucket lands in the working directory as applications/,
+# holding applicant records and their uploads. Nothing there belongs in git.
+applications/
 oauth-proxy/node_modules/
 oauth-proxy/.dev.vars
 applications-worker/node_modules/
 applications-worker/.dev.vars
+review-worker/node_modules/
+review-worker/.dev.vars
 
 # Applicant data: never committed. Applications live in a private R2 bucket;
 # this folder is staging for the review process and is on its way out. The

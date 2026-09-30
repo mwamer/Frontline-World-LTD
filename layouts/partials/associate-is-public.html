@@ -3,23 +3,37 @@
 
   This is the only place the rule lives. A person appears in the Expertise On
   Demand directory, in a course trainer grid and on a profile page only when
-  both conditions hold:
+  all three conditions hold:
 
-    visibility      public, not private
-    profile_status  active, not inactive or archived
+    publication_permitted  the applicant said yes to a public profile
+    visibility             public, not private
+    profile_status         active, not inactive or archived
 
-  Both fields are optional, so a record written before they existed still
-  publishes: a missing visibility falls back to the older `status` key and then
-  to public, and a missing profile_status is active.
+  The first condition is the applicant's own answer, carried across when the
+  review approved them. It is stored in the record as publication_permitted and
+  is copied from the application, never typed in by a reviewer, so "approved"
+  can never quietly become "published": a record with visibility: public and
+  publication_permitted: false stays off the site.
+
+  A record with no publication_permitted field is one that was not created from
+  an application — somebody already on the site, or one added by hand. Those
+  records have no consent decision to check and keep publishing as they did, so
+  the field defaults to true. That is a deliberate exception for existing
+  people, and it stops applying as soon as a record carries the field.
 
   Everything else about a person — contact details, availability, files, the
-  review history — lives in the private record in
-  data/private/applications/, which no template reads, so the gate is the only
-  thing standing between a record and the published page.
+  review history — lives in the private bucket under review/, which no template
+  reads, so the gate is the only thing standing between a record and the
+  published page.
 
   Call with a person:
     {{ partial "associate-is-public.html" $person }}
 */ -}}
 {{- $visibility := .visibility | default .status | default "public" -}}
 {{- $profile := .profile_status | default "active" -}}
-{{- return (and (eq $visibility "public") (eq $profile "active")) -}}
+{{- /* Absent means the record predates the application pipeline, not that consent was refused. */ -}}
+{{- $permitted := true -}}
+{{- if isset . "publication_permitted" -}}
+    {{- $permitted = eq .publication_permitted true -}}
+{{- end -}}
+{{- return (and $permitted (eq $visibility "public") (eq $profile "active")) -}}

@@ -1,0 +1,97 @@
+# Associate application review dashboard for Frontline World.
+#
+# A separate Worker from both existing ones, and it is deliberately not folded
+# into either:
+#
+#   applications-worker  A public, unauthenticated write endpoint. Coupling a
+#                        reviewer interface to it would put a session-signing
+#                        secret on the same Worker that accepts the public
+#                        internet.
+#   oauth-proxy          Hands a live GitHub token to the browser, because Decap
+#                        needs one to commit. A dashboard must never do that, so
+#                        the GitHub access token here stays in the Worker and
+#                        only its answer — which account signed in — is kept.
+#
+# Reads the same private R2 bucket the submissions Worker writes to. It is bound
+# read/write, so a decision can be stored next to the application it decides.
+# Nothing here changes what that Worker does.
+#
+# It also writes to the repository, through the GitHub Contents API: approving an
+# application creates `data/associates/<id>.yml`, and publishing a profile or a
+# photograph changes the record or copies an image into `static/images/`. Two
+# credentials with two jobs, never mixed:
+#
+#   the OAuth token      Scoped `read:user`, used once in the callback to learn
+#                        who signed in, then discarded. It cannot write.
+#   REPOSITORY_TOKEN     A Worker *secret* read only by `lib/repository.js`. It
+#                        needs "Contents: read and write" on this one
+#                        repository and nothing else. A fine-grained personal
+#                        access token is the shape that matches; a GitHub App
+#                        installation token works the same way.
+#
+# Neither credential is ever returned to the browser. That is also why
+# `oauth-proxy` cannot be reused here: it exists to hand a live token to Decap.
+#
+# Deploy with:  npx wrangler deploy
+# Secrets:      npx wrangler secret put GITHUB_CLIENT_ID
+#               npx wrangler secret put GITHUB_CLIENT_SECRET
+#               npx wrangler secret put SESSION_SECRET
+#               npx wrangler secret put REPOSITORY_TOKEN
+# Vars:         ALLOWED_USERS, GITHUB_REPO, REPOSITORY_BRANCH (below)
+#
+# GITHUB_API_BASE and ALLOW_TEST_RESET are deliberately absent. The first exists
+# only so the test suite can point the Worker at `test-github-stub.js`; the second
+# is how the suite mints a session without a GitHub round trip. Neither is ever
+# uploaded, because `wrangler deploy` does not send `.dev.vars` — a deployed
+# Worker talks to api.github.com and has no test-login route at all.
+#
+# This Worker needs its own GitHub OAuth App, not oauth-proxy's. A GitHub OAuth
+# App has exactly one callback URL, and no wildcard, so two Workers on two
+# different hosts cannot share one: registering this Worker's callback would
+# break the CMS editor's. Create a second App, point its callback URL at
+#   https://frontline-applications-review.<subdomain>.workers.dev/callback
+# and use its client id and secret here. Nothing else about it matters: the
+# scope is `read:user` and the only thing the callback reads from the token is
+# which account signed in.
+
+name = "frontline-applications-review"
+main = "worker.js"
+# Pins the target account, so a different authenticated session cannot deploy
+# this Worker somewhere else by accident. Not a secret.
+account_id = "7e48c5cfc5b732a376a9a3d89c2f1da0"
+compatibility_date = "2026-01-01"
+workers_dev = true
+
+[vars]
+# The GitHub accounts allowed to review. Comma-separated usernames, matched
+# case-insensitively. An account not on this list cannot reach a single
+# application, whatever else it holds.
+ALLOWED_USERS = "mwamer"
+
+# The repository the Associate records live in: read for the existing IDs and the
+# controlled vocabulary, written by the approval and publication actions.
+GITHUB_REPO = "mwamer/Frontline-World-LTD"
+
+# The branch every write lands on. A write goes to the Contents API as a commit
+# on this branch, so the site's source of truth gains one commit per approval.
+# Nothing is ever pushed to another branch, and no force-push happens.
+REPOSITORY_BRANCH = "main"
+
+# The same private bucket the submissions Worker writes to. There is no public
+# access and no public URL for any object: the dashboard streams a CV or a
+# photograph only to a signed-in reviewer, through this Worker.
+[[r2_buckets]]
+binding = "APPLICATIONS"
+bucket_name = "frontline-applications"
+
+# The retention sweep. 04:17 UTC daily, which is early enough to be out of the
+# way of anyone working and late enough not to collide with other jobs.
+#
+# This is a scheduled Worker rather than an R2 lifecycle rule because retention
+# turns on `status`, and `status` lives inside the object bodies. A lifecycle
+# rule matches on a prefix and an age in days; it cannot open an object and read
+# a field, so it could only delete every application on one fixed schedule —
+# which would destroy applications that are still under review. See
+# `lib/retention.js` for the periods and `lib/cleanup.js` for the sweep.
+[triggers]
+crons = ["17 4 * * *"]
