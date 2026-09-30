@@ -5,8 +5,114 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Frontline World content manager</title>
+  <style>
+    /* The three colours mirror the tokens at the top of static/styles.css, which
+       is the site's single source for them. They are repeated here rather than
+       linked because the CMS ships its own stylesheet, and loading the site
+       stylesheet into the admin would restyle the editor as well. */
+    :root {
+      --forest: #173A35;
+      --terracotta: #B85C45;
+      --offwhite: #F8F6F1;
+      --text-muted: #5D6158;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --admin-bar-h: 60px;
+    }
+
+    /* Application review is not a Decap collection: the applications live in a
+       private R2 bucket and are handled by the review Worker, which
+       authenticates a reviewer in its own right. A collection here could only
+       ever be an empty placeholder or a copy of applicant data, so the entry is
+       a link in the admin chrome instead. */
+    .fw-admin-bar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--admin-bar-h);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 clamp(0.75rem, 2vw, 1.25rem);
+      background: var(--forest);
+      color: var(--offwhite);
+      font-family: var(--font-sans);
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+
+    .fw-admin-bar__title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .fw-admin-bar__spacer {
+      flex: 1;
+    }
+
+    .fw-admin-bar__item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--offwhite);
+      border: 1px solid rgba(248, 246, 241, 0.32);
+      border-radius: 4px;
+      padding: 0.4rem 0.85rem;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .fw-admin-bar__item:hover,
+    .fw-admin-bar__item:focus-visible {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+
+    .fw-admin-bar__label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .fw-admin-bar__note {
+      font-size: 0.75rem;
+      color: rgba(248, 246, 241, 0.72);
+      white-space: nowrap;
+    }
+
+    .fw-admin-bar__action {
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 720px) {
+      .fw-admin-bar__note {
+        display: none;
+      }
+    }
+
+    /* Decap mounts into #nc-root and fills the viewport, so the bar is taken out
+       of flow and the editor is given the same top offset. */
+    #nc-root {
+      padding-top: var(--admin-bar-h);
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
+  <nav class="fw-admin-bar" aria-label="Frontline World admin">
+    <p class="fw-admin-bar__title">Frontline World</p>
+    <span class="fw-admin-bar__spacer"></span>
+    <a class="fw-admin-bar__item"
+       href="https://frontline-applications-review.wesaam-amer.workers.dev"
+       target="_blank"
+       rel="noopener noreferrer">
+      <span class="fw-admin-bar__label">Applications</span>
+      <span class="fw-admin-bar__note">Review and manage Associate applications</span>
+      <span class="fw-admin-bar__action">Open Application Review &rarr;</span>
+    </a>
+  </nav>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
