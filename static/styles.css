@@ -7486,53 +7486,98 @@ input[aria-invalid="true"] {
     line-height: 1.8;
 }
 
-/* The spine: one continuous hairline with a node on it, rather than six
-   stacked boxes. A spine implies a single argument; a card row implies six
-   separable things. Real text in real list markup, so it reflows, stays
-   selectable and needs no JavaScript. */
+/* The spine: a dark plate carrying one continuous hairline, with a drawn
+   diagram sitting on the line at each of the six movements.
+
+   The line is not a background rule. Every figure draws the segment that passes
+   through it, entering and leaving at the same x, so the six segments read as a
+   single path rather than six marks. The gap between one figure and the next is
+   bridged by a pseudo-element on the figure below, whose length is the item's
+   padding-bottom — a fixed distance, so the two halves cannot drift apart.
+
+   Real text in real list markup, so it reflows, stays selectable and needs no
+   JavaScript. */
 .hwt-spine {
     position: relative;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+    background: var(--forest-deep);
+    color: var(--offwhite);
+}
+
+/* Corner marks rather than a border: the plate reads as a drawing surface that
+   sits on the page, not as a boxed component. */
+.hwt-spine::before,
+.hwt-spine::after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border: 1px solid rgba(248, 246, 241, 0.42);
+    pointer-events: none;
 }
 
 .hwt-spine::before {
-    content: "";
-    position: absolute;
-    left: 4.75rem;
-    top: 1.7rem;
-    bottom: 1.7rem;
-    width: 1px;
-    background: var(--line-strong);
+    top: clamp(0.6rem, 1.5vw, 1.1rem);
+    left: clamp(0.45rem, 1.2vw, 1rem);
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.hwt-spine::after {
+    bottom: clamp(0.6rem, 1.5vw, 1.1rem);
+    right: clamp(0.45rem, 1.2vw, 1rem);
+    border-left: 0;
+    border-top: 0;
 }
 
 .hwt-spine__item {
     position: relative;
     display: grid;
-    grid-template-columns: 4.75rem minmax(0, 1fr);
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    align-items: start;
     gap: 0 clamp(1.5rem, 3vw, 2.75rem);
     padding: 1.5rem 0;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(248, 246, 241, 0.16);
 }
 
 .hwt-spine__item:last-child {
     border-bottom: 0;
+    padding-bottom: 0.5rem;
 }
 
-.hwt-spine__node {
+.hwt-spine__figure {
+    position: relative;
+    margin: 0;
+    align-self: start;
+}
+
+.hwt-spine__figure svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+}
+
+/* The bridge. bottom:100% puts its lower edge at the top of the figure, so it
+   spans exactly the previous item's padding-bottom and meets that item's rule. */
+.hwt-spine__item + .hwt-spine__item .hwt-spine__figure::before {
+    content: "";
     position: absolute;
-    left: calc(4.75rem - 5px);
-    top: 1.7rem;
-    width: 11px;
-    height: 11px;
-    background: var(--offwhite);
-    border: 1px solid var(--forest);
+    left: 50%;
+    bottom: 100%;
+    width: 1px;
+    height: 1.5rem;
+    margin-left: -0.5px;
+    background: rgba(248, 246, 241, 0.34);
 }
 
-.hwt-spine__item--accent .hwt-spine__node {
-    background: var(--terracotta);
-    border-color: var(--terracotta);
+.hwt-spine__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin: 0 0 0.5rem;
 }
 
 .hwt-spine__num {
@@ -7540,7 +7585,8 @@ input[aria-invalid="true"] {
     font-size: 0.66rem;
     font-weight: 600;
     letter-spacing: 0.18em;
-    color: var(--text-muted);
+    color: rgba(248, 246, 241, 0.62);
+    margin: 0;
 }
 
 .hwt-spine__term {
@@ -7548,8 +7594,8 @@ input[aria-invalid="true"] {
     font-weight: 400;
     font-size: 1.3rem;
     line-height: 1.3;
-    color: var(--forest);
-    margin: 0 0 0.4rem;
+    color: var(--offwhite);
+    margin: 0;
 }
 
 .hwt-spine__body {
@@ -7557,7 +7603,7 @@ input[aria-invalid="true"] {
     max-width: 58ch;
     font-size: 0.95rem;
     line-height: 1.75;
-    color: var(--text-muted);
+    color: rgba(248, 246, 241, 0.78);
 }
 
 .hwt-spine__note {
@@ -7567,7 +7613,7 @@ input[aria-invalid="true"] {
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: rgba(248, 246, 241, 0.62);
 }
 
 /* The register: hairline-ruled rows, the layout of a reference list. */
@@ -7618,35 +7664,119 @@ input[aria-invalid="true"] {
     color: var(--text-muted);
 }
 
+/* The encounter diagram: four ways of reaching the same learning condition,
+   drawn rather than listed.
+
+   The geometry is two layers over one set of labels. The SVG layer draws only
+   the links; the terms and their sentences are real text in a real list,
+   absolutely positioned so each label's centre lands on the node its links meet
+   at. Both layers are driven by percentages of the same box, so the labels stay
+   on the nodes at every width instead of needing a script to keep them in step.
+
+   Node centres are the same fractions in the CSS below as in the two SVG
+   viewBoxes. Changing one means changing the other. */
+.hwt-formats-plate {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 900 / 540;
+    background: var(--forest-deep);
+}
+
+.hwt-formats-plate::before,
+.hwt-formats-plate::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 13px;
+    height: 13px;
+    border: 1px solid rgba(248, 246, 241, 0.42);
+    pointer-events: none;
+}
+
+.hwt-formats-plate::before {
+    top: clamp(0.6rem, 1.5vw, 1.1rem);
+    left: clamp(0.45rem, 1.2vw, 1rem);
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.hwt-formats-plate::after {
+    bottom: clamp(0.6rem, 1.5vw, 1.1rem);
+    right: clamp(0.45rem, 1.2vw, 1rem);
+    border-left: 0;
+    border-top: 0;
+}
+
+.hwt-formats-plate__layer {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+}
+
+.hwt-formats-plate__layer svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hwt-formats-plate__layer--tall {
+    display: none;
+}
+
 .hwt-formats {
+    position: absolute;
+    inset: 0;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0 clamp(1.25rem, 2.5vw, 2.25rem);
 }
 
 .hwt-formats__item {
-    padding-top: 1rem;
-    border-top: 1px solid var(--line-strong);
+    position: absolute;
+    width: 9.5rem;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+.hwt-formats__item--online,
+.hwt-formats__item--condition,
+.hwt-formats__item--in-person {
+    top: calc(30% - 2rem);
+}
+
+.hwt-formats__item--online { left: 14%; }
+.hwt-formats__item--condition { left: 50%; width: 12.5rem; }
+.hwt-formats__item--in-person { left: 86%; }
+.hwt-formats__item--in-house { left: 50%; top: calc(68% - 2rem); }
+
+.hwt-formats__glyph {
+    width: 4rem;
+    margin: 0 auto 0.85rem;
+}
+
+.hwt-formats__glyph svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
 }
 
 .hwt-formats__term {
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: 1.1rem;
-    line-height: 1.35;
-    color: var(--forest);
-    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--offwhite);
+    margin: 0 0 0.3rem;
 }
 
 .hwt-formats__body {
-    margin: 0;
-    max-width: 30ch;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: var(--text-muted);
+    margin: 0 auto;
+    max-width: 26ch;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(248, 246, 241, 0.72);
 }
 
 .hwt-band--closing .hero-actions {
@@ -7664,10 +7794,6 @@ input[aria-invalid="true"] {
     .hwt-arc__accent { stroke-width: 2.6; }
     .hwt-arc__ticks { stroke-width: 1.5; }
 
-    .hwt-formats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     /* The term column of the register runs out of room well before the page
        does, so it drops under the number here rather than at the phone
        breakpoint: at 700px a three-column register leaves the terms about 130px,
@@ -7676,6 +7802,59 @@ input[aria-invalid="true"] {
         grid-template-areas: "num term" "num body";
         grid-template-columns: 2.5rem minmax(0, 1fr);
         row-gap: 0.35rem;
+    }
+}
+
+/* Below 780px the encounter plate is recomposed rather than shrunk. A
+   three-across layout cannot hold four labelled nodes at phone widths, so the
+   condition moves to the top, the two delivery modes sit either side of a
+   junction below it, and the contextual mode hangs off that junction. The
+   junction square is what stops the vertical reading as a sequence. */
+@media (max-width: 780px) {
+    .hwt-formats-plate {
+        max-width: 440px;
+        aspect-ratio: 440 / 760;
+    }
+
+    .hwt-formats-plate__layer--wide {
+        display: none;
+    }
+
+    .hwt-formats-plate__layer--tall {
+        display: block;
+    }
+
+    .hwt-formats-plate__layer .hwt-enc__links {
+        stroke-width: 2;
+    }
+
+    .hwt-formats__item {
+        width: 8rem;
+    }
+
+    .hwt-formats__item--condition {
+        width: 12.5rem;
+        left: 50%;
+        top: calc(19% - 2.375rem);
+    }
+
+    .hwt-formats__item--online {
+        left: 20%;
+        top: calc(47.5% - 2.375rem);
+    }
+
+    .hwt-formats__item--in-person {
+        left: 80%;
+        top: calc(47.5% - 2.375rem);
+    }
+
+    .hwt-formats__item--in-house {
+        left: 50%;
+        top: calc(80% - 2.375rem);
+    }
+
+    .hwt-formats__glyph {
+        width: 4.75rem;
     }
 }
 
@@ -7691,25 +7870,20 @@ input[aria-invalid="true"] {
         display: block;
     }
 
-    .hwt-spine::before {
-        left: 2.25rem;
-    }
-
     .hwt-spine__item {
-        grid-template-columns: 2.25rem minmax(0, 1fr);
+        grid-template-columns: 3.75rem minmax(0, 1fr);
         gap: 0 1.25rem;
     }
 
-    .hwt-spine__node {
-        left: calc(2.25rem - 5px);
-    }
+    /* At 60px a 64-unit plate scales strokes below a device pixel, so they are
+       thickened here rather than drawn heavier at every width. Presentation
+       attributes lose to CSS, so this only moves the small end of the range. */
+    .hwt-mv__part { stroke-width: 1.7; }
+    .hwt-mv__spine { stroke-width: 2.1; }
+    .hwt-mv__accent { stroke-width: 2.2; }
 
     .hwt-register__item {
         grid-template-columns: 2.25rem minmax(0, 1fr);
-    }
-
-    .hwt-formats {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .hwt-band--closing .hero-actions .cta-button {
