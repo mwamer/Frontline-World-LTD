@@ -1,0 +1,34 @@
+{{- /*
+  The site's stylesheet link, carrying a version built from the stylesheet's own
+  content.
+
+  Why this exists: the deployed HTML and the deployed CSS are cached for
+  different lengths — HTML for ten minutes, styles.css for four hours. A page
+  therefore used to pick up new markup while still being served the previous
+  stylesheet, and any rule the new markup introduced silently fell back to the
+  browser default. That is how the course cards arrived as a bare bulleted list
+  on programme pages that were otherwise rendering correctly. The mismatch is in
+  the CDN, which no commit can reach, so the fix has to live in the URL: a
+  stylesheet whose bytes change must be a stylesheet the browser has never seen.
+
+  The version is the SHA-256 of static/styles.css, truncated. Content-addressed
+  rather than date-stamped, so a deploy that leaves the stylesheet alone keeps
+  the same URL and the four-hour cache still does its job; only a real CSS
+  change invalidates anything. That also keeps a cached stylesheet from
+  outliving the markup it was written for.
+
+  Hugo's own BuildDate is not usable here: on this machine it reports the
+  Homebrew binary's build time, 2026-08-12, and is identical on every build, so
+  it would pin one version forever.
+
+  relURL rather than a hand-written relative path, so the link resolves at every
+  page depth and under both the custom domain and the github.io subpath, which
+  is what site-head.html already did.
+
+  The path is read from the repo rather than through resources.Get, which only
+  reaches assets/. Moving styles.css into assets/ to get Hugo's fingerprint
+  would rename the deployed file and change every URL that points at it; this
+  keeps the file where it is and the URL recognisable.
+*/ -}}
+{{- $hash := substr (os.ReadFile "static/styles.css" | crypto.SHA256) 0 12 -}}
+<link rel="stylesheet" href="{{ "styles.css" | relURL }}?v={{ $hash }}">

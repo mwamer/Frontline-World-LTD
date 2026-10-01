@@ -1,0 +1,10 @@
+{{- /*
+  The stylesheet link, for the hand-written pages in content/.
+
+  Those pages are complete HTML files with their own head, so they cannot call a
+  partial and cannot evaluate Go template actions: Hugo passes {{ hugo.BuildDate }}
+  through them as literal text. Shortcodes are the one thing it does evaluate
+  there. This is therefore a one-line wrapper so the version stays written once,
+  in stylesheet.html, rather than repeated into every page.
+*/ -}}
+{{- partial "stylesheet.html" . -}}

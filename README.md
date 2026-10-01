@@ -108,16 +108,19 @@ All internal links and asset paths are **relative**, so the site works at the re
 
 A relative path counts how far the page sits below the site root. On a page with one URL segment, reach the root with `../`; with two segments, use `../../`, and so on.
 
-| Page URL                               | Home        | Another page              | Asset                 |
-| -------------------------------------- | ----------- | ------------------------- | --------------------- |
-| `/`                                    | `./`        | `about/`                  | `styles.css`          |
-| `/about/`                              | `../`       | `../services/`            | `../styles.css`       |
-| `/insights/welcome/`                   | `../../`    | `../../about/`            | `../../styles.css`    |
-| `/training-academy/courses/<slug>/` | `../../../` | `../../training-academy/` | `../../../styles.css` |
+| Page URL                               | Home        | Another page              | Asset                |
+| -------------------------------------- | ----------- | ------------------------- | -------------------- |
+| `/`                                    | `./`        | `about/`                  | `{{< stylesheet >}}` |
+| `/about/`                              | `../`       | `../services/`            | `{{< stylesheet >}}` |
+| `/insights/welcome/`                   | `../../`    | `../../about/`            | `{{< stylesheet >}}` |
+| `/training-academy/courses/<slug>/` | `../../../` | `../../training-academy/` | `{{< stylesheet >}}` |
+
+Other assets stay relative and follow the depth table: `../images/foo.jpg` from a page one segment deep.
 
 Rules:
 
 - Never start a link or asset path with `/Frontline-World-LTD/`. That hard-codes the deployment path and breaks a custom domain.
+- Link the stylesheet with `{{< stylesheet >}}`, never with a hand-written path. That shortcode carries a version built from the stylesheet's own content, so a CSS change reaches browsers instead of being served from a four-hour cache alongside newer markup. See `layouts/partials/stylesheet.html`.
 - To link to a section on another page, add the fragment: `../services/#strategic-research`.
 - To link to a section on the same page, use just the fragment: `#courses`.
 
@@ -128,6 +131,8 @@ The document head, navigation, and footer appear in full in every hand-written p
 When you change the navigation or footer, change it in every file under `content/`. Use search and replace, and check the result.
 
 The generated parts of the site do share their chrome, because they are built by a template rather than written out: `layouts/people/single.html` and `layouts/insights/list.html` call the same `site-head`, `site-nav` and `site-footer` partials. A change to a partial therefore reaches those pages, and the repeated markup in `content/` still needs editing by hand.
+
+The stylesheet link is the one exception to the repetition. `layouts/partials/stylesheet.html` holds it, `site-head.html` calls it, and the hand-written pages reach it through the `{{< stylesheet >}}` shortcode. Those pages cannot call a partial or evaluate Go template actions, so the shortcode is what lets them share the same version without copying it seventeen times.
 
 ## The Associate Directory
 
