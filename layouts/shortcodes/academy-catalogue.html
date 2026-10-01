@@ -20,8 +20,11 @@
                 programme, matched the same way layouts/programmes/single.html
                 matches them.
 
-  A programme's course count comes from the same list that renders its courses,
-  so the two cannot disagree.
+  A programme's course count comes from the same list that fills its programme
+  page, so the card and the page cannot disagree. The card shows the count only:
+  each card is a single link to the programme page, so the courses themselves are
+  named there rather than inside the card. A link cannot contain another link,
+  and the courses are still one click from the card.
 */ -}}
 {{- $families := index hugo.Data.vocab.associates "programme_families" | default slice -}}
 {{- $programmes := where site.RegularPages "Section" "programmes" -}}
@@ -45,31 +48,24 @@
 
         {{- with $ordered }}
         <ul class="academy-programme-list">
-            {{- range $programme := . }}
+            {{- range $index, $programme := . }}
                 {{- $slug := $programme.Params.slug }}
                 {{- $in_programme := where $courses "Params.programme" $slug }}
                 {{- $course_count := len $in_programme }}
+                {{- /* The card is one link, so its own text is the accessible name and
+                     the heading is read as part of it. */}}
                 <li class="academy-programme">
-                    <div class="academy-programme-head">
-                        <h3 class="academy-programme-name"><a href="{{ $programme.RelPermalink }}">{{ $programme.Title }}</a></h3>
-                        <p class="academy-programme-count">{{ $course_count }} {{ if eq $course_count 1 }}course{{ else }}courses{{ end }}</p>
-                    </div>
-                    {{- with $programme.Params.description }}
-                    <p class="academy-programme-desc">{{ . }}</p>
-                    {{- end }}
-                    {{- if $course_count }}
-                    <div class="academy-course-group">
-                        <p class="academy-course-group-label" id="academy-courses-{{ $slug }}">Courses in this programme</p>
-                        <ul class="academy-course-list" aria-labelledby="academy-courses-{{ $slug }}">
-                            {{- range $course := $in_programme }}
-                            <li class="academy-course"><a class="academy-course-link" href="{{ $course.RelPermalink }}">{{ partial "course-name.html" $course }}</a></li>
-                            {{- end }}
-                        </ul>
-                    </div>
-                    {{- end }}
-                    <p class="academy-programme-actions">
-                        <a class="cta-button cta-button--sm" href="{{ $programme.RelPermalink }}">Explore Programme<span class="visually-hidden">: {{ $programme.Title }}</span></a>
-                    </p>
+                    <a class="academy-programme-card" href="{{ $programme.RelPermalink }}">
+                        <span class="academy-programme-num" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
+                        <h3 class="academy-programme-name">{{ $programme.Title }}</h3>
+                        {{- with $programme.Params.description }}
+                        <p class="academy-programme-desc">{{ . }}</p>
+                        {{- end }}
+                        <span class="academy-programme-foot">
+                            <span class="academy-programme-count">{{ $course_count }} {{ if eq $course_count 1 }}course{{ else }}courses{{ end }}</span>
+                            <span class="academy-programme-cta">Explore programme<span class="academy-programme-arrow" aria-hidden="true">&rarr;</span></span>
+                        </span>
+                    </a>
                 </li>
             {{- end }}
         </ul>

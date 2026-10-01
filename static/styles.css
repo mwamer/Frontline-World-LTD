@@ -7043,6 +7043,20 @@ input[aria-invalid="true"] {
     margin: 1.5rem 0 0;
 }
 
+/* The closing note on a programme page, set quieter than the line above it so
+   it reads as a sign-off rather than as another fact about the courses. */
+.programme-more-note {
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 2.25rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
 .programme-index-header {
     margin-bottom: 2.5rem;
 }
@@ -7098,11 +7112,14 @@ input[aria-invalid="true"] {
 }
 
 /* The programme grid sits under a hairline rule so the cards read as the
-   catalogue body rather than as a continuation of the section header. */
+   catalogue body rather than as a continuation of the section header. Five
+   cards in one row need more width than the 1200px container gives, so from
+   1440px the grid uses the page's side margin as extra track and stops
+   growing: the row widens without ever reaching the viewport edge. */
 .academy-programme-list {
     display: grid;
-    gap: clamp(1.5rem, 3vw, 2.25rem);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: clamp(0.875rem, 1.4vw, 1.25rem);
+    grid-template-columns: 1fr;
     list-style: none;
     border-top: 1px solid var(--line);
     margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
@@ -7111,109 +7128,169 @@ input[aria-invalid="true"] {
 
 .academy-programme {
     display: flex;
-    flex-direction: column;
-    background: var(--sand);
-    box-shadow: 0 0 0 1px var(--line);
-    padding: clamp(1.75rem, 3.5vw, 2.5rem);
-    transition: box-shadow 0.35s var(--ease-out);
 }
 
-.academy-programme:hover,
-.academy-programme:focus-within {
-    box-shadow: 0 0 0 1px var(--terracotta);
-}
-
-.academy-programme-head {
+/* The whole card is the link, so the hit area is the card rather than its
+   title alone. Equal height comes from the grid; the description grows and the
+   foot is pushed to the bottom, which keeps the arrow on one line across the
+   row whatever the titles measure. */
+.academy-programme-card {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.85rem;
+    flex-direction: column;
+    width: 100%;
+    padding: clamp(1.35rem, 1.9vw, 1.75rem);
+    text-decoration: none;
+    background: var(--programme-bg, var(--forest));
+    color: var(--programme-ink, var(--offwhite));
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+/* A hairline in the card's own ink rather than a shadow: at this saturation a
+   dark drop shadow reads as dirt on a coloured panel. */
+.academy-programme-card:hover,
+.academy-programme-card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px -14px rgba(15, 42, 38, 0.55);
+}
+
+.academy-programme-card:focus-visible {
+    outline: 2px solid var(--programme-ink, var(--offwhite));
+    outline-offset: 3px;
+}
+
+/* One muted colour per programme, assigned by position in the grid. The count
+   is fixed at five, so the colours are keyed to position rather than to a
+   programme's identity: a programme added later takes the first colour again
+   rather than silently changing which colour a named programme carries.
+
+   Each slot carries its own ink, because no single choice clears 4.5:1 on all
+   five panels. Contrast of the type actually used against its own panel:
+
+       01 forest     white 10.03   muted  7.36
+       02 terracotta white  4.54   muted  4.54
+       03 slate      white  7.24   muted  5.50
+       04 ochre      ink   4.63   muted  4.63
+       05 plum       white  6.96   muted  5.32
+
+   Two slots needed help to get there. The terracotta is one step off: at the
+   specified #A86652 the best possible pairing is white at 4.48:1 and no ink
+   reaches 4.5 either way, because the panel itself sits between the two. Dark
+   every channel by one to #A76551 and white reaches 4.54:1; that is a distance
+   of 0.39 dE, below the threshold where anyone could see the difference. The
+   ochre needs dark type instead, since white on it is only 3.30:1.
+
+   Muted text is white at partial opacity on the three dark panels, which is
+   where the hierarchy comes from. It is solid on slots 2 and 4: an alpha there
+   pulls the colour back toward the panel and drops it under 4.5:1. */
+.academy-programme:nth-child(1) {
+    --programme-bg: #29483F;
+    --programme-ink: #FFFFFF;
+    --programme-muted: rgba(255, 255, 255, 0.82);
+    --programme-rule: rgba(255, 255, 255, 0.28);
+}
+
+.academy-programme:nth-child(2) {
+    --programme-bg: #A76551;
+    --programme-ink: #FFFFFF;
+    --programme-muted: #FFFFFF;
+    --programme-rule: rgba(255, 255, 255, 0.34);
+}
+
+.academy-programme:nth-child(3) {
+    --programme-bg: #435A68;
+    --programme-ink: #FFFFFF;
+    --programme-muted: rgba(255, 255, 255, 0.82);
+    --programme-rule: rgba(255, 255, 255, 0.28);
+}
+
+.academy-programme:nth-child(4) {
+    --programme-bg: #A58A55;
+    --programme-ink: #242622;
+    --programme-muted: #242622;
+    --programme-rule: rgba(36, 38, 34, 0.26);
+}
+
+.academy-programme:nth-child(5) {
+    --programme-bg: #625568;
+    --programme-ink: #FFFFFF;
+    --programme-muted: rgba(255, 255, 255, 0.82);
+    --programme-rule: rgba(255, 255, 255, 0.28);
+}
+
+.academy-programme-num {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--programme-muted);
+    padding-bottom: 0.9rem;
 }
 
 .academy-programme-name {
     font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    font-size: clamp(1.1rem, 1.35vw, 1.32rem);
     font-weight: 500;
-    line-height: 1.22;
-    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+    color: inherit;
+    text-wrap: balance;
 }
 
-.academy-programme-name a {
-    color: var(--forest);
-    text-decoration: none;
+.academy-programme-desc {
+    color: var(--programme-muted);
+    font-size: 0.86rem;
+    line-height: 1.62;
+    margin: 0 0 1.25rem;
 }
 
-.academy-programme-name a:hover,
-.academy-programme-name a:focus-visible {
-    color: var(--terracotta);
+/* A five-across card is about 230px wide, which is not enough for the course
+   count and the call to action on one line, so the row wraps rather than
+   overflowing the panel. Neither label can break mid-phrase, and the call to
+   action takes the right edge on whichever line it lands on. */
+.academy-programme-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 0.75rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--programme-rule);
 }
 
 .academy-programme-count {
     flex: none;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--programme-muted);
     white-space: nowrap;
 }
 
-.academy-programme-desc {
-    color: var(--text-muted);
-    font-size: 0.98rem;
-    line-height: 1.72;
-    margin: 0 0 1.5rem;
-    max-width: 40rem;
-}
-
-/* Courses inside a programme are indented behind a rule, so they read as
-   belonging to the programme above rather than as a level of their own. The
-   label is what makes the nesting legible without a colour change. */
-.academy-course-group {
-    border-left: 2px solid var(--terracotta);
-    padding-left: clamp(0.9rem, 2vw, 1.35rem);
-    margin-bottom: 1.75rem;
-}
-
-.academy-course-group-label {
+.academy-programme-cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-left: auto;
     font-family: var(--font-sans);
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.11em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin: 0 0 0.7rem;
+    white-space: nowrap;
 }
 
-.academy-course-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.academy-programme-arrow {
+    display: inline-block;
+    transition: transform 0.3s var(--ease-out);
 }
 
-.academy-course + .academy-course {
-    margin-top: 0.5rem;
-}
-
-.academy-course-link {
-    color: var(--charcoal);
-    font-size: 0.98rem;
-    line-height: 1.6;
-    text-decoration: none;
-    border-bottom: 1px solid var(--line-strong);
-}
-
-.academy-course-link:hover,
-.academy-course-link:focus-visible {
-    color: var(--terracotta);
-    border-bottom-color: var(--terracotta);
-}
-
-.academy-programme-actions {
-    margin: auto 0 0;
-    padding-top: 0.25rem;
+.academy-programme-card:hover .academy-programme-arrow,
+.academy-programme-card:focus-visible .academy-programme-arrow {
+    transform: translateX(3px);
 }
 
 .cta-button--ghost {
@@ -7234,13 +7311,34 @@ input[aria-invalid="true"] {
     font-size: 0.72rem;
 }
 
-@media (max-width: 640px) {
-    .academy-programme-head {
-        flex-direction: column;
-        gap: 0.5rem;
+/* Programme cards: one per row on a phone, two on a small tablet, three from
+   the width where the longest title stops wrapping to four lines, and all five
+   from 1440px where the grid also spreads into the page's side margin. The
+   count is fixed, so each step adds a column rather than reflowing. */
+@media (min-width: 600px) {
+    .academy-programme-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    .academy-course-group {
-        padding-left: 0.9rem;
+@media (min-width: 900px) {
+    .academy-programme-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1440px) {
+    .academy-programme-list {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+
+        /* A centred container leaves the same spare margin either side, and
+           that is the only room a wider row can borrow. Half of it is taken so
+           the row never reaches the viewport edge: at 1440px the container is
+           1264px wide, so (100vw - 1264px) / 4 gives the safe amount per side.
+           Capped at 8rem so the row stops growing on an ultrawide display. */
+        --programme-spread: min(8rem, (100vw - 1264px) / 4);
+        width: calc(100% + (2 * var(--programme-spread)));
+        margin-left: calc(-1 * var(--programme-spread));
+        margin-right: calc(-1 * var(--programme-spread));
     }
 }
