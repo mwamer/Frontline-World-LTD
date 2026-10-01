@@ -127,13 +127,15 @@ Rules:
 
 ## Shared pieces are repeated on every page
 
-The document head, navigation, and footer appear in full in each of the eleven hand-written page files. That keeps each page self-contained, at the cost of repetition.
+The document head, navigation, and footer appear in full in each of the twelve hand-written page files. That keeps each page self-contained, at the cost of repetition.
 
-When you change the navigation or footer, change it in all eleven. Use search and replace, and check the result. The files are the ten top-level pages, `content/_index.html`, and `content/training-academy.html`; nothing under `content/courses/`, `content/people/`, `content/insights/` or `content/programmes/` carries its own copy.
+When you change the navigation or footer, change it in all twelve. Use search and replace, and check the result. The files are the ten top-level pages, `content/_index.html`, and `content/training-academy/how-we-teach.html`; nothing under `content/courses/`, `content/people/`, `content/insights/` or `content/programmes/` carries its own copy.
 
-The template-built pages share their chrome instead, because a partial is what renders it: `layouts/people/single.html`, `layouts/courses/single.html`, `layouts/insights/list.html` and `layouts/programmes/single.html` all call the same `site-head`, `site-nav` and `site-footer`. A change to a partial therefore reaches those pages, and the repeated markup in the eleven files still needs editing by hand.
+The template-built pages share their chrome instead, because a partial is what renders it: `layouts/people/single.html`, `layouts/courses/single.html`, `layouts/insights/list.html` and `layouts/programmes/single.html` all call the same `site-head`, `site-nav` and `site-footer`. A change to a partial therefore reaches those pages, and the repeated markup in the twelve files still needs editing by hand.
 
-The stylesheet link is the one thing all of them share. `layouts/partials/stylesheet.html` holds it and `site-head.html` calls it; the hand-written pages reach it through the `{{< stylesheet >}}` shortcode, because those pages cannot call a partial. The shortcode is what lets eleven files carry the same version without copying it.
+The stylesheet link is the one thing all of them share. `layouts/partials/stylesheet.html` holds it and `site-head.html` calls it; the hand-written pages reach it through the `{{< stylesheet >}}` shortcode, because those pages cannot call a partial. The shortcode is what lets twelve files carry the same version without copying it.
+
+`{{< canonical >}}` exists for the same reason: a hand-written page cannot call a partial, so the canonical tag is written once in a shortcode and reads `.Page.Permalink`. That resolves against `baseURL`, which is the custom domain in production and the repository subpath in the GitHub Pages build, so it needs no hand-maintained absolute URL.
 
 ## The Associate Directory
 
@@ -317,7 +319,7 @@ Courses are ordered by the programme they belong to, then by name, using the `pr
 
 The section was withheld from the sitemap while the programme work was unfinished. Both `sitemap.disable` settings have now been removed: the one `content/programmes/_index.md` set on the section, and the one `content/programmes/_content.gotmpl` set on each generated programme page. The latter sat on the `AddPage` call rather than inside `params`, because that is where Hugo reads it: a nested `sitemap` map under `params` is left as an ordinary page parameter and the page still reaches the sitemap.
 
-Adding the navigation item is a **coordinated change across two kinds of file**. `layouts/partials/site-nav.html` covers the generated pages. The eleven hand-written pages under `content/` each carry their own copy of the navigation and have to be edited individually, each with its own depth-relative prefix (`programmes/`, `../programmes/`, `../../../programmes/`). Change one and not the others and the section appears on some pages and not others.
+Adding the navigation item is a **coordinated change across two kinds of file**. `layouts/partials/site-nav.html` covers the generated pages. The twelve hand-written pages under `content/` each carry their own copy of the navigation and have to be edited individually, each with its own depth-relative prefix (`programmes/`, `../programmes/`, `../../programmes/`, `../../../programmes/`). Change one and not the others and the section appears on some pages and not others.
 
 ### How the pages are put together
 
@@ -732,6 +734,8 @@ No page needs editing. Tick `leadership` only for the person who leads Frontline
 1. Create `content/<name>.html`. Copy a similar page as a starting point so the head, navigation, and footer stay consistent.
 2. Fix the relative link depth for its location.
 3. Add a navigation link on every page if the page belongs in the menu.
+
+A hand-written page may also live in a subdirectory, which is how `content/training-academy/how-we-teach.html` builds `/training-academy/how-we-teach/` without a `url` override. Its URL then has two segments, so every relative path is `../../`. Hugo resolves a leaf page and a directory of the same name to different URLs without complaint, so `content/training-academy.html` and `content/training-academy/` can coexist.
 
 Never add a file under `content/people/`: the profile pages there are generated from the records, and a file added by hand is overwritten or ignored.
 

@@ -1,0 +1,16 @@
+{{- /*
+  The canonical URL, for the hand-written pages in content/.
+
+  Those pages are complete HTML files with their own head, so they cannot call a
+  partial, and a hand-written absolute URL would have to be kept in step with
+  hugo.toml by hand. A shortcode is the one template construct Hugo evaluates
+  inside them, so the tag is written once here.
+
+  .Page.Permalink resolves against baseURL, which is the custom domain in
+  production (CNAME) and the repository subpath in the GitHub Pages build, so
+  the tag is correct in both without a hand-maintained path.
+
+  .Page rather than .: inside a shortcode, the context is the shortcode, not the
+  page.
+*/ -}}
+<link rel="canonical" href="{{ .Page.Permalink }}">

@@ -7370,3 +7370,361 @@ input[aria-invalid="true"] {
         justify-content: center;
     }
 }
+
+/* ==========================================================================
+   How We Teach — the Training Academy's approach page.
+
+   Every selector here starts with .hwt-, so nothing in this block can change a
+   rule that already existed. Colours, fonts, measures and easings come from the
+   :root tokens; the plate borrows the hairline-diagram-on-dark-ground grammar
+   of static/images/academy-ascent.svg rather than introducing a new one.
+
+   Terracotta appears as a node, a rule and a figure accent, never as small
+   body text: #B85C45 on the offwhite ground is 4.2:1, which is under the 4.5:1
+   that small text needs. As a non-text mark it clears the 3:1 that graphics
+   need. This is the same decision the programme pages already make.
+   ========================================================================== */
+
+.hwt-open {
+    background: var(--offwhite);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.hwt-open__title {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(2.35rem, 5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.012em;
+    color: var(--forest);
+    max-width: 24ch;
+    margin: 0 0 1.75rem;
+}
+
+.hwt-open__lead {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 46ch;
+    margin: 0;
+}
+
+/* The one figure on the site that breaks the container and runs to the edges.
+   It is the first thing a visitor meets, which is what tells them this page is
+   a statement rather than a listing. Everything after it returns to the
+   measure, so the break stays an event instead of becoming the layout.
+
+   It reaches the edges by being a plain block child of <main>, which carries no
+   padding of its own, rather than by escaping a container with negative
+   margins. Negative margins would need viewport units to cover the full width,
+   and 100vw includes the scrollbar, which puts the plate a few pixels past the
+   right edge and scrolls the page sideways. */
+.hwt-arc {
+    background: var(--forest-deep);
+    overflow: hidden;
+}
+
+.hwt-arc__plate {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.hwt-arc__plate svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hwt-arc__plate--wide {
+    aspect-ratio: 21 / 9;
+}
+
+.hwt-arc__plate--tall {
+    display: none;
+    aspect-ratio: 6 / 7;
+}
+
+.hwt-arc__caption {
+    margin: 1rem 0 0;
+    max-width: 52ch;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.hwt-band {
+    background: var(--offwhite);
+    border-top: 1px solid var(--line);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 0;
+}
+
+.hwt-band + .hwt-band {
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.hwt-band__head {
+    max-width: 44rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.hwt-band__head h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.008em;
+    color: var(--forest);
+    margin: 0 0 1.1rem;
+}
+
+.hwt-band__intro {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+/* The spine: one continuous hairline with a node on it, rather than six
+   stacked boxes. A spine implies a single argument; a card row implies six
+   separable things. Real text in real list markup, so it reflows, stays
+   selectable and needs no JavaScript. */
+.hwt-spine {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hwt-spine::before {
+    content: "";
+    position: absolute;
+    left: 4.75rem;
+    top: 1.7rem;
+    bottom: 1.7rem;
+    width: 1px;
+    background: var(--line-strong);
+}
+
+.hwt-spine__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    gap: 0 clamp(1.5rem, 3vw, 2.75rem);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.hwt-spine__item:last-child {
+    border-bottom: 0;
+}
+
+.hwt-spine__node {
+    position: absolute;
+    left: calc(4.75rem - 5px);
+    top: 1.7rem;
+    width: 11px;
+    height: 11px;
+    background: var(--offwhite);
+    border: 1px solid var(--forest);
+}
+
+.hwt-spine__item--accent .hwt-spine__node {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+}
+
+.hwt-spine__num {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+}
+
+.hwt-spine__term {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    color: var(--forest);
+    margin: 0 0 0.4rem;
+}
+
+.hwt-spine__body {
+    margin: 0;
+    max-width: 58ch;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+}
+
+.hwt-spine__note {
+    margin: 0.6rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* The register: hairline-ruled rows, the layout of a reference list. */
+.hwt-register {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hwt-register__item {
+    display: grid;
+    grid-template-areas: "num term body";
+    grid-template-columns: 3.25rem minmax(0, 0.32fr) minmax(0, 1fr);
+    gap: 0 clamp(1.25rem, 2.5vw, 2.25rem);
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--line-strong);
+}
+
+.hwt-register__item:last-child {
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.hwt-register__num {
+    grid-area: num;
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+}
+
+.hwt-register__term {
+    grid-area: term;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    color: var(--forest);
+    margin: 0;
+}
+
+.hwt-register__body {
+    grid-area: body;
+    margin: 0;
+    max-width: 52ch;
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+.hwt-formats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+.hwt-formats__item {
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-strong);
+}
+
+.hwt-formats__term {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    color: var(--forest);
+    margin: 0 0 0.4rem;
+}
+
+.hwt-formats__body {
+    margin: 0;
+    max-width: 30ch;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.hwt-band--closing .hero-actions {
+    margin-top: 0.5rem;
+}
+
+/* Below 900px a 21:9 plate shrinks far enough that the approved 1.2px strokes
+   land under one device pixel, so they are thickened here rather than being
+   drawn heavier at every width. Presentation attributes lose to CSS, so this
+   only moves the small end of the range. */
+@media (max-width: 900px) {
+    .hwt-arc__strata { stroke-width: 1.5; }
+    .hwt-arc__flow { stroke-width: 1.9; }
+    .hwt-arc__branch { stroke-width: 2.3; }
+    .hwt-arc__accent { stroke-width: 2.6; }
+    .hwt-arc__ticks { stroke-width: 1.5; }
+
+    .hwt-formats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* The term column of the register runs out of room well before the page
+       does, so it drops under the number here rather than at the phone
+       breakpoint: at 700px a three-column register leaves the terms about 130px,
+       which wraps them to three lines. */
+    .hwt-register__item {
+        grid-template-areas: "num term" "num body";
+        grid-template-columns: 2.5rem minmax(0, 1fr);
+        row-gap: 0.35rem;
+    }
+}
+
+/* Below 640px the wide plate is recomposed rather than shrunk: the same four
+   states stacked top to bottom, so the figure keeps its weight instead of
+   becoming a strip. */
+@media (max-width: 640px) {
+    .hwt-arc__plate--wide {
+        display: none;
+    }
+
+    .hwt-arc__plate--tall {
+        display: block;
+    }
+
+    .hwt-spine::before {
+        left: 2.25rem;
+    }
+
+    .hwt-spine__item {
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+        gap: 0 1.25rem;
+    }
+
+    .hwt-spine__node {
+        left: calc(2.25rem - 5px);
+    }
+
+    .hwt-register__item {
+        grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+
+    .hwt-formats {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hwt-band--closing .hero-actions .cta-button {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .hwt-spine__term {
+        font-size: 1.18rem;
+    }
+
+    .hwt-spine__body,
+    .hwt-register__body {
+        font-size: 0.92rem;
+    }
+}
