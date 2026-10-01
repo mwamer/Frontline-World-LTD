@@ -14,6 +14,20 @@
   programme with no record fails the build instead, so this list is never
   silently short.
 
+  Two things about that list used to be wrong, and both are fixed here rather
+  than worked around:
+
+    order     a course page has no title: front matter, so .LinkTitle is the
+              same empty string for all six and sorting on it left the sequence
+              arbitrary. The order is now taken from the name each card actually
+              shows, resolved through course-name.html, which is what the flat
+              course catalogue already sorts on.
+    summary   reading .Params.summary directly printed a description for only
+              the one course that declares one, so five of six arrived here
+              silent. The summary now comes from course-lead.html, the partial
+              that already carries the page-lead fallback, and no second
+              summary mechanism is introduced.
+
   Each course is linked by its own RelPermalink, which is its canonical
   /training-academy/courses/<slug>/ URL. The course's legacy alias under
   /training-academy/programmes/ is not linked: it is a redirect kept for old
@@ -36,8 +50,22 @@
     {{- end -}}
 {{- end -}}
 
-{{- $courses := where (where site.RegularPages "Section" "courses") "Params.programme" $slug -}}
-{{- $courses = sort $courses "LinkTitle" -}}
+{{- $in_programme := where (where site.RegularPages "Section" "courses") "Params.programme" $slug -}}
+{{- /* A course page declares no title:, so .LinkTitle is the same empty string
+       for every course and sorting on it leaves the order arbitrary. Sort on
+       the name the card prints instead, resolved through the partial that reads
+       it, which is the key the flat course catalogue already sorts on. */ -}}
+{{- $courses := slice -}}
+{{- range $in_programme -}}
+    {{- $courses = $courses | append (dict "page" . "name" (partial "course-name.html" .)) -}}
+{{- end -}}
+{{- $courses = sort $courses "name" -}}
+{{- /* The programme's own slot in the catalogue order, so its cards can carry
+       its colour. The colour lives in the stylesheet, not here. */ -}}
+{{- $slot := 0 -}}
+{{- range $index, $ordered_slug := partial "programme-order.html" . -}}
+    {{- if eq $ordered_slug $slug -}}{{- $slot = add $index 1 -}}{{- end -}}
+{{- end -}}
 <!DOCTYPE html>
 <html lang="en">
 <head>{{ partial "site-head.html" (dict "title" .Title "description" $description) }}</head>
@@ -61,16 +89,7 @@
         <section class="programme-courses" aria-labelledby="programme-courses">
             <h2 class="programme-section-title" id="programme-courses">Courses in this programme</h2>
             {{ if gt (len $courses) 0 }}
-            <ul class="programme-course-list">
-                {{ range $courses }}
-                <li class="programme-course">
-                    <h3 class="programme-course-name">
-                        <a href="{{ .RelPermalink }}">{{ partial "course-name.html" . }}</a>
-                    </h3>
-                    {{ with .Params.summary }}<p class="programme-course-summary">{{ . }}</p>{{ end }}
-                </li>
-                {{ end }}
-            </ul>
+            {{ partial "programme-course-cards.html" (dict "courses" $courses "slot" $slot) }}
             <p class="programme-course-note">Each course lists the people who deliver it.</p>
             {{ else }}
             <p class="programme-placeholder">The courses in this programme have not been published yet. Please come back soon.</p>

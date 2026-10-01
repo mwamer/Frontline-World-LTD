@@ -1,0 +1,65 @@
+{{- /*
+  The course cards on a programme page: the courses belonging to one programme,
+  as a grid of whole-card links.
+
+  This is the nested counterpart to programme-card-grid.html. That partial owns
+  the programme cards on the two catalogue pages; this one owns the courses
+  underneath a single programme, where the programme's own title and description
+  have already been read. The two therefore do different jobs and are not merged:
+  the programme card is the primary layer and carries a solid colour panel, while
+  a course card stays a neutral editorial card and borrows only a hairline of its
+  parent's colour.
+
+  Everything printed here is read from the course page itself, through the same
+  partials the flat catalogue on the Training Academy page uses, so a course
+  cannot read differently in the two places:
+
+    name     course-name.html   its own <h1>, or a title: once the page moves to
+                                the CMS
+    lead     course-lead.html    summary: where the page states one, else the
+                                <p class="page-lead"> it opens with
+    facts    course-facts.html  the Audience and Format lines it publishes,
+                                and nothing for a fact it does not state
+
+  The card is one link, so its own text is the accessible name and the heading is
+  read as part of it. It names no second destination: a link cannot contain a
+  link, and the course page is where the detail belongs.
+
+  The grid is a fixed two columns rather than an auto-fit track count. That is
+  what keeps a programme holding a single course from stretching one card across
+  the whole row, and it makes a third or fourth course fall into a second row
+  with no change here.
+
+  The programme's colour reaches the card as a data attribute naming the slot
+  this programme occupies in the catalogue order. The colour itself stays in the
+  stylesheet, beside the programme card's own slot rules, so the five values are
+  written once for the whole site.
+
+  Emits nothing when a programme holds no course, so the caller can offer its own
+  empty-state copy instead of an empty grid.
+
+  Arguments:
+    courses   the programme's courses, already ordered by resolved name
+    slot      1-based position of this programme in the catalogue order
+*/ -}}
+{{- $courses := .courses -}}
+{{- $slot := .slot -}}
+{{- with $courses }}
+<ul class="programme-course-grid" data-programme-slot="{{ $slot }}">
+    {{- range $index, $course := . }}
+    <li class="programme-course-card">
+        <a class="programme-course-card__link" href="{{ $course.page.RelPermalink }}">
+            <span class="programme-course-card__number" aria-hidden="true">Course {{ printf "%02d" (add $index 1) }}</span>
+            <h3 class="programme-course-card__title">{{ $course.name }}</h3>
+            {{- with partial "course-lead.html" $course.page }}
+            <p class="programme-course-card__summary">{{ . }}</p>
+            {{- end }}
+            {{- with partial "course-facts.html" $course.page }}
+            <p class="programme-course-card__meta">{{ . }}</p>
+            {{- end }}
+            <span class="programme-course-card__cta">Explore course<span class="programme-course-card__arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+    </li>
+    {{- end }}
+</ul>
+{{- end }}

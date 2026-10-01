@@ -6998,41 +6998,148 @@ input[aria-invalid="true"] {
     margin: 0 0 1.25rem;
 }
 
-.programme-course-list {
+/* ---------------------------------------------------------------------
+   Course cards on a programme page.
+
+   The secondary layer. A programme card is a solid colour panel and is the
+   thing a reader arrives for; a course card sits underneath one, in a neutral
+   editorial treatment, and borrows its parent only as a hairline of colour
+   along the top edge. The programme's own title and description are already on
+   the page above, so the card does not repeat them.
+
+   These selectors are deliberately unlike the older .course-card used by the
+   flat catalogue on the Training Academy page. That card is styled by three
+   rule blocks that disagree with each other and opens with a placeholder
+   graphic, which is too heavy to sit beneath a programme panel. Nothing here
+   inherits from it, and nothing it defines reaches these cards.
+
+   Two fixed columns, not an auto-fit track count: a programme holding a single
+   course would otherwise stretch one card across the whole row, and the
+   number of columns would change with the viewport rather than with the
+   content. One, two, three or four courses fall into the same grid.
+
+   The grid is .programme-course-grid, not .programme-courses. The section that
+   wraps the heading and this list has carried the latter name since before the
+   cards existed, and it holds no rules of its own: a grid rule aimed at the
+   name would hand the section two columns and push the list into the second
+   one. */
+.programme-course-grid {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.programme-course {
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 1.25rem 1.35rem;
+@media (max-width: 899px) {
+    .programme-course-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.programme-course-name {
-    font-size: 1.1rem;
-    margin: 0;
+.programme-course-card {
+    display: flex;
+    min-width: 0;
 }
 
-.programme-course-name a {
-    color: var(--forest);
+.programme-course-card__link {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: clamp(1.35rem, 2vw, 1.7rem);
+    background: var(--offwhite);
+    border-top: 3px solid var(--programme-bg, var(--forest));
+    box-shadow: 0 0 0 1px var(--line);
     text-decoration: none;
+    transition: box-shadow 0.3s var(--ease-out);
 }
 
-.programme-course-name a:hover,
-.programme-course-name a:focus-visible {
-    color: var(--terracotta);
+/* A hairline that firms up on hover, the way a page does rather than the way a
+   control does. The programme card lifts; this one must not, or the secondary
+   layer starts competing with the panel above it. */
+.programme-course-card__link:hover,
+.programme-course-card__link:focus-visible {
+    box-shadow: 0 0 0 1px var(--line-strong);
 }
 
-.programme-course-summary {
+.programme-course-card__link:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 3px;
+}
+
+/* The programme's colour already runs along the top edge, so the number stays
+   neutral rather than carrying a second accent. It also has to clear AA at this
+   size: terracotta on the offwhite panel is 4.18:1, and --text-muted is 5.86:1. */
+.programme-course-card__number {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin: 0.6rem 0 0;
+    margin: 0 0 0.75rem;
+}
+
+.programme-course-card__title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+    font-weight: 500;
+    line-height: 1.24;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+    margin: 0 0 0.6rem;
+    /* Titles run to six words and wrap onto three lines in a narrow column.
+       Balance keeps the rag even instead of leaving one short last line. */
+    text-wrap: balance;
+}
+
+.programme-course-card__summary {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.62;
+    color: var(--text-muted);
+    margin: 0 0 1.15rem;
+}
+
+/* The facts a course publishes about itself: who it is for, and how it is run.
+   Read from the course page and omitted where the page is silent, so a card
+   never carries a fact its own page does not. */
+.programme-course-card__meta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+}
+
+.programme-course-card__cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 1.1rem;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--forest);
+}
+
+.programme-course-card__arrow {
+    display: inline-block;
+    transition: transform 0.3s var(--ease-out);
+}
+
+.programme-course-card__link:hover .programme-course-card__arrow,
+.programme-course-card__link:focus-visible .programme-course-card__arrow {
+    transform: translateX(3px);
 }
 
 .programme-course-note,
@@ -7161,35 +7268,45 @@ input[aria-invalid="true"] {
    Muted text is white at partial opacity on the three dark panels, which is
    where the hierarchy comes from. It is solid on slots 2 and 4: an alpha there
    pulls the colour back toward the panel and drops it under 4.5:1. */
-.academy-programme:nth-child(1) {
+/* Each slot is also reachable by name, through the data attribute the course
+   cards carry. A programme page holds one programme, so all of its course cards
+   share a colour, and keying it to the grid position would give every card on
+   the page the first colour instead. The hex stays here, written once; only the
+   selector that reaches it is shared. */
+.academy-programme:nth-child(1),
+[data-programme-slot="1"] {
     --programme-bg: #29483F;
     --programme-ink: #FFFFFF;
     --programme-muted: rgba(255, 255, 255, 0.82);
     --programme-rule: rgba(255, 255, 255, 0.28);
 }
 
-.academy-programme:nth-child(2) {
+.academy-programme:nth-child(2),
+[data-programme-slot="2"] {
     --programme-bg: #A76551;
     --programme-ink: #FFFFFF;
     --programme-muted: #FFFFFF;
     --programme-rule: rgba(255, 255, 255, 0.34);
 }
 
-.academy-programme:nth-child(3) {
+.academy-programme:nth-child(3),
+[data-programme-slot="3"] {
     --programme-bg: #435A68;
     --programme-ink: #FFFFFF;
     --programme-muted: rgba(255, 255, 255, 0.82);
     --programme-rule: rgba(255, 255, 255, 0.28);
 }
 
-.academy-programme:nth-child(4) {
+.academy-programme:nth-child(4),
+[data-programme-slot="4"] {
     --programme-bg: #A58A55;
     --programme-ink: #242622;
     --programme-muted: #242622;
     --programme-rule: rgba(36, 38, 34, 0.26);
 }
 
-.academy-programme:nth-child(5) {
+.academy-programme:nth-child(5),
+[data-programme-slot="5"] {
     --programme-bg: #625568;
     --programme-ink: #FFFFFF;
     --programme-muted: rgba(255, 255, 255, 0.82);
