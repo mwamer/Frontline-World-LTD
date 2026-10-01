@@ -36,10 +36,11 @@ To change a page, edit its file in `content/`. There is no separate template to 
 ├── data/                          # Records that pages are built from
 │   ├── associates/<id>.yml        # One person: the directory and their profile
 │   ├── assignments/<slug>.yml     # The people on one course, programme or project
+│   ├── programmes/<slug>.yml      # One learning pathway; the slug is its identifier
 │   ├── private/                   # Never served: applications and their uploads
 │   │   ├── applications/<id>.yml  # One application, plus the review history
 │   │   └── uploads/               # Photographs and CVs sent with an application
-│   └── vocab/associates.yml       # The wording behind every expertise, role, sector, region
+│   └── vocab/associates.yml       # The wording behind every expertise, role, sector, region, programme family
 ├── layouts/                       # Passthrough templates, partials and shortcodes
 │   ├── index.html                 # Home
 │   ├── _default/single.html       # Regular pages
@@ -178,9 +179,120 @@ Two fields decide whether a person appears, and they answer different questions.
 
 ### Vocabulary
 
-A record stores the ID of a term, never its wording. All the wording lives in `data/vocab/associates.yml`, in five lists: `expertise`, `roles`, `contributions`, `sectors` and `regions`. Relabelling a term there reaches the directory filters, the profile tags and every record at once.
+A record stores the ID of a term, never its wording. All the wording lives in `data/vocab/associates.yml`, in six lists. Five describe a person: `expertise`, `roles`, `contributions`, `sectors` and `regions`. The sixth, `programme_families`, holds the six broad categories the Training Academy groups its learning pathways under, and no person record refers to it. Relabelling a term there reaches the directory filters, the profile tags and every record at once.
 
 An ID that is missing from the vocabulary file is ignored rather than shown, so a typo in a record silently drops a tag. The CMS select options are generated from the same file; when a term is added or relabelled there, mirror the change in the `options` list of the matching field in `static/admin/config.yml`.
+
+### Programme catalogue
+
+The Training Academy's learning pathways are programmes. One file per programme in `data/programmes/`, named after its slug, holding a `title`, a `slug`, an optional `family` and an optional `description`. Nothing else: the courses inside a programme are ordinary course records, and the people working on them are named by ordinary assignment records, so a programme file repeats none of that.
+
+The slug is the canonical identifier, and it is the only thing a course or an assignment writes to refer to a programme:
+
+```yaml
+# in a course's frontmatter, or an assignment record
+programme: <the programme's slug>
+```
+
+The name and the description live in the catalogue and are never repeated in the record that points at it, so one edit reaches the programme and everything under it.
+
+The file name and the `slug` inside it must agree, the way an assignment file matches the URL slug of its activity, because that is how a reference resolves. Never change a slug once a course or an assignment refers to it: the reference is the slug, and nothing would follow the move.
+
+### Programme families
+
+A family is the broad category above a programme — one of the six in the `programme_families` list in `data/vocab/associates.yml`. A programme names one by identifier:
+
+```yaml
+# in data/programmes/<slug>.yml
+family: strategic-foresight-risk-future-thinking
+```
+
+The family is a label, not an entity. There is no family record and no family page: the wording lives in the vocabulary list and nowhere else, so the six families are labelled once and every record that refers to one picks the label up from there. `programme_families` is the sixth list in the same vocabulary file the Associate directory uses, reached through the same `vocab-labels.html` lookup, so a programme and an Associate resolve their terms the same way.
+
+A family is also not shown to a visitor. The public Academy page presents Programmes and Courses only, and reads the families to order the programme list. See "How the Academy page presents the catalogue" for the rule and where it is enforced.
+
+A family may be left off a programme for now. Every record in the catalogue sets one, but the validator still treats a missing family as valid and only fails on a wrong one, so a record is not blocked while its family is still being agreed.
+
+Each programme names exactly one family. A programme that spans two is two programmes: a record whose `family` is a list rather than a single identifier fails the build, the same as an unknown family. Where material genuinely covers more than one family, the fix is separate programmes in their own families, not a wider field.
+
+The catalogue holds one programme in five of the six families. The sixth, `conflict-recovery-resilience`, has no programme yet: no course sits naturally in it, and a programme is not invented to fill a gap in a list. Every course names one programme in its own front matter, so each appears under exactly one, and the programme page collects those courses rather than the record listing them.
+
+Decap exposes the catalogue as the Programmes collection, so a programme is created and edited in the CMS like any other record. The `programme` field on an assignment is a plain text field: Decap cannot offer the slugs in `data/programmes/` as a dropdown without custom JavaScript, and this site adds none. A reference is therefore typed and checked against the catalogue by eye.
+
+Because Decap cannot check it, the Hugo build does. `layouts/partials/programmes-validate.html` runs once per build, called from the home page template, and fails the build with an `errorf` when:
+
+* a course or an assignment sets a non-empty `programme` that is not a slug in the registry;
+* a record in `data/programmes/` has no `slug` or no `title`;
+* a record's file name and its `slug` disagree;
+* two records declare the same `slug`;
+* a record sets a `family` that is not one of the six in `programme_families`;
+* any page outside the `content/programmes/` section publishes anywhere under `/programmes/`.
+
+A missing or empty `programme` is valid, because programme membership is not settled across the site and requiring one would fail the build on correct content. A missing or empty `family` is valid for the same reason. A reference that does not resolve is an error rather than a dropped link: a programme that silently resolves to nothing is the failure this exists to prevent.
+
+### The reserved `/programmes/` namespace
+
+Three namespaces are in play, and the word "programmes" appears in two of them for unrelated reasons.
+
+| URL                                  | Written by                                    | Kind                       |
+| ------------------------------------ | --------------------------------------------- | -------------------------- |
+| `/training-academy/courses/<slug>/`  | A course's `url:`                             | Canonical course page      |
+| `/training-academy/programmes/<slug>/` | A course's `aliases:`                       | Legacy course alias        |
+| `/programmes/<slug>/`                | A programme page                              | Reserved for programmes    |
+
+The first two are a course's own two URLs. The third is not a course's to write: it belongs to programme pages alone, and nothing has claimed it yet.
+
+The build protects that reservation. `programmes-validate.html` reads the resolved `RelPermalink` of every page Hugo knows about and fails if one under `/programmes/` comes from outside the `content/programmes/` section. Reading the resolved path rather than the `url:` front matter is the point: `url:` is only one of the things that decide where a page lands — section configuration, file location and permalink settings all feed it — and a course page already publishes to `/training-academy/courses/` while its section is `courses`. A guard that read front matter would be one refactor away from being wrong.
+
+Legitimacy is decided by section rather than by the registry. The registry is empty, and a programme page can exist before its record does, so a registry lookup would reject a legitimate page and would have to be loosened later. Both routes into the namespace are therefore accepted: a programme page relying on the natural section route, and one setting `url: /programmes/<slug>/` explicitly.
+
+This makes a collision impossible rather than unlikely. Hugo does not warn when two pages would write the same output path — one silently wins — so without the guard, giving a course `url: /programmes/<something>/` would quietly take a programme's URL rather than raise anything. The build stops instead, and names the file.
+
+Records go directly in `data/programmes/`, with no subfolder. Hugo flattens that directory when it loads the data, so a nested file is read as a programme with no title and no slug, and the build fails naming a file that does not exist on disk — loud, but a confusing way to learn the rule.
+
+### How a programme page is built
+
+A programme page is never written by hand. One record in `data/programmes/` is the whole page: the content adapter turns it into a page at `/programmes/<slug>/`, and the layout reads the title, the description and the family from it. Adding a record adds the page, its entry on `/programmes/`, and its URL, so there is no second file to keep in step.
+
+| Piece                                | Role                                                                                    |
+| ------------------------------------ | --------------------------------------------------------------------------------------- |
+| `content/programmes/_index.md`       | The `/programmes/` section: the copy around the list, and the message shown while the catalogue is empty. |
+| `content/programmes/_content.gotmpl` | The content adapter. It reads `data/programmes/` and generates one page per record, filed under that record's own slug. |
+| `layouts/programmes/list.html`       | The index layout: the programmes that exist, or the empty state.                        |
+| `layouts/programmes/single.html`     | One programme: title, description, family, and the courses belonging to it.             |
+| `layouts/partials/course-name.html`  | The name of a course, for the list on a programme page.                                 |
+| `layouts/partials/vocab-labels.html` | Resolves the `family` identifier to its wording, shared with the Associate directory.   |
+
+The courses on a programme page are not listed in the record. The page collects every course whose front matter sets `programme:` to that programme's slug, so membership is written once on the course and the programme picks its courses up. A programme with no courses yet is valid, and the page says so rather than rendering an empty list.
+
+The course pages are still hand-written HTML and carry no `title:` in their front matter, so `course-name.html` reads the course's `<h1>` out of the page body. That is a stopgap for pages that have not been converted yet; once the courses are generated from records with a real title, the helper uses it and the fallback goes.
+
+### How the Academy page presents the catalogue
+
+`content/training-academy.html` keeps the page's own copy and calls two shortcodes, which between them render the catalogue. Neither names a family, a programme or a course, so publishing one adds it to the page with no edit to the template.
+
+| Piece                                        | Role                                                                                     |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `layouts/shortcodes/academy-catalogue.html`   | The Programmes section: one card per programme, each naming the courses inside it.         |
+| `layouts/shortcodes/individual-courses.html`  | The Courses grid: one card per course page, ordered by programme.                          |
+| `layouts/partials/programme-order.html`       | The catalogue's programme order, in vocabulary family order, shared by both shortcodes.    |
+| `layouts/partials/course-name.html`           | A course's name, from its `title:` or its `<h1>`.                                          |
+| `layouts/partials/course-lead.html`           | A course's one-line description, from its `summary:` or its `<p class="page-lead">`.        |
+| `layouts/partials/course-facts.html`          | A course's Audience and Format, from its `<div class="course-facts">`.                    |
+
+The course cards read the course page rather than repeating it. The title, the description and the delivery facts are the same sentences the course page prints, and the link is the course's own `RelPermalink`, so a course corrected on its own page is corrected everywhere it is listed. A fact the course page does not state is left off its card rather than filled in: `strategic-foresight-for-leaders` states no delivery format, so its card shows an audience line and no format.
+
+A course whose page lead is written to be read rather than scanned can add an optional `summary:` to its front matter, and the cards use that instead of the lead. The key covers the card only; the course page still opens with its own `<p class="page-lead">`. `strategic-foresight-for-leaders` is the only course that sets it.
+
+The public hierarchy is **Programmes → Courses**. Programme families are part of the data model and not part of the page: `academy-catalogue.html` reads the six families to decide the order programmes are listed in and renders nothing about them, so a family is a sort key rather than a public level. A family holding several programmes keeps them adjacent, and a family holding none contributes nothing to the page at all. Do not add a family heading, a family count, or a family label above the programme cards; the page presents two levels and the data model holds three.
+
+Courses are ordered by the programme they belong to, then by name, using the `programme` key the course already carries. That is what keeps the Courses list from reading as six unrelated courses: the two courses in the AI Leadership programme sit together, and the order of the groups matches the programme cards above. A course whose `programme:` names nothing still gets a card, placed last.
+
+`/programmes/` is public and carries a **Programmes** item in the site navigation. The Training Academy page presents the same hierarchy through its own two sections, so the section and the Academy are two ways in to one catalogue rather than two catalogues.
+
+The section was withheld from the sitemap while the programme work was unfinished. Both `sitemap.disable` settings have now been removed: the one `content/programmes/_index.md` set on the section, and the one `content/programmes/_content.gotmpl` set on each generated programme page. The latter sat on the `AddPage` call rather than inside `params`, because that is where Hugo reads it: a nested `sitemap` map under `params` is left as an ordinary page parameter and the page still reaches the sitemap.
+
+Adding the navigation item is a **coordinated change across two kinds of file**. `layouts/partials/site-nav.html` covers the generated pages. The seventeen hand-written pages under `content/` each carry their own copy of the navigation and have to be edited individually, each with its own depth-relative prefix (`programmes/`, `../programmes/`, `../../../programmes/`). Change one and not the others and the section appears on some pages and not others.
 
 ### How the pages are put together
 
@@ -553,6 +665,7 @@ team:
 
 | Key               | Purpose                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------- |
+| `programme`       | The learning pathway this activity belongs to, as a stable identifier. Optional, and unset on every file today. |
 | `associate`       | The person's ID, which is the file name of their record in `data/associates/`.                 |
 | `assignment_role` | What they do on this assignment, shown above their name. Optional.                            |
 | `title`           | An assignment-specific title, when it should differ from the one on their record. Optional.   |

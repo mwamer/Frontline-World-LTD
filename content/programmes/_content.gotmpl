@@ -1,0 +1,35 @@
+{{- /*
+  Generates one programme page per record in data/programmes/, at
+  /programmes/<slug>/.
+
+  A programme therefore becomes a page as soon as its record is written: there
+  is no second file to add and no page to keep in step. The page itself is
+  rendered by layouts/programmes/single.html.
+
+  The path is the record's slug, so the URL is derived from the canonical
+  identifier rather than restated anywhere. That is the same rule the
+  programme validator enforces on the record itself: the file name, the slug
+  field and every reference all have to agree, and this adds no third place for
+  them to disagree in.
+
+  Nothing is generated while the catalogue is empty, so an empty registry
+  produces no programme pages and no programme links. The section's own index
+  is a separate, hand-written file and is not generated from here.
+
+  The courses inside a programme are not listed here. They are found by
+  layouts/programmes/single.html from the courses' own `programme` front matter,
+  so membership is written once, on the course.
+
+  Generated pages are indexed like any other page. The `sitemap.disable` key that
+  once sat on this AddPage call, and the matching one in
+  content/programmes/_index.md, have both been removed now that the catalogue is
+  promoted and linked from the site navigation.
+*/ -}}
+{{- range $slug, $programme := hugo.Data.programmes -}}
+    {{- $.AddPage (dict
+        "path" $slug
+        "title" $programme.title
+        "kind" "page"
+        "params" (merge $programme (dict "slug" $slug))
+        "content" (dict "mediaType" "text/markdown" "value" "")) -}}
+{{- end -}}

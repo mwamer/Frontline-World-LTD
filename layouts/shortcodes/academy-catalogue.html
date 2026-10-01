@@ -1,0 +1,78 @@
+{{- /*
+  The Academy catalogue: Programmes → Courses.
+
+  The Training Academy page presents the catalogue here rather than writing it
+  into the page, so adding a programme or a course changes what the page shows
+  with no edit to it. The page keeps its own hero and surrounding sections.
+
+  Where each part comes from:
+
+    families    the programme_families list in data/vocab/associates.yml, read
+                through the same vocab-labels.html lookup the Associate directory
+                uses, so a family is named once for the whole site. Families are
+                an organising layer, not a public one: this file reads them to
+                decide the order programmes are listed in, and renders nothing
+                about them. Adding the first programme to a family therefore
+                needs no edit here, and a family with no programmes contributes
+                nothing to the page at all.
+    programmes  the generated pages under /programmes/.
+    courses     the course pages whose own `programme` front matter names the
+                programme, matched the same way layouts/programmes/single.html
+                matches them.
+
+  A programme's course count comes from the same list that renders its courses,
+  so the two cannot disagree.
+*/ -}}
+{{- $families := index hugo.Data.vocab.associates "programme_families" | default slice -}}
+{{- $programmes := where site.RegularPages "Section" "programmes" -}}
+{{- $courses := where site.RegularPages "Section" "courses" -}}
+{{- /* One flat list in family order. The family is the sort key and stops there:
+       a reader meets programmes and the courses inside them, and never the
+       grouping that decided where they sit. */ -}}
+{{- $ordered := slice -}}
+{{- range $families -}}
+    {{- range (where $programmes "Params.family" .id) -}}
+        {{- $ordered = $ordered | append . -}}
+    {{- end -}}
+{{- end -}}
+<section id="programmes" class="academy-catalogue" aria-labelledby="programmes-heading">
+    <div class="container">
+        <header class="address-head">
+            <p class="section-kicker">The Catalogue</p>
+            <h2 id="programmes-heading">Programmes</h2>
+            <p class="address-intro">Structured learning pathways bringing together related courses around a professional theme.</p>
+        </header>
+
+        {{- with $ordered }}
+        <ul class="academy-programme-list">
+            {{- range $programme := . }}
+                {{- $slug := $programme.Params.slug }}
+                {{- $in_programme := where $courses "Params.programme" $slug }}
+                {{- $course_count := len $in_programme }}
+                <li class="academy-programme">
+                    <div class="academy-programme-head">
+                        <h3 class="academy-programme-name"><a href="{{ $programme.RelPermalink }}">{{ $programme.Title }}</a></h3>
+                        <p class="academy-programme-count">{{ $course_count }} {{ if eq $course_count 1 }}course{{ else }}courses{{ end }}</p>
+                    </div>
+                    {{- with $programme.Params.description }}
+                    <p class="academy-programme-desc">{{ . }}</p>
+                    {{- end }}
+                    {{- if $course_count }}
+                    <div class="academy-course-group">
+                        <p class="academy-course-group-label" id="academy-courses-{{ $slug }}">Courses in this programme</p>
+                        <ul class="academy-course-list" aria-labelledby="academy-courses-{{ $slug }}">
+                            {{- range $course := $in_programme }}
+                            <li class="academy-course"><a class="academy-course-link" href="{{ $course.RelPermalink }}">{{ partial "course-name.html" $course }}</a></li>
+                            {{- end }}
+                        </ul>
+                    </div>
+                    {{- end }}
+                    <p class="academy-programme-actions">
+                        <a class="cta-button cta-button--sm" href="{{ $programme.RelPermalink }}">Explore Programme<span class="visually-hidden">: {{ $programme.Title }}</span></a>
+                    </p>
+                </li>
+            {{- end }}
+        </ul>
+        {{- end }}
+    </div>
+</section>

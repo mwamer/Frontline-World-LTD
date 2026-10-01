@@ -162,6 +162,19 @@ collections:
           ai-in-teaching-practices-and-design — because the page finds its file
           by that name. The file name and this value should stay in step.
 
+      - label: Programme
+        name: programme
+        widget: string
+        required: false
+        hint: >-
+          Optional. The learning pathway this activity belongs to, as a stable
+          identifier. A programme is a container of one or more courses; this
+          says which one, and it is the same identifier a course record uses.
+          Leave it blank until the relationship is settled, because a programme
+          must be right rather than plausible. This is not the Activity type
+          above: that describes what the assignment is, and this says where the
+          work sits in the catalogue.
+
       - label: Team
         name: team
         widget: list
@@ -514,16 +527,19 @@ collections:
         hint: Lower numbers come first in the directory.
 
   # The wording behind the terms the associate records refer to by ID. This is
-  # the only place a term is labelled, and the five lists inside it drive the
-  # directory filters, the profile tags and the field options above. The file
-  # exists as it is; only the labels are edited here.
+  # the only place a term is labelled, and the five associate lists inside it
+  # drive the directory filters, the profile tags and the field options above.
+  # The sixth list holds the Training Academy's programme families, which no
+  # record refers to yet. The file exists as it is; only the labels are edited
+  # here.
   - name: vocabulary
     label: Vocabulary
     label_singular: Vocabulary file
     description: >-
       The wording of every expertise, role, contribution, sector and region an
-      associate can be tagged with. One file, listed here so the terms can be
-      relabelled without editing YAML by hand.
+      associate can be tagged with, and of the programme families the Training
+      Academy groups its programmes under. One file, listed here so the terms
+      can be relabelled without editing YAML by hand.
     folder: data/vocab
     create: false
     extension: yml
@@ -600,3 +616,94 @@ collections:
             name: id
             widget: string
             hint: "Never change this on a published term: records refer to it."
+
+      - label: Programme family terms
+        name: programme_families
+        widget: list
+        summary: "{{{fields.label}}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+            hint: The agreed family name. These six labels are fixed wording.
+
+          - label: ID
+            name: id
+            widget: string
+            hint: "Never change this on a published term: records refer to it."
+
+  # The programme catalogue: the registry of learning pathways. One file per
+  # programme in data/programmes/, named after its slug, and that slug is the
+  # canonical identifier a course or an assignment refers to.
+  #
+  # The folder holds the five agreed programmes. A programme is added here rather
+  # than written into a page, because the slug is what a course resolves to and
+  # what a programme page is generated from.
+  #
+  # The `programme` field on the Assignments collection above stays a plain text
+  # field. Decap cannot offer the slugs in this folder as a dropdown without
+  # custom JavaScript, and this site adds none, so a reference is typed and
+  # checked by eye. A wrong slug is a reference that resolves to nothing; it is
+  # not a crash and it is not published.
+  - name: programmes
+    label: Programmes
+    label_singular: Programme
+    description: >-
+      The learning pathways the Training Academy is built from. One file per
+      programme, named after its slug. That slug is the identifier a course or
+      an assignment refers to; the name and description are written here only.
+      A family, if set, is an identifier from the programme_families vocabulary
+      rather than a new record of its own.
+    folder: data/programmes
+    create: true
+    extension: yml
+    format: yaml
+    editor:
+      preview: false
+    fields:
+      - label: Programme name
+        name: title
+        widget: string
+        hint: The programme's display name. Written here only; a course or an assignment names it by slug, never by this.
+
+      - label: Slug
+        name: slug
+        widget: string
+        hint: >-
+          The programme's canonical identifier, for example
+          ai-leadership-organisational-transformation. It must match the file name, the way an
+          assignment file matches the URL slug of its activity, because that is
+          how a course or an assignment resolves to this record. Never change it
+          once a course or an assignment refers to it: the reference is the
+          slug, and nothing would follow the move.
+
+      - label: Programme family
+        name: family
+        widget: select
+        required: false
+        hint: >-
+          Optional. The broad category this programme sits under, stored as the
+          family identifier and never as the wording — the label lives in the
+          programme_families list in data/vocab/associates.yml and is resolved
+          from there when it is shown. Leave it unset while the registry is
+          still being settled; the build fails if it is set to anything outside
+          these six. When a family is added or relabelled in the vocabulary,
+          mirror the change in these options.
+        options:
+        - { label: "AI & Digital Transformation", value: "ai-digital-transformation" }
+        - { label: "Education, Learning & Academic Practice", value: "education-learning-academic-practice" }
+        - { label: "Strategic Foresight, Risk & Future Thinking", value: "strategic-foresight-risk-future-thinking" }
+        - { label: "Leadership, Strategy & Organisational Capability", value: "leadership-strategy-organisational-capability" }
+        - { label: "Strategic Communication, Media & Information", value: "strategic-communication-media-information" }
+        - { label: "Conflict, Recovery & Resilience", value: "conflict-recovery-resilience" }
+
+      - label: Description
+        name: description
+        widget: text
+        required: false
+        hint: >-
+          Optional. A short summary of what the pathway covers. There is
+          deliberately no field here for courses, assignments, trainers,
+          audience, availability, dates, pricing, images or filtering: the
+          courses inside the programme hold what they are about, and their
+          assignment records name who works on them.

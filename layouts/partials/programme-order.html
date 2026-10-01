@@ -1,0 +1,28 @@
+{{- /*
+  The catalogue's programme order: every published programme, in the order the
+  programme_families vocabulary lists its families.
+
+  The families come from data/vocab/associates.yml, so the order follows the
+  vocabulary rather than a page weight, and a programme in the sixth family
+  appears after the fifth without anyone numbering it. Programmes are then taken
+  in the order their own pages are returned within each family.
+
+  The family is the sort key and nothing more: it is not rendered, and a
+  programme's family never appears on the page. Grouping therefore orders the
+  list without publishing the grouping, and a family holding several programmes
+  keeps them adjacent with no change here.
+
+  Both Academy sections order themselves from this, so the programme cards and
+  the course cards beneath them read in the same sequence. Ordering a course by
+  its programme is what keeps the flat course list from becoming a flat,
+  unrelated list.
+*/ -}}
+{{- $families := index hugo.Data.vocab.associates "programme_families" | default slice -}}
+{{- $programmes := where site.RegularPages "Section" "programmes" -}}
+{{- $order := slice -}}
+{{- range $family := $families -}}
+    {{- range where $programmes "Params.family" $family.id -}}
+        {{- $order = $order | append .Params.slug -}}
+    {{- end -}}
+{{- end -}}
+{{- return $order -}}

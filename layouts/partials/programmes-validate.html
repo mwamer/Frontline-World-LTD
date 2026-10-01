@@ -1,0 +1,148 @@
+{{- /*
+  Build-time integrity check for the programme registry and every `programme`
+  reference pointing at it.
+
+  Called once per build from layouts/index.html, not from a page layout: this
+  checks the whole site rather than the page being rendered, so calling it per
+  page would report every fault once per page rendered. The home page is the
+  entry point because Hugo always renders it, and if it ever stopped rendering
+  the build would fail anyway, so the check cannot be quietly skipped.
+
+  What it enforces:
+
+    registry     every record in data/programmes/ carries a title and a slug;
+                 the slug matches the file name; no two records share a slug; a
+                 family, if given, is one of the six in programme_families.
+
+    references   every non-empty `programme` on a course or an assignment names
+                 a slug that exists in the registry.
+
+    namespace    no page other than a programme page publishes anywhere under
+                 /programmes/.
+
+  An absent or empty `programme` is valid. Programme membership is not settled
+  across the site yet, so requiring one would fail the build on correct content.
+  An absent or empty `family` is valid for the same reason.
+
+  A reference that resolves to nothing is an error, not a warning and not a
+  quietly dropped link. `type: programme` on an assignment is a different
+  field — it describes the nature of the work — and is not read here.
+
+  The family is checked through vocab-labels.html, the same lookup the rest of
+  the site uses, so the six families stay labelled in exactly one place:
+  data/vocab/associates.yml.
+
+  The namespace check reads each page's own RelPermalink rather than its
+  `url:` front matter, because the front matter is only one of several things
+  that decide where a page lands: section configuration, the file's location
+  and the permalink settings all feed it, and a course page already publishes
+  to /training-academy/courses/ while its section is `courses`. Reading the
+  resolved path means the guard keeps working whatever route a page reaches
+  the reserved namespace by.
+
+  A page inside the reserved namespace is legitimate when it is a programme
+  page, which is decided by where its file lives: content/programmes/. The
+  registry is not the test, because the registry is empty and a programme page
+  may well exist before — or instead of — a record; a URL is not a licence to
+  be written by anything other than a programme.
+*/ -}}
+{{- $registry := hugo.Data.programmes | default dict -}}
+{{- $slugs := dict -}}
+
+{{- /* Registry integrity. The slug is the canonical identifier, so the file
+       name, the slug field and every reference all have to agree on it. */ -}}
+{{- range $file, $record := $registry -}}
+    {{- $slug := printf "%v" ($record.slug | default "") -}}
+    {{- if eq $slug "" -}}
+        {{- /* Nothing to compare or dedupe against, and the missing slug is
+               already the whole story. Reporting it once is clearer than also
+               reporting a filename mismatch and a duplicate empty slug. */ -}}
+        {{- errorf "programme registry: data/programmes/%s.yml has no slug. The slug is the canonical identifier a course or an assignment refers to, so a record without one can never be resolved." $file -}}
+    {{- else -}}
+        {{- if ne $file $slug -}}
+            {{- errorf "programme registry: data/programmes/%s.yml declares slug %q. The file name and the slug must be the same, because the file name is how a record is found and the slug is the only identifier: this record should be data/programmes/%s.yml." $file $slug $slug -}}
+        {{- end -}}
+        {{- if isset $slugs $slug -}}
+            {{- errorf "programme registry: two records declare the slug %q — data/programmes/%s.yml and data/programmes/%s.yml. The slug is the canonical identifier and has to be unique, so a reference could not say which programme it meant." $slug (index $slugs $slug) $file -}}
+        {{- else -}}
+            {{- $slugs = merge $slugs (dict $slug $file) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq (printf "%v" ($record.title | default "")) "" -}}
+        {{- errorf "programme registry: data/programmes/%s.yml has no title. Every programme carries a display name, and it is written here rather than repeated in the records that refer to it." $file -}}
+    {{- end -}}
+    {{- /* Family, checked through the site's own vocabulary lookup rather than a
+           second copy of the six families. A family is a label, not an entity,
+           so an unknown identifier is never created — it is only reported. */ -}}
+    {{- $family := printf "%v" ($record.family | default "") -}}
+    {{- if ne $family "" -}}
+        {{- $known := partial "vocab-labels.html" (dict "vocab" "programme_families" "ids" (slice $family)) -}}
+        {{- if eq (len $known) 0 -}}
+            {{- errorf "programme family: data/programmes/%s.yml sets family: %q, but no programme family with that identifier exists in the programme_families vocabulary in data/vocab/associates.yml. A family is a label rather than an entity, so it is not created here: set one of the six agreed families, or correct the identifier." $file $family -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* Course references. The courses are hand-written pages, so their `programme`
+       front matter key is read from the page rather than from a record. */ -}}
+{{- range where site.RegularPages "Section" "courses" -}}
+    {{- $ref := printf "%v" (.Params.programme | default "") -}}
+    {{- if and (ne $ref "") (not (isset $slugs $ref)) -}}
+        {{- errorf "programme reference: the course content/%s sets programme: %q, but no programme with that slug exists in data/programmes/. Add the programme record, or correct the slug. Nothing is generated for an unresolved reference." .File.Path $ref -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* Assignment references. */ -}}
+{{- range $file, $record := hugo.Data.assignments -}}
+    {{- $ref := printf "%v" ($record.programme | default "") -}}
+    {{- if and (ne $ref "") (not (isset $slugs $ref)) -}}
+        {{- errorf "programme reference: the assignment data/assignments/%s.yml sets programme: %q, but no programme with that slug exists in data/programmes/. Add the programme record, or correct the slug. Nothing is generated for an unresolved reference." $file $ref -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* Namespace. /programmes/ belongs to programme pages, so nothing else may
+       publish into it. Read the resolved RelPermalink of every page Hugo knows
+       about, which covers `url:`, section configuration, file location and
+       permalink settings alike, rather than trusting any one of them.
+
+       A node Hugo is not asked to render has an empty RelPermalink —
+       content/courses/_index.md sets build.render: never, and the node is not
+       published — and a page that publishes no URL cannot be squatting one, so
+       an empty path is skipped rather than reported.
+
+       A page may claim the reserved namespace legitimately if it is a programme
+       page. The test is the section, not the registry: the registry is empty
+       and a programme page can exist before, or without, a record, so a
+       registry lookup would fail a legitimate page and would have to be
+       loosened later. The section is also the same thing the URL is derived
+       from, so a file in content/programmes/ that sets a `url:` of
+       /programmes/<slug>/ is recognised and allowed.
+
+       The section list node Hugo creates for content/programmes/ has no File
+       of its own, so it is identified by section alone and its missing layout
+       is left to the ordinary build to report.
+
+       Range hugo.Sites and then .Pages rather than site.AllPages, which Hugo
+       deprecated in v0.156.0 because it spans every language rather than the
+       current site. This project is single-language, so the two return the same
+       pages today, and going through the sites keeps the guard correct if it
+       is ever translated: it would check each language's pages instead of one.
+*/ -}}
+{{- $reserved := "/programmes/" -}}
+{{- range $site := hugo.Sites -}}
+    {{- range $page := $site.Pages -}}
+        {{- $path := $page.RelPermalink -}}
+        {{- if and (ne $path "") (hasPrefix $path $reserved) -}}
+            {{- if ne $page.Section "programmes" -}}
+                {{- /* `with` rather than a test-then-print: a node Hugo generated
+                       for a section has no File, and reaching .Path through the
+                       test first would fault on it instead of reporting. */ -}}
+                {{- $where := "a section node Hugo generated" -}}
+                {{- with $page.File -}}{{- $where = printf "content/%s" .Path -}}{{- end -}}
+                {{- $section := printf "the %q section" $page.Section -}}
+                {{- if eq $page.Section "" -}}{{- $section = "the site root" -}}{{- end -}}
+                {{- errorf "programme namespace: %s publishes to %q, but /programmes/ is reserved for programme pages, and only a page in the content/programmes/ section may write there. This page belongs to %s, so it is not a programme: move it into content/programmes/, or give it a url outside the reserved namespace. A course belongs at /training-academy/courses/<slug>/, and /training-academy/programmes/<slug>/ is its legacy alias — both sit outside the reservation." $where $path $section -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}

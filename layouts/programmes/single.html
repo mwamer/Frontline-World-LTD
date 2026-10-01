@@ -1,0 +1,85 @@
+{{- /*
+  One programme, at /programmes/<slug>/.
+
+  The page is generated from the programme's record in data/programmes/ by
+  content/programmes/_content.gotmpl, and every field printed here is read from
+  that record. Nothing about a programme is written twice: the name, the
+  description and the family all come from the record, and the family label is
+  resolved through vocab-labels.html so no template holds a family's wording.
+
+  The courses are not held here. They are the courses whose own `programme`
+  front matter names this slug, so membership is written once, on the course, and
+  adding a course to a programme is a one-word edit to that course rather than an
+  edit to a list that would then have to be kept in step. A course that names a
+  programme with no record fails the build instead, so this list is never
+  silently short.
+
+  Each course is linked by its own RelPermalink, which is its canonical
+  /training-academy/courses/<slug>/ URL. The course's legacy alias under
+  /training-academy/programmes/ is not linked: it is a redirect kept for old
+  links, and a programme page should send readers to the real page.
+
+  The people who deliver a programme are not listed here. An assignment belongs
+  to a course, and assignment-team.html already reads it from there, so naming
+  trainers on the programme as well would be a second, hand-kept list of the same
+  people. A course page names its own people, and this page says so.
+*/ -}}
+{{- $programme := .Params -}}
+{{- $slug := printf "%v" ($programme.slug | default "") -}}
+{{- $description := printf "%v" ($programme.description | default "") -}}
+
+{{- /* The family is a vocabulary id in the record; the wording is looked up, not repeated. */ -}}
+{{- $family := "" -}}
+{{- with $programme.family -}}
+    {{- range partial "vocab-labels.html" (dict "vocab" "programme_families" "ids" (slice .)) -}}
+        {{- $family = .label -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $courses := where (where site.RegularPages "Section" "courses") "Params.programme" $slug -}}
+{{- $courses = sort $courses "LinkTitle" -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" .Title "description" $description) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}<main id="main-content">
+
+<article class="programme">
+    <div class="container programme-inner">
+        <a class="programme-back-link" href="{{ "programmes/" | relURL }}">&larr; All programmes</a>
+
+        <header class="programme-header">
+            {{ with $family }}
+            <p class="section-kicker">{{ . }}</p>
+            {{ end }}
+            <h1 class="programme-title">{{ .Title }}</h1>
+            {{ with $description }}
+            <p class="programme-description">{{ . }}</p>
+            {{ end }}
+        </header>
+
+        <section class="programme-courses" aria-labelledby="programme-courses">
+            <h2 class="programme-section-title" id="programme-courses">Courses in this programme</h2>
+            {{ if gt (len $courses) 0 }}
+            <ul class="programme-course-list">
+                {{ range $courses }}
+                <li class="programme-course">
+                    <h3 class="programme-course-name">
+                        <a href="{{ .RelPermalink }}">{{ partial "course-name.html" . }}</a>
+                    </h3>
+                    {{ with .Params.summary }}<p class="programme-course-summary">{{ . }}</p>{{ end }}
+                </li>
+                {{ end }}
+            </ul>
+            <p class="programme-course-note">Each course lists the people who deliver it.</p>
+            {{ else }}
+            <p class="programme-placeholder">The courses in this programme have not been published yet. Please come back soon.</p>
+            {{ end }}
+        </section>
+    </div>
+</article>
+
+    </main>{{ partial "site-footer.html" . }}
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+# The programme catalogue lives here: one file per programme, named after its
+# slug, holding a title, a slug, an optional family identifier and an optional
+# description. The slug is the canonical identifier a course or an assignment
+# refers to. The family is an id from the programme_families list in
+# data/vocab/associates.yml, never the family wording written out again.
+#
+# Each record names exactly one family. A programme that spans two is two
+# programmes; a `family` given as a list fails the build.
+#
+# A programme does not list its courses. Each course names one programme in its
+# own front matter, and the programme page collects those courses, so a course
+# cannot end up under two programmes.
+#
+# A README.md cannot live in this folder: Hugo loads everything under data/ as
+# site data and fails on a file it cannot unmarshal. The catalogue is documented
+# in README.md at the repository root, under "Programme catalogue".

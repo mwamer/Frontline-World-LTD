@@ -1,0 +1,21 @@
+{{- /*
+  The delivery facts of a course, for catalogue cards: who it is for and how it
+  is run.
+
+  Both are read from the course page's own <div class="course-facts"> block,
+  where each fact is a <p><strong>Label</strong> value</p>. Reading them from
+  there means the card says what the course page says: no second copy of the
+  audience or the format to fall out of date, and no format invented for a
+  course whose page does not state one.
+
+  A fact the page does not state is left out rather than filled in, and a course
+  with no facts block at all returns nothing, so its card shows no fact line.
+*/ -}}
+{{- $page := . -}}
+{{- $facts := slice -}}
+{{- range $label := slice "Audience" "Format" -}}
+    {{- with findRESubmatch (printf `<strong>%s</strong>\s*([^<]*)</p>` $label) $page.Content 1 -}}
+        {{- $facts = $facts | append (htmlUnescape (trim (index . 0 1) " ")) -}}
+    {{- end -}}
+{{- end -}}
+{{- return (delimit $facts " · ") -}}

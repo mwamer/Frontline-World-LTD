@@ -4,13 +4,25 @@
 # Editable through the Admin page (Assignments collection). The file name must
 # match the activity's URL slug, which is how the page finds it.
 #
-# type            What the activity is: course, programme, research,
-#                 consultancy or project. Used to group the collection.
-# title           Display name of the activity.
-# slug            The activity's URL slug, for example
-#                 ai-in-teaching-practices-and-design. The file name and this
-#                 value should stay in step.
-# team            The people on this activity, in display order.
+#   type            What the activity is: course, programme, research,
+#                   consultancy or project. Used to group the collection.
+#                   This stays the nature of the assignment and is not the
+#                   programme below.
+#   title           Display name of the activity.
+#   slug            The activity's URL slug, for example
+#                   ai-in-teaching-practices-and-design. The file name and this
+#                   value should stay in step.
+#   programme       Optional. The slug of the programme this activity belongs
+#                   to, resolved against the catalogue in data/programmes/. A
+#                   programme is a container of one or more courses, so this
+#                   says where the work sits in the catalogue, and it is the
+#                   only place the reference is written: the name and
+#                   description are not repeated here. It is not
+#                   `type: programme` above, which says what the assignment is.
+#                   Leave it out until the relationship is settled. No file
+#                   here sets it, because no course or activity has been placed
+#                   in a programme yet.
+#   team            The people on this activity, in display order.
 #
 # An entry names a person from the central Associate Directory by ID — the file
 # name of their record in data/associates/ — and the name, title, organisation,

@@ -1,0 +1,32 @@
+{{- /*
+  The display name of a course page.
+
+  Course pages predate the CMS: each one is a complete hand-written .html file
+  whose name sits in the body's <h1> and not in a `title:` front matter key. So
+  .Title is empty for all six of them today, and a programme page listing a
+  course would otherwise print a blank link.
+
+  The name is read from the page it is printed on rather than written a second
+  time, which keeps the site's rule that a thing is written once: correct the
+  heading on the course page and every list of that course follows.
+
+  The fallback order, most authoritative first:
+
+    .Title     what a course page declares once it is edited through the CMS,
+               which is where `title:` is required, and so the normal answer
+               from that point on.
+    the <h1>   where the hand-written pages keep their name today.
+    the slug   a last resort, so a course with neither is still a working link
+               rather than an empty one.
+
+  A course is named on the course page; this never invents one. It only reads.
+*/ -}}
+{{- $name := "" -}}
+{{- with .Title -}}{{- $name = . -}}{{- else -}}
+    {{- $heading := findRE "<h1[^>]*>([^<]*)</h1>" .Content -}}
+    {{- with $heading -}}
+        {{- $name = htmlUnescape (replaceRE "<[^>]*>" "" (index . 0)) -}}
+    {{- end -}}
+    {{- if eq (trim $name " ") "" -}}{{- $name = .File.BaseFileName -}}{{- end -}}
+{{- end -}}
+{{- return $name -}}

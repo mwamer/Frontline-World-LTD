@@ -1,0 +1,38 @@
+{{- /*
+  The one-line description of a course, for catalogue cards.
+
+  Course pages predate the CMS, so their short description lives in the body:
+  the <p class="page-lead"> under the course's own <h1>. That line is the
+  course's summary wherever it is printed, and it is the same sentence the
+  page's <meta name="description"> carries, so reading it here keeps one
+  description per course instead of a second one on the Academy page that can
+  drift from it.
+
+  A course whose lead is written for the course page rather than for a card can
+  add an optional `summary:` to its front matter. That covers the card only:
+  the page still opens with its own lead.
+
+  The order, most authoritative first:
+
+    summary:                   an optional front-matter line, where a course
+                                states a card-length description itself.
+    the <p class="page-lead">   where the hand-written pages keep it today.
+    the meta description        the same sentence, used when a page has a
+                                description but no lead paragraph.
+    nothing                    so a course with neither is still a working
+                                card, without a blank line where the
+                                description belongs.
+*/ -}}
+{{- $text := "" -}}
+{{- with .Params.summary -}}
+    {{- $text = . -}}
+{{- else -}}
+    {{- with findRESubmatch `<p class="page-lead">([^<]*)</p>` .Content 1 -}}
+        {{- $text = htmlUnescape (trim (index . 0 1) " ") -}}
+    {{- else -}}
+        {{- with findRESubmatch `<meta name="description" content="([^"]*)"` .Content 1 -}}
+            {{- $text = htmlUnescape (trim (index . 0 1) " ") -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $text -}}

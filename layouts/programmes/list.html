@@ -1,0 +1,47 @@
+{{- /*
+  The programmes index, at /programmes/.
+
+  The list is generated from the programme records in data/programmes/, the same
+  way the pages are, so publishing a programme adds it here without an edit.
+
+  While the catalogue is empty the list is replaced by the empty_state message
+  from content/programmes/_index.md, so the page says what is going on instead of
+  rendering an empty heading or a blank grid. The message is deliberately not
+  invented here: it is page content, and it stops being shown the moment a
+  programme exists, so the page never carries both a list and a "coming soon"
+  note at once.
+*/ -}}
+{{- $programmes := .RegularPages -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" .Title "description" .Params.summary) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}<main id="main-content">
+
+<section class="programme-index">
+    <div class="container">
+        <header class="programme-index-header">
+            <p class="section-kicker">Frontline World Training Academy</p>
+            <h1>{{ .Title }}</h1>
+            {{ .Content }}
+        </header>
+
+        {{ if gt (len $programmes) 0 }}
+        <ul class="programme-list">
+            {{ range $programmes }}
+            <li class="programme-list-item">
+                <h2 class="programme-list-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                {{ with .Params.description }}<p class="programme-list-summary">{{ . }}</p>{{ end }}
+            </li>
+            {{ end }}
+        </ul>
+        {{ else }}
+        <p class="programme-placeholder">{{ .Params.empty_state }}</p>
+        {{ end }}
+    </div>
+</section>
+
+    </main>{{ partial "site-footer.html" . }}
+
+</body>
+</html>

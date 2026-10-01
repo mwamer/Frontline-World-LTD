@@ -1,0 +1,73 @@
+{{- /*
+  The Individual Courses grid on the Training Academy page.
+
+  One card per course page, generated the same way the Programmes section above
+  it is: so a course appears here the moment its page exists, and the Academy
+  never carries a second list of the courses the programme cards already
+  collect. Nothing in this file names a course.
+
+  Each card is the card that was hand-written on the page, unchanged in design:
+  the media block, the index, the title, the description, the delivery facts and
+  the call to action. Only the source of each value changed, from literal HTML to
+  the course's own page:
+
+    title    partial "course-name.html"   the course's <h1>
+    lead     partial "course-lead.html"   its <p class="page-lead">
+    facts    partial "course-facts.html"  its Audience and Format lines
+    link     the page's RelPermalink      the canonical course URL
+
+  The card is a single link to the course page, and stays in the same tab.
+  Opening internal pages in a new tab was a habit on this page rather than a
+  site-wide convention, and it breaks the back button for no gain.
+
+  Courses are ordered by the programme they belong to, then by name, so the flat
+  list still reads against the section above it: everything in one programme
+  sits together. The order therefore comes from the same `programme` key the
+  programme cards are built from.
+*/ -}}
+{{- $programme_order := partial "programme-order.html" . -}}
+{{- $courses := slice -}}
+{{- range where site.RegularPages "Section" "courses" -}}
+    {{- $page := . -}}
+    {{- /* A course with no programme sorts after every one that has a
+           programme, so an unplaced course still reaches the grid instead of
+           silently disappearing from the page. */ -}}
+    {{- $rank := len $programme_order -}}
+    {{- range $index, $slug := $programme_order -}}
+        {{- if and (eq $page.Params.programme $slug) (lt $index $rank) -}}{{- $rank = $index -}}{{- end -}}
+    {{- end -}}
+    {{- $courses = $courses | append (dict "page" $page "rank" $rank "name" (partial "course-name.html" $page)) -}}
+{{- end -}}
+{{- $courses = sort $courses "name" -}}
+{{- $courses = sort $courses "rank" -}}
+<div class="course-grid">
+    {{- range $index, $course := $courses }}
+    <a class="course-card" href="{{ $course.page.RelPermalink }}">
+        <span class="media" aria-hidden="true"><span class="media__grid"></span><span class="media__mono">FW</span><span class="media__ratio">16:09</span></span>
+        <span class="course-card-body">
+        <span class="course-card-index" aria-hidden="true">{{ add $index 1 | printf "%02d" }}</span>
+        <span class="course-card-title">{{ $course.name }}</span>
+        {{- with partial "course-lead.html" $course.page }}
+        <span class="course-card-desc">{{ . }}</span>
+        {{- end }}
+        {{- with partial "course-facts.html" $course.page }}
+        <span class="course-card-meta">{{ . }}</span>
+        {{- end }}
+        <span class="course-card-cta">View Course &rarr;<span class="visually-hidden">: {{ $course.name }}</span></span>
+        </span>
+    </a>
+    {{- end }}
+    {{- /* The Academy's standing note that more courses are in development. It
+           is a statement about the Academy rather than a course, so it is not
+           generated, and its number follows the real ones. */}}
+    <div class="course-card course-card--coming">
+        <span class="media" aria-hidden="true"><span class="media__grid"></span><span class="media__mono">FW</span><span class="media__ratio">16:09</span></span>
+        <span class="course-card-body">
+        <span class="course-card-index" aria-hidden="true">{{ add (len $courses) 1 | printf "%02d" }}</span>
+        <span class="course-card-title">New Courses Coming</span>
+        <span class="course-card-desc">The Academy is developing new programmes. Announcements will be published here.</span>
+        <span class="course-card-meta">More details to be announced</span>
+        <span class="course-card-cta">Coming Soon</span>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+# Programme record for "Leadership & Decision-Making Under Uncertainty".
+#
+# Editable through the Admin page (Programmes collection). The file name must
+# match the slug, because the file name is how a record is found and the slug is
+# the identifier a course or an assignment refers to. Never change the slug once
+# something refers to it.
+#
+#   title         Display name of the programme.
+#   slug          The programme's URL slug. It becomes the page URL,
+#                 /programmes/<slug>/, so the file name and this value must
+#                 agree.
+#   family        An id from the programme_families list in
+#                 data/vocab/associates.yml, never the family wording written
+#                 out again. The label is looked up at render time.
+#   description   One or two sentences for the programme index card and the top
+#                 of the programme page.
+#
+# The courses are not listed here. Membership is written once, on the course:
+# each course below sets `programme:` to this slug in its front matter, and the
+# programme page collects those courses. The programme is the container and the
+# course holds the pointer, so a course cannot appear under two programmes by
+# accident.
+
+title: "Leadership & Decision-Making Under Uncertainty"
+slug: leadership-decision-making-under-uncertainty
+family: leadership-strategy-organisational-capability
+description: "A programme focused on leadership, judgement and decision-making in uncertain and changing environments."

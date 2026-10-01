@@ -5060,6 +5060,24 @@ em {
     }
 }
 
+/* Nine links plus the CTA need more room than the space between 1024px and
+   1280px leaves beside the logo, so tighten the gaps and the letter-spacing
+   across that band only. The full 2.4rem gap and 0.18em tracking return at
+   1280px, where the row fits. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        letter-spacing: 0.14em;
+    }
+
+    .nav-cta {
+        margin-left: 0.2rem;
+    }
+}
+
 @media (min-width: 1200px) {
     .why-band-grid {
         grid-template-columns: repeat(5, 1fr);
@@ -6933,5 +6951,296 @@ input[aria-invalid="true"] {
 
     .af-submit {
         align-self: flex-start;
+    }
+}
+
+/* Programme pages. The pages are generated from data/programmes/ and the
+   courses on them are found from each course's own `programme` front matter, so
+   everything below only shapes what those two sources produce. Colours, fonts and
+   spacing come from the tokens above; nothing here introduces a new one. */
+.programme-inner {
+    padding-bottom: 4.5rem;
+    padding-top: 2.5rem;
+}
+
+.programme-back-link {
+    color: var(--text-muted);
+    display: inline-block;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    text-decoration: none;
+}
+
+.programme-back-link:hover,
+.programme-back-link:focus-visible {
+    color: var(--terracotta);
+}
+
+.programme-header {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+}
+
+.programme-title {
+    margin: 0.35rem 0 0;
+}
+
+.programme-description {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin: 1.1rem 0 0;
+    max-width: 46rem;
+}
+
+.programme-section-title {
+    margin: 0 0 1.25rem;
+}
+
+.programme-course-list {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.programme-course {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.25rem 1.35rem;
+}
+
+.programme-course-name {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.programme-course-name a {
+    color: var(--forest);
+    text-decoration: none;
+}
+
+.programme-course-name a:hover,
+.programme-course-name a:focus-visible {
+    color: var(--terracotta);
+}
+
+.programme-course-summary {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0.6rem 0 0;
+}
+
+.programme-course-note,
+.programme-placeholder {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 1.5rem 0 0;
+}
+
+.programme-index-header {
+    margin-bottom: 2.5rem;
+}
+
+.programme-list {
+    border-top: 1px solid var(--line);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.programme-list-item {
+    border-bottom: 1px solid var(--line);
+    padding: 1.75rem 0;
+}
+
+.programme-list-name {
+    font-size: 1.35rem;
+    margin: 0;
+}
+
+.programme-list-name a {
+    color: var(--forest);
+    text-decoration: none;
+}
+
+.programme-list-name a:hover,
+.programme-list-name a:focus-visible {
+    color: var(--terracotta);
+}
+
+.programme-list-summary {
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin: 0.6rem 0 0;
+    max-width: 46rem;
+}
+
+/* ---------------------------------------------------------------------
+   Training Academy catalogue: Programmes → Courses
+
+   The Academy page renders this from data/programmes/ and the courses' own
+   front matter, so the styling is structural only: nothing here knows a
+   programme's name, a family's name, or how many of either there are. Square
+   corners and hairline rules follow the programme and course pages, which
+   keeps the two views of a programme reading as one system.
+   --------------------------------------------------------------------- */
+
+.academy-catalogue {
+    background: var(--offwhite);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+}
+
+/* The programme grid sits under a hairline rule so the cards read as the
+   catalogue body rather than as a continuation of the section header. */
+.academy-programme-list {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    list-style: none;
+    border-top: 1px solid var(--line);
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: clamp(2rem, 4vw, 3rem) 0 0;
+}
+
+.academy-programme {
+    display: flex;
+    flex-direction: column;
+    background: var(--sand);
+    box-shadow: 0 0 0 1px var(--line);
+    padding: clamp(1.75rem, 3.5vw, 2.5rem);
+    transition: box-shadow 0.35s var(--ease-out);
+}
+
+.academy-programme:hover,
+.academy-programme:focus-within {
+    box-shadow: 0 0 0 1px var(--terracotta);
+}
+
+.academy-programme-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.85rem;
+}
+
+.academy-programme-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.22;
+    margin: 0;
+}
+
+.academy-programme-name a {
+    color: var(--forest);
+    text-decoration: none;
+}
+
+.academy-programme-name a:hover,
+.academy-programme-name a:focus-visible {
+    color: var(--terracotta);
+}
+
+.academy-programme-count {
+    flex: none;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.academy-programme-desc {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.72;
+    margin: 0 0 1.5rem;
+    max-width: 40rem;
+}
+
+/* Courses inside a programme are indented behind a rule, so they read as
+   belonging to the programme above rather than as a level of their own. The
+   label is what makes the nesting legible without a colour change. */
+.academy-course-group {
+    border-left: 2px solid var(--terracotta);
+    padding-left: clamp(0.9rem, 2vw, 1.35rem);
+    margin-bottom: 1.75rem;
+}
+
+.academy-course-group-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 0.7rem;
+}
+
+.academy-course-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.academy-course + .academy-course {
+    margin-top: 0.5rem;
+}
+
+.academy-course-link {
+    color: var(--charcoal);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.academy-course-link:hover,
+.academy-course-link:focus-visible {
+    color: var(--terracotta);
+    border-bottom-color: var(--terracotta);
+}
+
+.academy-programme-actions {
+    margin: auto 0 0;
+    padding-top: 0.25rem;
+}
+
+.cta-button--ghost {
+    background: transparent;
+    color: var(--forest);
+    border-color: var(--line-strong);
+}
+
+.cta-button--ghost:hover,
+.cta-button--ghost:focus-visible {
+    background: var(--sand);
+    border-color: var(--forest);
+}
+
+.cta-button--sm {
+    min-height: 40px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.72rem;
+}
+
+@media (max-width: 640px) {
+    .academy-programme-head {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .academy-course-group {
+        padding-left: 0.9rem;
     }
 }

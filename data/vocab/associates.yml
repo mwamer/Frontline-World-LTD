@@ -130,3 +130,26 @@ regions:
     label: Germany
   - id: united-states
     label: United States
+
+# Programme families: the broad categories the Training Academy's programmes
+# are grouped under. A family is the top of the learning catalogue:
+#
+#   family -> programme -> course
+#
+# A family is not a course and not a person, and nothing here is written into an
+# associate record. The six labels are the agreed wording and are not to be
+# reworded; the ids follow the same rules as every other list in this file, so
+# they stay stable once a record refers to one.
+programme_families:
+  - id: ai-digital-transformation
+    label: AI & Digital Transformation
+  - id: education-learning-academic-practice
+    label: Education, Learning & Academic Practice
+  - id: strategic-foresight-risk-future-thinking
+    label: Strategic Foresight, Risk & Future Thinking
+  - id: leadership-strategy-organisational-capability
+    label: Leadership, Strategy & Organisational Capability
+  - id: strategic-communication-media-information
+    label: Strategic Communication, Media & Information
+  - id: conflict-recovery-resilience
+    label: Conflict, Recovery & Resilience
