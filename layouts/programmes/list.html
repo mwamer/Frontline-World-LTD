@@ -1,10 +1,13 @@
 {{- /*
   The programmes index, at /programmes/.
 
-  The list is generated from the programme records in data/programmes/, the same
-  way the pages are, so publishing a programme adds it here without an edit.
+  This page and the Training Academy catalogue section are two views of one
+  catalogue, so they show one set of cards rather than two sets that resemble
+  each other: programme-card-grid.html renders the grid, its order and its
+  course counts, and both pages place it inside their own heading. Publishing a
+  programme adds it here with no edit, exactly as it does on the Academy page.
 
-  While the catalogue is empty the list is replaced by the empty_state message
+  While the catalogue is empty the grid is replaced by the empty_state message
   from content/programmes/_index.md, so the page says what is going on instead of
   rendering an empty heading or a blank grid. The message is deliberately not
   invented here: it is page content, and it stops being shown the moment a
@@ -27,14 +30,7 @@
         </header>
 
         {{ if gt (len $programmes) 0 }}
-        <ul class="programme-list">
-            {{ range $programmes }}
-            <li class="programme-list-item">
-                <h2 class="programme-list-name"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-                {{ with .Params.description }}<p class="programme-list-summary">{{ . }}</p>{{ end }}
-            </li>
-            {{ end }}
-        </ul>
+        {{ partial "programme-card-grid.html" . }}
         {{ else }}
         <p class="programme-placeholder">{{ .Params.empty_state }}</p>
         {{ end }}

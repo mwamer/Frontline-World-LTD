@@ -27,4 +27,4 @@ summary: "Learning pathways from the Frontline World Training Academy."
 # programme pages out of the listings and the home page RSS feed.
 empty_state: "Programmes are being prepared and will be listed here as soon as they are published. In the meantime, the Training Academy's courses are available individually."
 ---
-<p>Programmes group related courses into a single learning pathway. Each programme gathers the courses that belong to it, along with the people who deliver them.</p>
+<p>Programmes group related courses into a single learning pathway. Each programme gathers the courses that belong to it, so you can see the whole pathway before you choose a course.</p>

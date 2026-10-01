@@ -7061,38 +7061,17 @@ input[aria-invalid="true"] {
     margin-bottom: 2.5rem;
 }
 
-.programme-list {
-    border-top: 1px solid var(--line);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.programme-list-item {
+/* The index carries the catalogue's own field so its cards rest on the same
+   ground as the Training Academy ones: offwhite, the same vertical rhythm, the
+   same hairline closing the block. Left without it the cards would sit on the
+   page's sand background while the Academy's sit on offwhite, and identical
+   cards in two different fields would not read as one system. The card styles
+   themselves are not repeated here - programme-card-grid.html renders the same
+   markup on both pages. */
+.programme-index {
+    background: var(--offwhite);
     border-bottom: 1px solid var(--line);
-    padding: 1.75rem 0;
-}
-
-.programme-list-name {
-    font-size: 1.35rem;
-    margin: 0;
-}
-
-.programme-list-name a {
-    color: var(--forest);
-    text-decoration: none;
-}
-
-.programme-list-name a:hover,
-.programme-list-name a:focus-visible {
-    color: var(--terracotta);
-}
-
-.programme-list-summary {
-    color: var(--text-muted);
-    line-height: 1.75;
-    margin: 0.6rem 0 0;
-    max-width: 46rem;
+    padding: clamp(4.5rem, 9vw, 7.5rem) 0;
 }
 
 /* ---------------------------------------------------------------------

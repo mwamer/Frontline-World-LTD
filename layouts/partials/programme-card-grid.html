@@ -1,0 +1,64 @@
+{{- /*
+  The programme card grid, shared by the Training Academy catalogue section and
+  the /programmes/ index so the two render one card, not two that resemble each
+  other. Both callers place this inside a .container inside their own section,
+  so the page keeps its own heading and the grid is the only shared part.
+
+  Ordering and counts come from here too, and that matters more than it looks.
+  Colour is keyed to position in the grid, so if one page ordered the catalogue
+  differently from the other, the same programme would carry a different panel
+  on each. Both therefore read one list in family order:
+
+    families    the programme_families list in data/vocab/associates.yml, read
+                through the same vocab-labels.html lookup the Associate directory
+                uses, so a family is named once for the whole site. Families are
+                an organising layer, not a public one: this file reads them to
+                decide the order programmes appear in, and renders nothing about
+                them.
+    programmes  the generated pages under /programmes/.
+    courses     the course pages whose own `programme` front matter names the
+                programme, matched the same way layouts/programmes/single.html
+                matches them. The count is read from this list, so the card and
+                the programme page cannot disagree.
+
+  Each card is a single link to the programme page, so its own text is the
+  accessible name and the heading is read as part of it. It names no courses:
+  a link cannot contain another link, and the courses are one click away on the
+  programme page and listed in the Academy Courses section.
+
+  Emits nothing when the catalogue is empty, so a caller can offer its own
+  empty-state copy in place of a blank grid.
+*/ -}}
+{{- $families := index hugo.Data.vocab.associates "programme_families" | default slice -}}
+{{- $programmes := where site.RegularPages "Section" "programmes" -}}
+{{- $courses := where site.RegularPages "Section" "courses" -}}
+{{- /* One flat list in family order. The family is the sort key and stops
+       there: a reader meets programmes and the courses inside them, and never
+       the grouping that decided where they sit. */ -}}
+{{- $ordered := slice -}}
+{{- range $families -}}
+    {{- range (where $programmes "Params.family" .id) -}}
+        {{- $ordered = $ordered | append . -}}
+    {{- end -}}
+{{- end -}}
+{{- with $ordered }}
+<ul class="academy-programme-list">
+    {{- range $index, $programme := . }}
+        {{- $slug := $programme.Params.slug }}
+        {{- $course_count := len (where $courses "Params.programme" $slug) }}
+        <li class="academy-programme">
+            <a class="academy-programme-card" href="{{ $programme.RelPermalink }}">
+                <span class="academy-programme-num" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
+                <h3 class="academy-programme-name">{{ $programme.Title }}</h3>
+                {{- with $programme.Params.description }}
+                <p class="academy-programme-desc">{{ . }}</p>
+                {{- end }}
+                <span class="academy-programme-foot">
+                    <span class="academy-programme-count">{{ $course_count }} {{ if eq $course_count 1 }}course{{ else }}courses{{ end }}</span>
+                    <span class="academy-programme-cta">Explore programme<span class="academy-programme-arrow" aria-hidden="true">&rarr;</span></span>
+                </span>
+            </a>
+        </li>
+    {{- end }}
+</ul>
+{{- end }}

@@ -5,39 +5,11 @@
   into the page, so adding a programme or a course changes what the page shows
   with no edit to it. The page keeps its own hero and surrounding sections.
 
-  Where each part comes from:
-
-    families    the programme_families list in data/vocab/associates.yml, read
-                through the same vocab-labels.html lookup the Associate directory
-                uses, so a family is named once for the whole site. Families are
-                an organising layer, not a public one: this file reads them to
-                decide the order programmes are listed in, and renders nothing
-                about them. Adding the first programme to a family therefore
-                needs no edit here, and a family with no programmes contributes
-                nothing to the page at all.
-    programmes  the generated pages under /programmes/.
-    courses     the course pages whose own `programme` front matter names the
-                programme, matched the same way layouts/programmes/single.html
-                matches them.
-
-  A programme's course count comes from the same list that fills its programme
-  page, so the card and the page cannot disagree. The card shows the count only:
-  each card is a single link to the programme page, so the courses themselves are
-  named there rather than inside the card. A link cannot contain another link,
-  and the courses are still one click from the card.
+  The cards themselves, their order and their course counts come from
+  programme-card-grid.html, which /programmes/ renders too. A programme added to
+  a family shows up here and there with no edit to either page, and neither page
+  can end up colouring a programme differently from the other.
 */ -}}
-{{- $families := index hugo.Data.vocab.associates "programme_families" | default slice -}}
-{{- $programmes := where site.RegularPages "Section" "programmes" -}}
-{{- $courses := where site.RegularPages "Section" "courses" -}}
-{{- /* One flat list in family order. The family is the sort key and stops there:
-       a reader meets programmes and the courses inside them, and never the
-       grouping that decided where they sit. */ -}}
-{{- $ordered := slice -}}
-{{- range $families -}}
-    {{- range (where $programmes "Params.family" .id) -}}
-        {{- $ordered = $ordered | append . -}}
-    {{- end -}}
-{{- end -}}
 <section id="programmes" class="academy-catalogue" aria-labelledby="programmes-heading">
     <div class="container">
         <header class="address-head">
@@ -46,29 +18,6 @@
             <p class="address-intro">Structured learning pathways bringing together related courses around a professional theme.</p>
         </header>
 
-        {{- with $ordered }}
-        <ul class="academy-programme-list">
-            {{- range $index, $programme := . }}
-                {{- $slug := $programme.Params.slug }}
-                {{- $in_programme := where $courses "Params.programme" $slug }}
-                {{- $course_count := len $in_programme }}
-                {{- /* The card is one link, so its own text is the accessible name and
-                     the heading is read as part of it. */}}
-                <li class="academy-programme">
-                    <a class="academy-programme-card" href="{{ $programme.RelPermalink }}">
-                        <span class="academy-programme-num" aria-hidden="true">{{ printf "%02d" (add $index 1) }}</span>
-                        <h3 class="academy-programme-name">{{ $programme.Title }}</h3>
-                        {{- with $programme.Params.description }}
-                        <p class="academy-programme-desc">{{ . }}</p>
-                        {{- end }}
-                        <span class="academy-programme-foot">
-                            <span class="academy-programme-count">{{ $course_count }} {{ if eq $course_count 1 }}course{{ else }}courses{{ end }}</span>
-                            <span class="academy-programme-cta">Explore programme<span class="academy-programme-arrow" aria-hidden="true">&rarr;</span></span>
-                        </span>
-                    </a>
-                </li>
-            {{- end }}
-        </ul>
-        {{- end }}
+        {{ partial "programme-card-grid.html" . }}
     </div>
 </section>
