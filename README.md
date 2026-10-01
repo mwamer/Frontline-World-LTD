@@ -7,7 +7,7 @@ Public website for Frontline World Ltd. It is a static site built with [Hugo](ht
 The site uses plain Hugo: no theme, no package manager, and no build step other than the `hugo` command.
 
 - **Every page is one complete HTML file** in `content/`.
-- **`layouts/` holds the passthrough templates, plus the partials and shortcodes that build the generated parts**: the insights lists, the associate directory, and the associate profiles.
+- **`layouts/` holds the passthrough templates, plus the partials and shortcodes that build the generated parts**: the insights lists, the programme pages, the course pages, the associate directory, and the associate profiles.
 - **`data/` holds the records that pages are built from**: associates, assignment teams, and the vocabulary those records refer to. It also holds `data/private/`, which the site never serves.
 - **`static/` holds the CSS, JavaScript, and images.**
 - **`hugo.toml` holds site configuration.**
@@ -46,6 +46,7 @@ To change a page, edit its file in `content/`. There is no separate template to 
 │   ├── _default/single.html       # Regular pages
 │   ├── insights/list.html         # Insights listing
 │   ├── people/single.html         # Associate profile
+│   ├── courses/single.html        # One course, for every course in the catalogue
 │   ├── partials/                  # Shared pieces, including the directory and profile helpers
 │   ├── shortcodes/                # Assignment teams, leadership block, associate directory, form options
 ├── applications-worker/            # Public form endpoint. Validates, then writes to a private R2 bucket
@@ -106,33 +107,33 @@ Only `url` and `aliases` change the build. `title` is documentation.
 
 All internal links and asset paths are **relative**, so the site works at the repository subpath and at a custom domain without changes.
 
-A relative path counts how far the page sits below the site root. On a page with one URL segment, reach the root with `../`; with two segments, use `../../`, and so on.
+A relative path counts how far the page sits below the site root. On a page with one URL segment, reach the root with `../`; with two segments, use `../../`, and so on. The table covers the hand-written pages under `content/`, which write their paths out by hand:
 
-| Page URL                               | Home        | Another page              | Asset                |
-| -------------------------------------- | ----------- | ------------------------- | -------------------- |
-| `/`                                    | `./`        | `about/`                  | `{{< stylesheet >}}` |
-| `/about/`                              | `../`       | `../services/`            | `{{< stylesheet >}}` |
-| `/insights/welcome/`                   | `../../`    | `../../about/`            | `{{< stylesheet >}}` |
-| `/training-academy/courses/<slug>/` | `../../../` | `../../training-academy/` | `{{< stylesheet >}}` |
+| Page URL             | Home     | Another page   | Asset                |
+| -------------------- | -------- | -------------- | -------------------- |
+| `/`                  | `./`     | `about/`       | `{{< stylesheet >}}` |
+| `/about/`            | `../`    | `../services/` | `{{< stylesheet >}}` |
+| `/insights/welcome/` | `../../` | `../../about/` | `{{< stylesheet >}}` |
 
 Other assets stay relative and follow the depth table: `../images/foo.jpg` from a page one segment deep.
 
 Rules:
 
 - Never start a link or asset path with `/Frontline-World-LTD/`. That hard-codes the deployment path and breaks a custom domain.
+- In a template, resolve a path with `relURL` and **no leading slash**: `{{ "contact/" | relURL }}`. A leading slash tells Hugo the path is already root-relative, so it skips the subpath and the page 404s on the repository URL while working on the custom domain.
 - Link the stylesheet with `{{< stylesheet >}}`, never with a hand-written path. That shortcode carries a version built from the stylesheet's own content, so a CSS change reaches browsers instead of being served from a four-hour cache alongside newer markup. See `layouts/partials/stylesheet.html`.
 - To link to a section on another page, add the fragment: `../services/#strategic-research`.
 - To link to a section on the same page, use just the fragment: `#courses`.
 
 ## Shared pieces are repeated on every page
 
-The document head, navigation, and footer appear in full in every hand-written page file. That keeps each page self-contained, at the cost of repetition.
+The document head, navigation, and footer appear in full in each of the eleven hand-written page files. That keeps each page self-contained, at the cost of repetition.
 
-When you change the navigation or footer, change it in every file under `content/`. Use search and replace, and check the result.
+When you change the navigation or footer, change it in all eleven. Use search and replace, and check the result. The files are the ten top-level pages, `content/_index.html`, and `content/training-academy.html`; nothing under `content/courses/`, `content/people/`, `content/insights/` or `content/programmes/` carries its own copy.
 
-The generated parts of the site do share their chrome, because they are built by a template rather than written out: `layouts/people/single.html` and `layouts/insights/list.html` call the same `site-head`, `site-nav` and `site-footer` partials. A change to a partial therefore reaches those pages, and the repeated markup in `content/` still needs editing by hand.
+The template-built pages share their chrome instead, because a partial is what renders it: `layouts/people/single.html`, `layouts/courses/single.html`, `layouts/insights/list.html` and `layouts/programmes/single.html` all call the same `site-head`, `site-nav` and `site-footer`. A change to a partial therefore reaches those pages, and the repeated markup in the eleven files still needs editing by hand.
 
-The stylesheet link is the one exception to the repetition. `layouts/partials/stylesheet.html` holds it, `site-head.html` calls it, and the hand-written pages reach it through the `{{< stylesheet >}}` shortcode. Those pages cannot call a partial or evaluate Go template actions, so the shortcode is what lets them share the same version without copying it seventeen times.
+The stylesheet link is the one thing all of them share. `layouts/partials/stylesheet.html` holds it and `site-head.html` calls it; the hand-written pages reach it through the `{{< stylesheet >}}` shortcode, because those pages cannot call a partial. The shortcode is what lets eleven files carry the same version without copying it.
 
 ## The Associate Directory
 
@@ -270,7 +271,26 @@ A programme page is never written by hand. One record in `data/programmes/` is t
 
 The courses on a programme page are not listed in the record. The page collects every course whose front matter sets `programme:` to that programme's slug, so membership is written once on the course and the programme picks its courses up. A programme with no courses yet is valid, and the page says so rather than rendering an empty list.
 
-The course pages are still hand-written HTML and carry no `title:` in their front matter, so `course-name.html` reads the course's `<h1>` out of the page body. That is a stopgap for pages that have not been converted yet; once the courses are generated from records with a real title, the helper uses it and the fallback goes.
+A course states its own name in `title:`, and the page heading is rendered from it, so the name is written once. `course-name.html` still falls back to reading the `<h1>` out of the body for a course that predates that key, and to the slug after that, so no list can print an empty link.
+
+### How a course page is built
+
+One template renders all six courses. `layouts/courses/single.html` owns the chrome and the page's frame; `content/courses/<course>.html` owns the lead, the facts, and the sections between them. A new course is a new content file, not a new template and not a new page of markup.
+
+| Piece                                 | Role                                                                                     |
+| ------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `layouts/courses/single.html`         | The page: head, nav, breadcrumb, programme label, heading, actions, body, closing action, footer. |
+| `layouts/partials/course-programme.html` | Resolves the course's `programme:` into the name, the URL, and the colour slot.         |
+| `layouts/partials/course-index.html`  | The course's position among its programme's courses, as `Course 01`.                      |
+| `layouts/partials/course-name.html`   | The name, used by the heading and by every list of the course.                            |
+
+The page reads top to bottom in one column: breadcrumb, the programme's label and the course's number, one heading, the lead, the facts, the action a visitor came to take, the sections the course states, its trainers, and one closing action. Sections are optional, and a course carries only the ones it has copy for.
+
+**The lead and the facts stay in the file.** `course-lead.html` and `course-facts.html` read the rendered body, not the layout's output, so moving `<p class="page-lead">` or `<div class="course-facts">` into the template would empty every card in the catalogue. The facts stay `<p><strong>Label</strong> value</p>` for the same reason: `course-facts.html` finds them by that markup, so a `<dl>` would break the approved card.
+
+The course's number is derived, never written down. `course-index.html` takes the order the programme's own course cards use and returns the position in it, so adding or removing a course renumbers its siblings and no `course_number:` key exists to fall out of step.
+
+**The programme's colour is one hairline, never type.** `--programme-bg` arrives as a custom property from the `data-programme-slot` attribute the template writes, and the page draws it as a 3px rule along the top and a small square beside the programme's name. It is never used for text, because one of the five slots is an ochre that sits at 2.4:1 on the page ground. The programme's name and every other word on the page use `--forest` or `--text`, so contrast does not change from one programme to the next.
 
 ### How the Academy page presents the catalogue
 
@@ -297,7 +317,7 @@ Courses are ordered by the programme they belong to, then by name, using the `pr
 
 The section was withheld from the sitemap while the programme work was unfinished. Both `sitemap.disable` settings have now been removed: the one `content/programmes/_index.md` set on the section, and the one `content/programmes/_content.gotmpl` set on each generated programme page. The latter sat on the `AddPage` call rather than inside `params`, because that is where Hugo reads it: a nested `sitemap` map under `params` is left as an ordinary page parameter and the page still reaches the sitemap.
 
-Adding the navigation item is a **coordinated change across two kinds of file**. `layouts/partials/site-nav.html` covers the generated pages. The seventeen hand-written pages under `content/` each carry their own copy of the navigation and have to be edited individually, each with its own depth-relative prefix (`programmes/`, `../programmes/`, `../../../programmes/`). Change one and not the others and the section appears on some pages and not others.
+Adding the navigation item is a **coordinated change across two kinds of file**. `layouts/partials/site-nav.html` covers the generated pages. The eleven hand-written pages under `content/` each carry their own copy of the navigation and have to be edited individually, each with its own depth-relative prefix (`programmes/`, `../programmes/`, `../../../programmes/`). Change one and not the others and the section appears on some pages and not others.
 
 ### How the pages are put together
 
@@ -648,14 +668,19 @@ The listing, the home cards, and the ticker all read the article frontmatter, so
 
 ### Add a course
 
-1. Copy an existing file in `content/courses/`.
+1. Copy an existing file in `content/courses/`. The file name is the slug, and the course's URL is set from it.
 2. Set `url` in frontmatter to `/training-academy/courses/<slug>/`.
-3. Edit the copy, including the title, audience, and format facts.
-4. Add the course to the list in `content/training-academy.html`.
+3. Set `title:` to the course's name, and `programme:` to the slug of the programme it belongs to. That one key is the whole link to the programme.
+4. Set `action:` — the button under the heading, and the one action that closes the page. Both point at destinations the course already offers.
+5. Write the body: the lead, the facts block, then one `<section>` per piece of the course. Keep only the sections the course has copy for.
+
+No list needs editing. The course appears on its programme page, inside the Academy's programme card and in its Courses grid, in the sitemap and the feed, because all of them read the front matter. `content/training-academy.html` is not a list of courses.
+
+State a fact only if the course states it. A course with no `Format` line gets a card with no format, which is the intended behaviour rather than a gap to fill.
 
 ### Add or edit an assignment team
 
-Every course supports several people, displayed between "What the course covers" and the "Audience" section. The same shape serves a programme or a project, so one file describes the people on any piece of work.
+Every course supports several people, shown wherever the course places the `{{< course-trainers >}}` shortcode in its body. The same shape serves a programme or a project, so one file describes the people on any piece of work.
 
 A person on an assignment is a person in the Associate Directory, not a copy of one. Assignment data lives in one file per assignment at `data/assignments/<slug>.yml`, and the file name must match the course's URL slug exactly. Each entry in `team` names an associate ID and, at most, what belongs to that assignment:
 

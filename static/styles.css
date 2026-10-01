@@ -1961,69 +1961,6 @@ em {
     margin: 0;
 }
 
-.reason-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-    padding: 0;
-    margin: 0;
-}
-
-.reason-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    background: var(--offwhite);
-    padding: clamp(1.6rem, 3vw, 2.2rem) clamp(1.25rem, 2.6vw, 1.9rem);
-    transition: background-color 0.4s var(--ease-out);
-}
-
-.reason-card:hover,
-.reason-card:focus-within {
-    background: var(--sand-shade);
-}
-
-.reason-node {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
-    border: 1px solid var(--line-strong);
-    border-radius: 50%;
-    color: var(--terracotta);
-    transition: border-color 0.4s var(--ease-out);
-}
-
-.reason-card:hover .reason-node {
-    border-color: var(--terracotta);
-}
-
-.reason-node svg {
-    width: 20px;
-    height: 20px;
-}
-
-.reason-name {
-    font-size: 1.06rem;
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--charcoal);
-    margin: 0 0 0.45rem;
-}
-
-.reason-desc {
-    font-size: 0.92rem;
-    line-height: 1.6;
-    color: var(--text-muted);
-    margin: 0;
-}
-
 /* ---------- Interested in Working Together band (Our People) ---------- */
 .work-together {
     background: var(--offwhite);
@@ -3877,24 +3814,6 @@ em {
     line-height: 1.75;
 }
 
-/* Module and audience bullets. The site sets no generic list styling, so the
-   markers and rhythm come from the same tokens as the text beside them. */
-.course-body .course-list {
-    margin: 0.4rem 0 0;
-    padding-left: 1.15rem;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-.course-body .course-list li {
-    margin-bottom: 0.15rem;
-}
-
-.course-body .course-list li::marker {
-    color: var(--terracotta);
-}
-
 /* Trainer profile cards on course pages. The names, roles, bios and photos
    come from data/trainers/*.yml, edited through the CMS; this only shapes the
    cards around whatever the admin supplies. */
@@ -4772,10 +4691,6 @@ em {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .reason-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .partnership-form-fields {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -5054,10 +4969,6 @@ em {
         grid-template-columns: 0.9fr 1.1fr;
         align-items: start;
     }
-
-    .reason-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 /* Nine links plus the CTA need more room than the space between 1024px and
@@ -5313,11 +5224,6 @@ em {
     padding: clamp(4.5rem, 9vw, 7.5rem) 0;
 }
 
-.courses-note {
-    margin-top: 0.4rem;
-    color: var(--text-muted);
-}
-
 .courses-register {
     margin-top: 2.6rem;
 }
@@ -5461,65 +5367,6 @@ em {
 }
 
 /* Course pages */
-.course-facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem 3rem;
-    margin-top: 2rem;
-}
-
-.course-facts p {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-}
-
-.course-facts strong {
-    display: block;
-    color: var(--forest);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 0.25rem;
-}
-
-.course-body {
-    padding: clamp(3rem, 6vw, 5rem) 0;
-}
-
-.course-body-inner {
-    max-width: 46rem;
-}
-
-.course-body p {
-    font-size: 1.06rem;
-    line-height: 1.85;
-    color: var(--text);
-}
-
-.course-body h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
-    color: var(--forest);
-    margin: 2.75rem 0 1rem;
-}
-
-.course-body h2:first-child {
-    margin-top: 0;
-}
-
-.course-enrol {
-    margin-top: 3rem;
-    padding-top: 2.25rem;
-    border-top: 1px solid var(--line);
-}
-
-.course-enrol > p {
-    margin-bottom: 1.75rem;
-    max-width: 40rem;
-}
-
 @media (max-width: 1024px) {
     .model-band {
         grid-template-columns: repeat(3, 1fr);
@@ -5570,411 +5417,14 @@ em {
     border-color: transparent;
 }
 
-/* ==========================================================================
-   Course detail page (strategic-foresight-for-leaders)
-   ========================================================================== */
-
-/* Kill the inherited article padding; sections are full-bleed bands */
-.course-detail {
-    padding: 0;
-}
-
-/* Full-bleed section bands */
-.course-section {
-    padding: 5.5rem 0 6rem;
-    scroll-margin-top: calc(var(--nav-h) + 1rem);
-}
-
-.course-section--alt {
-    background: var(--offwhite);
-}
-
-/* Section typography on course pages (overrides .course-body h2) */
-.course-section h2 {
-    font-size: clamp(2rem, 3.6vw, 3.1rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    color: var(--forest);
-    margin: 0 0 1.4rem;
-}
-
-.course-section h3 {
-    color: var(--forest);
-    margin: 0 0 0.6rem;
-}
-
-.course-section--alt h2,
-.course-section--alt h3 {
-    color: var(--forest);
-}
-
 .section-lead {
     color: var(--text-muted);
     max-width: 56rem;
     margin: 0 0 2.6rem;
 }
 
-/* Breadcrumb */
-.course-breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 0 2.4rem;
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
-}
-
-.course-breadcrumb a {
-    color: var(--forest);
-    border-bottom: 1px solid transparent;
-    transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
-}
-
-.course-breadcrumb a:hover {
-    color: var(--terracotta);
-    border-color: var(--terracotta);
-}
-
-.course-breadcrumb .crumb-sep {
-    color: rgba(36, 38, 34, 0.45);
-}
-
-.course-breadcrumb .crumb-current {
-    color: var(--text-muted);
-}
-
-/* Course overview: two-column copy + info panel */
-.course-overview-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3.5rem;
-    align-items: start;
-}
-
-.course-overview-copy p {
-    margin-bottom: 1rem;
-    max-width: 40rem;
-}
-
-.course-overview-copy p:last-child {
-    margin-bottom: 0;
-}
-
-/* Info panel */
-.course-info-panel {
-    border: 1px solid var(--line-strong);
-    background: var(--offwhite);
-    padding: 1.8rem 1.9rem 1.4rem;
-    border-radius: 2px;
-}
-
-.course-info-list {
-    margin: 0;
-}
-
-.course-info-row {
-    padding: 1.05rem 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 5.5rem 1fr;
-    gap: 1rem;
-}
-
-.course-info-row:first-child {
-    padding-top: 0.2rem;
-}
-
-.course-info-row:last-child {
-    padding-bottom: 0.35rem;
-    border-bottom: none;
-}
-
-.course-info-row dt {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    padding-top: 0.2rem;
-}
-
-.course-info-row dd {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text);
-}
-
-/* Reasons (Why this course) */
-.reason-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.reason-block {
-    border-top: 2px solid var(--terracotta);
-    padding: 2rem 0.5rem 0.5rem 0;
-}
-
-.reason-num {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 2.6rem;
-    line-height: 1;
-    color: var(--terracotta);
-    margin-bottom: 1rem;
-}
-
-.reason-block h3 {
-    font-size: 1.18rem;
-}
-
-.reason-block p {
-    color: var(--text-muted);
-    font-size: 0.98rem;
-    line-height: 1.7;
-}
-
-/* Audience (Who it is for) */
-.audience-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.audience-card {
-    border: 1px solid var(--line);
-    background: var(--offwhite);
-    border-radius: 2px;
-    padding: 1.6rem 1.5rem;
-    transition: border-color 0.3s var(--ease-out);
-}
-
-.audience-card:hover {
-    border-color: var(--terracotta);
-}
-
-.audience-num {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    color: var(--terracotta);
-    margin-bottom: 0.8rem;
-}
-
-.audience-card h3 {
-    font-size: 1.02rem;
-}
-
-.audience-card p {
-    color: var(--text-muted);
-    font-size: 0.94rem;
-    line-height: 1.65;
-    margin: 0;
-}
-
-/* Learning objectives */
-.objectives-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.9rem 1.5rem;
-}
-
-.objective-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.1rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.objective-num {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--terracotta);
-    padding-top: 0.15rem;
-    white-space: nowrap;
-}
-
-.objective-copy h3 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-}
-
-.objective-copy p {
-    color: var(--text-muted);
-    font-size: 0.93rem;
-    line-height: 1.62;
-    margin: 0;
-}
-
-/* Three themes (forest band) */
-.course-themes {
-    background: var(--forest);
-}
-
-.course-themes h2 {
-    color: var(--offwhite);
-}
-
-.course-themes .section-kicker {
-    color: var(--sand);
-    border-color: var(--terracotta);
-    background: none;
-    padding-left: 0;
-}
-
-.course-themes .section-lead {
-    color: rgba(248, 246, 241, 0.78);
-}
-
-.themes-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-}
-
-.theme-block {
-    border-top: 1px solid rgba(248, 246, 241, 0.22);
-    padding-top: 1.6rem;
-}
-
-.theme-num {
-    display: block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 0.7rem;
-}
-
-.theme-block h3 {
-    color: var(--offwhite);
-    font-size: 1.3rem;
-}
-
-.theme-block p {
-    color: rgba(248, 246, 241, 0.78);
-    font-size: 0.97rem;
-    line-height: 1.7;
-    margin: 0;
-}
-
-/* Course structure placeholder */
-.structure-panel {
-    border: 1px dashed var(--line-strong);
-    background: var(--offwhite);
-    border-radius: 2px;
-    padding: 2.2rem 2rem;
-    max-width: 44rem;
-}
-
-.structure-status {
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--forest);
-    margin-bottom: 0.7rem;
-}
-
-.structure-panel p:last-child {
-    color: var(--text-muted);
-    margin: 0;
-}
-
-/* Delivery panels */
-.delivery-panels {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    max-width: 56rem;
-}
-
-.delivery-panel {
-    border-top: 2px solid var(--terracotta);
-    padding-top: 1.5rem;
-}
-
-.delivery-panel h3 {
-    font-size: 1.18rem;
-}
-
-.delivery-panel ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.delivery-panel li {
-    position: relative;
-    padding-left: 1.3rem;
-    margin-bottom: 0.6rem;
-    color: var(--text-muted);
-    font-size: 0.97rem;
-    line-height: 1.65;
-}
-
-.delivery-panel li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--terracotta);
-}
-
-/* Application + final CTA actions */
-.course-apply .hero-actions,
 .cta-section .final-cta-actions {
     margin-top: 1.2rem;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .course-section {
-        padding: 4rem 0 4.5rem;
-    }
-
-    .course-overview-grid {
-        grid-template-columns: 1fr;
-        gap: 2.4rem;
-    }
-
-    .reason-grid,
-    .audience-grid,
-    .objectives-grid,
-    .themes-grid,
-    .delivery-panels {
-        grid-template-columns: 1fr;
-    }
-
-    .objective-item {
-        padding: 1.1rem 0 0.4rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .course-section {
-        padding: 3.4rem 0 3.8rem;
-    }
-
-    .course-info-row {
-        grid-template-columns: 1fr;
-        gap: 0.3rem;
-    }
-
-    .reason-block,
-    .theme-block {
-        padding-right: 0;
-    }
-
-    .course-breadcrumb {
-        margin-bottom: 1.8rem;
-    }
 }
 
 /* ==========================================================================
@@ -6537,7 +5987,6 @@ em {
 .approach-steps + .academy-tags {
     margin-top: clamp(2.75rem, 5.5vw, 4rem);
 }
-
 
 /* 3. Who We Train — borderless list, so the page does not stack three
       identical card grids (areas, courses, audiences). */
@@ -7436,5 +6885,488 @@ input[aria-invalid="true"] {
         width: calc(100% + (2 * var(--programme-spread)));
         margin-left: calc(-1 * var(--programme-spread));
         margin-right: calc(-1 * var(--programme-spread));
+    }
+}
+
+/* ==========================================================================
+   Course pages
+   ==========================================================================
+   One course page, rendered for every course by layouts/courses/single.html.
+   Every rule is scoped to .course-page so the programme cards, the Academy
+   course cards and the rest of the site keep their own rules untouched.
+
+   The programme's colour arrives as --programme-bg, set by the
+   data-programme-slot attribute the template writes, and it is used for one
+   hairline rule and never for type. One of the five slots is an ochre that sits
+   at 2.4:1 on the offwhite, so coloured text would fail on some programmes and
+   pass on others. The identity is carried by the rule instead: it is the same
+   3px top edge a course card wears, so the card and the page it opens read as
+   one object.
+
+   Prose is held to a 46rem measure and the wider elements are named, so a
+   section's width follows what it holds rather than the other way round. */
+
+.course-page {
+    border-top: 3px solid var(--programme-bg, var(--forest));
+}
+
+.course-page__inner {
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* ---------- Breadcrumb ---------- */
+
+.course-page__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.15rem 0.55rem;
+    padding-top: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+}
+
+.course-page__breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.course-page__breadcrumb a:hover {
+    color: var(--forest);
+    border-bottom-color: var(--line-strong);
+}
+
+.course-page__breadcrumb a:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 3px;
+}
+
+.course-page__crumb-sep {
+    color: var(--line-strong);
+}
+
+.course-page__crumb-current {
+    color: var(--forest);
+}
+
+/* ---------- Header ---------- */
+
+.course-page__header {
+    padding-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.course-page__eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    margin: 0 0 1.15rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* The programme's square, the one place its colour is drawn on the page. */
+.course-page__programme::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.65rem;
+    background: var(--programme-bg, var(--forest));
+}
+
+.course-page__programme {
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    transition: border-color 0.25s var(--ease-out);
+}
+
+.course-page__programme:hover {
+    border-bottom-color: var(--forest);
+}
+
+.course-page__programme:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 3px;
+}
+
+/* The number already sits beside the programme's colour, so it stays neutral
+   rather than carrying a second accent. The same reasoning as the course card. */
+.course-page__number {
+    color: var(--text-muted);
+    border-left: 1px solid var(--line);
+    padding-left: 1rem;
+}
+
+.course-page__title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2.15rem, 4.6vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    color: var(--forest);
+    max-width: 20ch;
+    margin: 0;
+    text-wrap: balance;
+}
+
+/* ---------- Actions ---------- */
+
+.course-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+
+/* ---------- Body ---------- */
+
+.course-page__body {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.course-page__body > p {
+    max-width: 46rem;
+}
+
+/* The lead and the facts sit directly under the header, so they are held to the
+   prose measure rather than the page's full width. */
+.course-page__body > .page-lead {
+    max-width: 44rem;
+}
+
+/* ---------- Facts ----------
+   A course publishes who it is for and how it runs as a <p><strong>label</strong>
+   value</p> pair, because course-facts.html reads that markup to fill the
+   catalogue cards. It stays that markup here and is shaped as a ruled spec
+   strip instead of a definition list, so the cards and the page cannot drift
+   apart. */
+
+.course-page__body > .course-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem 2.5rem;
+    max-width: 64rem;
+    margin: 2.5rem 0 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+}
+
+.course-page .course-facts p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.course-page .course-facts strong {
+    display: block;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+/* ---------- Sections ---------- */
+
+.course-page__section {
+    margin-top: clamp(2.75rem, 5.5vw, 4.25rem);
+    padding-top: clamp(2.75rem, 5.5vw, 4.25rem);
+    border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.course-page__section:first-of-type {
+    margin-top: clamp(2.75rem, 5.5vw, 3.75rem);
+    padding-top: 0;
+    border-top: 0;
+}
+
+.course-page__section > h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--forest);
+    max-width: 26ch;
+    margin: 0 0 1.1rem;
+    text-wrap: balance;
+}
+
+.course-page__section > .section-lead {
+    margin-bottom: 2.4rem;
+}
+
+/* ---------- Item grids ----------
+   Ruled columns rather than cards: a hairline over each item and nothing else.
+   A grid of boxes would read as a catalogue, and the programme page is already
+   the catalogue for these courses. */
+
+.course-page__items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem 2.5rem;
+    list-style: none;
+    max-width: 64rem;
+    margin: 2.25rem 0 0;
+    padding: 0;
+}
+
+/* For items that carry a list of their own, where three columns would squeeze
+   the list into a narrow ribbon. */
+.course-page__items--pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.course-page__item {
+    min-width: 0;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--line);
+}
+
+.course-page__item-num,
+.course-page__item-tag {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.7rem;
+}
+
+.course-page__item-title {
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    color: var(--forest);
+    margin: 0 0 0.5rem;
+    text-wrap: balance;
+}
+
+.course-page__item-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ---------- Nested lists ---------- */
+
+.course-page__points {
+    margin: 0.7rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.course-page__points li {
+    margin-bottom: 0.3rem;
+}
+
+.course-page__points li::marker {
+    color: var(--terracotta);
+}
+
+.course-page__list {
+    max-width: 44rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.course-page__list li {
+    margin-bottom: 0.4rem;
+}
+
+.course-page__list li::marker {
+    color: var(--terracotta);
+}
+
+/* ---------- Overview split ---------- */
+
+.course-page__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    max-width: 64rem;
+}
+
+.course-page__split-copy > p {
+    max-width: 46rem;
+}
+
+/* ---------- Panels ---------- */
+
+.course-page__panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 2.5rem;
+    max-width: 64rem;
+    margin-top: 2.25rem;
+}
+
+.course-page__panel {
+    max-width: 46rem;
+    padding-top: 1.3rem;
+    border-top: 1px solid var(--line-strong);
+}
+
+.course-page__panel-title {
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--forest);
+    margin: 0 0 0.75rem;
+}
+
+.course-page__panel p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.course-page__panel p.course-page__panel-status {
+    color: var(--forest);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.course-page__panel .course-page__points {
+    margin-top: 0;
+}
+
+/* A course that states its own course information states it as a real
+   definition list, which needs no second markup contract to keep it readable. */
+.course-page__facts-list {
+    margin: 0;
+}
+
+.course-page__facts-row {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.course-page__facts-row:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.course-page__facts-row dt {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.course-page__facts-row dd {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ---------- Closing action ----------
+   One closing action, and it carries the same programme rule the page opens
+   with, so the two ends of the page are visibly one object. */
+
+.course-page__closing {
+    margin-top: clamp(3.5rem, 7vw, 5.5rem);
+    padding-top: clamp(2.75rem, 5.5vw, 4rem);
+    border-top: 3px solid var(--programme-bg, var(--forest));
+}
+
+.course-page__closing-inner {
+    max-width: 44rem;
+}
+
+.course-page__closing h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--forest);
+    margin: 0 0 0.9rem;
+    max-width: 24ch;
+    text-wrap: balance;
+}
+
+.course-page__closing p {
+    color: var(--text-muted);
+    max-width: 42rem;
+    margin: 0;
+}
+
+/* ---------- Responsive ----------
+   Two steps only. Below the first the two-column layouts stack; below the
+   second everything is a single column. */
+
+@media (max-width: 900px) {
+    .course-page__items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    /* An explicit two columns rather than auto-fit, so four facts read as two
+       rows of two instead of three and a stray one. */
+    .course-page__body > .course-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .course-page__items--pair {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .course-page__split {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .course-page__panels {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 620px) {
+    .course-page__items {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
+    }
+
+    .course-page__body > .course-facts {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.15rem;
+    }
+
+    .course-page__title {
+        font-size: clamp(1.9rem, 8vw, 2.4rem);
+    }
+
+    .course-page__actions .cta-button {
+        flex: 1 1 auto;
+        justify-content: center;
     }
 }

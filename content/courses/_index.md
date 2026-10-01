@@ -41,14 +41,42 @@
 # academy-catalogue.html and the "How the Academy page presents the catalogue"
 # section of README.md.
 #
+# A course may carry a second key of its own:
+#
+#   action:
+#     primary:               the button under the heading
+#       label: <button text>
+#       href: <a site-relative path, with no leading slash>
+#       external: true       adds target="_blank" rel="noopener"
+#     closing:               the one action that closes the page
+#       heading: <its heading>
+#       text: <one sentence, optional>
+#       label: <button text>
+#       href: <a site-relative path, with no leading slash>
+#
+# Both destinations are the ones the course already offered, so the key routes
+# an existing link rather than introducing one. The two are deliberately not the
+# same link: the button under the heading is the action a visitor has come to
+# take, and the closing action is a different one, so the page does not repeat
+# the same call to action twice.
+#
 # A course's own page is the single source for what its catalogue card says.
-# The card on the Training Academy page reads the course's <h1> for the name,
+# The card on the Training Academy page reads the course's `title:` for the name,
 # its <p class="page-lead"> for the description, and the Audience and Format
 # lines in its <div class="course-facts"> for the delivery facts, through
 # course-name.html, course-lead.html and course-facts.html. A course that states
 # no facts block gets a card with no facts line rather than an invented one.
 # Editing a sentence on the course page therefore updates every list of that
 # course, which is the point: there is no second copy to fall out of step.
+#
+# Those three pieces stay in the body of the file rather than moving into
+# layouts/courses/single.html, because the three helpers read the rendered body
+# and not the layout's output. The template owns the chrome, the breadcrumb, the
+# programme label, the heading and the two actions; the file owns the lead, the
+# facts, and the sections between them. The heading is the one that moved out of
+# the file, which is why the name is read from `title:` and no longer from the
+# <h1>, and why course-name.html still keeps that <h1> fallback for a course
+# written before the template existed.
 #
 # A course may add an optional `summary:` to its front matter to give the card a
 # shorter description than its page lead, for a page whose opening paragraph is

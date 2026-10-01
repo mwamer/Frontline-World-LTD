@@ -1,0 +1,118 @@
+{{- /*
+  One course page, for every course in the catalogue.
+
+  These pages used to be six complete hand-written HTML documents, each carrying
+  its own copy of the head, the navigation, the footer, the promotional rails and
+  a course-page structure that had drifted into two different shapes. Only the
+  article differed, so only the article is written per course now; everything
+  around it is this template and the partials it already shared with the rest of
+  the site.
+
+  What is read from where:
+
+    name       course-name.html    the course's own title
+    lead       course-lead.html    its summary, the sentence the Academy and the
+                                  programme cards already print
+    programme  course-programme.html   the parent, from `programme:` and the record
+    number     course-index.html   its position among its programme's courses
+    trainers   course-trainers.html    the people who deliver it, or the empty state
+
+  Only the first action sits in the header. A second link there would either repeat
+  it or jump to the article that starts on the next line, so the header carries one
+  action and the page carries one closing action.
+
+  The page keeps the three elements the programme course cards scrape, and they
+  stay in the course's own content rather than moving into this template:
+
+    <h1>                        the name, printed from the title front matter
+    <p class="page-lead">       the lead
+    <div class="course-facts">  the delivery facts
+
+  course-name.html, course-lead.html and course-facts.html read a course's content,
+  not its rendered layout, so those three live in the content file where the
+  partials have always found them. Moving them into the template would silently
+  empty every course card in the catalogue.
+
+  The article below the header is the course's own `.Content`, so a course carries
+  only the sections it actually has. There is no placeholder for a section a
+  course does not have, and no course is stretched to match another: benefits,
+  themes and learning objectives are different things and are not interchanged
+  here.
+
+  Facts stay as the paragraphs the cards scrape, rather than becoming a <dl>.
+  course-facts.html reads them by their <strong> label markup, and that partial
+  is shared with the approved catalogue, so restyling them here is safe and
+  changing their markup is not.
+
+  Optional sections are written by the course. This template decides the frame:
+  the breadcrumb, the programme label, the title, the action, the article and one
+  closing action.
+*/ -}}
+{{- $programme := partial "course-programme.html" (dict "programme" .Params.programme) -}}
+{{- $number := partial "course-index.html" (dict "page" .) -}}
+{{- $name := partial "course-name.html" . -}}
+{{- $lead := partial "course-lead.html" . -}}
+{{- $academy := "training-academy/" | relURL -}}
+{{- $action := .Params.action | default dict -}}
+{{- $primary := $action.primary | default dict -}}
+{{- $closing := $action.closing | default dict -}}
+<!DOCTYPE html>
+<html lang="en">
+<head>{{ partial "site-head.html" (dict "title" $name "description" $lead) }}</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>{{ partial "site-nav.html" . }}
+<main id="main-content">
+
+<article class="course-page" data-programme-slot="{{ $programme.slot }}">
+    <div class="container course-page__inner">
+
+        <nav class="course-page__breadcrumb" aria-label="Breadcrumb">
+            <a href="{{ "" | relURL }}">Home</a>
+            <span class="course-page__crumb-sep" aria-hidden="true">/</span>
+            <a href="{{ $academy }}">Training Academy</a>
+            <span class="course-page__crumb-sep" aria-hidden="true">/</span>
+            <a href="{{ $programme.url }}">{{ $programme.title }}</a>
+            <span class="course-page__crumb-sep" aria-hidden="true">/</span>
+            <span class="course-page__crumb-current" aria-current="page">{{ $name }}</span>
+        </nav>
+
+        <header class="course-page__header">
+            <p class="course-page__eyebrow">
+                <a class="course-page__programme" href="{{ $programme.url }}">{{ $programme.title }}</a>
+                {{ with $number }}
+                <span class="course-page__number">Course {{ printf "%02d" . }}</span>
+                {{ end }}
+            </p>
+            <h1 class="course-page__title">{{ $name }}</h1>
+        </header>
+
+        {{ with $primary }}
+        <div class="course-page__actions">
+            <a class="cta-button cta-button--shimmer" href="{{ .href | relURL }}"{{ if .external }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
+        </div>
+        {{ end }}
+
+        <div class="course-page__body">
+            {{ .Content }}
+        </div>
+
+        {{ with $closing }}
+        <section class="course-page__closing" aria-labelledby="course-closing-heading">
+            <div class="course-page__closing-inner">
+                {{ with .kicker }}<p class="section-kicker">{{ . }}</p>{{ end }}
+                <h2 id="course-closing-heading">{{ .heading }}</h2>
+                {{ with .text }}<p>{{ . }}</p>{{ end }}
+                <div class="course-page__actions">
+                    <a class="cta-button" href="{{ .href | relURL }}"{{ if .external }} target="_blank" rel="noopener"{{ end }}>{{ .label }}</a>
+                    <a class="cta-button secondary" href="{{ $academy }}#courses">Back to all courses</a>
+                </div>
+            </div>
+        </section>
+        {{ end }}
+
+    </div>
+</article>
+
+</main>{{ partial "site-footer.html" . }}<script src="{{ "script.js" | relURL }}"></script>
+</body>
+</html>

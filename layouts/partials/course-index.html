@@ -1,0 +1,34 @@
+{{- /*
+  A course's position among the courses of its own programme, as "Course 01".
+
+  The number is derived, never written down. A course carries no `course_number:`
+  key and no page prints a hand-kept count, so a course added to or removed from a
+  programme renumbers itself and nothing can fall out of step.
+
+  The order is the one the programme's course cards already use: the courses whose
+  `programme:` names this programme, sorted by the name each card actually shows.
+  That name comes from course-name.html rather than from .LinkTitle, so the number
+  follows the wording a visitor actually reads. It is also the key the flat course
+  catalogue sorts on, so a course keeps one position within its programme
+  everywhere it is listed.
+
+  Returns 0 when the course names no programme, so a caller can print nothing
+  rather than call the course the first one.
+
+  Everything is resolved into top-level variables because `return` is evaluated
+  outside the blocks below, where a variable declared inside one is not visible.
+
+  Arguments:
+    page   the course page
+*/ -}}
+{{- $page := .page -}}
+{{- $slug := printf "%v" ($page.Params.programme | default "") -}}
+{{- $siblings := slice -}}
+{{- range where (where site.RegularPages "Section" "courses") "Params.programme" $slug -}}
+    {{- $siblings = $siblings | append (dict "page" . "name" (partial "course-name.html" .)) -}}
+{{- end -}}
+{{- $index := 0 -}}
+{{- range $position, $sibling := (sort $siblings "name") -}}
+    {{- if eq $sibling.page.RelPermalink $page.RelPermalink -}}{{- $index = add $position 1 -}}{{- end -}}
+{{- end -}}
+{{- return $index -}}

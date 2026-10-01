@@ -1,0 +1,43 @@
+{{- /*
+  The programme a course belongs to, resolved once for a course page.
+
+  Membership is written once, on the course's own `programme:` front matter. This
+  partial turns that slug into everything a course page needs to name its parent,
+  so no template holds a programme's name or URL:
+
+    slug     the slug, for the breadcrumb and the colour slot
+    title    the name, from the programme's record in data/programmes/
+    url      /programmes/<slug>/, the same URL the generated programme page uses
+    slot     its 1-based position in the catalogue order, which is what the
+             stylesheet keys the five programme colours on
+
+  The record is the single source for the name. programmes-validate.html already
+  fails the build when a course names a programme with no record, and this
+  repeats that check so a caller is never handed a parent it cannot print.
+
+  The colour itself stays in the stylesheet beside the programme card's slot
+  rules; only the slot travels through here.
+
+  Everything is resolved into top-level variables because `return` is evaluated
+  outside the blocks below, where a variable declared inside one is not visible.
+
+  Arguments:
+    programme   the slug from the course's front matter
+*/ -}}
+{{- $slug := printf "%v" (.programme | default "") -}}
+{{- $record := index (hugo.Data.programmes | default dict) $slug -}}
+{{- $title := "" -}}
+{{- with $record -}}
+    {{- $title = printf "%v" (.title | default "") -}}
+{{- end -}}
+{{- if or (eq $slug "") (not $record) (eq $title "") -}}
+    {{- errorf "course page: programme %q has no usable record in data/programmes/, so this course has no parent to link to." $slug -}}
+{{- end -}}
+{{- $slot := 0 -}}
+{{- range $position, $ordered := partial "programme-order.html" $ -}}
+    {{- if eq $ordered $slug -}}{{- $slot = add $position 1 -}}{{- end -}}
+{{- end -}}
+{{- if eq $slot 0 -}}
+    {{- errorf "course page: programme %q is in no catalogue order, so it would carry no colour." $slug -}}
+{{- end -}}
+{{- return (dict "slug" $slug "title" $title "url" (printf "programmes/%s/" $slug | relURL) "slot" $slot) -}}
