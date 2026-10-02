@@ -27,6 +27,12 @@
     --container-pad: clamp(1.25rem, 4vw, 2rem);
     --nav-h: 84px;
 
+    /* Two gaps, kept apart on purpose. --gap-figure binds a figure to the text
+       that explains it, so the two read as one thing. --gap-section holds one
+       major section off the next, and stays generous. */
+    --gap-figure: clamp(1.5rem, 2.6vw, 2.25rem);
+    --gap-section: clamp(3.5rem, 7vw, 6rem);
+
     --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
     --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -7387,7 +7393,7 @@ input[aria-invalid="true"] {
 
 .hwt-open {
     background: var(--offwhite);
-    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem);
+    padding: clamp(3.5rem, 7vw, 6rem) 0 var(--gap-figure);
 }
 
 .hwt-open__title {
@@ -7437,16 +7443,16 @@ input[aria-invalid="true"] {
 }
 
 .hwt-arc__plate--wide {
-    aspect-ratio: 21 / 9;
+    aspect-ratio: 1400 / 172;
 }
 
 .hwt-arc__plate--tall {
     display: none;
-    aspect-ratio: 6 / 7;
+    aspect-ratio: 600 / 394;
 }
 
 .hwt-arc__caption {
-    margin: 1rem 0 0;
+    margin: 0.9rem 0 0;
     max-width: 52ch;
     font-size: 0.82rem;
     line-height: 1.6;
@@ -7456,16 +7462,16 @@ input[aria-invalid="true"] {
 .hwt-band {
     background: var(--offwhite);
     border-top: 1px solid var(--line);
-    padding: clamp(3.5rem, 7vw, 6rem) 0 0;
+    padding: var(--gap-section) 0 0;
 }
 
 .hwt-band + .hwt-band {
-    margin-top: clamp(3.5rem, 7vw, 6rem);
+    margin-top: var(--gap-section);
 }
 
 .hwt-band__head {
     max-width: 44rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--gap-figure);
 }
 
 .hwt-band__head h2 {
@@ -7486,304 +7492,377 @@ input[aria-invalid="true"] {
     line-height: 1.8;
 }
 
-/* The spine: a dark plate carrying one continuous hairline, with a drawn
-   diagram sitting on the line at each of the six movements.
+/* The orbit: six movements as circles on one continuous line.
 
-   The line is not a background rule. Every figure draws the segment that passes
-   through it, entering and leaving at the same x, so the six segments read as a
-   single path rather than six marks. The gap between one figure and the next is
-   bridged by a pseudo-element on the figure below, whose length is the item's
-   padding-bottom — a fixed distance, so the two halves cannot drift apart.
+   Three compositions of one idea, because one cannot serve every width. Six
+   circles each holding a sentence need a floor of about 150px before the type
+   stops being readable, and a ring that fits six circles is squeezed by its own
+   height, so the orbital only works while the plate stays near its design
+   width.
 
-   Real text in real list markup, so it reflows, stays selectable and needs no
-   JavaScript. */
-.hwt-spine {
+     wide  >= 894px    six circles on a tilted ellipse, one closed loop
+     mid   640-893px   three down the left, three up the right, one rounded
+                       rectangle loop
+     tall  < 640px     one staggered column, the line descending and then
+                       climbing a return channel along the left edge
+
+   Each node's centre appears twice: as a percentage below, and as viewBox
+   coordinates in the SVG paths. Both come from one generator, so they agree.
+   The circles are opaque and sit above the paths, so every one of them hides
+   the segment crossing it and the line reads as entering and leaving rather
+   than passing behind. That technique is also why a small disagreement between
+   the two copies would not show — it still has to be checked in the browser
+   rather than assumed. */
+.hwt-orbit {
     position: relative;
-    list-style: none;
+    container-type: inline-size;
     margin: 0;
-    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+    aspect-ratio: 1136 / 830;
     background: var(--forest-deep);
     color: var(--offwhite);
+    --d: 18.93cqw;
 }
 
-/* Corner marks rather than a border: the plate reads as a drawing surface that
-   sits on the page, not as a boxed component. */
-.hwt-spine::before,
-.hwt-spine::after {
-    content: "";
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    border: 1px solid rgba(248, 246, 241, 0.42);
-    pointer-events: none;
-}
-
-.hwt-spine::before {
-    top: clamp(0.6rem, 1.5vw, 1.1rem);
-    left: clamp(0.45rem, 1.2vw, 1rem);
-    border-right: 0;
-    border-bottom: 0;
-}
-
-.hwt-spine::after {
-    bottom: clamp(0.6rem, 1.5vw, 1.1rem);
-    right: clamp(0.45rem, 1.2vw, 1rem);
-    border-left: 0;
-    border-top: 0;
-}
-
-.hwt-spine__item {
-    position: relative;
-    display: grid;
-    grid-template-columns: 5.5rem minmax(0, 1fr);
-    align-items: start;
-    gap: 0 clamp(1.5rem, 3vw, 2.75rem);
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(248, 246, 241, 0.16);
-}
-
-.hwt-spine__item:last-child {
-    border-bottom: 0;
-    padding-bottom: 0.5rem;
-}
-
-.hwt-spine__figure {
-    position: relative;
-    margin: 0;
-    align-self: start;
-}
-
-.hwt-spine__figure svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
-}
-
-/* The bridge. bottom:100% puts its lower edge at the top of the figure, so it
-   spans exactly the previous item's padding-bottom and meets that item's rule. */
-.hwt-spine__item + .hwt-spine__item .hwt-spine__figure::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    width: 1px;
-    height: 1.5rem;
-    margin-left: -0.5px;
-    background: rgba(248, 246, 241, 0.34);
-}
-
-.hwt-spine__head {
-    display: flex;
-    align-items: baseline;
-    gap: 0.85rem;
-    margin: 0 0 0.5rem;
-}
-
-.hwt-spine__num {
-    font-family: var(--font-sans);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: rgba(248, 246, 241, 0.62);
+.hwt-orbit__layer {
+    display: none;
     margin: 0;
 }
 
-.hwt-spine__term {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    color: var(--offwhite);
-    margin: 0;
-}
-
-.hwt-spine__body {
-    margin: 0;
-    max-width: 58ch;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: rgba(248, 246, 241, 0.78);
-}
-
-.hwt-spine__note {
-    margin: 0.6rem 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.64rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(248, 246, 241, 0.62);
-}
-
-/* The register: hairline-ruled rows, the layout of a reference list. */
-.hwt-register {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.hwt-register__item {
-    display: grid;
-    grid-template-areas: "num term body";
-    grid-template-columns: 3.25rem minmax(0, 0.32fr) minmax(0, 1fr);
-    gap: 0 clamp(1.25rem, 2.5vw, 2.25rem);
-    padding: 1.2rem 0;
-    border-top: 1px solid var(--line-strong);
-}
-
-.hwt-register__item:last-child {
-    border-bottom: 1px solid var(--line-strong);
-}
-
-.hwt-register__num {
-    grid-area: num;
-    font-family: var(--font-sans);
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-}
-
-.hwt-register__term {
-    grid-area: term;
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 1.1rem;
-    line-height: 1.35;
-    color: var(--forest);
-    margin: 0;
-}
-
-.hwt-register__body {
-    grid-area: body;
-    margin: 0;
-    max-width: 52ch;
-    font-size: 0.93rem;
-    line-height: 1.7;
-    color: var(--text-muted);
-}
-
-/* The encounter diagram: four ways of reaching the same learning condition,
-   drawn rather than listed.
-
-   The geometry is two layers over one set of labels. The SVG layer draws only
-   the links; the terms and their sentences are real text in a real list,
-   absolutely positioned so each label's centre lands on the node its links meet
-   at. Both layers are driven by percentages of the same box, so the labels stay
-   on the nodes at every width instead of needing a script to keep them in step.
-
-   Node centres are the same fractions in the CSS below as in the two SVG
-   viewBoxes. Changing one means changing the other. */
-.hwt-formats-plate {
-    position: relative;
-    max-width: 900px;
-    margin: 0 auto;
-    aspect-ratio: 900 / 540;
-    background: var(--forest-deep);
-}
-
-.hwt-formats-plate::before,
-.hwt-formats-plate::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    width: 13px;
-    height: 13px;
-    border: 1px solid rgba(248, 246, 241, 0.42);
-    pointer-events: none;
-}
-
-.hwt-formats-plate::before {
-    top: clamp(0.6rem, 1.5vw, 1.1rem);
-    left: clamp(0.45rem, 1.2vw, 1rem);
-    border-right: 0;
-    border-bottom: 0;
-}
-
-.hwt-formats-plate::after {
-    bottom: clamp(0.6rem, 1.5vw, 1.1rem);
-    right: clamp(0.45rem, 1.2vw, 1rem);
-    border-left: 0;
-    border-top: 0;
-}
-
-.hwt-formats-plate__layer {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-}
-
-.hwt-formats-plate__layer svg {
+.hwt-orbit__layer svg {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.hwt-formats-plate__layer--tall {
+.hwt-orbit__layer--wide {
+    display: block;
+}
+
+.hwt-orbit__nodes {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hwt-orbit__node {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: calc(var(--d) * var(--s));
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(0.7rem, 1.5vw, 1.15rem);
+    border: 1px solid rgba(248, 246, 241, 0.3);
+    border-radius: 50%;
+    background: var(--forest-deep);
+}
+
+/* The three compositions each size the same six circles differently, so a node
+   carries one scale per composition (--sa, --sb, --sc) and each breakpoint
+   picks the one its plate was generated against. Sizes are paired across the
+   centreline in every composition, so the disc mass either side of it matches
+   and the figure sits centred rather than merely inside a centred container. */
+.hwt-orbit__node--1 { --sa: 1.06; --sb: 1.05; --sc: 1.02; --s: var(--sa); --ax: 70.55%; --ay: 29.51%; --bx: 28%;    --by: 20%;    --cx: 27.30%;    --cy: 14.41%; }
+.hwt-orbit__node--2 { --sa: 1.01; --sb: 0.95; --sc: 0.99; --s: var(--sa); --ax: 87.44%; --ay: 59.67%; --bx: 28%;    --by: 50%;    --cx: 72.70%;    --cy: 28.66%; }
+.hwt-orbit__node--3 { --sa: 0.99; --sb: 1.00; --sc: 1.01; --s: var(--sa); --ax: 63.44%; --ay: 83.11%; --bx: 28%;    --by: 80%;    --cx: 27.30%;    --cy: 42.90%; }
+.hwt-orbit__node--4 { --sa: 0.99; --sb: 1.00; --sc: 1.01; --s: var(--sa); --ax: 29.24%; --ay: 72.90%; --bx: 72%;    --by: 80%;    --cx: 72.70%;    --cy: 57.14%; }
+.hwt-orbit__node--5 { --sa: 1.01; --sb: 0.95; --sc: 0.99; --s: var(--sa); --ax: 12.35%; --ay: 41.77%; --bx: 72%;    --by: 50%;    --cx: 27.30%;    --cy: 71.38%; }
+.hwt-orbit__node--6 { --sa: 1.06; --sb: 1.05; --sc: 1.02; --s: var(--sa); --ax: 36.00%; --ay: 20.50%; --bx: 72%;    --by: 20%;    --cx: 72.70%;    --cy: 85.63%; }
+
+.hwt-orbit__node {
+    --x: var(--ax);
+    --y: var(--ay);
+}
+
+/* The line begins at Research and returns to it, so Research and Strategic
+   reflection carry a brighter edge than the four movements between them. */
+.hwt-orbit__node--1 { border-color: rgba(248, 246, 241, 0.5); }
+
+.hwt-orbit__node--6 { border-color: rgba(201, 111, 88, 0.7); }
+
+.hwt-orbit__num {
+    margin: 0 0 0.3rem;
+    font-size: clamp(0.56rem, 0.72vw, 0.66rem);
+    letter-spacing: 0.2em;
+    color: rgba(248, 246, 241, 0.6);
+}
+
+.hwt-orbit__term {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(0.8rem, 1.15vw, 1.02rem);
+    line-height: 1.24;
+    letter-spacing: -0.004em;
+    color: var(--offwhite);
+}
+
+.hwt-orbit__body {
+    margin: 0;
+    font-size: clamp(0.6rem, 0.79vw, 0.75rem);
+    line-height: 1.55;
+    color: rgba(248, 246, 241, 0.76);
+}
+
+.hwt-orbit__note {
+    max-width: 100%;
+    margin: 0.4rem 0 0;
+    font-size: clamp(0.46rem, 0.6vw, 0.55rem);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.45;
+    color: rgba(232, 225, 210, 0.6);
+}
+
+/* The principles: six nodes drawn on two rules, three across and two down.
+
+   Not cards, and not a numbered list either. A number set above a heading is
+   how a list is built; here each number sits inside a hairline ring that
+   straddles the row's rule, so the numbering is part of the drawing. The ring
+   is the same mark as the movement circles above, which is what carries the
+   idea across the two systems: both are one continuous line with circles on it.
+
+   Each row of three shares one continuous rule — every node draws its own
+   stretch and its own ring knocks a gap out of it — and the rules overhang the
+   outer nodes a little, so they read as drawn lines rather than as table rules.
+   A closing rule under the last row holds the field together. */
+.hwt-principles {
+    --gutter: clamp(1.75rem, 3.2vw, 3rem);
+    --over: clamp(0.75rem, 1.6vw, 1.5rem);
+    --ring: 2.15rem;
+    /* Three distances rather than one. The ring is placed on the rule instead
+       of sitting in flow above it, so the air above the rule and the air
+       between the rule and the term are set independently rather than
+       falling out of however tall the numbering happens to be. */
+    --on-rule: clamp(1.35rem, 2.1vw, 1.8rem);
+    --under: clamp(1.6rem, 2.3vw, 1.95rem);
+    --below: clamp(1.6rem, 3.4vw, 2.9rem);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    column-gap: var(--gutter);
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.hwt-principles__node {
+    position: relative;
+    padding-top: calc(var(--on-rule) + var(--under));
+    padding-bottom: var(--below);
+}
+
+/* One rule per node, stretched to reach both ends of its row and a little
+   beyond them. Negative margins carry it across the column gaps. */
+.hwt-principles__node::before {
+    content: "";
+    position: absolute;
+    top: var(--on-rule);
+    left: calc(var(--gutter) * -2);
+    right: 0;
+    height: 1px;
+    background: var(--line-strong);
+}
+
+.hwt-principles__node:nth-child(3n + 1)::before {
+    left: calc(var(--over) * -1);
+    right: calc(var(--gutter) * -2);
+}
+
+.hwt-principles__node:nth-child(3n + 2)::before {
+    left: calc(var(--gutter) * -1);
+    right: calc(var(--gutter) * -1);
+}
+
+.hwt-principles__node:nth-child(3n)::before {
+    left: calc(var(--gutter) * -2);
+    right: calc(var(--over) * -1);
+}
+
+.hwt-principles__num {
+    /* The ring straddles the rule: half above it, half below, with the band
+       colour knocking the line out either side. It is placed rather than
+       flowed, so the vertical rhythm does not depend on how tall it is. */
+    position: absolute;
+    top: var(--on-rule);
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--ring);
+    height: var(--ring);
+    margin: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--offwhite);
+    transform: translateY(-50%);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-indent: 0.1em;
+    color: var(--terracotta);
+}
+
+.hwt-principles__term {
+    margin: 0 0 0.7rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.18rem, 1.9vw, 1.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--forest);
+    /* Two lines held open, so the six statements in a row start on one line
+       however the terms above them happen to wrap. The term sits at the foot
+       of the space, so the slack joins the air above the rule rather than
+       opening a hole between the term and what it introduces. */
+    display: grid;
+    align-content: end;
+    min-height: 2.4em;
+}
+
+.hwt-principles__body {
+    margin: 0;
+    max-width: 34ch;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+}
+
+/* The encounter field: four modes gathered around one shared centre.
+
+   Interactive learning is the centre, and the three delivery modes are drawn as
+   separate ways of reaching it — three fine arcs arriving from three marked
+   points, not three steps in a sequence. The concentric rings and the field of
+   fine points are there to give that centre some air, so it reads as the thing
+   the eye lands on rather than one more item in a row.
+
+   Label positions are percentages of the plate and match the coordinates the
+   arcs were drawn against, so the labels sit under the points they name. */
+.hwt-field {
+    position: relative;
+    container-type: inline-size;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 900 / 560;
+    background: var(--forest-deep);
+    color: var(--offwhite);
+}
+
+.hwt-field__layer {
+    margin: 0;
+}
+
+.hwt-field__layer svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.hwt-field__layer--tall {
     display: none;
 }
 
-.hwt-formats {
+.hwt-field__items {
     position: absolute;
     inset: 0;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
-.hwt-formats__item {
+.hwt-field__item {
     position: absolute;
-    width: 9.5rem;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    margin: 0;
     text-align: center;
-    transform: translateX(-50%);
 }
 
-.hwt-formats__item--online,
-.hwt-formats__item--condition,
-.hwt-formats__item--in-person {
-    top: calc(30% - 2rem);
+.hwt-field__item--condition {
+    --x: 50%;
+    --y: 44.64%;
+    --w: 9.5rem;
+    transform: translate(-50%, -50%);
 }
 
-.hwt-formats__item--online { left: 14%; }
-.hwt-formats__item--condition { left: 50%; width: 12.5rem; }
-.hwt-formats__item--in-person { left: 86%; }
-.hwt-formats__item--in-house { left: 50%; top: calc(68% - 2rem); }
-
-.hwt-formats__glyph {
-    width: 4rem;
-    margin: 0 auto 0.85rem;
+.hwt-field__item--online {
+    --x: 16.67%;
+    --y: 27.5%;
+    --w: 10rem;
+    margin-left: calc(var(--w) / -2);
 }
 
-.hwt-formats__glyph svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
+.hwt-field__item--in-person {
+    --x: 83.33%;
+    --y: 27.5%;
+    --w: 10rem;
+    margin-left: calc(var(--w) / -2);
 }
 
-.hwt-formats__term {
+.hwt-field__item--in-house {
+    --x: 50%;
+    --y: 83.57%;
+    --w: 10rem;
+    margin-left: calc(var(--w) / -2);
+}
+
+.hwt-field__term {
+    margin: 0 0 0.28rem;
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: 1.05rem;
-    line-height: 1.3;
+    font-size: 1rem;
+    line-height: 1.22;
+    letter-spacing: -0.004em;
     color: var(--offwhite);
-    margin: 0 0 0.3rem;
 }
 
-.hwt-formats__body {
-    margin: 0 auto;
-    max-width: 26ch;
-    font-size: 0.85rem;
-    line-height: 1.55;
+.hwt-field__body {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
     color: rgba(248, 246, 241, 0.72);
 }
 
-.hwt-band--closing .hero-actions {
-    margin-top: 0.5rem;
+/* Two centred introductions: the encounter and the closing read as statements
+   in their own right rather than as the head of a list. */
+.hwt-band__head--centred {
+    max-width: 40rem;
+    margin-inline: auto;
+    text-align: center;
 }
 
-/* Below 900px a 21:9 plate shrinks far enough that the approved 1.2px strokes
+.hwt-band__head--centred .hwt-band__intro {
+    margin-inline: auto;
+}
+
+.hwt-closing__mark {
+    width: clamp(6.5rem, 11vw, 8.5rem);
+    margin: 0 auto var(--gap-figure);
+}
+
+.hwt-closing__mark svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hwt-band--closing .hero-actions {
+    justify-content: center;
+}
+
+/* Below 900px an 8:1 plate shrinks far enough that the approved 1.2px strokes
    land under one device pixel, so they are thickened here rather than being
    drawn heavier at every width. Presentation attributes lose to CSS, so this
    only moves the small end of the range. */
@@ -7792,16 +7871,29 @@ input[aria-invalid="true"] {
     .hwt-arc__flow { stroke-width: 1.9; }
     .hwt-arc__branch { stroke-width: 2.3; }
     .hwt-arc__accent { stroke-width: 2.6; }
-    .hwt-arc__ticks { stroke-width: 1.5; }
 
-    /* The term column of the register runs out of room well before the page
-       does, so it drops under the number here rather than at the phone
-       breakpoint: at 700px a three-column register leaves the terms about 130px,
-       which wraps them to three lines. */
-    .hwt-register__item {
-        grid-template-areas: "num term" "num body";
-        grid-template-columns: 2.5rem minmax(0, 1fr);
-        row-gap: 0.35rem;
+}
+
+/* Two across rather than three below 760px: a three-across field leaves each
+   term about 130px there, which wraps them to three lines and breaks the rule's
+   even rhythm. Odd and even children now share a row, so the rule reaches one
+   gutter either side of the pair. */
+@media (max-width: 759px) and (min-width: 460px) {
+    .hwt-principles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hwt-principles__node::before,
+    .hwt-principles__node:nth-child(3n + 1)::before,
+    .hwt-principles__node:nth-child(3n + 2)::before,
+    .hwt-principles__node:nth-child(3n + 3)::before {
+        left: calc(var(--gutter) * -1);
+        right: calc(var(--over) * -1);
+    }
+
+    .hwt-principles__node:nth-child(odd)::before {
+        left: calc(var(--over) * -1);
+        right: calc(var(--gutter) * -1);
     }
 }
 
@@ -7811,51 +7903,66 @@ input[aria-invalid="true"] {
    junction below it, and the contextual mode hangs off that junction. The
    junction square is what stops the vertical reading as a sequence. */
 @media (max-width: 780px) {
-    .hwt-formats-plate {
+    .hwt-field {
         max-width: 440px;
-        aspect-ratio: 440 / 760;
+        aspect-ratio: 440 / 700;
     }
 
-    .hwt-formats-plate__layer--wide {
+    .hwt-field__layer--wide {
         display: none;
     }
 
-    .hwt-formats-plate__layer--tall {
+    .hwt-field__layer--tall {
         display: block;
     }
 
-    .hwt-formats-plate__layer .hwt-enc__links {
-        stroke-width: 2;
+    .hwt-field__arcs { stroke-width: 1.7; }
+
+    .hwt-field__item--condition {
+        --y: 24%;
+        --w: 8.5rem;
     }
 
-    .hwt-formats__item {
-        width: 8rem;
+    .hwt-field__item--online {
+        --x: 20.91%;
+        --y: 55.43%;
+        --w: 8rem;
     }
 
-    .hwt-formats__item--condition {
-        width: 12.5rem;
-        left: 50%;
-        top: calc(19% - 2.375rem);
+    .hwt-field__item--in-person {
+        --x: 79.09%;
+        --y: 55.43%;
+        --w: 8rem;
     }
 
-    .hwt-formats__item--online {
-        left: 20%;
-        top: calc(47.5% - 2.375rem);
+    .hwt-field__item--in-house {
+        --y: 81.71%;
+        --w: 8rem;
     }
 
-    .hwt-formats__item--in-person {
-        left: 80%;
-        top: calc(47.5% - 2.375rem);
+    .hwt-field__term { font-size: 0.92rem; }
+    .hwt-field__body { font-size: 0.74rem; }
+}
+
+/* Below 893px the orbital can no longer hold six readable circles on a ring, so
+   it is recomposed as three down the left and three up the right rather than
+   shrunk until the type inside the circles stops being legible. */
+@media (max-width: 893px) {
+    .hwt-orbit {
+        aspect-ratio: 600 / 792;
+        --d: 30cqw;
     }
 
-    .hwt-formats__item--in-house {
-        left: 50%;
-        top: calc(80% - 2.375rem);
+    .hwt-orbit__node {
+        --x: var(--bx);
+        --y: var(--by);
+        --s: var(--sb);
     }
 
-    .hwt-formats__glyph {
-        width: 4.75rem;
-    }
+    .hwt-orbit__layer--wide { display: none; }
+    .hwt-orbit__layer--mid { display: block; }
+    .hwt-orbit__strata,
+    .hwt-orbit__corners { stroke-width: 1.6; }
 }
 
 /* Below 640px the wide plate is recomposed rather than shrunk: the same four
@@ -7870,20 +7977,59 @@ input[aria-invalid="true"] {
         display: block;
     }
 
-    .hwt-spine__item {
-        grid-template-columns: 3.75rem minmax(0, 1fr);
-        gap: 0 1.25rem;
+    /* The staggered column, capped rather than stretched: at full container
+       width a six-circle column would be more than 1400px tall, and the extra
+       width would be empty plate. */
+    .hwt-orbit {
+        aspect-ratio: 460 / 825;
+        --d: 44.57cqw;
+        max-width: 460px;
+        margin-inline: auto;
     }
 
-    /* At 60px a 64-unit plate scales strokes below a device pixel, so they are
-       thickened here rather than drawn heavier at every width. Presentation
-       attributes lose to CSS, so this only moves the small end of the range. */
-    .hwt-mv__part { stroke-width: 1.7; }
-    .hwt-mv__spine { stroke-width: 2.1; }
-    .hwt-mv__accent { stroke-width: 2.2; }
+    .hwt-orbit__node {
+        --x: var(--cx);
+        --y: var(--cy);
+        --s: var(--sc);
+    }
 
-    .hwt-register__item {
-        grid-template-columns: 2.25rem minmax(0, 1fr);
+    .hwt-orbit__layer--mid { display: none; }
+    .hwt-orbit__layer--tall { display: block; }
+
+    /* The mobile composition is a constellation rather than a ladder, so the
+       circles sit close enough to interleave. Two things follow.
+
+       First, the text has to do more work in less room: tighter leading, less
+       air between the number, the term and the body, and a shorter measure on
+       the note, which sits at the foot of a circle where the shape is already
+       narrowing. None of it is smaller than it needs to be — the body and term
+       keep their sizes — it is the spacing that gives.
+
+       Second, the padding comes down, because on a 160px circle 8px of padding
+       is a twentieth of the diameter. What is left is enough to keep the text
+       off the rule. */
+    .hwt-orbit__node {
+        padding: 0.4rem;
+    }
+
+    .hwt-orbit__num {
+        margin-bottom: 0.2rem;
+    }
+
+    .hwt-orbit__term {
+        margin-bottom: 0.25rem;
+        line-height: 1.18;
+    }
+
+    .hwt-orbit__body {
+        line-height: 1.42;
+    }
+
+    .hwt-orbit__note {
+        max-width: 76%;
+        margin: 0.28rem auto 0;
+        letter-spacing: 0.05em;
+        line-height: 1.38;
     }
 
     .hwt-band--closing .hero-actions .cta-button {
@@ -7892,13 +8038,30 @@ input[aria-invalid="true"] {
     }
 }
 
-@media (max-width: 420px) {
-    .hwt-spine__term {
-        font-size: 1.18rem;
+/* One rule per principle at phone widths: a single column is the only way the
+   rings can stay on unbroken lines. The air around each rule comes down with
+   it, so six principles still occupy less height than the six ruled rows they
+   replace. */
+@media (max-width: 459px) {
+    .hwt-principles {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: auto;
+        --on-rule: 1.25rem;
+        --under: 1.5rem;
+        --below: 1.5rem;
     }
 
-    .hwt-spine__body,
-    .hwt-register__body {
-        font-size: 0.92rem;
+    .hwt-principles__node::before,
+    .hwt-principles__node:nth-child(3n + 1)::before,
+    .hwt-principles__node:nth-child(3n + 2)::before,
+    .hwt-principles__node:nth-child(3n + 3)::before,
+    .hwt-principles__node:nth-child(odd)::before,
+    .hwt-principles__node:nth-child(even)::before {
+        left: 0;
+        right: 0;
+    }
+
+    .hwt-principles__term {
+        min-height: 0;
     }
 }
