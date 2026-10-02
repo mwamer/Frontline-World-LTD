@@ -33,6 +33,13 @@
     --gap-figure: clamp(1.5rem, 2.6vw, 2.25rem);
     --gap-section: clamp(3.5rem, 7vw, 6rem);
 
+    /* One measure for a person's photograph, wherever it appears: the leadership
+       portrait, the directory card and the profile page. Held here because the
+       profile header sizes its grid track to the same figure, and the two used
+       to drift apart. Associate cards fill their column instead, which the grid
+       sets. */
+    --portrait: 24rem;
+
     --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
     --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -844,7 +851,7 @@ em {
    width: 100% fills the grid area; max-width still caps the measure. */
 .leadership-portrait {
     width: 100%;
-    max-width: 24rem;
+    max-width: var(--portrait);
     margin: 0 auto;
 }
 
@@ -4235,8 +4242,12 @@ em {
     color: var(--text-muted);
 }
 
+/* Shares --portrait, the measure the leadership portrait uses, so a person is
+   one size everywhere they appear. The profile keeps its taller 4:5 crop; only
+   the width is shared, since the source photograph is 400px square. No width is
+   needed here: the portrait has no auto margin, so the grid item stretches. */
 .profile-portrait {
-    max-width: 12rem;
+    max-width: var(--portrait);
 }
 
 .profile-body > .profile-section {
@@ -4317,7 +4328,7 @@ em {
 
 @media (min-width: 900px) {
     .profile-header {
-        grid-template-columns: 1fr 12rem;
+        grid-template-columns: 1fr var(--portrait);
     }
 }
 
