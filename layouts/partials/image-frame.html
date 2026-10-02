@@ -1,6 +1,6 @@
 {{- /*
   Decorative image frame. Call from page scope, where the dot is the page:
-    {{ partial "image-frame.html" (dict "image" .Params.image "alt" (.Params.image_alt | default .Title) "ratio" "21:09" "variant" "wide") }}
+    {{ partial "image-frame.html" (dict "image" .Params.image "alt" (.Params.image_alt | default .Title) "variant" "wide") }}
   Inside a with block the dot is the loop value, not the page, so bind the page
   to a variable first and take the alt from that.
   path.Base normalises whatever the CMS writes — "/images/foo.png" or a bare
@@ -14,7 +14,6 @@
     <div class="image-frame__mat">
         <div class="image-frame__plate">
             <img src="{{ printf "images/%s" (path.Base .image) | relURL }}" alt="{{ .alt }}" loading="{{ .loading | default "lazy" }}">
-            <span class="image-frame__ratio-tag">{{ .ratio }}</span>
         </div>
         <span class="image-frame__corner image-frame__corner--tl" aria-hidden="true"></span>
         <span class="image-frame__corner image-frame__corner--tr" aria-hidden="true"></span>

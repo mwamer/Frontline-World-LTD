@@ -35,7 +35,7 @@
             </div>
             {{ with $person.photo }}
             <div class="profile-portrait">
-                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "04:05" "variant" "portrait" "loading" "eager") }}
+                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "variant" "portrait" "loading" "eager") }}
             </div>
             {{ end }}
         </header>

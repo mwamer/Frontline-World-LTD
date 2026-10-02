@@ -19,7 +19,7 @@
             {{ range .Pages.ByWeight }}
             {{ $card := . }}
             <article class="public-insight-card">
-                {{ with .Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" ($card.Params.image_alt | default $card.Title) "ratio" "04:05" "variant" "portrait") }}{{ end }}
+                {{ with .Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" ($card.Params.image_alt | default $card.Title) "variant" "portrait") }}{{ end }}
                 <div class="public-insight-card-content">
                     <span class="public-insight-category">{{ .Params.category }}</span>
                     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>

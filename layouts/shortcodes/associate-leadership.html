@@ -17,7 +17,7 @@
         <div class="leadership-grid">
             <div class="leadership-portrait reveal">
                 {{ with $person.photo }}
-                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "01:01" "variant" "square" "loading" "eager") }}
+                {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "variant" "square" "loading" "eager") }}
                 {{ end }}
             </div>
             <div class="leadership-bio reveal">

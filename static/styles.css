@@ -4418,26 +4418,6 @@ em {
     opacity: 0.3;
 }
 
-/* Ratio tag in the bottom-left of the plate */
-.image-frame__ratio-tag {
-    position: absolute;
-    left: 0.85rem;
-    bottom: 0.75rem;
-    z-index: 2;
-    padding: 0.2rem 0.45rem;
-    background: rgba(248, 246, 241, 0.72);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--forest);
-}
-
-.image-frame--forest .image-frame__ratio-tag,
-.image-frame--terracotta .image-frame__ratio-tag {
-    background: rgba(23, 58, 53, 0.42);
-    color: var(--offwhite);
-}
-
 /* Corner crop marks on the mat */
 .image-frame__corner {
     position: absolute;

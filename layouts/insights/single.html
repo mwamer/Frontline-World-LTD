@@ -19,7 +19,7 @@
         </div>
         {{ with .Params.image }}
         <div class="single-insight-featured-image">
-            {{ partial "image-frame.html" (dict "image" . "alt" ($.Params.image_alt | default $.Title) "ratio" "21:09" "variant" "wide") }}
+            {{ partial "image-frame.html" (dict "image" . "alt" ($.Params.image_alt | default $.Title) "variant" "wide") }}
         </div>
         {{ end }}
 

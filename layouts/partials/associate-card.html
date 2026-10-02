@@ -21,7 +21,7 @@
     data-regions="{{ partial "vocab-ids.html" (dict "vocab" "regions" "ids" $person.regions) }}"
     data-search="{{ lower (delimit $searchable " ") }}">
     {{ with $person.photo }}
-    {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "ratio" "01:01" "variant" "square") }}
+    {{ partial "image-frame.html" (dict "image" . "alt" ($person.photo_alt | default $person.name) "variant" "square") }}
     {{ end }}
     <h3 class="associate-card__name"><a href="{{ $profile }}">{{ $person.name }}</a></h3>
     <p class="associate-card__title">{{ $person.title }}</p>
