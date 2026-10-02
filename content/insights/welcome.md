@@ -7,6 +7,7 @@ image: welcome-frontline-world.png
 image_alt: Welcome
 weight: 1
 cms_visible: true
+homepage_lead: true
 aliases:
   - /news/welcome/
 ---

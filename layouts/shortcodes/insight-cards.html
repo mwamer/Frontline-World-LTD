@@ -4,8 +4,18 @@
 
   The cap is 4 because the grid is four columns from 1024px up; a fifth card
   would wrap to a row of its own and unbalance the section.
+
+  An article marked `homepage_lead` in its front matter leads the strip even when
+  it is not the newest: "Welcome to Frontline World" introduces the firm rather
+  than reporting on a subject, so date order would leave it last. The list is
+  fetched with a longer cap so promoting it never pushes a newer article out of
+  the grid, and only this shortcode reads the flag, so the news ticker above
+  stays in date order.
 */ -}}
-{{- range (partial "insights-latest.html" (dict "site" .Site "limit" 4)) }}
+{{- $ordered := partial "insights-latest.html" (dict "site" .Site "limit" 6) -}}
+{{- $lead := where $ordered "page.Params.homepage_lead" true -}}
+{{- $rest := where $ordered "page.Params.homepage_lead" "!=" true -}}
+{{- range first 4 ($lead | append $rest) }}
 {{- $article := .page }}
 <article class="insight-card">
     {{ with $article.Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" ($article.Params.image_alt | default $article.Title) "variant" "square") }}{{ end }}

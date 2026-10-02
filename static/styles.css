@@ -766,10 +766,16 @@ em {
     gap: 1rem;
 }
 
+/* Three equal tracks rather than a wrapping flex row. As flex the three
+   categories wrapped 2 + 1 on desktop, leaving the third alone on its own line
+   under a wide empty stretch; equal tracks align the labels, keep the gaps
+   identical, and fall to a single column below the desktop band. The middot
+   stays a within-list separator, used only where a value enumerates items, so
+   the three lines read the same way without a decorative rule between them. */
 .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
     margin-top: clamp(3rem, 7vw, 5.5rem);
     padding-top: 1.5rem;
     border-top: 1px solid var(--line);
@@ -787,6 +793,13 @@ em {
     color: var(--forest);
     font-weight: 600;
     margin-right: 0.4rem;
+}
+
+@media (min-width: 1024px) {
+    .hero-meta {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem 2rem;
+    }
 }
 
 /* ---------- Our People hero ---------- */
@@ -2777,6 +2790,8 @@ em {
     font-size: clamp(1.45rem, 2.8vw, 2.15rem);
     line-height: 1.45;
     color: var(--charcoal);
+    /* Same headline-to-supporting-text gap the other homepage sections use. */
+    margin-top: 1.2rem;
     margin-bottom: 2.2rem;
 }
 
@@ -3257,7 +3272,9 @@ em {
     margin-bottom: 1.2rem;
 }
 
-.contact-preview > .container > p {
+/* :not(.section-kicker) because the kicker is a p in the same block, and
+   .section-kicker has to keep its own size, colour and spacing. */
+.contact-preview .section-head > p:not(.section-kicker) {
     color: var(--text-muted);
     font-size: 1.08rem;
     line-height: 1.8;
@@ -4959,13 +4976,15 @@ em {
     }
 }
 
-/* Nine links plus the CTA need more room than the space between 1024px and
-   1280px leaves beside the logo, so tighten the gaps and the letter-spacing
-   across that band only. The full 2.4rem gap and 0.18em tracking return at
-   1280px, where the row fits. */
-@media (min-width: 1024px) and (max-width: 1279px) {
+/* Nine links plus the CTA no longer fit at the 2.4rem gap and 0.18em tracking.
+   The container is capped at --max-width, so a wider viewport gives the row no
+   more room: 1280px and 1920px leave the same space beside the logo. The row is
+   therefore tightened at every desktop width rather than in a band, and only
+   the gap moves, because tightening the tracking changes how the labels read
+   more than tightening the space between them does. */
+@media (min-width: 1024px) {
     .nav-links {
-        gap: 1rem;
+        gap: 0.6rem;
     }
 
     .nav-links a {
@@ -8046,4 +8065,89 @@ input[aria-invalid="true"] {
     .hwt-principles__term {
         min-height: 0;
     }
+}
+
+/* ==========================================================================
+   Homepage vertical rhythm
+
+   Every section on the site is padded clamp(4.5rem, 9vw, 7.5rem) on both edges.
+   Sections stack, so that padding adds up: the band between two homepage
+   sections measured 120px + 120px = 240px, and the nine transitions came to
+   roughly 1,950px of empty space, a quarter of the page.
+
+   The rhythm here runs the other way. The exit is uniform and modest, and the
+   entry carries the hierarchy, so two sections telling one story can sit close
+   while a genuine change of subject still opens up. Because the band is the sum
+   of the two edges, holding one constant is what keeps the others free to vary
+   without the page becoming mechanical.
+
+   The section class names are shared with about.html, sectors.html, the four
+   service pages and the Insights list, so these rules sit behind the homepage's
+   own body class and reach nothing else.
+   ========================================================================== */
+
+.page-home {
+    --rhythm-exit: clamp(0.625rem, 1.25vw, 1.25rem);
+    --rhythm-entry: clamp(1.125rem, 1.875vw, 1.75rem);
+    --rhythm-entry-tight: clamp(0.8125rem, 1.25vw, 1.25rem);
+    --rhythm-entry-wide: clamp(1.3125rem, 2.5vw, 2.625rem);
+    --rhythm-entry-runin: clamp(0.5rem, 1vw, 1rem);
+}
+
+.page-home .hero-meta {
+    margin-top: clamp(2.25rem, 4vw, 4rem);
+}
+
+/* The hero hands over to the news ticker and then straight into the first
+   section, so it leaves on the run-in entry rather than the standard one. */
+.page-home .hero {
+    padding-bottom: var(--rhythm-entry-runin);
+}
+
+/* A thin strip inside that handover: both of its edges are part of it, so its
+   own padding is trimmed to match. Symmetric, because the strip is ruled top
+   and bottom and an uneven one would read as a mistake. */
+.page-home .news-ticker {
+    padding: 0.6rem 0;
+}
+
+/* The opening section follows the ticker's own hairline, which already marks
+   the division, so it takes the run-in entry too. The dark band and the closing
+   call to action change the register of the page and take the wider entry. */
+.page-home .mission {
+    padding-top: var(--rhythm-entry-runin);
+}
+
+.page-home .cta-section,
+.page-home .contact-preview {
+    padding-top: var(--rhythm-entry-wide);
+}
+
+.page-home .mission,
+.page-home .expertise,
+.page-home .sectors,
+.page-home .sectors-band,
+.page-home .projects,
+.page-home .insights,
+.page-home .cta-section,
+.page-home .contact-preview {
+    padding-bottom: var(--rhythm-exit);
+}
+
+.page-home .expertise,
+.page-home .sectors,
+.page-home .projects,
+.page-home .insights {
+    padding-top: var(--rhythm-entry);
+}
+
+/* The numbered sector list continues the section above it, so the two are set
+   closer together than any other pair on the page. */
+.page-home .sectors-band {
+    padding-top: var(--rhythm-entry-tight);
+}
+
+/* Space between a heading block and the content it introduces. */
+.page-home .section-head {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
 }

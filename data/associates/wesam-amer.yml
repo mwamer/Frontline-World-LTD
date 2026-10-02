@@ -63,15 +63,6 @@ bio:
     technology, AI, conflict, and public discourse — helping leaders make
     sense of complex and politically sensitive environments.
   - >-
-    His international academic and professional experience spans Palestine,
-    the UK, Germany and the United States, with experience associated with
-    institutions including Cambridge, Newcastle, Harvard and Hamburg.
-  - >-
-    He previously served as Dean of the Faculty of Mass Communication and
-    Languages at Gaza University, where he contributed to institutional
-    development, course innovation, quality assurance, research strategy and
-    academic capacity building.
-  - >-
     At Frontline World, he leads the company's strategic development,
     oversees research and advisory projects, develops partnerships and
     coordinates multidisciplinary teams around complex challenges.
@@ -104,6 +95,14 @@ regions:
   - united-kingdom
   - germany
   - united-states
+experience:
+  - >-
+    Dean of the Faculty of Mass Communication and Languages, Gaza University.
+    Contributed to institutional development, course innovation, quality
+    assurance, research strategy and academic capacity building.
+  - >-
+    Academic and professional experience associated with institutions including
+    Cambridge, Newcastle, Harvard and Hamburg.
 links:
   - label: Personal Website
     url: https://wesamamer.com
