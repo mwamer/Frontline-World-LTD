@@ -838,7 +838,12 @@ em {
     align-items: start;
 }
 
+/* An auto margin on a grid item suppresses stretch, which would leave the
+   portrait sized to fit-content. The plate is a scroll container, so its
+   min-content is zero and the whole frame would collapse to its mat padding.
+   width: 100% fills the grid area; max-width still caps the measure. */
 .leadership-portrait {
+    width: 100%;
     max-width: 24rem;
     margin: 0 auto;
 }
@@ -1123,23 +1128,14 @@ em {
     border: 1px solid var(--line);
 }
 
+/* People photos fill their column, the way trainer cards already do. A pixel
+   frame turns a portrait into an avatar, so let the layout set the measure and
+   let the square ratio follow from it. Anything added to data/associates/ is
+   sized by this, so a new person needs no per-image rule. */
 .associate-card .image-frame,
 .leadership-portrait .image-frame {
-    width: 72px;
-    height: 72px;
-    margin: 0 auto 0.9rem;
-}
-
-/* Slim the archival mat so the photo stays a visible headshot inside the
-   fixed-size frame. */
-.associate-card .image-frame__mat,
-.leadership-portrait .image-frame__mat {
-    padding: 0.5rem;
-}
-
-.associate-card .image-frame__monogram,
-.leadership-portrait .image-frame__monogram {
-    font-size: 1.1rem;
+    width: 100%;
+    margin: 0 0 1.1rem;
 }
 
 .associate-card__name {
@@ -1203,23 +1199,11 @@ em {
     .associate-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .associate-card .image-frame,
-    .leadership-portrait .image-frame {
-        width: 80px;
-        height: 80px;
-    }
 }
 
 @media (max-width: 640px) {
     .associate-grid {
         grid-template-columns: 1fr;
-    }
-
-    .associate-card .image-frame,
-    .leadership-portrait .image-frame {
-        width: 88px;
-        height: 88px;
     }
 }
 
@@ -4718,6 +4702,13 @@ em {
 
     .leadership-grid {
         grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    /* Beside the bio the portrait takes the column's left edge, so its line
+       meets the name above and the bio text. Alone in a single column the
+       centred rule above is what carries it. */
+    .leadership-portrait {
+        margin-left: 0;
     }
 
     .leadership-expertise-grid {
