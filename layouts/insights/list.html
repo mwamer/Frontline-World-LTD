@@ -1,6 +1,12 @@
 {{- /*
   The insights listing. Cards are generated from each article's frontmatter,
   so publishing a new article adds it here automatically.
+
+  An article marked `pinned` leads the listing even when it is not the newest,
+  the same way `homepage_lead` leads the home page strip. Both flags are read
+  separately, so pinning an article to the top of this page does not move the
+  home page. Sorting runs over `.Pages.ByWeight` first, so the rest of the list
+  keeps whatever order the editorial weights give it.
 */ -}}
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +22,9 @@
         </header>
 
         <section class="public-insights-grid" aria-live="polite">
-            {{ range .Pages.ByWeight }}
+            {{- $ordered := .Pages.ByWeight -}}
+            {{- $pinned := where $ordered "Params.pinned" true -}}
+            {{- range ($pinned | append (where $ordered "Params.pinned" "!=" true)) }}
             {{ $card := . }}
             <article class="public-insight-card">
                 {{ with .Params.image }}{{ partial "image-frame.html" (dict "image" . "alt" ($card.Params.image_alt | default $card.Title) "variant" "portrait") }}{{ end }}

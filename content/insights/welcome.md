@@ -8,6 +8,7 @@ image_alt: Frontline World logo
 weight: 1
 cms_visible: true
 homepage_lead: true
+pinned: true
 aliases:
   - /news/welcome/
 ---
