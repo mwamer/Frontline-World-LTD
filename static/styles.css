@@ -8080,16 +8080,18 @@ input[aria-invalid="true"] {
 /* ==========================================================================
    Homepage vertical rhythm
 
-   Every section on the site is padded clamp(4.5rem, 9vw, 7.5rem) on both edges.
-   Sections stack, so that padding adds up: the band between two homepage
-   sections measured 120px + 120px = 240px, and the nine transitions came to
-   roughly 1,950px of empty space, a quarter of the page.
+   Two tiers, and the within-section tier is the tighter of the two.
 
-   The rhythm here runs the other way. The exit is uniform and modest, and the
-   entry carries the hierarchy, so two sections telling one story can sit close
-   while a genuine change of subject still opens up. Because the band is the sum
-   of the two edges, holding one constant is what keeps the others free to vary
-   without the page becoming mechanical.
+   Every section on the site is padded clamp(4.5rem, 9vw, 7.5rem) on both edges,
+   and sections stack, so a band's width is the sum of two edges. Holding the
+   exit constant is what lets the entry vary without the page becoming
+   mechanical: a section that continues the one above it takes a tight entry,
+   while one that changes the register of the page opens up.
+
+   Inside a section the gaps are smaller than any band, so a heading block, its
+   supporting line and the content it introduces read as a single unit. Card
+   padding is untouched, so the tightening shows up between blocks rather than
+   inside them.
 
    The section class names are shared with about.html, sectors.html, the four
    service pages and the Insights list, so these rules sit behind the homepage's
@@ -8097,15 +8099,27 @@ input[aria-invalid="true"] {
    ========================================================================== */
 
 .page-home {
-    --rhythm-exit: clamp(0.625rem, 1.25vw, 1.25rem);
-    --rhythm-entry: clamp(1.125rem, 1.875vw, 1.75rem);
-    --rhythm-entry-tight: clamp(0.8125rem, 1.25vw, 1.25rem);
-    --rhythm-entry-wide: clamp(1.3125rem, 2.5vw, 2.625rem);
-    --rhythm-entry-runin: clamp(0.5rem, 1vw, 1rem);
+    /* Section to section. The exit is uniform and modest; the entry carries the
+       hierarchy, so two sections telling one story can sit close while a
+       genuine change of subject still opens up. */
+    --rhythm-exit: clamp(0.5rem, 1vw, 1rem);
+    --rhythm-entry: clamp(0.875rem, 1.5vw, 1.375rem);
+    --rhythm-entry-tight: clamp(0.75rem, 1.125vw, 1.125rem);
+    --rhythm-entry-wide: clamp(1rem, 1.875vw, 1.875rem);
+    --rhythm-entry-runin: clamp(0.5rem, 0.875vw, 0.875rem);
+
+    /* Within a section. The gap from a heading block to the content it
+       introduces, and from that content to a closing action. Both sit below
+       every section band, so a section reads as one unit rather than as a
+       heading floating above a distant block. */
+    --gap-head-to-content: clamp(1.5rem, 2.5vw, 2.125rem);
+    --gap-content-to-action: clamp(1.5rem, 2.25vw, 2rem);
 }
 
+/* The category strip closes the hero rather than introducing a section, so it
+   takes the heading-to-content gap. */
 .page-home .hero-meta {
-    margin-top: clamp(2.25rem, 4vw, 4rem);
+    margin-top: var(--gap-head-to-content);
 }
 
 /* The hero hands over to the news ticker and then straight into the first
@@ -8159,5 +8173,26 @@ input[aria-invalid="true"] {
 
 /* Space between a heading block and the content it introduces. */
 .page-home .section-head {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--gap-head-to-content);
+}
+
+/* The sector list has its own head element rather than a .section-head, so it
+   takes the same gap to stay on the scale. */
+.page-home .sectors-band-head {
+    margin-bottom: var(--gap-head-to-content);
+}
+
+/* Trailing gaps to a closing action. These three each carry their own margin
+   from the shared base rules, and as siblings they collapse to the larger of
+   the pair, so all of them move to the one token. */
+.page-home .section-actions {
+    margin-top: var(--gap-content-to-action);
+}
+
+.page-home .areas-of-interest {
+    margin-bottom: var(--gap-content-to-action);
+}
+
+.page-home .contact-quick-list {
+    margin-bottom: var(--gap-content-to-action);
 }
