@@ -4970,6 +4970,16 @@ em {
         grid-template-columns: repeat(4, 1fr);
     }
 
+    /* Six items across four columns fills the first row and leaves the second
+       half empty, and because this grid draws its own hairlines over a lined
+       background an unoccupied cell reads as a blank box rather than as space.
+       Three columns fills both rows exactly. Scoped to the homepage: the eight
+       items on the contact page divide evenly into four columns, where two full
+       rows leave nothing blank. */
+    .page-home .areas-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .partnership-form {
         grid-template-columns: 0.9fr 1.1fr;
         align-items: start;
