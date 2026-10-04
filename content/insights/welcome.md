@@ -4,7 +4,7 @@ date: 2026-09-06
 category: News
 summary: Understanding Complexity. Building Capability. Creating Change.
 image: welcome-frontline-world.png
-image_alt: Welcome
+image_alt: Frontline World logo
 weight: 1
 cms_visible: true
 homepage_lead: true
